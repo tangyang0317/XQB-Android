@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="80dp"
+    android:layout_height="80dp">
+
+    <ImageView
+        android:id="@+id/home_data_spkcall_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_main"
+        android:scaleType="fitXY" />
+
+    <ImageView
+        android:id="@+id/me_jjgl_xcgl_play"
+        android:layout_width="@dimen/dp_35"
+        android:layout_height="@dimen/dp_35"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/dp_5"
+        android:src="@mipmap/sp_bfbg"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/me_jjgl_xcgl_false"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/dp_5"
+        android:src="@mipmap/me_jjgl_xcgl_false"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/me_jjgl_xcgl_true"
+        android:layout_width="@dimen/dp_20"
+        android:layout_height="@dimen/dp_20"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/dp_5"
+        android:src="@mipmap/me_jjgl_xcgl_true"
+        android:visibility="gone" />
+
+</RelativeLayout>

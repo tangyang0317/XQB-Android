@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.zhangju.xingquban.interestclassapp.ui.widget.PublicHead
+        android:id="@+id/wallet_bind_addActivity"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#12999999">
+
+        <ImageView
+            android:id="@+id/iv_wallet_bind_add_icon"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:src="@mipmap/bindwithdrawal_icon_alipay" />
+
+        <TextView
+            android:id="@+id/tv_wallet_bind_add_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_wallet_bind_add_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="28dp"
+            android:layout_marginTop="45dp"
+            android:text="绑定的支付宝账号将成为你的提现账户"
+            android:textColor="#939393"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="18dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_wallet_bind_add_account"
+            android:layout_width="85dp"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:text="支付宝账号"
+            android:textColor="#939393"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_wallet_bind_add_num"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:gravity="bottom"
+            android:hint="请输入支付宝账户"
+            android:inputType="textVisiblePassword"
+            android:maxLength="25"
+            android:singleLine="true"
+            android:textColor="#8e8e8e"
+            android:textCursorDrawable="@null"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:background="#45999999" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="18dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="85dp"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:text="真实姓名"
+            android:textColor="#939393"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/et_wallet_bind_add_name_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:gravity="bottom"
+            android:hint="请输入您的真实姓名"
+            android:maxLength="25"
+            android:singleLine="true"
+            android:textColor="#8e8e8e"
+            android:textCursorDrawable="@null"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:background="#45999999" />
+
+    <TextView
+        android:id="@+id/tv_wallet_bind_add_tip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="15dp"
+        android:text="注意：请仔细确认支付宝账户和姓名是否正确，否则提现操作都将失败"
+        android:textColor="@color/color_main"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/tv_wallet_bind_add_bindnow"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/shape_bt_main_normal"
+        android:gravity="center"
+        android:text="立即绑定"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+</LinearLayout>

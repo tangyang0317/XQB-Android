@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/teaNameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:orientation="horizontal"
+            android:padding="13dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="12"
+                android:text="姓名"
+                android:textColor="#444444" />
+
+            <TextView
+                android:id="@+id/teaName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/list_arrow_normal_small"
+                android:gravity="center_vertical"
+                android:textColor="#888888"
+                android:textSize="@dimen/font_size_small"
+                tools:text="李老师" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/teaSexLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:orientation="horizontal"
+            android:padding="13dp">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="12"
+                android:text="性别"
+                android:textColor="#444444" />
+
+            <TextView
+                android:id="@+id/teaSex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/list_arrow_normal_small"
+                android:gravity="center_vertical"
+                android:textColor="#888888"
+                android:textSize="@dimen/font_size_small"
+                tools:text="女" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/teaTeachAgeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:orientation="horizontal"
+            android:padding="13dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="12"
+                android:text="教龄"
+                android:textColor="#444444" />
+
+            <TextView
+                android:id="@+id/teaTeachAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/list_arrow_normal_small"
+                android:gravity="center_vertical"
+                android:textColor="#888888"
+                android:textSize="@dimen/font_size_small"
+                tools:text="10年" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:orientation="horizontal"
+            android:padding="13dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="12"
+                android:text="毕业院校"
+                android:textColor="#444444" />
+
+            <TextView
+                android:id="@+id/teaSchool"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:textColor="#888888"
+                android:textSize="@dimen/font_size_small"
+                tools:text="西安美术学院" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/teaTeachAddressLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:orientation="horizontal"
+            android:padding="13dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="12"
+                android:text="授课地点"
+                android:textColor="#444444" />
+
+            <TextView
+                android:id="@+id/teaTeachAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/list_arrow_normal_small"
+                android:gravity="center_vertical"
+                android:textColor="#888888"
+                android:textSize="@dimen/font_size_small"
+                tools:text="上大路23号" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/teaIdQualityLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:orientation="horizontal"
+            android:padding="13dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="12"
+                android:text="身份认证"
+                android:textColor="#444444"/>
+
+            <TextView
+                android:id="@+id/teaIdQuality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/list_arrow_normal_small"
+                android:gravity="center_vertical"
+                android:textColor="#888888"
+                android:textSize="@dimen/font_size_small"
+                tools:text="未认证"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/teaQualifyLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:orientation="horizontal"
+            android:padding="13dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="12"
+                android:text="资格认证"
+                android:textColor="#444444"/>
+
+            <TextView
+                android:id="@+id/teaQualify"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/list_arrow_normal_small"
+                android:gravity="center_vertical"
+                android:textColor="#888888"
+                android:textSize="@dimen/font_size_small"
+                tools:text="未认证"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/teaPlatformQualifyLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:selectableItemBackground"
+            android:orientation="horizontal"
+            android:padding="13dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="12"
+                android:text="平台认证"
+                android:textColor="#444444"/>
+
+            <TextView
+                android:id="@+id/teaPlatformQualify"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/list_arrow_normal_small"
+                android:gravity="center_vertical"
+                android:text="已认证"
+                android:textColor="#888888"
+                android:textSize="@dimen/font_size_small"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

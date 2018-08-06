@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:crl="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zhangju.xingquban.interestclassapp.ui.fragment.find.SeekResource.PicDetailActivity">
+
+    <include layout="@layout/res_top" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_230">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/imageViewpager"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_200" />
+
+        <ImageButton
+            android:id="@+id/image_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|top"
+            android:layout_margin="@dimen/dp_10"
+            android:background="@drawable/trans_retangle"
+            android:padding="@dimen/dp_5"
+            android:src="@drawable/turn_right" />
+
+        <TextView
+            android:id="@+id/tv_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_margin="@dimen/dp_10"
+            android:background="@drawable/trans_retangle"
+            android:padding="@dimen/dp_5"
+            android:text="1/1"
+            android:textColor="@color/white" />
+
+    </FrameLayout>
+
+
+    <com.zhangju.xingquban.interestclassapp.swiperefrsh.SwipeRefreshRecyclerView
+        android:id="@+id/swipereimagerefresh"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        crl:load_animator="true">
+
+    </com.zhangju.xingquban.interestclassapp.swiperefrsh.SwipeRefreshRecyclerView>
+
+
+    <include layout="@layout/res_bottom" />
+</LinearLayout>

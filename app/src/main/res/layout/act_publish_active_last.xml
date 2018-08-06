@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <com.fastlib.widget.TitleBar
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        app:leftIcon="@drawable/home_city_back"
+        app:titleText="活动详情"
+        app:rightText="发布"
+        app:rightTextColor="#EF4E4C"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/background"/>
+
+            <ImageView
+                android:id="@+id/poster"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                tools:src="@mipmap/ic_launcher"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/font_size_large"
+                        android:maxLines="2"
+                        tools:text="城市生存之魔都生存挑战"/>
+
+                    <TextView
+                        android:id="@+id/host"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#686871"
+                        android:layout_marginTop="5dp"
+                        android:maxLines="2"
+                        android:text="兴趣班亲子举办"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/addSomething"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:padding="10dp"
+                    android:layout_marginRight="5dp"
+                    android:visibility="invisible"
+                    android:src="@mipmap/seek_choiceness_sc"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/seek_sl_time"/>
+
+                <TextView
+                    android:id="@+id/startDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#686871"
+                    android:layout_marginLeft="10dp"
+                    android:maxLines="1"
+                    android:layout_gravity="center_vertical"
+                    tools:text="2017年5月30日 14:30开始" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/divider"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@mipmap/seek_sl_wz"/>
+
+                <TextView
+                    android:id="@+id/location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#686871"
+                    android:layout_marginLeft="10dp"
+                    android:maxLines="1"
+                    android:layout_gravity="center_vertical"
+                    tools:text="鲁迅公园、上海自然博物馆"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/background"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="@dimen/font_size_normal_high"
+                android:textColor="@android:color/black"
+                android:text="活动特色"/>
+
+            <TextView
+                android:id="@+id/activeFeature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="#686871"
+                tools:text="当孩子离开了父母的庇护，没有手机、银行卡、现金、甚至是水！
+当孩子只能通过完成一系列挑战填饱肚子，所有花费必须要靠自己的时候，他们可以在上海这座城市里生存一天吗？
+要生存，如何获取生存基金？要选择什么方式赚更多的钱来维持生计？
+要选择打工还是做生意？
+如果打工要体验什么职业？
+如果要做生意，进货有什么讲究？
+加入“魔都生存”战队 这是一场属于孩子的蜕变之旅。"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="@dimen/font_size_normal_high"
+                android:textColor="@android:color/black"
+                android:text="活动行程"/>
+
+            <com.zhangju.xingquban.interestclassapp.refactor.common.widget.NoScrollListView
+                android:id="@+id/tripList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:listSelector="@android:color/transparent"
+                android:dividerHeight="0dp"
+                android:divider="@android:color/transparent"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/background"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textSize="@dimen/font_size_normal_high"
+                android:textColor="@android:color/black"
+                android:text="活动须知"/>
+
+            <TextView
+                android:id="@+id/activeNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="#686871"
+                tools:text="1、本次活动适合6周岁及以上具有生活自理能力的小朋友"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/main_rg"/>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

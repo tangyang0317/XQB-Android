@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/addFolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/EF4E4C"
+        android:textColor="@android:color/white"
+        android:padding="15dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:text="+ 创建视频文件夹"/>
+
+    <GridView
+        android:id="@+id/folder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:layout_above="@id/addFolder"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:horizontalSpacing="25dp"
+        android:verticalSpacing="20dp"
+        android:numColumns="2"
+        android:background="@android:color/white"
+        android:layout_marginTop="10dp"/>
+</RelativeLayout>

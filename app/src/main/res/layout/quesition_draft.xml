@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zhangju.xingquban.interestclassapp.ui.widget.PublicHead
+        android:id="@+id/pub_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.zhangju.xingquban.interestclassapp.ui.widget.PublicHead>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_1"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/draft_tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/white"
+            app:tabIndicatorColor="@color/color_main"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/color_main"
+            app:tabTextColor="@color/color_tab_text" />
+
+        <com.zhangju.xingquban.interestclassapp.hplper.NoScrollViewPager
+            android:id="@+id/draft_viewpage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="@color/white"></com.zhangju.xingquban.interestclassapp.hplper.NoScrollViewPager>
+
+    </LinearLayout>
+
+</LinearLayout>

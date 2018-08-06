@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhangju.xingquban.interestclassapp.view.SquareRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/photo_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <View
+        android:id="@+id/pic_delete"
+        android:layout_width="@dimen/dp_19"
+        android:layout_height="@dimen/dp_19"
+        android:layout_alignParentRight="true"
+        android:background="@mipmap/home_data_xdp_delete"
+        android:padding="@dimen/dp_5" />
+
+
+</com.zhangju.xingquban.interestclassapp.view.SquareRelativeLayout>

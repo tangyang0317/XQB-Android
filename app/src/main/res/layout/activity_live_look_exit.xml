@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical"
+    tools:context="com.zhangju.xingquban.interestclassapp.ui.activity.find.liveradio.LiveLookExitActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_50"
+        android:gravity="center"
+        android:text="直播结束"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_16" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_50"
+        android:gravity="center">
+
+        <com.fastlib.widget.RoundImageView
+            android:id="@+id/image_head"
+            android:layout_width="@dimen/dp_70"
+            android:layout_height="@dimen/dp_70"
+            android:scaleType="centerCrop"
+            android:src="@drawable/app_icon" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/_tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:gravity="center"
+        android:text="李老师"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/_tv_people_num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_5"
+        android:gravity="center"
+        android:text="观看人数：0"
+        android:textColor="@color/lightgray" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/tv_close"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_35"
+        android:layout_margin="@dimen/dp_50"
+        android:background="@drawable/live_finish"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="@color/white" />
+
+
+</LinearLayout>

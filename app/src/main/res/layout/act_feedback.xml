@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.fastlib.widget.TitleBar
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@android:color/white"
+        app:titleText="帮助与反馈"
+        app:leftIcon="@drawable/home_city_back"
+        app:rightText="发布"
+        app:rightTextColor="#EF4E4C"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:padding="10dp"
+        android:layout_marginTop="10dp">
+
+        <EditText
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:lines="10"
+            android:gravity="top|left"
+            android:textSize="@dimen/font_size_small"
+            android:hint="在这里写下对兴趣班的感受，我们将不断进步，为您做的更好！"/>
+
+        <com.zhangju.xingquban.interestclassapp.refactor.common.widget.NoScrollGridView
+            android:id="@+id/photos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:verticalSpacing="5dp"
+            android:horizontalSpacing="5dp"
+            android:numColumns="4"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@android:color/white"
+        android:layout_marginTop="10dp"
+        android:textSize="@dimen/font_size_small"
+        android:hint="输入QQ、邮箱或者手机号，让我们可以联系您"/>
+</LinearLayout>

@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.zhangju.xingquban">
+
+    <uses-sdk
+        android:minSdkVersion="17"
+        android:targetSdkVersion="22" />
+
+    <!-- 扫描二维码需要权限 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- 权限声明 -->
+    <!-- 允许挂载和反挂载文件系统 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
+    <!-- 允许程序打开网络套接字 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- 允许程序写音频数据 -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- 允许程序使用PowerManager WakeLocks以防止处理器休眠或者屏幕锁屏 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- 允许程序获取Wifi网络状态信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 允许程序使用设备的camera -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 允许程序使用闪光灯 -->
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <!-- 允许程序获得设备信息 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
+
+    <!-- 声明程序使用camera和自动对焦功能 -->
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <!-- if you want to load images from a file OR from the internet -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!-- 允许程序设置内置sd卡的写权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 允许程序获取网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- 用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 用于访问GPS定位 -->
+    ·
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+    <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <!-- 声明程序使用OpenGL ES 2.0 -->
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <application
+        android:name=".interestclassapp.application.MyApp"
+        android:allowBackup="true"
+        android:icon="@drawable/app_icon"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/app_icon"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:name">
+
+        <service android:name=".interestclassapp.refactor.common.UpdateService" />
+
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation|screenSize"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity
+            android:name="com.alipay.sdk.app.H5AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+
+
+        <!-- QQ额外配置 -->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent1104938073" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:exported="true" />
+
+        <!--
+        &lt;!&ndash; 设置key &ndash;&gt;
+        <meta-data
+
+            android:name="com.amap.api.v2.apikey"
+            android:value="200e4e6006ce4f892b0f72b3f725ac31" />
+        -->
+        <!-- 设置key -->
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="d18d14f538b8922af5c57bced4653f86" />
+
+        <!-- 定位需要的服务 -->
+        <service android:name="com.amap.api.location.APSService" />
+
+        <activity
+            android:name=".interestclassapp.ui.main.MainActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan|stateHidden">
+            <intent-filter>
+                <category android:name="android.intent.category.MONKEY" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".interestclassapp.refactor.LauncherActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.MONKEY" />
+            </intent-filter>
+        </activity>
+
+        <!-- 声明云信后台服务，如需保持后台推送，使用独立进程效果会更好。 -->
+        <service
+            android:name="com.netease.nimlib.service.NimService"
+            android:process=":core" />
+        <service
+            android:name="com.netease.nimlib.service.NimService$Aux"
+            android:process=":core" />
+        <!--
+                  云信SDK的监视系统启动和网络变化的广播接收器，用户开机自启动以及网络变化时候重新登录，
+                 保持和 NimService 同一进程
+        -->
+        <receiver
+            android:name="com.netease.nimlib.service.NimReceiver"
+            android:exported="false"
+            android:process=":core">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+        <!-- 云信进程间通信 Receiver -->
+        <receiver android:name="com.netease.nimlib.service.ResponseReceiver" />
+
+        <!-- 7.0 注册内容提供器 -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.zhangju.xingquban.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"
+                tools:replace="android:resource" />
+        </provider>
+
+        <!-- *************************************************************************************** -->
+
+        <!-- 首页 -->
+        <!-- 首页轮播详情 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.home.HomeWebView"
+            android:theme="@style/AppTheme" />
+        <!-- 首页消息 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.home.HomeMessage"
+            android:theme="@style/AppTheme" />
+
+        <!-- 主页数据详情 -->
+        <activity android:name=".interestclassapp.ui.fragment.home.HomeRecyclerViewData" />
+
+        <!-- 发布信息 城市 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeVip.MeVipStudentTuij" />
+
+        <!-- *************************************************************************************** -->
+        <!-- *************************************************************************************** -->
+
+
+        <!-- 附近 -->
+        <!-- 附近搜索 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.near.NearShare.NearShareActivity"
+            android:theme="@style/AppTheme" />
+        <activity android:name=".interestclassapp.ui.fragment.near.DistrictActivity" />
+
+        <!-- *************************************************************************************** -->
+        <!-- *************************************************************************************** -->
+
+
+        <!-- 直播 -->
+        <!-- 直播主页面activity, 默认竖屏模式 -->
+        <activity
+            android:name=".interestclassapp.ui.activity.find.liveradio.LivingActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <!-- 直播 -->
+        <activity
+            android:name=".interestclassapp.ui.activity.find.liveradio.StartLiveActivity"
+            android:theme="@style/AppTheme" />
+        <!-- 直播拉流端 -->
+        <activity
+            android:name=".interestclassapp.ui.activity.find.liveradio.LiveWatchActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <!-- 直播结束页面 -->
+        <activity
+            android:name=".interestclassapp.ui.activity.find.liveradio.LiveExitActivity"
+            android:screenOrientation="portrait" />
+        <!-- 声明直播异常报警服务 -->
+        <service android:name=".interestclassapp.service.AlertService" />
+
+        <!-- *************************************************************************************** -->
+        <!-- *************************************************************************************** -->
+
+
+        <!-- 发现 -->
+        <!-- 找活动 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.find.SeekActivity.FindActivity"
+            android:theme="@style/AppTheme" />
+        <!-- 找机构 -->
+        <!-- 找直播 -->
+        <!-- 信息平台 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.find.SeekMessage.FindMessage"
+            android:theme="@style/AppTheme" />
+        <!-- 资源 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.find.SeekResource.FindResource"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <!-- 找机构/老师 -->
+        <!-- 我的问答 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.find.Wenda.FindWenda"
+            android:theme="@style/AppTheme" />
+        <!--  -->
+        <activity
+            android:name=".interestclassapp.ui.activity.AgreementsActivity"
+            android:theme="@style/AppTheme" />
+        <!-- 发现 精选 -->
+        <activity android:name=".interestclassapp.ui.fragment.find.SeekActivity.jingxuan.FindSeekChoicenessXq" />
+        <!-- 我的提问 -->
+        <activity android:name=".interestclassapp.ui.fragment.find.Wenda.FindTiWen" />
+        <!-- 发现界面导航提问 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.find.Wenda.FindTabTiWen"
+            android:windowSoftInputMode="adjustNothing|stateAlwaysHidden" />
+        <!-- 发现 发布信息 城市 -->
+        <activity android:name=".interestclassapp.ui.fragment.find.SeekMessage.FindMessageFabuCity" />
+        <!-- 发现 找活动 我发布的 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.wofabude.MeActivityWfbd" />
+        <!-- 发现 找活动 活动收入 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.huodongshouru.MeActivityHdsr" />
+        <!-- 发现 找活动 检票 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.jianpiao.MeActivityJianp" />
+        <!-- 发现 找活动 发起活动 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.wofabude.MeActivityFaqihd" />
+        <!-- 发现 找活动 发布活动 报名设置 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.wofabude.MeActivityFbhdBmsz" />
+        <!-- 发现 找活动 发布活动 投票设置 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.wofabude.MeActivityFbhdTptd" />
+        <!-- 发现 找活动 发起活动2 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.wofabude.MeActivityFaqihdTwo" />
+        <!-- 发现 找活动 发起活动3 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.wofabude.MeActivityFaqihdThree" />
+        <!-- 发现 找活动 发起活动3 编辑文本 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.wofabude.MeActivityFaqihdThreeBjwb" />
+        <!-- 发现 找活动 发起活动4 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.wofabude.MeActivityFaqihdFour" />
+        <!-- 发现 找活动 发布活动预览 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.wofabude.MeActivityFbhdYuLan" />
+        <!-- 发现 找活动 我发布的 发布活动成功 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.wofabude.MeActivityFbhdSucess" />
+        <!-- 发现 找活动 我的票券 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.wodepiaoquan.MeActivityWdpj" />
+        <!-- 发现 找活动 我参与的 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.wocanyude.MeActivityWcyd" />
+        <!-- 发现 找活动 我关注的 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.wodeguanzhu.MeActivityWdgz" />
+        <!-- 发现 找活动 我发布的数据 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.wofabude.MeActivityWfbdData" />
+        <!-- 发现 找活动 我的活动 我发布的报名管理 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.wofabude.baomingguanli.MeActivityWfbdDataBmgl" />
+        <!-- 发现 找活动 我的活动 我发布的 报名管理全部  详情 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.wofabude.baomingguanli.MeActivityWfbdDataBmglAllXq" />
+        <!-- 发现 找活动 我发布的活动  邀请函 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.wofabude.MeActivityWfbdHdfx" />
+        <!-- 发现 找活动 我的票券全部详情 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.wodepiaoquan.MeActivityWdpqAllXq" />
+        <!-- 发现 找活动 我的票券全部详情 退票 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeActivity.wofabude.baomingguanli.MeActivityWdpqAllXqTp" />
+        <!-- 发现 找活动 报名信息 -->
+        <activity android:name=".interestclassapp.ui.fragment.find.SeekActivity.jingxuan.FindSeekChoicenessXqBmxx" />
+        <!-- 发现 找活动 投票 -->
+        <activity android:name=".interestclassapp.ui.fragment.find.SeekActivity.jingxuan.FindSeekChoicenessTp" />
+        <!-- 发现 问答草稿 -->
+        <activity android:name=".interestclassapp.ui.fragment.find.Wenda.FindWendaCaog" />
+        <!-- 发现 找活动 发布作品 -->
+        <activity android:name=".interestclassapp.ui.fragment.find.SeekActivity.jingxuan.FindSeekChoicenessXqFbzp" />
+        <!-- 发现 找活动 作品预览 -->
+        <activity android:name=".interestclassapp.ui.fragment.find.SeekActivity.jingxuan.FindSeekChoicenessXqFbzpYulan" />
+        <!-- 发现 提问详情 -->
+        <activity android:name=".interestclassapp.ui.fragment.find.Wenda.FindTiWenXq" />
+        <!-- 发现 提问详情回答 -->
+        <activity android:name=".interestclassapp.ui.fragment.find.Wenda.FindTiWenXqHd" />
+
+        <!-- 发现 草稿详情提交 -->
+        <activity android:name=".interestclassapp.ui.fragment.find.Wenda.FindCGDetail" />
+
+        <!-- 发布信息 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.find.SeekMessage.FindMessageFabu"
+            android:windowSoftInputMode="adjustNothing|stateHidden" />
+
+        <!-- *************************************************************************************** -->
+        <!-- *************************************************************************************** -->
+
+
+        <!-- 我 -->
+        <!-- 钱包支付宝/微信添加 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.me.Wallet.WalletBindAddActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <!-- 头像修改 -->
+        <!-- 我的设置 -->
+        <!-- 绑定支付宝/微信界面 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.me.Wallet.MeWalletBind"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <!-- 用户注册 -->
+        <!-- 我的界面开通vip -->
+        <!-- 邀请 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.me.YaoQing.MyYaoQing"
+            android:theme="@style/AppTheme" />
+        <!-- 登录 -->
+        <!-- 钱包 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.me.Wallet.MyWallet"
+            android:theme="@style/AppTheme" />
+        <!-- 直播 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.me.RadioBroadcast.MyRadioBroadcast"
+            android:theme="@style/AppTheme" />
+        <!-- 我的订单 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.me.Order.MyOrder"
+            android:theme="@style/AppTheme" />
+        <!-- 商户订单 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.me.Lesson.MyLesson"
+            android:theme="@style/AppTheme" />
+        <!-- Head消息 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.me.Message.MyMessage"
+            android:theme="@style/AppTheme" />
+        <!-- 我的直播间 -->
+        <!-- 我的评论 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.me.MeActivity.MyActivity"
+            android:theme="@style/AppTheme" />
+        <!-- 我的收藏 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.me.Collect.MyCollect"
+            android:theme="@style/AppTheme" />
+        <!-- 我的评论 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.me.Comment.MyComment"
+            android:theme="@style/AppTheme" />
+
+        <!-- 机构管理 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.me.Institutions.MyJiGou"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustNothing|stateHidden" />
+
+        <!-- 机构 课程管理 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.Institutions.kcgl.MeJiGouKcgl" />
+
+        <!-- 机构 课程添加 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.me.Institutions.kcgl.MeJiGouKcglKctj"
+            android:windowSoftInputMode="adjustNothing|stateAlwaysHidden" />
+        <!-- 机构 课程安排 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.Institutions.kcap.MeJiGouKcap" />
+
+        <!-- 机构 课程相册 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.Institutions.xcgl.MeJiGouXcgl" />
+
+        <!-- 机构 相册管理-上传视频 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.me.Institutions.xcgl.MeJiGouXcglScsp"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+
+        <!-- 机构 视频课程 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.Institutions.spkc.MeJiGouSpkc" />
+
+        <!-- 机构 机构简介 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.Institutions.jgjj.MeJiGouJgjj" />
+
+        <!-- 机构 机构简介添加 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.Institutions.jgjj.MeJiGouJgjjTj" />
+
+        <!-- 机构 机构简介 文本 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.Institutions.jgjj.MeJiGouJgjjWb" />
+
+        <!-- 机构详情 城市选择 -->
+        <activity android:name=".interestclassapp.ui.fragment.home.HomeDataCity" />
+        <!-- 机构详情 网友点评 -->
+        <activity android:name=".interestclassapp.ui.fragment.home.HomeDataWydp" />
+        <!-- 机构详情 视频课程详情 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.home.spkc.HomeDataSpkcXq"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <!-- 机构详情 私教课程详情 -->
+        <activity android:name=".interestclassapp.ui.fragment.home.sjkc.HomeDataSjkcXq" />
+        <!-- 机构详情 名师风采详情 -->
+        <activity android:name=".interestclassapp.ui.fragment.home.msfc.HomeDataMsfcXq" />
+        <!-- 机构详情 我的评论详情 -->
+        <activity android:name=".interestclassapp.ui.fragment.home.wydp.HomeDataWdplXq" />
+        <!-- 机构详情 写点评 -->
+        <activity android:name=".interestclassapp.ui.fragment.home.HomeDataXdp" />
+        <!-- 机构详情 视频课程全部 -->
+        <activity android:name=".interestclassapp.ui.fragment.home.spkc.HomeDataSpkcAll" />
+        <!-- 机构详情 名师风采全部 -->
+        <activity android:name=".interestclassapp.ui.fragment.home.msfc.HomeDataMsfcAll" />
+        <!--  -->
+        <activity android:name=".interestclassapp.ui.fragment.home.ppjs.HomeDataPpjs" />
+        <!-- 发现 我的问答 -->
+        <activity android:name=".interestclassapp.ui.fragment.find.Wenda.FindMeWenda" />
+        <!-- 发现 我的收藏 -->
+        <activity android:name=".interestclassapp.ui.fragment.find.Wenda.FindMeShoucang" />
+        <!-- 发现 我的问答详情 -->
+        <activity android:name=".interestclassapp.ui.fragment.find.Wenda.FindMeWendaXq" />
+        <!-- 发现 我的提问草稿详情 -->
+        <activity android:name=".interestclassapp.ui.fragment.find.Wenda.FindWDCgTwXq" />
+        <!-- 发现 我的问答草稿详情 -->
+        <activity android:name=".interestclassapp.ui.fragment.find.Wenda.FindWDCgWdXq" />
+        <!-- 发现 我的收藏详情 -->
+        <activity android:name=".interestclassapp.ui.fragment.find.Wenda.FindMeSCXq" />
+        <!-- 消息中心 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.me.HelpAndBack.MyHelpandBack"
+            android:theme="@style/AppTheme" />
+        <!-- 我的钱包 充值 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.Wallet.walletCz.MeWalletCz" />
+        <!-- 我的钱包 提现 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.Wallet.walletTix.MeWalletTix" />
+        <!-- 我的钱包 余额 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.Wallet.walletYue.MeWalletYue" />
+        <!-- 我的钱包 兴趣豆 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.Wallet.walletXqd.MeWalletXqd" />
+        <!-- 我的钱包 兴趣币 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.Wallet.walletXqb.MeWalletXqb" />
+        <!-- 我的钱包 门票收益 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.Wallet.walletMenpiao.MeWalletMenp" />
+        <!-- 我的钱包 优惠券 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.Wallet.walletYouhuiq.MeWalletYouhuiq" />
+        <!-- 我的钱包 交易记录 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.Wallet.MeWalletJYJL" />
+        <!-- 我的钱包 充值成功 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.Wallet.MeWalletCZture" />
+        <!-- 我的钱包 每日动态 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.Message.MeMessageDay" />
+        <!-- 我的钱包 资源管理 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MyRecrouse.MeRecrouse" />
+        <!-- 我的钱包 发表视频/音频 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.me.MyRecrouse.popupYp.MeRecrousePopuYp"
+            android:windowSoftInputMode="adjustNothing|stateHidden" />
+        <!-- 我的Vip 生源推荐 -->
+        <activity android:name=".interestclassapp.ui.fragment.me.MeVip.MeVipStudentSYKm" />
+
+        <!--
+            <activity
+            android:name=".ui.fragment.live.ConfigActivity"
+            android:theme="@style/AppTheme" />
+        -->
+
+
+        <!-- *************************************************************************************** -->
+        <!-- *************************************************************************************** -->
+
+        <activity
+            android:name=".interestclassapp.ui.fragment.live.LiveStreamingActivity"
+            android:theme="@style/AppTheme" />
+
+        <!-- 用户协议 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.me.Login.AgreementActivity"
+            android:theme="@style/AppTheme" />
+
+        <!-- 地图 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.home.MapActivity"
+            android:theme="@style/AppTheme" />
+        <!-- 地图定位 -->
+        <activity
+            android:name=".interestclassapp.ui.fragment.home.CityActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize" />
+        <!--            android:windowSoftInputMode="adjustPan"-->
+        <!-- *************************************************************************************** -->
+        <!-- 发现 -->
+        <!-- 找直播 -->
+        <!-- 信息平台 -->
+        <!-- 资源 -->
+        <!-- 找老师 -->
+        <!-- 我的问答 -->
+        <!-- 首页轮播详情 -->
+        <!-- 附近 -->
+        <!-- 附近搜索 -->
+        <!-- 首页消息 -->
+        <!-- 直播主页面activity, 默认竖屏模式 -->
+        <!-- *************************************************************************************** -->
+        <!-- shareSDk -->
+        <activity
+            android:name="com.mob.tools.MobUIShell"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:windowSoftInputMode="stateHidden|adjustResize">
+
+            <!--
+                如果集成QQ分享，或者使用QQ客户端来进行QQ空间的
+                分享，须要在此处添加一个对ACTION_VIEW事件的过滤器，
+                其中的scheme是“tencent”前缀再开发者应用的加上appId。
+                如果此过滤器不设置，则分享结束以后不能得到正确的回调
+            -->
+            <intent-filter>
+                <data android:scheme="tencent1104938073" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <!-- 调用新浪原生SDK，需要注册的回调activity -->
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <!-- 微信分享回调 -->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true" />
+        <!-- *************************************************************************************** -->
+        <activity android:name=".interestclassapp.ui.fragment.me.Institutions.kcgl.MeJiGouKcglKctjStxx" />
+        <activity android:name=".interestclassapp.ui.fragment.me.Institutions.kcgl.MeJiGouKcglKctjSKfs" />
+        <activity android:name=".interestclassapp.ui.fragment.me.Institutions.kcgl.MeJiGouKcglKctjCity" />
+        <activity android:name=".interestclassapp.ui.fragment.me.Institutions.kcgl.MeJiGouKcglKctjCity2" />
+        <activity android:name=".interestclassapp.ui.fragment.me.Institutions.kcgl.MeJiGouKcglSkkm" />
+        <activity
+            android:name=".interestclassapp.ui.fragment.me.Institutions.spkc.LiveVideo"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity android:name=".interestclassapp.ui.fragment.me.Institutions.xcgl.MeJiGouXcglScspSpj" />
+        <activity android:name=".interestclassapp.ui.fragment.me.Institutions.spkc.MeJiGouSpkcUploading" />
+        <activity android:name=".interestclassapp.ui.fragment.me.user.MeUserOrganization" />
+        <activity android:name=".interestclassapp.ui.fragment.me.user.MeUserTeacher" />
+        <activity android:name=".interestclassapp.ui.fragment.find.SeekMessage.FindMessageDataXq" />
+        <activity android:name=".interestclassapp.ui.fragment.find.Wenda.FindCGAnwserDetailActivity" />
+        <activity android:name=".interestclassapp.ui.fragment.find.SeekMessage.DataPickerActivity" />
+        <activity
+            android:name=".interestclassapp.ui.fragment.me.MyRecrouse.popupYp.SendPictureActivity"
+            android:windowSoftInputMode="adjustNothing|stateHidden" />
+        <activity
+            android:name=".interestclassapp.ui.fragment.me.MyRecrouse.popupYp.SendNewsActivity"
+            android:windowSoftInputMode="adjustNothing|stateHidden" />
+        <activity android:name=".interestclassapp.ui.fragment.me.MyRecrouse.ChargeActivity" />
+        <activity android:name=".interestclassapp.ui.fragment.me.MyRecrouse.LocationActive" />
+        <activity android:name=".interestclassapp.ui.fragment.near.DistrictActivity_Copy" />
+        <activity android:name=".interestclassapp.ui.activity.near.HomeDistrictActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.WalletActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.SettingsActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.PersonDataActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.NotificationListActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.NotificationActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.InviteActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.FeedbackActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.CommentActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.CommentDetailActivity" />
+        <activity android:name=".interestclassapp.ui.fragment.me.Settings.AboutUsActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.LoginActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.MONKEY" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".interestclassapp.refactor.me.activity.LoginByOtherActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.ForgotPasswordActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.RegisterActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.ChangeNicknameActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.ChangeSexActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.ChangePasswordActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.OrderPayActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.OrderActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.CheckCourseCodeActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.CollectionActivity" />
+        <activity android:name=".interestclassapp.ui.fragment.live.LiveTabLayoutFragment.LiveVideoPlayerActivity" />
+        <activity android:name=".interestclassapp.ui.activity.find.liveradio.CourseChoiceActivity" />
+        <activity android:name=".interestclassapp.ui.fragment.live.VideoCommentActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.publish_active.AddFeatureTextActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.publish_active.AddTripActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.publish_active.PublishActiveActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.publish_active.PublishActiveDoneActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.publish_active.SignupSettingsActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.publish_active.VoteSettingsActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.publish_active.ActiveCategoryActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.publish_active.ActiveLastActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.OrgManagerActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.OrgProfileActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.AuditionTypeActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.TeachTypeActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.ClassManagerActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.AlbumManageActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.AlbumMangeUploadImageActivity" />
+        <activity android:name=".interestclassapp.refactor.common.activity.PreviewImageActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.ResourceManageActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.SendVideoActivity" />
+        <activity android:name=".interestclassapp.ui.fragment.find.mediscover.FindLiveActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.AddFieldControlActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.BlacklistActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.FansRankActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.FieldControlActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.FocusUserActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.LiveroomPublishHistoryActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.LiveroomSettingsActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.MyFansActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.MyLiveRoomActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.BindingPhoneActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.VipActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.OrderDetailActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.BusinessOrderActivity" />
+        <activity
+            android:name=".interestclassapp.ui.fragment.find.SeekResource.AudioDetailActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity android:name=".interestclassapp.ui.fragment.find.SeekResource.ResSendActivity" />
+        <activity android:name=".interestclassapp.ui.fragment.find.SeekResource.PicDetailActivity" />
+        <activity android:name=".interestclassapp.ui.fragment.find.SeekResource.NewsDetailActivity" />
+        <activity android:name=".interestclassapp.ui.activity.near.NearAllSjkcAcitivity" />
+        <activity android:name=".interestclassapp.ui.fragment.find.Wenda.Question.fresh.MyQuestionMain" />
+        <activity android:name=".interestclassapp.ui.fragment.find.Wenda.Question.fresh.AnswerQuestionActivity" />
+        <activity android:name=".interestclassapp.ui.fragment.find.Wenda.Question.fresh.AskQuestionActivity" />
+        <activity android:name=".interestclassapp.ui.fragment.find.Wenda.Question.fresh.DraftQuestionActivity" />
+        <activity android:name=".interestclassapp.ui.fragment.find.Wenda.Question.fresh.CollectQuestionActivity" />
+        <activity android:name=".interestclassapp.ui.fragment.find.Wenda.Question.fresh.QuestionDetailActivity" />
+        <activity android:name=".interestclassapp.ui.fragment.find.Wenda.Question.fresh.MyAddQuestionActivity" />
+        <activity android:name=".interestclassapp.ui.fragment.find.Wenda.Question.fresh.MyAnswerActivity" />
+        <activity android:name=".interestclassapp.ui.activity.near.NearAllVideoLessonsAcitivity" />
+        <activity android:name=".interestclassapp.ui.activity.near.NearAllCommentActivity" />
+        <activity android:name=".interestclassapp.ui.activity.near.NearAlbumManageActivity" />
+        <activity android:name=".interestclassapp.ui.fragment.live.LiveVideoPlayerActivity" />
+        <activity android:name=".interestclassapp.ui.fragment.live.LivePayActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.ApplyToMemberActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.ChangeTeachAgeActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.QualifyActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.CourseListActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.AlbumManageUploadVideoActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.CourseVideoActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.CourseVideoListActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.SelectVideoFolderActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.PublishCourseVideoActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.ActiveActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.ActivePublishedActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.ActiveIncomeActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.CheckTicketActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.MyTicketActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.ActiveTakePartInActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.ActiveFocusActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.SelectLocationActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.SelectAreaActivity" />
+        <activity
+            android:name=".interestclassapp.refactor.common.activity.WebViewActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".interestclassapp.refactor.me.activity.SelectDegreeActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.BindPayActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.BoundPayActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.ExchangeTicketIncomeActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.SelectBindPayActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.WalletCouponActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.WalletTransactionHistoryActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.ExchangeFunBeanActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.ExchangeFunCoinActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.ExchangeActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.WithdrawActivity" />
+        <activity android:name=".interestclassapp.ui.fragment.find.lookactivity.FindActiveActivity" />
+        <activity android:name=".interestclassapp.ui.activity.find.liveradio.LiveLookExitActivity" />
+        <activity
+            android:name=".interestclassapp.ui.activity.near.ShipinBofangActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity android:name=".interestclassapp.ui.activity.near.MapNaviActivity" />
+        <activity android:name=".interestclassapp.ui.activity.near.CurriculumActivity" />
+        <activity android:name=".interestclassapp.ui.fragment.home.sjkc.CurriculumXqActivity" />
+        <activity android:name=".interestclassapp.ui.activity.near.CurriculumOrderActivity" />
+        <activity android:name=".interestclassapp.ui.activity.near.CurriculumHomeOrderActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.MessagePlatformActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.StudentIntroduceActivity" />
+        <activity android:name=".interestclassapp.util.test.TestMyActivity" />
+        <activity android:name=".interestclassapp.ui.activity.near.CurriculumOrderPayActivity" />
+        <activity android:name=".interestclassapp.ui.activity.near.CurriculumOrderSucessActivity" />
+        <activity android:name=".interestclassapp.ui.activity.near.CurriculumHomeOrderPayActivity" />
+        <activity android:name=".interestclassapp.ui.activity.near.CurriculumHomeOrderSucessActivity" />
+
+        <activity android:name=".interestclassapp.refactor.me.activity.EditCourseActivity" />
+        <activity android:name=".interestclassapp.refactor.GuideActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.RebindPhoneActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.ChangeContactPhoneActivity" />
+        <activity android:name=".zxing.activity.CaptureActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.VipVertifyActivity"></activity>
+        <activity android:name=".interestclassapp.refactor.me.activity.CheckTicketManualActivity" />
+        <activity android:name=".interestclassapp.ui.activity.near.CurriculumOrderErrorActivity" />
+        <activity android:name=".interestclassapp.refactor.me.activity.OrderCommentActivity" />
+        <activity android:name=".interestclassapp.test.TestActivity" />
+        <activity android:name=".interestclassapp.ui.fragment.home.ExperienceActivity" />
+
+        <activity android:name=".interestclassapp.ui.fragment.home.BusinessDetailsActivity" />
+
+        <activity
+            android:name=".interestclassapp.ui.fragment.home.contest.ContestWebActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".interestclassapp.ui.fragment.home.contest.ContestWebActivity1"
+            android:screenOrientation="portrait"/>
+    </application>
+</manifest>

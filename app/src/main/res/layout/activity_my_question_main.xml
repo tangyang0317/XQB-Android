@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zhangju.xingquban.interestclassapp.ui.fragment.find.Wenda.Question.fresh.MyQuestionMain">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:layout_marginBottom="@dimen/dp_1"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/find_return"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:src="@mipmap/return_image" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_question"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_my_question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="我的问答"
+                android:textColor="@color/black"
+                android:textSize="@dimen/dp_15" />
+
+            <ImageView
+                android:id="@+id/image_over"
+                android:layout_width="@dimen/dp_10"
+                android:layout_height="@dimen/dp_10"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:layout_toRightOf="@+id/text_wodewenda"
+                android:src="@mipmap/find_down_wenda" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/quesion_add"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="@dimen/dp_20"
+                android:text="提问"
+                android:textColor="@color/color_main" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <include layout="@layout/layout_banner"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/findWd_tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            app:tabIndicatorColor="@color/color_main"
+            app:tabMode="scrollable"
+            app:tabSelectedTextColor="@color/color_main"
+            app:tabTextColor="@color/black" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_10"
+            android:background="@color/f6f6f6" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/question_viewpage"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true" />
+
+    </LinearLayout>
+</LinearLayout>

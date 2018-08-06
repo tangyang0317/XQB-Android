@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/translucent_white">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_size_large"
+        android:padding="10dp"
+        android:text="分享"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:id="@+id/shareToWechat"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/share_wechat"
+            android:drawablePadding="10dp"
+            android:textColor="@android:color/black"
+            android:gravity="center_horizontal"
+            android:text="微信"/>
+
+        <TextView
+            android:id="@+id/shareToMoments"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/share_circle"
+            android:drawablePadding="10dp"
+            android:textColor="@android:color/black"
+            android:gravity="center_horizontal"
+            android:text="朋友圈"/>
+
+        <TextView
+            android:id="@+id/shareToXl"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/share_weibo"
+            android:drawablePadding="10dp"
+            android:textColor="@android:color/black"
+            android:gravity="center_horizontal"
+            android:text="新浪微博"/>
+
+        <TextView
+            android:id="@+id/shareToQQ"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/share_qq"
+            android:drawablePadding="10dp"
+            android:textColor="@android:color/black"
+            android:gravity="center_horizontal"
+            android:text="腾讯QQ"/>
+
+        <TextView
+            android:id="@+id/shareToBean"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/share_douban"
+            android:drawablePadding="10dp"
+            android:textColor="@android:color/black"
+            android:gravity="center_horizontal"
+            android:text="豆瓣"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:id="@+id/generateQrImage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/share_qrcode"
+            android:drawablePadding="10dp"
+            android:textColor="@android:color/black"
+            android:gravity="center_horizontal"
+            android:text="生成图片"/>
+
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="取消"/>
+</LinearLayout>

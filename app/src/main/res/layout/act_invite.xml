@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.fastlib.widget.TitleBar
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@android:color/white"
+        app:titleText="邀请有奖"
+        app:leftIcon="@drawable/home_city_back"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--计算二维码位置和图片高，来拉伸这个背景图片高度-->
+        <ImageView
+            android:id="@+id/bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@mipmap/me_yaoqing_bg"/>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:layout_marginTop="40dp"
+                    android:textSize="@dimen/font_size_large_high"
+                    android:text="分享给好友成功注册APP"/>
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textColor="@android:color/white"-->
+                    <!--android:layout_marginTop="15dp"-->
+                    <!--android:textSize="@dimen/font_size_large_high"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:text="即可获得20颗兴趣豆"/>-->
+
+                <ImageView
+                    android:id="@+id/qrCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="37dp"
+                    android:src="@mipmap/xingquban_erweima"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:textColor="#444444"
+                    android:text="扫描下载APP"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1px"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="#EBEBEB"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#848484"
+                        android:text="分享给好友"/>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1px"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="#EBEBEB"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="32dp">
+
+                    <TextView
+                        android:id="@+id/wechat"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:drawableTop="@mipmap/me_yaoqing_weixin"
+                        android:gravity="center_horizontal"
+                        android:drawablePadding="5dp"
+                        android:padding="5dp"
+                        android:text="微信"/>
+
+                    <TextView
+                        android:id="@+id/moments"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:drawableTop="@mipmap/me_yaoqing_pengyouquan"
+                        android:gravity="center_horizontal"
+                        android:drawablePadding="5dp"
+                        android:text="朋友圈"/>
+
+                    <TextView
+                        android:id="@+id/weibo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:drawableTop="@mipmap/me_yaoqing_weibo"
+                        android:gravity="center_horizontal"
+                        android:drawablePadding="5dp"
+                        android:text="微博"/>
+
+                    <TextView
+                        android:id="@+id/qq"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:gravity="center_horizontal"
+                        android:drawablePadding="5dp"
+                        android:drawableTop="@mipmap/me_yaoqing_qq"
+                        android:text="QQ"/>
+
+                    <TextView
+                        android:id="@+id/qqZone"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="5dp"
+                        android:gravity="center_horizontal"
+                        android:drawablePadding="5dp"
+                        android:drawableTop="@mipmap/me_yaoqing_kongjian"
+                        android:text="QQ空间"/>
+                </LinearLayout>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </FrameLayout>
+</LinearLayout>

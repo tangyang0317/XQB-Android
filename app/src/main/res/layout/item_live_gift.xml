@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp">
+
+    <RelativeLayout
+        android:id="@+id/rlparent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingRight="15dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_radius_top_black"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingBottom="5dp"
+            android:paddingLeft="50dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp">
+
+            <TextView
+                android:id="@+id/tv_gift_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tony老师"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/tv_gift_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="发送了xxx礼物"
+                android:textColor="@android:color/holo_orange_light"
+                android:textSize="10sp"/>
+        </LinearLayout>
+
+        <com.zhangju.xingquban.interestclassapp.view.imageView.CustomRoundView
+            android:id="@+id/criv_gift_user_avatar"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/default_icon"
+            app:border_color="@color/black"
+            app:border_width="1dp"/>
+    </RelativeLayout>
+
+    <com.zhangju.xingquban.interestclassapp.view.imageView.CustomRoundView
+        android:id="@+id/criv_gift_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignRight="@id/rlparent"
+        android:src="@mipmap/ic_launcher"/>
+
+    <com.zhangju.xingquban.interestclassapp.view.textView.MagicTextView
+        android:id="@+id/mtv_gift_num"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@+id/criv_gift_icon"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="x1"
+        android:textColor="@color/fans_rank_star"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:strokeColor="@android:color/white"
+        app:strokeJoinStyle="miter"
+        app:strokesWidth="2"/>
+
+</RelativeLayout>

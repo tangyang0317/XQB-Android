@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dp_5"
+    android:layout_marginLeft="@dimen/dp_10"
+    android:descendantFocusability="blocksDescendants"
+    android:layout_marginRight="@dimen/dp_10"
+    android:background="@drawable/live_background"
+    android:orientation="vertical"
+    android:padding="@dimen/dp_5">
+
+
+    <TextView
+        android:id="@+id/img_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text=""
+        android:textColor="#FF000000"
+        android:textSize="16sp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_image"
+
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_80">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
+        <TextView
+            android:id="@+id/tv_news_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:drawableLeft="@drawable/icon_disscuz_12_12"
+            android:drawablePadding="@dimen/dp_5"
+            android:text="2109"
+            android:textColor="#FFACACAC"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tv_news_love_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:drawableLeft="@drawable/love_red"
+            android:drawablePadding="@dimen/dp_5"
+            android:text="2109"
+            android:textColor="#FFACACAC"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/thumbCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFACACAC"
+            android:textSize="11sp"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="15dp"
+            tools:text="点赞100次"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+
+        <TextView
+            android:id="@+id/tv_news_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:paddingRight="@dimen/dp_5"
+            android:text="1小时前"
+            android:textColor="#FFACACAC"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

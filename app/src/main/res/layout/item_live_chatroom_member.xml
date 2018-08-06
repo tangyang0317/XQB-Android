@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_margin="-10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+    <!--<com.zhangju.xingquban.view.imageView.circleImageview.CircleImageView
+        android:id="@+id/civ_chatroom_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/hugh"
+        app:civ_border_color="@color/light"
+        app:civ_border_width="0.5dp"/>-->
+
+    <ImageView
+        android:id="@+id/iv_chatroom_avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/default_icon"/>
+</RelativeLayout>

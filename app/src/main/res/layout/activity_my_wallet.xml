@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/f6f6f6"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_wallet_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title"
+        android:background="@color/wallet_background">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/nav_leftarrow_normal" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_wallet_head"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@id/rl_wallet_title"
+        android:background="@color/wallet_background">
+
+
+        <RelativeLayout
+            android:id="@+id/rl_wallet_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <com.fastlib.widget.RoundImageView
+                android:id="@+id/avatar"
+                android:layout_width="@dimen/dp_70"
+                android:layout_height="@dimen/dp_70"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/me_touxiang" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/avatar"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                tools:text="@string/balance"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/bind"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="15dp"
+                android:layout_below="@id/name"
+                android:text="@string/bind"
+                android:textColor="@color/white"
+                android:drawableLeft="@mipmap/wallet_zhifubao"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/recharge"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_100"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:src="@mipmap/wallet_chongzhi" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="充值" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/dp_1"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@color/f6f6f6" />
+
+        <LinearLayout
+            android:id="@+id/remainLayout"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_100"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:src="@mipmap/wallet_yue" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="余额" />
+
+                <TextView
+                    android:id="@+id/remain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_5"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:text="0" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="@dimen/dp_1"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@color/f6f6f6" />
+
+        <View
+            android:layout_width="@dimen/dp_1"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@color/f6f6f6" />
+
+        <LinearLayout
+            android:id="@+id/withdraw"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp_100"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="@dimen/dp_30"
+                android:layout_height="@dimen/dp_30"
+                android:src="@mipmap/wallet_tixian" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="提现" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_20"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/funBean"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/row_bg">
+
+                    <ImageView
+                        android:id="@+id/iv_my_yaoqing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:src="@mipmap/wallet_dou" />
+
+                    <TextView
+                        android:id="@+id/tv_my_vip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_toRightOf="@+id/iv_my_yaoqing"
+                        android:text="兴 趣 豆"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_my_vip_arrows"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/list_arrow_normal" />
+
+                    <TextView
+                        android:id="@+id/beanCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp_20"
+                        android:layout_toLeftOf="@+id/iv_my_vip_arrows"
+                        android:text="0"
+                        android:textSize="15sp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="#fafafa" />
+
+                <RelativeLayout
+                    android:id="@+id/funCoin"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/row_bg">
+
+                    <ImageView
+                        android:id="@+id/iv_my_yaoqing1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:src="@mipmap/wallet_bi" />
+
+                    <TextView
+                        android:id="@+id/tv_my_vip1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_toRightOf="@+id/iv_my_yaoqing1"
+                        android:text="兴 趣 币"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_my_vip_arrows1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/list_arrow_normal" />
+
+                    <TextView
+                        android:id="@+id/coinCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp_20"
+                        android:layout_toLeftOf="@+id/iv_my_vip_arrows1"
+                        android:text="0"
+                        android:textSize="15sp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="#fafafa" />
+
+                <RelativeLayout
+                    android:id="@+id/ticketIncome"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/row_bg">
+
+                    <ImageView
+                        android:id="@+id/iv_my_yaoqing2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:src="@mipmap/wallet_piao" />
+
+                    <TextView
+                        android:id="@+id/tv_my_vip2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/ticketIncomeCount"
+                        android:layout_alignBottom="@+id/ticketIncomeCount"
+                        android:layout_marginLeft="14dp"
+                        android:layout_marginStart="14dp"
+                        android:layout_toEndOf="@+id/iv_my_yaoqing2"
+                        android:layout_toRightOf="@+id/iv_my_yaoqing2"
+                        android:text="门票收益"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_my_vip_arrows2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/list_arrow_normal" />
+
+                    <TextView
+                        android:id="@+id/ticketIncomeCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp_20"
+                        android:layout_toLeftOf="@+id/iv_my_vip_arrows2"
+                        android:text="0"
+                        android:textSize="15sp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="15dp"
+                    android:background="#fafafa" />
+
+                <RelativeLayout
+                    android:id="@+id/discountTicket"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/row_bg">
+
+                    <ImageView
+                        android:id="@+id/iv_my_yaoqing3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:src="@mipmap/wallet_juan" />
+
+                    <TextView
+                        android:id="@+id/tv_my_vip3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_toRightOf="@+id/iv_my_yaoqing3"
+                        android:text="优 惠 券"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_my_vip_arrows3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:src="@drawable/list_arrow_normal" />
+
+                    <TextView
+                        android:id="@+id/ticketCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp_20"
+                        android:layout_toLeftOf="@+id/iv_my_vip_arrows3"
+                        android:text="0"
+                        android:textSize="15sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/transactionHistory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="查看交易记录"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="13sp"
+                android:layout_marginTop="10dp"
+                android:background="@android:color/white"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

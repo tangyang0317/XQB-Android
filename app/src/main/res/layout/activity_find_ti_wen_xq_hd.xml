@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/f6f6f6"
+    android:orientation="vertical"
+    tools:context="com.zhangju.xingquban.interestclassapp.ui.fragment.find.Wenda.FindTiWenXqHd">
+
+    <!--    <com.interest.dhy.interestclassapp.ui.widget.PublicHead
+            android:id="@+id/find_tiwen_xqHd_Head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />-->
+
+    <include  layout="@layout/top_wenda" />
+
+
+    <TextView
+        android:id="@+id/find_tiwen_xq_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_10"
+        android:text=""
+        android:textColor="#353535"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/find_tiwen_xq_edit"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@color/white"
+            android:gravity="top"
+            android:hint="添加答案"
+            android:lineSpacingExtra="@dimen/dp_5"
+            android:padding="@dimen/dp_10"
+            android:textColor="#969696"
+            android:textSize="16sp" />
+
+        <GridView
+            android:id="@+id/find_wenda_girdview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_20"
+            android:horizontalSpacing="@dimen/dp_5"
+            android:numColumns="3"
+            android:verticalSpacing="@dimen/dp_5" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:background="@color/f6f6f6" />
+
+        <ImageView
+            android:id="@+id/find_tiwen_xq_image"
+            android:layout_width="@dimen/dp_30"
+            android:layout_height="@dimen/dp_30"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:padding="@dimen/dp_5"
+            android:src="@mipmap/find_wenda_tiwen" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

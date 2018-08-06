@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhangju.xingquban.interestclassapp.ui.fragment.find.Wenda.PhotoSquare xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
+
+    <ImageView
+        android:id="@+id/videoIcon"
+        android:visibility="gone"
+        android:layout_width="@dimen/dp_35"
+        android:layout_height="@dimen/dp_35"
+        android:layout_gravity="center"
+        android:src="@mipmap/sp_bfbg" />
+</com.zhangju.xingquban.interestclassapp.ui.fragment.find.Wenda.PhotoSquare>

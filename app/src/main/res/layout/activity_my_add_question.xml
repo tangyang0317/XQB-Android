@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/f6f6f6"
+    android:orientation="vertical">
+
+    <com.zhangju.xingquban.interestclassapp.ui.widget.PublicHead
+        android:id="@+id/pub_head"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_1"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/ask_question_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/dp_10"
+                    android:minHeight="@dimen/dp_150"
+                    android:background="@null"
+                    android:gravity="top"
+                    android:hint="清输入问题的标题"
+                    android:textColor="#969696"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/find_tab_text_xt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/dp_10"
+                    android:background="@null"
+                    android:minHeight="@dimen/dp_150"
+                    android:gravity="top"
+                    android:hint="清输入问题的详情"
+                    android:textColor="#969696"
+                    android:textSize="16sp" />
+
+            </RelativeLayout>
+           <android.support.v7.widget.RecyclerView
+               android:id="@+id/add_recyclerview_question"
+               android:layout_width="match_parent"
+
+               android:layout_height="wrap_content">
+
+           </android.support.v7.widget.RecyclerView>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/tv_ask_picselect"
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:src="@mipmap/find_tiwen_photo_select" />
+
+                <ImageView
+                    android:id="@+id/image_select_label"
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_margin="@dimen/dp_10"
+                    android:src="@mipmap/find_tiwen_tab_select" />
+                <TextView
+                    android:id="@+id/tv_select_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_20"
+                    android:layout_margin="@dimen/dp_10"
+                    android:visibility="gone"
+                    android:text="美术"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

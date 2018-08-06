@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:textColor="#686871"
+    android:layout_marginLeft="15dp"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="5dp"
+    android:lineSpacingMultiplier="1.2"
+    android:textSize="15sp"
+    tools:text="卢晓燕威宁书法私塾是上海唯一一家获得国家专利的书法培训机构。快笔书法教育以“快速练好硬笔/毛笔字”为核心业务，以需要提高写字水平的各界人士提供服务。"/>

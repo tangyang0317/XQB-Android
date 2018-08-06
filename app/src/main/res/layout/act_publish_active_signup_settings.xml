@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:focusable="true">
+
+    <com.fastlib.widget.TitleBar
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@android:color/white"
+        app:leftIcon="@drawable/home_city_back"
+        app:titleText="报名设置"
+        app:rightText="完成"
+        app:rightTextColor="#EF4E4C"/>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/shape_rect_red"
+                android:gravity="center_vertical"
+                android:drawablePadding="11dp"
+                android:textColor="@android:color/black"
+                android:textSize="15sp"
+                android:padding="10dp"
+                android:background="@android:color/white"
+                android:layout_marginTop="10dp"
+                android:text="参与方式"/>
+
+            <RadioGroup
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1px"
+                android:background="@android:color/white"
+                android:padding="10dp">
+
+                <RadioButton
+                    android:id="@+id/signUpOnLine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:background="@drawable/selector_publish_active"
+                    android:layout_marginLeft="15dp"
+                    android:padding="5dp"
+                    android:textColor="@drawable/selector_publish_active_text"
+                    android:text="在线报名" />
+
+                <RadioButton
+                    android:id="@+id/noSignUp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:background="@drawable/selector_publish_active"
+                    android:layout_marginLeft="20dp"
+                    android:padding="5dp"
+                    android:textColor="@drawable/selector_publish_active_text"
+                    android:checked="true"
+                    android:text="无需报名" />
+            </RadioGroup>
+
+            <LinearLayout
+                android:id="@+id/signUpNeedInfoLayout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/shape_rect_red"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="11dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"
+                    android:padding="10dp"
+                    android:background="@android:color/white"
+                    android:layout_marginTop="10dp"
+                    android:text="参与信息"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:background="@android:color/white">
+
+                    <CheckBox
+                        android:id="@+id/needName"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:background="@drawable/selector_publish_active"
+                        android:textColor="@drawable/selector_publish_active_text"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:layout_marginLeft="15dp"
+                        android:gravity="center"
+                        android:text="姓名" />
+
+                    <CheckBox
+                        android:id="@+id/needPhone"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:background="@drawable/selector_publish_active"
+                        android:textColor="@drawable/selector_publish_active_text"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="center"
+                        android:text="电话" />
+
+                    <CheckBox
+                        android:id="@+id/needSex"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:background="@drawable/selector_publish_active"
+                        android:textColor="@drawable/selector_publish_active_text"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="center"
+                        android:text="性别" />
+
+                    <CheckBox
+                        android:id="@+id/needAge"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:background="@drawable/selector_publish_active"
+                        android:textColor="@drawable/selector_publish_active_text"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="center"
+                        android:layout_marginRight="15dp"
+                        android:text="年龄" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/shape_rect_red"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="11dp"
+                    android:textColor="@android:color/black"
+                    android:textSize="15sp"
+                    android:padding="10dp"
+                    android:background="@android:color/white"
+                    android:layout_marginTop="10dp"
+                    android:text="设置票劵类型"/>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="15dp"
+                    android:paddingLeft="23dp"
+                    android:paddingRight="23dp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_top_round_red">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_small"
+                            android:textColor="@android:color/white"
+                            android:paddingTop="12dp"
+                            android:paddingBottom="6dp"
+                            android:paddingLeft="20dp"
+                            android:drawableRight="@mipmap/me_activity_fbhd_bjhd"
+                            android:gravity="center_vertical"
+                            android:drawablePadding="5dp"
+                            android:text="免费票劵"/>
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_bottom_round_white">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="28dp"
+                                android:textColor="@android:color/black"
+                                android:text="总数"/>
+
+                            <EditText
+                                android:id="@+id/freeTicketCount"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                android:textSize="@dimen/font_size_small"
+                                android:layout_marginLeft="20dp"
+                                android:maxLines="1"
+                                android:inputType="numberDecimal"
+                                android:hint="请输入票劵总数"/>
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1px"
+                            android:background="@color/divider"/>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="28dp"
+                                android:textColor="@android:color/black"
+                                android:text="限购"/>
+
+                            <EditText
+                                android:id="@+id/buyFreeLimit"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                android:textSize="@dimen/font_size_small"
+                                android:layout_marginLeft="20dp"
+                                android:maxLines="1"
+                                android:inputType="numberDecimal"
+                                android:hint="每人限购的数量,默认不限购"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_top_round_red"
+                        android:layout_marginTop="17dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_size_small"
+                            android:textColor="@android:color/white"
+                            android:paddingTop="12dp"
+                            android:paddingBottom="6dp"
+                            android:paddingLeft="20dp"
+                            android:drawableRight="@mipmap/me_activity_fbhd_bjhd"
+                            android:gravity="center_vertical"
+                            android:drawablePadding="5dp"
+                            android:text="会员票劵"/>
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/shape_bottom_round_white"
+                        android:layout_marginBottom="40dp">
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="28dp"
+                                android:textColor="@android:color/black"
+                                android:text="票价"/>
+
+                            <EditText
+                                android:id="@+id/ticketPrice"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                android:textSize="@dimen/font_size_small"
+                                android:layout_marginLeft="20dp"
+                                android:maxLines="1"
+                                android:inputType="numberDecimal"
+                                android:hint="请输入价格"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="28dp"
+                                android:textColor="@android:color/black"
+                                android:text="总数"/>
+
+                            <EditText
+                                android:id="@+id/ticketCount"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                android:textSize="@dimen/font_size_small"
+                                android:layout_marginLeft="20dp"
+                                android:maxLines="1"
+                                android:inputType="numberDecimal"
+                                android:hint="该票券总数,默认无限制"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="28dp"
+                                android:textColor="@android:color/black"
+                                android:text="限购"/>
+
+                            <EditText
+                                android:id="@+id/buyTicketLimit"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                android:textSize="@dimen/font_size_small"
+                                android:layout_marginLeft="20dp"
+                                android:maxLines="1"
+                                android:inputType="numberDecimal"
+                                android:hint="每人限购数量，默认不限购"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>

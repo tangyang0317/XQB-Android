@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="mcv_pager" type="id" />
+    <item name="slidable_panel" type="id" />
+    <item name="slidable_content" type="id" />
+    <item name="img_tag" type="id" />
+    <item name="drag_ban_tag" type="id" />
+    <item name="iv_play_button" type="id" />
+    <item name="refresh_head" type="id"/>
+
+    <item name="decode" type="id"/>
+    <item name="decode_failed" type="id"/>
+    <item name="decode_succeeded" type="id"/>
+    <item name="quit" type="id"/>
+    <item name="restart_preview" type="id"/>
+    <item name="return_scan_result" type="id"/>
+</resources>

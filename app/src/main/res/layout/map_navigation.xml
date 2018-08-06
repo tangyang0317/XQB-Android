@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:background="@color/white"
+              android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/height1"
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+        <RelativeLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/white">
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/nav_btn_back_red_11_20"
+                android:layout_centerVertical="true"
+                android:scaleType="centerInside"/>
+
+            <TextView
+                android:id="@+id/navga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="right"
+                android:layout_marginRight="15dp"
+                android:text="导航"
+                android:layout_alignParentRight="true"
+                android:textSize="16sp"
+             />
+        </RelativeLayout>
+    </LinearLayout>
+    <com.amap.api.maps.MapView
+        android:id="@+id/bmapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true" />
+</LinearLayout>

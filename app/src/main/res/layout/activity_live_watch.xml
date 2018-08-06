@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/rl_live_watch_main"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <com.zhangju.xingquban.interestclassapp.view.livestream.NEVideoView
+        android:id="@+id/view_live_watch_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:id="@+id/buffering_prompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:text="@string/buffering"
+            android:textColor="#FFFFFFFF"
+            android:textSize="13dp"/>
+
+        <ProgressBar
+            style="@android:style/Widget.ProgressBar.Large"
+            android:layout_width="50dip"
+            android:layout_height="50dip"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--被隐藏的界面-->
+        <RelativeLayout
+            android:id="@+id/rl_livevideo_gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="20dp">
+                <!--发言-->
+                <ImageView
+                    android:id="@+id/iv_livevideo_speak"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/shape_bg_live_round"
+                    android:src="@mipmap/mystudio_iocn_bubble"/>
+                <!--分享-->
+                <ImageView
+                    android:id="@+id/iv_livevideo_share"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/iv_livevideo_speak"
+                    android:background="@drawable/shape_bg_live_round"
+                    android:src="@mipmap/mystudio_iocn_share"/>
+
+                <ImageView
+                    android:id="@+id/iv_livevideo_gift"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/iv_livevideo_share"
+                    android:background="@drawable/shape_bg_live_round"
+                    android:src="@mipmap/mystudio_iocn_gift"/>
+
+                <ImageView
+                    android:id="@+id/iv_livevideo_exit"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/shape_bg_live_round"
+                    android:src="@mipmap/livein_iocn_cross"/>
+
+
+            </RelativeLayout>
+
+
+            <!--主播头像-->
+
+            <LinearLayout
+                android:id="@+id/ll_livevideo_avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_livevideo_avatar"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/default_icon"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_livevideo_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="主播昵称"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_livevideo_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0人"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_livevideo_follow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@id/iv_livevideo_avatar"
+                    android:background="@drawable/shape_bg_live_follow"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:paddingTop="2dp"
+                    android:text="@string/attention"
+                    android:textColor="#fde000"/>
+            </LinearLayout>
+
+            <!--兴趣币-->
+            <RelativeLayout
+                android:id="@+id/relativeLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="26dp"
+                android:layout_below="@id/ll_livevideo_avatar"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/shape_bg_live_xqb"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/textview_livevideo_xqb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:text="@string/interested_coin"
+                    android:textColor="#f6d27b"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_livevideo_xqb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@id/textview_livevideo_xqb"
+                    android:text="0"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp"/>
+
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:layout_toRightOf="@id/tv_livevideo_xqb"
+                    android:src="@mipmap/livein_iocn_more"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_live_gift_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/relativeLayout"
+                android:layout_marginTop="100dp"
+                android:animateLayoutChanges="true"
+                android:gravity="top"
+                android:orientation="vertical">
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_livevideo_roomid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/relativeLayout"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@+id/relativeLayout"
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical"
+                android:text="直播号 : null"
+                android:textColor="#999999"
+                android:textSize="11sp"/>
+
+            <com.zhangju.xingquban.interestclassapp.view.listView.HorizontalListView
+                android:id="@+id/hlv_livevideo_avatars"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="11dp"
+                android:layout_toRightOf="@id/ll_livevideo_avatar"
+                android:cacheColorHint="#00000000"/>
+
+            <ListView
+                android:id="@+id/lv_livevideo_chatroom"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="60dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="50dp"
+                android:cacheColorHint="#00000000"
+                android:divider="@null"
+                android:scrollbars="none"
+                android:stackFromBottom="true"
+                android:transcriptMode="alwaysScroll">
+            </ListView>
+
+        </RelativeLayout>
+        <!--隐藏其他控件-->
+        <ImageView
+            android:id="@+id/iv_livevideo_gone"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="65dp"
+            android:background="@drawable/shape_bg_live_round"
+            android:src="@mipmap/livein_iocn_cls_normal"/>
+    </RelativeLayout>
+
+
+    <FrameLayout
+        android:id="@+id/frame_progress"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_lucency"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+
+</FrameLayout>

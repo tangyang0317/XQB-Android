@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/main_frame_empty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <include layout="@layout/include_line_small" />
+
+    <RadioGroup
+        android:id="@+id/main_radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingTop="4dp">
+
+        <RadioButton
+            android:id="@+id/main_btn_home"
+            style="@style/BottomRgStyle"
+            android:checked="true"
+            android:drawableTop="@drawable/ic_menu_home"
+            android:text="@string/home"
+            android:textColor="@drawable/text_bg_home"/>
+
+        <RadioButton
+            android:id="@+id/main_btn_near"
+            style="@style/BottomRgStyle"
+            android:checked="false"
+            android:drawableTop="@drawable/ic_menu_near"
+            android:text="@string/near"
+            android:textColor="@drawable/text_bg_near"/>
+
+        <RadioButton
+            android:id="@+id/main_btn_live"
+            style="@style/BottomRgStyle"
+            android:checked="false"
+            android:drawableTop="@drawable/ic_menu_live"
+            android:text="@string/livebutton"
+            android:textColor="@drawable/text_bg_live"/>
+
+        <RadioButton
+            android:id="@+id/main_btn_find"
+            style="@style/BottomRgStyle"
+            android:drawableTop="@drawable/ic_menu_find"
+            android:text="@string/find"
+            android:textColor="@drawable/text_bg_find"/>
+
+        <RadioButton
+            android:id="@+id/main_btn_me"
+            style="@style/BottomRgStyle"
+            android:checked="false"
+            android:drawableTop="@drawable/ic_menu_me"
+            android:text="@string/me"
+            android:textColor="@drawable/text_bg_me"/>
+    </RadioGroup>
+
+</LinearLayout>

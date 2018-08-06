@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="95dp">
+
+        <ImageView
+            android:id="@+id/cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/item_find_wd_bg"/>
+
+        <TextView
+            android:id="@+id/videoCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/translucent_dialog"
+            android:textColor="@android:color/white"
+            android:padding="4dp"
+            android:textSize="@dimen/font_size_small"
+            tools:visibility="visible"
+            tools:text="7个视频"/>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="5dp"
+        android:maxLines="1"
+        tools:text="默认视频文件夹"/>
+
+    <TextView
+        android:id="@+id/defaultFolderFlag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/font_size_small"
+        android:layout_marginTop="3dp"
+        android:text="默认文件夹"/>
+</LinearLayout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="com.zhangju.xingquban.interestclassapp.ui.fragment.find.SeekActivity.jingxuan.FindSeekChoicenessTpTpTJ">
+
+    <LinearLayout
+        android:id="@+id/me_activity_fbhdTwo_tianjia"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_200"
+            android:src="@mipmap/me_activity_fbhdtwo_bg" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="这个活动很新鲜,快来报名参加吧"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/fid_seek_chicoeness_tptp_button"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@drawable/juxingbg_colorman_bg"
+            android:text="立即报名"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dp_14" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

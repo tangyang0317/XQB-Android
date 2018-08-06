@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#00000000">
+
+        <Button
+            android:id="@+id/btn_live_setpay_setpirce"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@drawable/bt_bg_selector_white"
+            android:text="收取门票"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/button_text_grey"/>
+        <Button
+            android:id="@+id/btn_live_setpay_setnull"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@drawable/bt_bg_selector_white"
+            android:text="恢复公开直播"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/btn_live_setpay_dismiss"
+            android:layout_marginTop="6dp"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@drawable/bt_bg_selector_white"
+            android:text="取消"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

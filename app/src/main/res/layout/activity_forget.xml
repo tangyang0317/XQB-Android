@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/reset_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/reset_password"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@drawable/home_city_back" />
+    </RelativeLayout>
+	<RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="40dp" >
+
+            <EditText
+                android:id="@+id/phoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:ems="10"
+                android:hint="@string/please_input_your_phone_number"
+                android:textSize="15sp"
+                android:textColor="#999999"
+                android:paddingLeft="3dp" >
+
+                <requestFocus />
+            </EditText>
+
+            <View
+                android:id="@+id/View"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/phoneNumber"
+                android:background="#dddddd" >
+            </View>
+
+            <TextView
+                android:id="@+id/gainCaptcha"
+                android:layout_width="80dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:text="@string/gain_captcha"
+                android:layout_above="@+id/View"
+                android:background="@drawable/test_bg_captcha"
+                android:textColor="#f65442"
+                android:gravity="center"
+                android:layout_marginBottom="2dp"
+                android:textSize="12sp" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="44dp"
+                android:layout_toLeftOf="@+id/gainCaptcha"
+                android:layout_marginRight="12dp"
+                android:layout_above="@+id/View"
+                android:layout_marginBottom="2dp"
+                android:background="#dddddd" >
+            </View>
+
+        </RelativeLayout>
+	<RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="28dp" >
+
+            <EditText
+                android:id="@+id/Captcha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:ems="10"
+                android:hint="@string/please_input_your_Captcha"
+                android:textSize="15sp"
+                android:textColor="#999999"
+                android:paddingLeft="3dp" >
+
+            </EditText>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/Captcha"
+                android:background="#dddddd" >
+            </View>
+
+        </RelativeLayout>
+	<RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="28dp" >
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:ems="10"
+                android:hint="@string/please_reset_password"
+                android:textSize="15sp"
+                android:textColor="#999999"
+                android:paddingLeft="3dp"
+                android:password="true" >
+
+            </EditText>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/password"
+                android:background="#dddddd" >
+            </View>
+
+        </RelativeLayout>
+	<RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_marginTop="28dp" >
+
+            <EditText
+                android:id="@+id/passwordAgain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:ems="10"
+                android:hint="@string/please_input_password_again"
+                android:textSize="15sp"
+                android:textColor="#999999"
+                android:paddingLeft="3dp"
+                android:password="true" >
+
+            </EditText>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/passwordAgain"
+                android:background="#dddddd" >
+            </View>
+
+        </RelativeLayout>
+
+	<Button
+	    android:id="@+id/confirmButton"
+	    android:layout_width="match_parent"
+	    android:layout_height="40dp"
+	    android:layout_marginLeft="25dp"
+	    android:layout_marginRight="25dp"
+	    android:layout_marginTop="53dp"
+	    android:background="@drawable/button_bg_red"
+	    android:textColor="#ffffff"
+	    android:textSize="18sp"
+	    android:text="@string/commit" />
+
+</LinearLayout>

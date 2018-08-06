@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+
+    <com.fastlib.widget.RoundImageView
+        android:id="@+id/iv_live_exit_avatar"
+        android:layout_width="@dimen/dp_70"
+        android:layout_height="@dimen/dp_70"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:src="@mipmap/me_touxiang"/>
+
+    <TextView
+        android:id="@+id/tv_live_exit_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_live_exit_avatar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:text="直播时长:00:00"
+        android:textColor="#ffffff"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_live_exit_time"
+        android:layout_marginTop="74dp"
+        android:orientation="horizontal"
+        android:id="@+id/linearlayout_live_exit">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_live_exit_xqb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/color_main"
+                android:textSize="25sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="兴趣币"
+                android:textColor="@color/title_text"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/second_text"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_live_exit_audience_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/title_text"
+                android:textSize="25sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="关注"
+                android:textColor="@color/title_text"
+                android:textSize="14sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--分享-->
+
+<RelativeLayout
+    android:id="@+id/rl_live_exit_share"
+    android:layout_marginTop="98dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/linearlayout_live_exit">
+
+    <TextView
+        android:id="@+id/tv_live_exit_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/share_live_to"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:layout_centerHorizontal="true"/>
+
+    <View
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_toLeftOf="@id/tv_live_exit_share"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/view_gray"
+        android:layout_centerVertical="true"/>
+    <View
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/tv_live_exit_share"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/view_gray"
+        android:layout_centerVertical="true"/>
+</RelativeLayout>
+
+    <LinearLayout
+        android:layout_marginTop="42dp"
+        android:id="@+id/ll_live_exit_share"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_live_exit_share"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb_live_share_SinaWeibo"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/rb_bg_live_share_weibo"
+            android:button="@null"/>
+
+        <CheckBox
+            android:id="@+id/cb_live_share_WechatMoments"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/rb_bg_live_share_moments"
+            android:button="@null"/>
+
+        <CheckBox
+            android:id="@+id/cb_live_share_Wechat"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/cb_bg_live_share_wechat"
+            android:button="@null"/>
+
+        <CheckBox
+            android:id="@+id/cb_live_share_QQ"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/cb_bg_live_qq"
+            android:button="@null"/>
+
+        <CheckBox
+            android:id="@+id/cb_live_share_QZone"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/cb_bg_live_qzone"
+            android:button="@null"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_live_exit_back"
+        android:layout_marginTop="27dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/live_exit_back"
+        android:textColor="@color/color_main"
+        android:textSize="18sp"
+        android:layout_below="@+id/ll_live_exit_share"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/juxingbg_colorman"/>
+
+</RelativeLayout>

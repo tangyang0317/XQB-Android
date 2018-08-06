@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:crl="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zhangju.xingquban.interestclassapp.ui.fragment.find.SeekResource.AudioDetailActivity">
+
+    <include layout="@layout/res_top" />
+
+    <FrameLayout
+        android:id="@+id/fragment_play"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_200">
+        <ImageView
+            android:id="@+id/audio_play_back"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/back_play"
+            android:scaleType="centerCrop"/>
+
+        <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+            android:id="@+id/audio_jiecaoplayer"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+
+        </fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard>
+
+
+        <TextView
+            android:id="@+id/tv_ischarge_res"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+
+    <com.zhangju.xingquban.interestclassapp.swiperefrsh.SwipeRefreshRecyclerView
+        android:id="@+id/swipeAudioDeatailrefresh"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/base_gray"
+        crl:load_animator="true">
+
+    </com.zhangju.xingquban.interestclassapp.swiperefrsh.SwipeRefreshRecyclerView>
+
+    <RelativeLayout
+        android:id="@+id/rela_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/res_bottom" />
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_pay_money"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_45"
+        android:layout_margin="@dimen/dp_5"
+        android:background="@drawable/juxingbg_colorman_bg"
+        android:gravity="center"
+        android:text="付费观看"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_16"
+        android:visibility="gone" />
+
+</LinearLayout>

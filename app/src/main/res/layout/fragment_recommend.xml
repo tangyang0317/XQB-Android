@@ -1,0 +1,24 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:crl="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zhangju.xingquban.interestclassapp.ui.fragment.find.Wenda.Question.fresh.RecommendFragment">
+
+    <com.zhangju.xingquban.interestclassapp.ui.widget.PublicHead
+        android:id="@+id/pub_head"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/dp_1"
+        android:visibility="gone"
+        android:layout_height="wrap_content">
+    </com.zhangju.xingquban.interestclassapp.ui.widget.PublicHead>
+    <com.zhangju.xingquban.interestclassapp.swiperefrsh.SwipeRefreshRecyclerView
+        android:id="@+id/swiperecommendrefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        crl:load_animator="true">
+
+    </com.zhangju.xingquban.interestclassapp.swiperefrsh.SwipeRefreshRecyclerView>
+</LinearLayout>

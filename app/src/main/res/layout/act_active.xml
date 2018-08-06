@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zhangju.xingquban.interestclassapp.ui.fragment.me.MeActivity.MyActivity">
+
+    <com.fastlib.widget.TitleBar
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="@android:color/white"
+        app:titleText="我的活动"
+        app:leftIcon="@drawable/home_city_back"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/row_bg"
+        android:gravity="center_vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <com.fastlib.widget.RoundImageView
+            android:id="@+id/avatar"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginStart="14dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/me_touxiang" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:layout_marginLeft="@dimen/dp_10"
+            tools:text="卢晓燕书法工作室"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_10"
+        android:background="@color/f6f6f6" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/dp_3"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@color/color_main" />
+
+            <TextView
+                android:id="@+id/typeHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:text="参与者"/>
+
+            <TextView
+                android:id="@+id/me_activity_cyz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:text="参与者"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/teacherLine"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/publish"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/me_activity_wdfb"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp"
+                android:gravity="center_horizontal"
+                android:drawablePadding="10dp"
+                android:background="?android:selectableItemBackground"
+                android:text="我的发布"/>
+
+            <TextView
+                android:id="@+id/activeIncome"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/me_activity_hdsr"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp"
+                android:gravity="center_horizontal"
+                android:drawablePadding="10dp"
+                android:background="?android:selectableItemBackground"
+                android:text="活动收入"/>
+
+            <TextView
+                android:id="@+id/startCheckTicket"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/me_activity_ksjp"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp"
+                android:gravity="center_horizontal"
+                android:drawablePadding="10dp"
+                android:background="?android:selectableItemBackground"
+                android:text="开始检票"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/studentLine"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:id="@+id/tickets"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/me_activity_wdpj"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp"
+                android:gravity="center_horizontal"
+                android:drawablePadding="10dp"
+                android:background="?android:selectableItemBackground"
+                android:text="我的票劵"/>
+
+            <TextView
+                android:id="@+id/takePartIn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/me_activity_wcyd"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp"
+                android:gravity="center_horizontal"
+                android:drawablePadding="10dp"
+                android:background="?android:selectableItemBackground"
+                android:text="我参与的"/>
+
+            <TextView
+                android:id="@+id/focus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:drawableTop="@mipmap/me_activity_wdgz"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp"
+                android:gravity="center_horizontal"
+                android:drawablePadding="10dp"
+                android:background="?android:selectableItemBackground"
+                android:text="我的关注"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
