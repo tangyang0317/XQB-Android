@@ -1,31 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.fastlib.widget.TitleBar
         android:id="@+id/titleBar"
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
         app:leftIcon="@drawable/home_city_back"
-        app:titleText="兴趣新体验"/>
+        app:titleText="兴趣新体验" />
 
-    <include layout="@layout/layout_banner"/>
-
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/refresh"
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:elevation="0dp">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/list"
+            <com.youth.banner.Banner
+                android:id="@+id/home_banner"
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:background="@drawable/banner_place_holder"
+                app:indicator_drawable_selected="@drawable/selected_radius"
+                app:indicator_drawable_unselected="@drawable/unselected_radius"
+                app:layout_scrollFlags="scroll" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="LinearLayoutManager"/>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+
+    </android.support.design.widget.CoordinatorLayout>
 
 </LinearLayout>

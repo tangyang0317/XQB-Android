@@ -1,7 +1,6 @@
 package com.zhangju.xingquban.interestclassapp.ui.fragment.find.Wenda.Question.fresh;
 
 import android.content.Intent;
-import android.media.midi.MidiManager;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,7 +14,6 @@ import com.fastlib.net.Request;
 import com.fastlib.net.SimpleListener;
 import com.zhangju.xingquban.R;
 import com.zhangju.xingquban.interestclassapp.adapter.baseadpter.OnListItemClickListener;
-import com.zhangju.xingquban.interestclassapp.refactor.user.UserManager;
 import com.zhangju.xingquban.interestclassapp.swiperefrsh.SwipeRefreshAdapterView;
 import com.zhangju.xingquban.interestclassapp.swiperefrsh.SwipeRefreshRecyclerView;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.find.Wenda.Question.fresh.adapter.QuestionMainAdapter;
@@ -31,8 +29,8 @@ import butterknife.Unbinder;
 
 /**
  * @author hqf
- *         create by 2017/11/16
- *         发现--我的问答最新Fragment
+ * create by 2017/11/16
+ * 发现--我的问答最新Fragment
  */
 @ContentView(R.layout.fragment_recommend)
 public class NewestFragment extends FastFragment implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshAdapterView.OnListLoadListener {
@@ -42,7 +40,7 @@ public class NewestFragment extends FastFragment implements SwipeRefreshLayout.O
     private List<QuestionMainBean.AaDataBean> mainBeanList = new ArrayList<>();
 
     Unbinder unbinder;
-    boolean isFirst=true;
+    boolean isFirst = true;
 
     @Override
     protected void alreadyPrepared() {
@@ -63,8 +61,8 @@ public class NewestFragment extends FastFragment implements SwipeRefreshLayout.O
             public void onItemClickListener(int position, View v) {
                 QuestionMainBean.AaDataBean dataBean = mainBeanList.get(position);
                 Intent intent = new Intent(getActivity(), QuestionDetailActivity.class);
-                intent.putExtra("data",dataBean);
-                intent.putExtra("type",1);
+                intent.putExtra("data", dataBean);
+                intent.putExtra("type", 1);
                 startActivity(intent);
             }
         });
@@ -73,16 +71,16 @@ public class NewestFragment extends FastFragment implements SwipeRefreshLayout.O
     @Override
     public void onResume() {
         super.onResume();
-        if (!isFirst){
+        if (!isFirst) {
             swiperecommendrefresh.autoRefresh();
-            isFirst=true;
+            isFirst = true;
         }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        isFirst=false;
+        isFirst = false;
     }
 
     @Override

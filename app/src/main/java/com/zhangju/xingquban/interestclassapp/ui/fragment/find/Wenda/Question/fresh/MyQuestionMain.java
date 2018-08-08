@@ -26,6 +26,7 @@ import com.zhangju.xingquban.interestclassapp.adapter.SingleTextAdapter;
 import com.zhangju.xingquban.interestclassapp.adapter.baseadpter.OnListItemClickListener;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.live.LiveTabLayoutFragment.LiveTabLayoutAdapter;
 import com.zhangju.xingquban.interestclassapp.view.BannerHelper;
+import com.zhangju.xingquban.refactoring.fragment.ExcellentFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -42,7 +43,6 @@ import butterknife.OnClick;
 
 @ContentView(R.layout.activity_my_question_main)
 public class MyQuestionMain extends FastActivity {
-
     @BindView(R.id.find_return)
     RelativeLayout findReturn;
     @BindView(R.id.image_over)
@@ -59,12 +59,7 @@ public class MyQuestionMain extends FastActivity {
     TextView tv_my_question;
     @BindView(R.id.home_banner)
     Banner mHomeBanner;
-
     private LiveTabLayoutAdapter liveTabLayoutAdapter;
-
-
-    private NewestFragment newestFragment;//最新fragment
-    private RecommendFragment recommendFragment;//推荐fragment
 
     List<Fragment> mFragments = new ArrayList<>();
     List<String> mTitles = Arrays.asList("推荐", "最新");
@@ -72,7 +67,6 @@ public class MyQuestionMain extends FastActivity {
     private PopupWindow mPopupWindow;
     private List<String> mSelectTitle = Arrays.asList("我的提问", "我的回答", "我的草稿", "我的收藏");
     private BannerHelper mBannerHelper;
-
 
     @Override
     protected void alreadyPrepared() {
@@ -87,11 +81,8 @@ public class MyQuestionMain extends FastActivity {
     }
 
     private void initData() {
-        newestFragment = new NewestFragment();
-        recommendFragment = new RecommendFragment();
-
-        mFragments.add(newestFragment);
-        mFragments.add(recommendFragment);
+        mFragments.add(ExcellentFragment.getInstance(0));
+        mFragments.add(ExcellentFragment.getInstance(1));
 
         findWdTablayout.addTab(findWdTablayout.newTab().setText(mTitles.get(0)));
         findWdTablayout.addTab(findWdTablayout.newTab().setText(mTitles.get(1)));
@@ -143,7 +134,6 @@ public class MyQuestionMain extends FastActivity {
         SingleTextAdapter singleTextAdapter = new SingleTextAdapter(MyQuestionMain.this, mSelectTitle);
         listView.setLayoutManager(new LinearLayoutManager(MyQuestionMain.this));
         listView.setAdapter(singleTextAdapter);
-
 
 
         mPopupWindow = new PopupWindow(inflate, linearQuestion.getWidth(),

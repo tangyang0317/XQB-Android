@@ -59,56 +59,55 @@ import cn.jpush.android.api.JPushInterface;
 /**
  * Created by john on 2015/11/18
  */
-public class MyApp
-        extends MultiDexApplication {
-    public final static int    DB_VERSION = 5;
-        public static final String URL        = "http://my.xqban.com"; //正式服务器
-//    public static final String URL        = "http://test.xqban.com"; //测试服务器
+public class MyApp extends MultiDexApplication {
+    public final static int DB_VERSION = 5;
+    public static final String URL = "http://my.xqban.com"; //正式服务器
+    //    public static final String URL        = "http://test.xqban.com"; //测试服务器
     //    public static final String URL="http://myqqy.vicp.io/std"; //本地测试服务+器
     public static MyApp instance;
-    public final static String TOKEN      = "mToken";
+    public final static String TOKEN = "mToken";
     public final static String CUSTOMERID = "customerId";
-    public static Data                customerData;//用户的信息
-    public static HttpUtils           httpUtils;
-    public static BitmapUtils         bitmapUtils;
+    public static Data customerData;//用户的信息
+    public static HttpUtils httpUtils;
+    public static BitmapUtils bitmapUtils;
     public static DisplayImageOptions mNormalImageOptions;
-    public static final String SDCARD_PATH   = Environment
+    public static final String SDCARD_PATH = Environment
             .getExternalStorageDirectory().toString();
-    public static       String IMAGES_FOLDER = null;
+    public static String IMAGES_FOLDER = null;
     public static ImageLoader imageLoader;
-    public static String  userId            = null;
-    public static String  categoriesId      = null; // 直播间选择的科目id
-    public static String  LiveSubject       = null; // 直播间选择的科目名字
+    public static String userId = null;
+    public static String categoriesId = null; // 直播间选择的科目id
+    public static String LiveSubject = null; // 直播间选择的科目名字
     public static boolean isUpdataShowFirst = true; // 是否显示过升级提示
     /*
      * 图片存放路径
      */
     // 磁盘的根路径
-    public static String  DISK_ROOT         = null;
+    public static String DISK_ROOT = null;
     // 图片存放的路径
-    public static String  DISK_PICTURE      = null;
+    public static String DISK_PICTURE = null;
     // 图片存放的目录名称
-    public static String  FLOADER_NAME      = "Images";
-    private       File file;
+    public static String FLOADER_NAME = "Images";
+    private File file;
     public static File tempPictures;
     /*
      * 视频存放路径
      */
     public static String DISK_VIDEO = null;
     public static String VIDEO_NAME = "movies";
-    public static File   videos;
+    public static File videos;
     // 初始化
     /*
      * 经纬度 全局
      */
     public static double latitude;
     public static double longitude;
-    public static        ArrayList<City.AaDataBean> recentlyCity    = new ArrayList<>(6);
+    public static ArrayList<City.AaDataBean> recentlyCity = new ArrayList<>(6);
     // 默认的cityName和cityId , 获取城市列表的时候自动更新
-    public static        String                     defaultCityName = "上海市";
-    public static        String                     defaultCityId   = "310000";
-    private static final String                     TAG             = "JPush";
-    protected            boolean                    isInited        = false; //支持测试类的字段
+    public static String defaultCityName = "上海市";
+    public static String defaultCityId = "310000";
+    private static final String TAG = "JPush";
+    protected boolean isInited = false; //支持测试类的字段
     public ActivityStack mActivityStack;
 
     //声明AMapLocationClient类对象

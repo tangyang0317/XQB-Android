@@ -62,10 +62,7 @@ public class RecommendFragment extends FastFragment implements SwipeRefreshAdapt
         questionMainAdapter.setOnListItemClickListener(new OnListItemClickListener() {
             @Override
             public void onItemClickListener(int position, View v) {
-                QuestionMainBean.AaDataBean dataBean = mainBeanList.get(position);
-                Intent intent = new Intent(getActivity(), QuestionDetailActivity.class);
-                intent.putExtra("data",dataBean);
-                startActivity(intent);
+
             }
         });
     }

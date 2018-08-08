@@ -424,7 +424,6 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
         homeRecyclerview = view.findViewById(R.id.home_recyclerview);
         homeItemCp = view.findViewById(R.id.home_item_cp);
         homePageIndicator = view.findViewById(R.id.home_page_Indicator);
-
         businessListAdapter.addHeaderView(view);
         indexRV.setAdapter(businessListAdapter);
         businessListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -512,7 +511,6 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
             //直播推荐
             case R.id.home_head_zhibotuijian:
                 startActivity(new Intent(getContext(), ExperienceActivity.class));
-//                startActivity(new Intent(getActivity(), FindActivity.class));
                 break;
 
             //优秀问答
@@ -551,7 +549,6 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
             case R.id.home_head_jingpinkecheng:
                 startActivity(new Intent(getActivity(), CurriculumActivity.class));
                 break;
-
             //消息
             case R.id.home_message:
                 if (!checkLogin()) return;

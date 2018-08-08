@@ -39,7 +39,6 @@ public class VipActivity extends FastActivity {
     @Override
     protected void alreadyPrepared() {
         User user = UserManager.getInstance().getUser();
-
         mName.setText(user.signame);
         Glide.with(this).load(user.picture).into(mAvatar);
         if (user.degree != null) {
@@ -84,8 +83,8 @@ public class VipActivity extends FastActivity {
      */
     @Bind(R.id.platformInfo)
     private void openPlatformInfo() {
-        if(UserManager.getInstance().getUser().isMember)
-        startActivity(new Intent(VipActivity.this, MessagePlatformActivity.class));
+        if (UserManager.getInstance().getUser().isMember)
+            startActivity(new Intent(VipActivity.this, MessagePlatformActivity.class));
     }
 
     /**
@@ -93,7 +92,7 @@ public class VipActivity extends FastActivity {
      */
     @Bind(R.id.studentResRecommend)
     private void openStudentResRecommend() {
-        if(UserManager.getInstance().getUser().isMember)
-        startActivity(new Intent(VipActivity.this, StudentIntroduceActivity.class));
+        if (UserManager.getInstance().getUser().isMember)
+            startActivity(new Intent(VipActivity.this, StudentIntroduceActivity.class));
     }
 }

@@ -2,23 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp_200"
         android:background="@mipmap/bg_vip_375_205"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
         <com.fastlib.widget.TitleBar
             android:id="@+id/titleBar"
             android:layout_width="match_parent"
             android:layout_height="?android:actionBarSize"
-            app:titleText="我的会员"
+            app:leftIcon="@drawable/home_city_back"
             app:titleColor="@android:color/white"
-            app:leftIcon="@drawable/home_city_back"/>
+            app:titleText="我的会员" />
 
         <com.fastlib.widget.RoundImageView
             android:id="@+id/avatar"
@@ -26,38 +27,38 @@
             android:layout_height="65dp"
             android:layout_gravity="center"
             android:src="@mipmap/me_touxiang"
-            tools:src="@drawable/item_all_order_bg"/>
+            tools:src="@drawable/item_all_order_bg" />
 
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:textColor="@android:color/white"
             android:textSize="@dimen/font_size_large"
-            android:layout_marginTop="10dp"
-            tools:text="美迪西西"/>
+            tools:text="美迪西西" />
 
         <TextView
             android:id="@+id/vipFlag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/white"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
             android:drawableLeft="@mipmap/vip_icon_uservip_normal_17_17"
             android:drawablePadding="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            tools:text="普通会员"/>
+            android:textColor="@android:color/white"
+            tools:text="普通会员" />
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
-        android:textColor="@android:color/black"
         android:gravity="center"
         android:padding="12dp"
-        android:textSize="@dimen/font_size_normal_high"
-        android:text="升级会员享受更多特权"/>
+        android:text="升级会员享受更多特权"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/font_size_normal_high" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -67,19 +68,19 @@
             android:id="@+id/bottomLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
+            android:layout_alignParentBottom="true"
             android:background="@android:color/white"
-            android:layout_alignParentBottom="true">
+            android:padding="10dp">
 
             <Button
                 android:id="@+id/openVip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_bg_red"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
                 android:layout_above="@id/bottomView"
-                android:text="开通会员"/>
+                android:background="@drawable/button_bg_red"
+                android:text="开通会员"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
         </FrameLayout>
 
         <android.support.v4.widget.NestedScrollView
@@ -88,16 +89,18 @@
             android:layout_above="@id/bottomLayout">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <include
                     android:id="@+id/personVipLayout"
                     layout="@layout/act_vip_person" />
 
-                <include layout="@layout/act_vip_org"
-                    android:id="@+id/orgVipLayout"/>
+                <include
+                    android:id="@+id/orgVipLayout"
+                    layout="@layout/act_vip_org" />
+
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
     </RelativeLayout>

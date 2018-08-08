@@ -38,8 +38,7 @@ import rx.schedulers.Schedulers;
  * 资源全部
  */
 
-public class AllResourceFragment extends BaseFragment
-        implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshAdapterView.OnListLoadListener {
+public class AllResourceFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshAdapterView.OnListLoadListener {
     @BindView(R.id.swipe_refresh_audio)
     SwipeRefreshRecyclerView swipeRefreshAudio;
     Unbinder unbinder;

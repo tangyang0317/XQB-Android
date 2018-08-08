@@ -29,17 +29,15 @@ import butterknife.ButterKnife;
  * create by hqf 2017/10/10
  */
 
-public class AllTypeResourceAdapter
-        extends BaseRecycleViewAdapter {
-
+public class AllTypeResourceAdapter extends BaseRecycleViewAdapter {
 
     private List<ResouecesAll.AaDataBean> resAllList;
-    private int TYPE_AUDIO        = 0x111;
-    private int TYPE_VIDEO        = 0x222;
+    private int TYPE_AUDIO = 0x111;
+    private int TYPE_VIDEO = 0x222;
     private int TYPE_IMAGE_SINGLE = 0x333;
-    private int TYPE_IMAGE_MULTI  = 0x666;
-    private int TYPE_NEWS_SINGLE  = 0x444;
-    private int TYPE_NEWS_MULTI   = 0x555;
+    private int TYPE_IMAGE_MULTI = 0x666;
+    private int TYPE_NEWS_SINGLE = 0x444;
+    private int TYPE_NEWS_MULTI = 0x555;
 
 
     public AllTypeResourceAdapter(Context c, List<ResouecesAll.AaDataBean> resAllList) {
@@ -127,27 +125,27 @@ public class AllTypeResourceAdapter
 
         int pos;
         @BindView(R.id.img_back_pic)
-        ImageView      imgBackPic;
+        ImageView imgBackPic;
         @BindView(R.id.tv_audio_ischarge)
-        TextView       tvAudioIscharge;
+        TextView tvAudioIscharge;
         @BindView(R.id.tv_audio_time)
-        TextView       tvAudioTime;
+        TextView tvAudioTime;
         @BindView(R.id.tv_audio_title)
-        TextView       tvAudioTitle;
+        TextView tvAudioTitle;
         @BindView(R.id.tv_audio_price)
-        TextView       tvAudioPrice;
+        TextView tvAudioPrice;
         @BindView(R.id.tv_audio_count)
-        TextView       tvAudioCount;
+        TextView tvAudioCount;
         @BindView(R.id.img_author_head)
         RoundImageView imgAuthorHead;
         @BindView(R.id.tv_author_name)
-        TextView       tvAuthorName;
+        TextView tvAuthorName;
         @BindView(R.id.tv_audio_comment_num)
-        TextView       tvAudioCommentNum;
+        TextView tvAudioCommentNum;
         @BindView(R.id.tv_audio_love_num)
-        TextView       tvAudioLoveNum;
+        TextView tvAudioLoveNum;
         @BindView(R.id.thumbCount)
-        TextView       mThumbCount;
+        TextView mThumbCount;
 
         public AudioViewHodler(View itemView) {
             super(itemView);
@@ -214,32 +212,31 @@ public class AllTypeResourceAdapter
     }
 
     //视频
-    class VideoViewHolder
-            extends RecyclerView.ViewHolder {
+    class VideoViewHolder extends RecyclerView.ViewHolder {
 
         int pos;
         @BindView(R.id.img_back_pic)
-        ImageView      imgBackPic;
+        ImageView imgBackPic;
         @BindView(R.id.tv_video_ischarge)
-        TextView       tvVideoIscharge;
+        TextView tvVideoIscharge;
         @BindView(R.id.tv_video_time)
-        TextView       tvVideoTime;
+        TextView tvVideoTime;
         @BindView(R.id.tv_video_title)
-        TextView       tvVideoTitle;
+        TextView tvVideoTitle;
         @BindView(R.id.tv_video_price)
-        TextView       tvVideoPrice;
+        TextView tvVideoPrice;
         @BindView(R.id.tv_video_count)
-        TextView       tvVideoCount;
+        TextView tvVideoCount;
         @BindView(R.id.img_author_head)
         RoundImageView imgAuthorHead;
         @BindView(R.id.tv_author_name)
-        TextView       tvAuthorName;
+        TextView tvAuthorName;
         @BindView(R.id.tv_video_comment_num)
-        TextView       tvVideoCommentNum;
+        TextView tvVideoCommentNum;
         @BindView(R.id.tv_video_love_num)
-        TextView       tvVideoLoveNum;
+        TextView tvVideoLoveNum;
         @BindView(R.id.thumbCount)
-        TextView       mThumbCount;
+        TextView mThumbCount;
 
         public VideoViewHolder(View itemView) {
             super(itemView);
@@ -299,23 +296,22 @@ public class AllTypeResourceAdapter
     }
 
     //图片
-    class PicViewHolder
-            extends RecyclerView.ViewHolder {
+    class PicViewHolder extends RecyclerView.ViewHolder {
 
         int pos;
 
         @BindView(R.id.img_title)
-        TextView     tvTitle;
+        TextView tvTitle;
         @BindView(R.id.recycler_image)
         RecyclerView recyclerImage;
         @BindView(R.id.tv_news_num)
-        TextView     tvNewsNum;
+        TextView tvNewsNum;
         @BindView(R.id.tv_news_love_num)
-        TextView     tvNewsLoveNum;
+        TextView tvNewsLoveNum;
         @BindView(R.id.tv_news_time)
-        TextView     tvNewsTime;
+        TextView tvNewsTime;
         @BindView(R.id.thumbCount)
-        TextView     mThumbCount;
+        TextView mThumbCount;
 
         public PicViewHolder(View itemView) {
             super(itemView);
@@ -386,22 +382,21 @@ public class AllTypeResourceAdapter
     }
 
     //单个图片
-    class SinglePicViewHolder
-            extends RecyclerView.ViewHolder {
+    class SinglePicViewHolder extends RecyclerView.ViewHolder {
         int pos;
 
         @BindView(R.id.tv_title)
-        TextView  tvTitle;
+        TextView tvTitle;
         @BindView(R.id.tv_news_num)
-        TextView  tvNewsNum;
+        TextView tvNewsNum;
         @BindView(R.id.tv_news_love_num)
-        TextView  tvNewsLoveNum;
+        TextView tvNewsLoveNum;
         @BindView(R.id.tv_news_time)
-        TextView  tvNewsTime;
+        TextView tvNewsTime;
         @BindView(R.id.img_news_back)
         ImageView imgNewsBack;
         @BindView(R.id.thumbCount)
-        TextView  mThumbCount;
+        TextView mThumbCount;
 
         public SinglePicViewHolder(View itemView) {
             super(itemView);
@@ -453,17 +448,17 @@ public class AllTypeResourceAdapter
             extends RecyclerView.ViewHolder {
         int pos;
         @BindView(R.id.tv_title)
-        TextView  tvTitle;
+        TextView tvTitle;
         @BindView(R.id.tv_news_num)
-        TextView  tvNewsNum;
+        TextView tvNewsNum;
         @BindView(R.id.tv_news_love_num)
-        TextView  tvNewsLoveNum;
+        TextView tvNewsLoveNum;
         @BindView(R.id.tv_news_time)
-        TextView  tvNewsTime;
+        TextView tvNewsTime;
         @BindView(R.id.img_news_back)
         ImageView imgNewsBack;
         @BindView(R.id.thumbCount)
-        TextView  mThumbCount;
+        TextView mThumbCount;
 
         public SingleViewHolder(View itemView) {
             super(itemView);
@@ -516,17 +511,17 @@ public class AllTypeResourceAdapter
             extends RecyclerView.ViewHolder {
         int pos;
         @BindView(R.id.img_title)
-        TextView     tvTitle;
+        TextView tvTitle;
         @BindView(R.id.recycler_image)
         RecyclerView recyclerImage;
         @BindView(R.id.tv_news_num)
-        TextView     tvNewsNum;
+        TextView tvNewsNum;
         @BindView(R.id.tv_news_love_num)
-        TextView     tvNewsLoveNum;
+        TextView tvNewsLoveNum;
         @BindView(R.id.tv_news_time)
-        TextView     tvNewsTime;
+        TextView tvNewsTime;
         @BindView(R.id.thumbCount)
-        TextView     mThumbCount;
+        TextView mThumbCount;
 
         public MultiViewHolder(View itemView) {
             super(itemView);

@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.youth.banner.loader.ImageLoader;
+import com.zhangju.xingquban.R;
 
 /**
  * Created by zsl on 2017/6/29.
@@ -24,11 +25,9 @@ public class GlideImageLoader
          传输的到的是什么格式，那么这种就使用Object接收和返回，你只需要强转成你传输的类型就行，
          切记不要胡乱强转！
          */
-        //        eg：
-
         //Glide 加载图片简单用法
         if (context != null && imageView != null) {
-            if (!((Activity)context).isFinishing()) {
+            if (!((Activity) context).isFinishing()) {
                 Glide.with(context)
                         .load(path)
                         .into(imageView);

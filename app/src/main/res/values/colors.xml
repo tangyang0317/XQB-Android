@@ -40,6 +40,7 @@
     <color name="button_text_grey">#b6b6b6</color>
 
     <color name="row_bg_pressed_true">#DDDDDD</color>
+    <color name="line">#DDDDDD</color>
     <color name="row_bg_pressed_false">#ffffff</color>
     <color name="button_bg_pressed_true_red">#E15447</color>
     <color name="cb_bg_choice_true">#ececec</color>
@@ -76,8 +77,8 @@
     <color name="bg_gray">#20999999</color>
     <color name="view_bg">#fafafa</color>
     <color name="side_bar_text">#176cff</color>
-    <color name="lightgray">#F8F8F8 </color>
-    <color name="halfgray">#DCDCDC </color>
+    <color name="lightgray">#F8F8F8</color>
+    <color name="halfgray">#DCDCDC</color>
 
     <!-- 全局使用的颜色 -->
     <color name="titlebar_bg_color">#3C3C3C</color>
@@ -176,7 +177,6 @@
     <color name="blue">#0000FF</color>
 
     <!-- 蓝色 -->
-
 
 
     <color name="title_grey">#CED9E7</color>

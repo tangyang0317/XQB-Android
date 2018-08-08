@@ -7,8 +7,6 @@
     android:orientation="vertical"
     tools:context="com.zhangju.xingquban.interestclassapp.ui.fragment.find.Wenda.Question.fresh.MyQuestionMain">
 
-
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_45"
@@ -72,32 +70,44 @@
         </RelativeLayout>
     </RelativeLayout>
 
-    <include layout="@layout/layout_banner"/>
-
-    <LinearLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/findWd_tablayout"
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            app:tabIndicatorColor="@color/color_main"
-            app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/color_main"
-            app:tabTextColor="@color/black" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_10"
-            android:background="@color/f6f6f6" />
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:elevation="0dp">
+
+            <com.youth.banner.Banner
+                android:id="@+id/home_banner"
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                android:background="@drawable/banner_place_holder"
+                app:indicator_drawable_selected="@drawable/selected_radius"
+                app:indicator_drawable_unselected="@drawable/unselected_radius"
+                app:layout_scrollFlags="scroll" />
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/findWd_tablayout"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:tabIndicatorColor="@color/color_main"
+                app:tabMode="scrollable"
+                app:tabSelectedTextColor="@color/color_main"
+                app:tabTextColor="@color/black" />
+
+            <include layout="@layout/view_divider_line" />
+
+        </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/question_viewpage"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentTop="true" />
+            android:layout_alignParentTop="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
 </LinearLayout>
