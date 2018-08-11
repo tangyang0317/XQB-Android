@@ -47,6 +47,8 @@ import com.zhangju.xingquban.interestclassapp.ui.fragment.home.HomeRecyclerViewD
 import com.zhangju.xingquban.interestclassapp.util.DpUtil;
 import com.zhangju.xingquban.interestclassapp.util.ToastUtil;
 import com.zhangju.xingquban.interestclassapp.view.BannerHelper;
+import com.zhangju.xingquban.refactoring.entity.CategoryBean;
+import com.zhangju.xingquban.refactoring.dblite.CategoryDao;
 import com.zhangju.xingquban.refactoring.view.AppBarStateChangeListener;
 
 import java.util.ArrayList;
@@ -162,11 +164,12 @@ public class NearPointbyFragment extends BaseFragment {
     private View contentViewshaixuan;
     private int screenHeight;
     private JSONArray jsonArray = new JSONArray();
-    private NearSubjectBean.AaDataBean dataBean;
+    private int categoryId;
     private Boolean avgScore = null;
     private NearDataBean mnearDataBean;
     private int lastVisibleItem;
     private BannerHelper mBannerHelper;
+    private CategoryDao categoryDao;
 
     @Override
     public void initView() {
@@ -218,9 +221,7 @@ public class NearPointbyFragment extends BaseFragment {
 
     private void initBanner() {
         mBannerHelper = new BannerHelper(getActivity());
-        String name = dataBean.getName();
-
-        mBannerHelper.init(mHomeBanner).setSubject(dataBean.getId() + "").loadBannerDate("4");
+        mBannerHelper.init(mHomeBanner).setSubject(categoryId + "").loadBannerDate("4");
     }
 
     @Override
@@ -243,8 +244,10 @@ public class NearPointbyFragment extends BaseFragment {
     }
 
     private void setTextforBundle() {
-        if (dataBean != null) {
-            kemu.setText(dataBean.getName());
+
+        CategoryBean categoryBean = categoryDao.queryCategoryById(categoryId);
+        if (categoryBean != null) {
+            kemu.setText(categoryBean.getName());
         }
         areasid = Integer.valueOf(LocationManager.getInstance().getLocation().cityId);
         nearRecylerAdapter = new NearRecylerAdapter(getActivity());
@@ -441,7 +444,6 @@ public class NearPointbyFragment extends BaseFragment {
         leibie.setTextColor(getContext().getResources().getColor(R.color.color_main));
         icon.setImageDrawable(Utils.tintDrawable(getResources().getDrawable(R.drawable.home_filter_up_red_selected),
                 getResources().getColor(R.color.EF4E4C)));
-        /*  icon.setBackground(getContext().getResources().getDrawable(R.drawable.shaixuan));*/
     }
 
     private void downPopwindow2() {
@@ -459,22 +461,23 @@ public class NearPointbyFragment extends BaseFragment {
                 click2 = false;
             }
         });
-        naerKemuRightAdapter = new NaerKemuRightAdapter(getActivity(), dataBean);
+
+        List<CategoryBean> categoryBeanList = categoryDao.queryLevelTowAll(categoryId);
+        naerKemuRightAdapter = new NaerKemuRightAdapter(getActivity(), categoryBeanList);
         gridView.setAdapter(naerKemuRightAdapter);
         naerKemuRightAdapter.selectnum(pos2);
-        /*  mainlist.setSelection(0);*/
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                kemuRightid = Integer.parseInt(dataBean.getChilds().get(position).getId());
+                CategoryBean categoryBean = (CategoryBean) parent.getItemAtPosition(position);
+                kemuRightid = categoryBean.getId();
                 page = 0;
                 load = true;
                 pos2 = position;
                 naerKemuRightAdapter.selectnum(position);
-                String name = naerKemuRightAdapter.getData().getChilds().get(position).getName();
                 swipeRefreshLayout.setRefreshing(true);
                 getNearData(degreeId, kemuRightid, areasid, radius, jsonArray.toJSONString(), avgScore);
-                kemu.setText(name);
+                kemu.setText(categoryBean.getName());
                 popWindow2.dismiss();
             }
         });
@@ -659,17 +662,14 @@ public class NearPointbyFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
-
         unbinder = ButterKnife.bind(this, rootView);
-
-
         Bundle bundle = this.getArguments();
         if (bundle != null) {
-            dataBean = (NearSubjectBean.AaDataBean) bundle.getSerializable("data");
+            categoryId = bundle.getInt("categoryId");
+            kemuRightid = bundle.getInt("categoryId");
         }
-        kemuRightid = Integer.valueOf(dataBean.getId());
+        categoryDao = new CategoryDao(getActivity());
         setTextforBundle();
         initBanner();
         return rootView;

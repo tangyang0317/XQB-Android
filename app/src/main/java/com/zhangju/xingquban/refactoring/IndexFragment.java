@@ -2,7 +2,6 @@ package com.zhangju.xingquban.refactoring;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -30,14 +32,11 @@ import com.lidroid.xutils.http.client.HttpRequest;
 import com.youth.banner.Banner;
 import com.zhangju.xingquban.R;
 import com.zhangju.xingquban.interestclassapp.RetrofitInterface.NetWork;
-import com.zhangju.xingquban.interestclassapp.adapter.FragmentItemAdapter;
-import com.zhangju.xingquban.interestclassapp.adapter.IndicatorAdapter;
 import com.zhangju.xingquban.interestclassapp.application.MyApp;
 import com.zhangju.xingquban.interestclassapp.base.BaseFragment;
 import com.zhangju.xingquban.interestclassapp.bean.CityConvertBean;
 import com.zhangju.xingquban.interestclassapp.bean.HomeRecylerBean;
 import com.zhangju.xingquban.interestclassapp.bean.NearDataBean;
-import com.zhangju.xingquban.interestclassapp.bean.NearSubjectBean;
 import com.zhangju.xingquban.interestclassapp.refactor.common.bean.CommonInterface;
 import com.zhangju.xingquban.interestclassapp.refactor.location.Location;
 import com.zhangju.xingquban.interestclassapp.refactor.location.LocationManager;
@@ -45,6 +44,7 @@ import com.zhangju.xingquban.interestclassapp.refactor.me.activity.LoginActivity
 import com.zhangju.xingquban.interestclassapp.refactor.me.activity.NotificationActivity;
 import com.zhangju.xingquban.interestclassapp.refactor.user.UserManager;
 import com.zhangju.xingquban.interestclassapp.ui.activity.near.CurriculumActivity;
+import com.zhangju.xingquban.interestclassapp.ui.activity.near.HomeDistrictActivity;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.find.SeekMessage.FindMessage;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.find.SeekResource.FindResource;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.find.Wenda.Question.fresh.MyQuestionMain;
@@ -52,9 +52,6 @@ import com.zhangju.xingquban.interestclassapp.ui.fragment.home.CityActivity;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.home.ExperienceActivity;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.home.HomeRecyclerViewData;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.home.contest.ContestWebActivity1;
-import com.zhangju.xingquban.interestclassapp.ui.fragment.home.homeviewpage.HomeClassPage1;
-import com.zhangju.xingquban.interestclassapp.ui.fragment.home.homeviewpage.HomeClassPage2;
-import com.zhangju.xingquban.interestclassapp.ui.fragment.home.homeviewpage.HomeClassPage3;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.home.zyzs.ChangeCityEvent;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.near.DistrictActivity_Copy;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.near.NearShare.NearShareActivity;
@@ -62,7 +59,11 @@ import com.zhangju.xingquban.interestclassapp.util.ToastUtil;
 import com.zhangju.xingquban.interestclassapp.util.UrlUtils;
 import com.zhangju.xingquban.interestclassapp.util.click.NoDoubleClick;
 import com.zhangju.xingquban.interestclassapp.view.BannerHelper;
+import com.zhangju.xingquban.refactoring.entity.CategoryBean;
 import com.zhangju.xingquban.refactoring.adapter.BusinessListAdapter;
+import com.zhangju.xingquban.refactoring.adapter.CategoryViewPagerAdapter;
+import com.zhangju.xingquban.refactoring.adapter.IndexCategoryGridAdapter;
+import com.zhangju.xingquban.refactoring.dblite.CategoryDao;
 import com.zhangju.xingquban.refactoring.view.XQBLoadMoreView;
 
 import java.util.ArrayList;
@@ -109,11 +110,12 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
     LinearLayout homeHeadJingpinkecheng;
     RecyclerView homeRecyclerview;
     ViewPager homeItemCp;
-    RecyclerView homePageIndicator;
+    //圆点指示器
+    private LinearLayout group;
+    //小圆点图片的集合
+    private ImageView[] ivPoints;
 
     private BannerHelper mBannerHelper;
-    private FragmentItemAdapter fragmentItemAdapter;
-    private IndicatorAdapter indicatorAdapter;
 
     private String city;
     String latitude;
@@ -131,30 +133,6 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
     private BusinessListAdapter businessListAdapter;
     private int currPage = 0;
 
-
-    Observer<NearSubjectBean> observer = new Observer<NearSubjectBean>() {
-        @Override
-        public void onCompleted() {
-
-        }
-
-        @Override
-        public void onError(Throwable e) {
-
-        }
-
-        @Override
-        public void onNext(NearSubjectBean homeViewPage) {
-            List<Fragment> list = new ArrayList<>();
-            list.add(HomeClassPage1.newInstance(homeViewPage));
-            list.add(HomeClassPage2.newInstance(homeViewPage));
-            list.add(HomeClassPage3.newInstance(homeViewPage));
-            fragmentItemAdapter = new FragmentItemAdapter(getFragmentManager(), list);
-            homeItemCp.setAdapter(fragmentItemAdapter);
-        }
-    };
-
-
     /***
      * 加载banner数据
      */
@@ -169,20 +147,65 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
     public void initData() {
         currPage = 0;
         loadBottomData(currPage);
-
         loadBanner();
-
-        /**中间类别数据**/
-        NetWork.getNearSubject().getKemuAllData()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observer);
-
-        /***指示器***/
-        intiInditors();
+        loadCategoryData();
 
         /***初始化定位***/
         initLocation();
+
+    }
+
+    /***
+     * 加载类别View
+     */
+    private void loadCategoryData() {
+        List<CategoryBean> categoryBeanList = new CategoryDao(getActivity()).queryLevelOneAll();
+        final int totalPage = (int) Math.ceil(categoryBeanList.size() * 1.0 / 10);
+        List<View> viewList = new ArrayList<>();
+        for (int i = 0; i < totalPage; i++) {
+            final GridView gridView = (GridView) LayoutInflater.from(getActivity()).inflate(R.layout.view_category_grid, null);
+            gridView.setAdapter(new IndexCategoryGridAdapter(getActivity(), categoryBeanList, i, 10));
+            gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int postion, long l) {
+                    Intent intent = new Intent(getActivity(), HomeDistrictActivity.class);
+                    intent.putExtra("categoryId", ((CategoryBean) adapterView.getItemAtPosition(postion)).getId());
+                    startActivity(intent);
+                }
+            });
+            viewList.add(gridView);
+        }
+        homeItemCp.setAdapter(new CategoryViewPagerAdapter(viewList));
+
+        //添加小圆点
+        ivPoints = new ImageView[totalPage];
+        for (int i = 0; i < totalPage; i++) {
+            //循坏加入点点图片组
+            ivPoints[i] = new ImageView(getActivity());
+            if (i == 0) {
+                ivPoints[i].setImageResource(R.drawable.indicator_red);
+            } else {
+                ivPoints[i].setImageResource(R.drawable.indicator_gray);
+            }
+            ivPoints[i].setPadding(8, 0, 8, 0);
+            group.addView(ivPoints[i]);
+        }
+        //设置ViewPager的滑动监听，主要是设置点点的背景颜色的改变
+        homeItemCp.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                // TODO Auto-generated method stub
+                //currentPage = position;
+                for (int i = 0; i < totalPage; i++) {
+                    if (i == position) {
+                        ivPoints[i].setImageResource(R.drawable.indicator_red);
+                    } else {
+                        ivPoints[i].setImageResource(R.drawable.indicator_gray);
+                    }
+                }
+            }
+        });
+
 
     }
 
@@ -242,33 +265,6 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observerCity);
     }
-
-
-    //自定义指示器Recyclerview
-    private void intiInditors() {
-        indicatorAdapter = new IndicatorAdapter(getActivity(), 3);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        homePageIndicator.setLayoutManager(linearLayoutManager);
-        homePageIndicator.setAdapter(indicatorAdapter);
-
-        homeItemCp.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                indicatorAdapter.setPosition(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-            }
-        });
-
-    }
-
 
     Observer<CityConvertBean> observerCity = new Observer<CityConvertBean>() {
         @Override
@@ -421,9 +417,9 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
         homeHeadYouxiulaoshi = view.findViewById(R.id.home_head_youxiulaoshi);
         homeHeadYouxiujigou = view.findViewById(R.id.home_head_youxiujigou);
         homeHeadJingpinkecheng = view.findViewById(R.id.home_head_jingpinkecheng);
+        group = view.findViewById(R.id.points);
         homeRecyclerview = view.findViewById(R.id.home_recyclerview);
         homeItemCp = view.findViewById(R.id.home_item_cp);
-        homePageIndicator = view.findViewById(R.id.home_page_Indicator);
         businessListAdapter.addHeaderView(view);
         indexRV.setAdapter(businessListAdapter);
         businessListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {

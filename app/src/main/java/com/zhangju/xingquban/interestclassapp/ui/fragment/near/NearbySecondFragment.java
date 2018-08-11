@@ -48,6 +48,8 @@ import com.zhangju.xingquban.interestclassapp.ui.fragment.home.HomeRecyclerViewD
 import com.zhangju.xingquban.interestclassapp.util.DpUtil;
 import com.zhangju.xingquban.interestclassapp.util.ToastUtil;
 import com.zhangju.xingquban.interestclassapp.view.BannerHelper;
+import com.zhangju.xingquban.refactoring.entity.CategoryBean;
+import com.zhangju.xingquban.refactoring.dblite.CategoryDao;
 import com.zhangju.xingquban.refactoring.view.AppBarStateChangeListener;
 
 import java.util.ArrayList;
@@ -175,6 +177,7 @@ public class NearbySecondFragment extends BaseFragment {
     private String requestCityCode = "310000";
     private BannerHelper mBannerHelper;
     private String mBannerType;
+    private CategoryDao categoryDao;
 
     @Override
     public void initView() {
@@ -210,6 +213,8 @@ public class NearbySecondFragment extends BaseFragment {
                 screenHeight);
         swipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
 
+        categoryDao = new CategoryDao(getActivity());
+
         mytitle.setIconifiedByDefault(false);
         mytitle.setQueryHint("搜索老师/机构");
         mytitle.setFocusable(false);
@@ -230,8 +235,6 @@ public class NearbySecondFragment extends BaseFragment {
         liexinglist.add("老师");
         liexinglist.add("机构");
         /*     getNearData(null,null,null,radius,null);*/
-        /*获取科目数据*/
-        getNearSubject();
         /*区域数据*/
         getNearDistrict();
         /*弹框数据*/
@@ -520,33 +523,32 @@ public class NearbySecondFragment extends BaseFragment {
                 click2 = false;
             }
         });
-        naerKemuLeftAdapter = new NaerKemuLeftAdapter(getActivity(), nearSubjectBean);
+        List<CategoryBean> categoryBeanList = categoryDao.queryLevelOneAll();
+        naerKemuLeftAdapter = new NaerKemuLeftAdapter(getActivity(), categoryBeanList);
         mainlist.setAdapter(naerKemuLeftAdapter);
         naerKemuLeftAdapter.selectnum(0);
         mainlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                /*     kemuLeftid= Integer.parseInt(nearSubjectBean.getAaData().get(position).getId());*/
-                initMoreAdapter(position);
+                CategoryBean categoryBean = (CategoryBean) parent.getItemAtPosition(position);
+                initMoreAdapter(categoryBean.getId());
                 naerKemuLeftAdapter.selectnum(position);
                 naerKemuLeftAdapter.notifyDataSetChanged();
             }
         });
         mainlist.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        /*  mainlist.setSelection(0);*/
         initMoreAdapter(0);
         morelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                kemuRightid = Integer.parseInt(naerKemuRightAdapter.getData().getChilds().get(position).getId());
+                CategoryBean categoryBean = (CategoryBean) parent.getItemAtPosition(position);
+                kemuRightid = categoryBean.getId();
                 page = 0;
                 load = true;
-
                 naerKemuRightAdapter.selectnum(position);
-                String name = naerKemuRightAdapter.getData().getChilds().get(position).getName();
                 swipeRefreshLayout.setRefreshing(true);
                 getNearData(degreeId, kemuRightid, areasid, radius, jsonArray.toJSONString(), avgScore);
-                kemu.setText(name);
+                kemu.setText(categoryBean.getName());
                 popWindow2.dismiss();
             }
         });
@@ -724,9 +726,10 @@ public class NearbySecondFragment extends BaseFragment {
         }
     }
 
-    private void initMoreAdapter(int pos) {
-        if (nearSubjectBean != null && nearSubjectBean.getAaData() != null && nearSubjectBean.getAaData().size() > 0) {
-            naerKemuRightAdapter = new NaerKemuRightAdapter(getActivity(), nearSubjectBean.getAaData().get(pos));
+    private void initMoreAdapter(int levelOneCategoryId) {
+        List<CategoryBean> categoryBeanList = categoryDao.queryLevelTowAll(levelOneCategoryId);
+        if (categoryBeanList != null && categoryBeanList.size() > 0) {
+            naerKemuRightAdapter = new NaerKemuRightAdapter(getActivity(), categoryBeanList);
             morelist.setAdapter(naerKemuRightAdapter);
             naerKemuRightAdapter.notifyDataSetChanged();
         }
@@ -810,25 +813,6 @@ public class NearbySecondFragment extends BaseFragment {
         }
     };
 
-    //获取所有科目的信息
-    private Observer<NearSubjectBean> observerSubject = new Observer<NearSubjectBean>() {
-
-        @Override
-        public void onCompleted() {
-            Log.e(TAG, "======onNext=======: ");
-        }
-
-        @Override
-        public void onError(Throwable e) {
-            ToastUtil.makeText(getContext(), e.getMessage(), ToastUtil.LENGTH_LONG).show();
-        }
-
-        @Override
-        public void onNext(NearSubjectBean mnearSubjectBean) {
-            nearSubjectBean = mnearSubjectBean;
-        }
-    };
-
     //区域的地区名数据
     private Observer<NearDistrictBean> observerNearDistrict = new Observer<NearDistrictBean>() {
 
@@ -854,15 +838,6 @@ public class NearbySecondFragment extends BaseFragment {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observerNearDistrict);
-    }
-
-
-    //全部科目
-    public void getNearSubject() {
-        NetWork.getNearSubject().getKemuAllData()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observerSubject);
     }
 
 

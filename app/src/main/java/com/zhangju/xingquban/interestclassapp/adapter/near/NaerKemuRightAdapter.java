@@ -8,7 +8,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.zhangju.xingquban.R;
-import com.zhangju.xingquban.interestclassapp.bean.NearSubjectBean;
+import com.zhangju.xingquban.refactoring.entity.CategoryBean;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,29 +21,33 @@ import butterknife.ButterKnife;
 
 public class NaerKemuRightAdapter extends BaseAdapter {
     private Context context;
-    private NearSubjectBean.AaDataBean data;
+    private List<CategoryBean> data;
     private LayoutInflater mlayoutInflater;
-    private int flag=0;
-    public NaerKemuRightAdapter(Context mcontext, NearSubjectBean.AaDataBean mdata) {
+    private int flag = 0;
+
+    public NaerKemuRightAdapter(Context mcontext, List<CategoryBean> mdata) {
         this.context = mcontext;
         this.data = mdata;
         mlayoutInflater = LayoutInflater.from(mcontext);
     }
-    public void selectnum(int mflag){
-        this.flag=mflag;
+
+    public void selectnum(int mflag) {
+        this.flag = mflag;
         notifyDataSetChanged();
     }
-    public NearSubjectBean.AaDataBean getData(){
-        return  data;
+
+    public List<CategoryBean> getData() {
+        return data;
     }
+
     @Override
     public int getCount() {
-        return data.getChilds().size();
+        return data.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return data.getChilds().get(position);
+        return data.get(position);
     }
 
     @Override
@@ -52,18 +58,18 @@ public class NaerKemuRightAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
-        if(convertView==null){
+        if (convertView == null) {
             convertView = mlayoutInflater.inflate(R.layout.popup_text_item_red, null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
-        }else {
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.leibieText.setText(data.getChilds().get(position).getName());
-        if(position==flag){
+        viewHolder.leibieText.setText(data.get(position).getName());
+        if (position == flag) {
             viewHolder.selectLine.setBackgroundColor(context.getResources().getColor(R.color.color_main));
             viewHolder.leibieText.setTextColor(context.getResources().getColor(R.color.color_main));
-        }else {
+        } else {
             viewHolder.selectLine.setBackgroundColor(context.getResources().getColor(R.color.color_tab_text));
             viewHolder.leibieText.setTextColor(context.getResources().getColor(R.color.color_tab_text));
         }

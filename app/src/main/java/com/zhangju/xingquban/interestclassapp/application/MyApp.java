@@ -1,5 +1,6 @@
 package com.zhangju.xingquban.interestclassapp.application;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap.Config;
@@ -7,6 +8,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
@@ -14,6 +16,7 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.facebook.stetho.Stetho;
 import com.fastlib.db.FastDatabase;
 import com.fastlib.net.GlobalListener;
 import com.fastlib.net.NetManager;
@@ -48,6 +51,7 @@ import com.zhangju.xingquban.interestclassapp.refactor.user.UserManager;
 import com.zhangju.xingquban.interestclassapp.ui.sys.SystemUtil;
 import com.zhangju.xingquban.interestclassapp.util.ToastUtil;
 import com.zhangju.xingquban.interestclassapp.util.imageloader.GlideImageLoader;
+import com.zhangju.xingquban.refactoring.dblite.DataBaseHelper;
 
 import java.io.File;
 import java.sql.Date;
@@ -59,7 +63,7 @@ import cn.jpush.android.api.JPushInterface;
 /**
  * Created by john on 2015/11/18
  */
-public class MyApp extends MultiDexApplication {
+public class MyApp extends Application {
     public final static int DB_VERSION = 5;
     public static final String URL = "http://my.xqban.com"; //正式服务器
     //    public static final String URL        = "http://test.xqban.com"; //测试服务器
@@ -116,6 +120,7 @@ public class MyApp extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        MultiDex.install(this);
         if (!isInited)
             init();
     }
@@ -149,6 +154,14 @@ public class MyApp extends MultiDexApplication {
         // initLocation();
         com.zhangju.xingquban.interestclassapp.config.Logger.setTag("xingquban");
         com.zhangju.xingquban.interestclassapp.config.Logger.setDebug(true);
+
+        /****初始化数据库****/
+        DataBaseHelper.getHelper(this);
+
+        /****Steho 初始化****/
+        Stetho.initializeWithDefaults(this);
+
+
         ToastUtil.init(this);
         SImagePicker.init(new PickerConfig.Builder().setAppContext(this)
                 .setImageLoader(new GlideImageLoader())

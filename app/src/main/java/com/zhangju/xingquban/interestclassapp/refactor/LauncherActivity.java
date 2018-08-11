@@ -23,6 +23,9 @@ import com.zhangju.xingquban.interestclassapp.ui.main.MainActivity;
 import com.zhangju.xingquban.interestclassapp.util.ScreenUtils;
 import com.zhangju.xingquban.interestclassapp.util.SortUtils;
 import com.zhangju.xingquban.interestclassapp.util.SpUtil;
+import com.zhangju.xingquban.refactoring.entity.BaseResponseBean;
+import com.zhangju.xingquban.refactoring.entity.CategoryBean;
+import com.zhangju.xingquban.refactoring.dblite.CategoryDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,9 +43,9 @@ public class LauncherActivity extends AppCompatActivity {
     final String SAVE_FIRST_LAUNCHER = "firstLauncher";
     boolean isStarted = false;
     private boolean canAutoJump = true;
+    private CategoryDao categoryDao;
 
     private List<CityNameBean.AaDataBean> cityData = new ArrayList<>();//全部城市
-
 
     private void getCityData() {
         NetWork.getICityName().getCityName()
@@ -70,6 +73,50 @@ public class LauncherActivity extends AppCompatActivity {
         }
     };
 
+    /***
+     * 获取类别数据
+     */
+    Observer<BaseResponseBean<CategoryBean>> observer = new Observer<BaseResponseBean<CategoryBean>>() {
+        @Override
+        public void onCompleted() {
+        }
+
+        @Override
+        public void onError(Throwable e) {
+        }
+
+        @Override
+        public void onNext(BaseResponseBean<CategoryBean> baseResponseBean) {
+            if (baseResponseBean != null && baseResponseBean.getAaData() != null) {
+                categoryDao.clearAll();
+                insertData(baseResponseBean.getAaData());
+            }
+        }
+    };
+
+
+    /***
+     * 递归插入数据
+     * @param categoryBeans
+     */
+    private void insertData(List<CategoryBean> categoryBeans) {
+        for (int i = 0; i < categoryBeans.size(); i++) {
+            categoryDao.addCategory(categoryBeans.get(i));
+            if (categoryBeans.get(i).getChilds() != null && categoryBeans.get(i).getChilds().size() > 0) {
+                insertData(categoryBeans.get(i).getChilds());
+            }
+        }
+    }
+
+
+    private void getCategoryData() {
+        /**中间类别数据**/
+        NetWork.getNearSubject().getCategory()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +125,8 @@ public class LauncherActivity extends AppCompatActivity {
         final TextView skip = (TextView) findViewById(R.id.skip);
         String launcherAdUrl = SpUtil.getString(this, "launcherAdUrl");
         final String launcherAdGotoUrl = SpUtil.getString(this, "launcherAdGotoUrl");
+        categoryDao = new CategoryDao(this);
+        getCategoryData();
         getCityData();
         Glide.with(this)
                 .load(launcherAdUrl)

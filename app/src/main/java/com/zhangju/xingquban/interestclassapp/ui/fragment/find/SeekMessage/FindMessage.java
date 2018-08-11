@@ -47,17 +47,16 @@ import rx.schedulers.Schedulers;
 public class FindMessage extends BaseActivity implements SwipeRefreshAdapterView.OnListLoadListener, SwipeRefreshLayout.OnRefreshListener {
     public static final String TAG = "FindMessage";
 
-
     @BindView(R.id.drawer_layout)
-    DrawerLayout             drawerLayout;
+    DrawerLayout drawerLayout;
     @BindView(R.id.find_message_return)
-    LinearLayout             findMessageReturn;
+    LinearLayout findMessageReturn;
     @BindView(R.id.find_message_shaixuan)
-    TextView                 findMessageShaixuan;
+    TextView findMessageShaixuan;
     @BindView(R.id.find_message_quxiao)
-    TextView                 findMessageQuxiao;
+    TextView findMessageQuxiao;
     @BindView(R.id.find_message_radiogroup1)
-    RadioGroup               findMessageRadiogroup1;
+    RadioGroup findMessageRadiogroup1;
     @BindView(R.id.find_message_radiogroup2)
     RadioGroup findMessageRadiogroup2;
     @BindView(R.id.find_message_llxinxiliebie)
@@ -87,19 +86,19 @@ public class FindMessage extends BaseActivity implements SwipeRefreshAdapterView
     @BindView(R.id.find_message_radio_buxian)
     RadioButton findMessageRadioBuxian;
     @BindView(R.id.find_message_radio_yizhou)
-    RadioButton              findMessageRadioYizhou;
+    RadioButton findMessageRadioYizhou;
     @BindView(R.id.find_message_radio_yiyue)
-    RadioButton              findMessageRadioYiyue;
+    RadioButton findMessageRadioYiyue;
     @BindView(R.id.find_message_radio_sanyue)
-    RadioButton              findMessageRadioSanyue;
+    RadioButton findMessageRadioSanyue;
     @BindView(R.id.find_message_radio_zidingy)
-    RadioButton              findMessageRadioZidingy;
+    RadioButton findMessageRadioZidingy;
     @BindView(R.id.findMessageRecycler)
     SwipeRefreshRecyclerView findMessageRecycler;
     @BindView(R.id.tv_now_time)
-    TextView                 tvNowTime;
+    TextView tvNowTime;
     @BindView(R.id.home_banner)
-    Banner                   mHomeBanner;
+    Banner mHomeBanner;
 
     private List<FindMessageBean.AaDataBean> mInfoList = new ArrayList<>();
     private FindMessageAdapter findMessageAdapter;
@@ -217,7 +216,6 @@ public class FindMessage extends BaseActivity implements SwipeRefreshAdapterView
         getTiWenData();
 
 
-
     }
 
     private void setCurrentTime() {
@@ -226,7 +224,7 @@ public class FindMessage extends BaseActivity implements SwipeRefreshAdapterView
         int month = (now.get(Calendar.MONTH) + 1);
         int day = now.get(Calendar.DAY_OF_MONTH);
 
-        tvNowTime.setText(year+"/"+month+"/"+day);
+        tvNowTime.setText(year + "/" + month + "/" + day);
 
     }
 
@@ -251,17 +249,17 @@ public class FindMessage extends BaseActivity implements SwipeRefreshAdapterView
     @Override
     protected void onPause() {
         super.onPause();
-        isRefresh=true;
+        isRefresh = true;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        if (isRefresh){
+        if (isRefresh) {
             pageIndex = 0;
             getTiWenData();
-            isRefresh=false;
+            isRefresh = false;
         }
 
         //用户类型判断
@@ -382,7 +380,7 @@ public class FindMessage extends BaseActivity implements SwipeRefreshAdapterView
         }
     };
 
-    @OnClick({R.id.find_message_return, R.id.find_message_radio_zhuanr, R.id.find_message_radio_zhaos, R.id.find_message_radio_zul, R.id.find_message_radio_zhaop,  R.id.find_message_radio_all, R.id.find_message_radio_buxian, R.id.find_message_radio_yizhou, R.id.find_message_radio_yiyue, R.id.find_message_shaixuan, R.id.find_message_quxiao, R.id.me_find_message_bj, R.id.find_message_radio_sanyue, R.id.find_message_radio_zidingy})
+    @OnClick({R.id.find_message_return, R.id.find_message_radio_zhuanr, R.id.find_message_radio_zhaos, R.id.find_message_radio_zul, R.id.find_message_radio_zhaop, R.id.find_message_radio_all, R.id.find_message_radio_buxian, R.id.find_message_radio_yizhou, R.id.find_message_radio_yiyue, R.id.find_message_shaixuan, R.id.find_message_quxiao, R.id.me_find_message_bj, R.id.find_message_radio_sanyue, R.id.find_message_radio_zidingy})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.find_message_return:
@@ -404,7 +402,7 @@ public class FindMessage extends BaseActivity implements SwipeRefreshAdapterView
             //全部
             case R.id.find_message_radio_all:
                 type = null;
-              search();
+                search();
                 break;
             //招聘
             case R.id.find_message_radio_zhaop:
@@ -428,7 +426,7 @@ public class FindMessage extends BaseActivity implements SwipeRefreshAdapterView
                 search();
                 break;
             case R.id.find_message_radio_qit:
-                type=5;
+                type = 5;
                 search();
                 break;
             //不限
@@ -464,13 +462,13 @@ public class FindMessage extends BaseActivity implements SwipeRefreshAdapterView
                 break;
         }
     }
-    private void search(){
+
+    private void search() {
         pageIndex = 0;
         findMessageRecycler.autoRefresh();
         drawerLayout.closeDrawer(Gravity.RIGHT);
 
     }
-
 
 
     @Override

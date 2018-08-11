@@ -17,9 +17,9 @@
             android:id="@+id/titleBar"
             android:layout_width="match_parent"
             android:layout_height="?android:actionBarSize"
-            app:leftIcon="@drawable/home_city_back"
+            app:leftIcon="@mipmap/return_image_white"
             app:titleColor="@android:color/white"
-            app:titleText="我的会员" />
+            app:titleText="" />
 
         <com.fastlib.widget.RoundImageView
             android:id="@+id/avatar"

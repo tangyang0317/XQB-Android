@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.fastlib.widget.TitleBar
         android:id="@+id/titleBar"
@@ -11,72 +12,48 @@
         android:layout_height="?android:actionBarSize"
         android:background="@android:color/white"
         app:leftIcon="@drawable/home_city_back"
-        app:titleText="课程设置"/>
+        app:rightIcon="@mipmap/icon_add_class"
+        app:titleText="课程设置" />
 
-    <android.support.v4.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="vertical"
+            android:id="@+id/teachClassesLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white">
-
-            <LinearLayout
-                android:id="@+id/teachClassesLayout"
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?android:selectableItemBackground"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="授课科目"/>
-
-                <TextView
-                    android:id="@+id/teachClasses"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/list_arrow_normal"
-                    android:gravity="center_vertical"
-                    android:drawablePadding="5dp"
-                    android:textSize="@dimen/font_size_small"
-                    android:maxLines="1"
-                    android:maxLength="15"
-                    tools:text="幼儿美术，儿绘幼儿美术，儿绘幼儿美术，儿绘幼儿美术，儿绘幼儿美术，儿绘幼儿美术，儿绘"/>
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/divider"/>
+            android:layout_marginTop="@dimen/dp_8"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
             <TextView
-                android:id="@+id/addTeachClass"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="?android:selectableItemBackground"
-                android:padding="10dp"
-                android:drawableRight="@drawable/list_arrow_normal"
-                android:text="课程添加"/>
-
-            <com.zhangju.xingquban.interestclassapp.refactor.common.widget.NoScrollRecyclerView
-                android:id="@+id/customCourse"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_weight="1"
+                android:text="授课科目" />
 
             <TextView
-                android:id="@+id/moreCustomCourse"
+                android:id="@+id/teachClasses"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:padding="5dp"
-                android:text="点击查看更多》"/>
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/list_arrow_normal"
+                android:gravity="center_vertical"
+                android:maxLength="15"
+                android:maxLines="1"
+                android:textSize="@dimen/font_size_small"
+                tools:text="幼儿美术，儿绘幼儿美术，儿绘幼儿美术，儿绘幼儿美术，儿绘幼儿美术，儿绘幼儿美术，儿绘" />
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/classListRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
 </LinearLayout>

@@ -37,7 +37,6 @@ import com.zhangju.xingquban.interestclassapp.refactor.me.activity.LoginActivity
 import com.zhangju.xingquban.interestclassapp.refactor.me.fragment.MeFragment;
 import com.zhangju.xingquban.interestclassapp.refactor.user.UserManager;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.find.FindFragment;
-import com.zhangju.xingquban.interestclassapp.ui.fragment.home.HomeFragment;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.live.LiveFragment;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.me.Settings.MyDialog;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.near.NearbyFragment;

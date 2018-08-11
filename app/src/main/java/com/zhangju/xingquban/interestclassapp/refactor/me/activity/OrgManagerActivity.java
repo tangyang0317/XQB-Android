@@ -42,7 +42,6 @@ public class OrgManagerActivity extends FastActivity{
     protected void alreadyPrepared() {
         User user=UserManager.getInstance().getUser();
 //        Pair<Integer,String> classManagerPair=Pair.create(R.mipmap.me_jg_kcap,"课程安排");
-
         mName.setText(user.signame);
         Glide.with(this).load(user.picture).dontAnimate().dontTransform().into(mAvatar);
         mGrid.setLayoutManager(new GridLayoutManager(this,3));

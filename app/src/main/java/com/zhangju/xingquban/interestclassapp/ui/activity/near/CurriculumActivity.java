@@ -36,7 +36,6 @@ import com.zhangju.xingquban.interestclassapp.adapter.near.NaerKemuRightAdapter;
 import com.zhangju.xingquban.interestclassapp.adapter.near.NaerPaixuAdapter;
 import com.zhangju.xingquban.interestclassapp.adapter.near.NaerQuyuLeftAdapter;
 import com.zhangju.xingquban.interestclassapp.adapter.near.NaerQuyuRightAdapter;
-import com.zhangju.xingquban.interestclassapp.bean.NearSubjectBean;
 import com.zhangju.xingquban.interestclassapp.bean.OrderRefresh;
 import com.zhangju.xingquban.interestclassapp.bean.near.CurriculumBean;
 import com.zhangju.xingquban.interestclassapp.bean.near.NearDistrictBean;
@@ -45,6 +44,8 @@ import com.zhangju.xingquban.interestclassapp.ui.fragment.home.sjkc.CurriculumXq
 import com.zhangju.xingquban.interestclassapp.util.DpUtil;
 import com.zhangju.xingquban.interestclassapp.util.ToastUtil;
 import com.zhangju.xingquban.interestclassapp.view.BannerHelper;
+import com.zhangju.xingquban.refactoring.entity.CategoryBean;
+import com.zhangju.xingquban.refactoring.dblite.CategoryDao;
 import com.zhangju.xingquban.refactoring.view.AppBarStateChangeListener;
 
 import java.util.ArrayList;
@@ -64,7 +65,6 @@ import rx.schedulers.Schedulers;
 @ContentView(R.layout.act_curriculum)
 public class CurriculumActivity extends FastActivity implements View.OnClickListener {
     public static final String TAG = "CurriculumActivity";
-
     @BindView(R.id.back)
     ImageView back;
     @BindView(R.id.ll_search)
@@ -95,8 +95,6 @@ public class CurriculumActivity extends FastActivity implements View.OnClickList
     SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.home_banner)
     Banner mHomeBanner;
-
-    private NearSubjectBean nearSubjectBean;
     private NearDistrictBean districtBean;
     private List<String> quyurightList = new ArrayList<>();
     private List<String> paixuList = new ArrayList<>();
@@ -137,6 +135,7 @@ public class CurriculumActivity extends FastActivity implements View.OnClickList
     private int lastVisibleItem;
     private BannerHelper mBannerHelper;
     private int showAtLocationY = 0;
+    private CategoryDao categoryDao;
 
     @Override
     protected void alreadyPrepared() {
@@ -154,15 +153,6 @@ public class CurriculumActivity extends FastActivity implements View.OnClickList
         mBannerHelper.init(mHomeBanner).loadBannerDate("13");
     }
 
-/*    @Override
-    protected void onResume() {
-        super.onResume();
-        page = 0;
-        load = true;
-        swipeRefreshLayout.setRefreshing(true);
-        getCurriculumData(kemuRightid,areasid,radius, jsonArray.toJSONString());
-    }*/
-
     @Event
     private void refreshData(OrderRefresh refresh) {
         page = 0;
@@ -174,6 +164,7 @@ public class CurriculumActivity extends FastActivity implements View.OnClickList
 
     private void readyData() {
         areasid = Integer.valueOf(LocationManager.getInstance().getLocation().cityId);
+        categoryDao = new CategoryDao(this);
         curriculumAdapter = new CurriculumAdapter(CurriculumActivity.this);
         swipeRefreshLayout.setRefreshing(true);
         linearLayoutManager = new LinearLayoutManager(CurriculumActivity.this);
@@ -184,7 +175,6 @@ public class CurriculumActivity extends FastActivity implements View.OnClickList
     }
 
     private void initPopData() {
-        getNearSubject();
         /*区域数据*/
         getNearDistrict();
         /*弹框数据*/
@@ -220,32 +210,6 @@ public class CurriculumActivity extends FastActivity implements View.OnClickList
                 null);
         popWindow4 = new PopupWindow(contentViewshaixuan, ViewGroup.LayoutParams.MATCH_PARENT,
                 screenHeight);
-    }
-
-    private Observer<NearSubjectBean> observerSubject = new Observer<NearSubjectBean>() {
-
-        @Override
-        public void onCompleted() {
-            Log.e(TAG, "======onNext=======: ");
-        }
-
-        @Override
-        public void onError(Throwable e) {
-            ToastUtil.makeText(CurriculumActivity.this, e.getMessage(), ToastUtil.LENGTH_LONG).show();
-        }
-
-        @Override
-        public void onNext(NearSubjectBean mnearSubjectBean) {
-            nearSubjectBean = mnearSubjectBean;
-        }
-    };
-
-    //全部科目
-    public void getNearSubject() {
-        NetWork.getNearSubject().getKemuAllData()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(observerSubject);
     }
 
     //区域的地区名数据
@@ -451,14 +415,16 @@ public class CurriculumActivity extends FastActivity implements View.OnClickList
                 click2 = false;
             }
         });
-        naerKemuLeftAdapter = new NaerKemuLeftAdapter(CurriculumActivity.this, nearSubjectBean);
+
+        List<CategoryBean> categoryBeanList = categoryDao.queryLevelOneAll();
+        naerKemuLeftAdapter = new NaerKemuLeftAdapter(CurriculumActivity.this, categoryBeanList);
         mainlist.setAdapter(naerKemuLeftAdapter);
         naerKemuLeftAdapter.selectnum(0);
         mainlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                initMoreAdapter(position);
+                CategoryBean categoryBean = (CategoryBean) parent.getItemAtPosition(position);
+                initMoreAdapter(categoryBean.getId());
                 naerKemuLeftAdapter.selectnum(position);
                 naerKemuLeftAdapter.notifyDataSetChanged();
             }
@@ -469,15 +435,14 @@ public class CurriculumActivity extends FastActivity implements View.OnClickList
         morelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                kemuRightid = Integer.parseInt(naerKemuRightAdapter.getData().getChilds().get(position).getId());
+                CategoryBean categoryBean = (CategoryBean) parent.getItemAtPosition(position);
+                kemuRightid = categoryBean.getId();
                 page = 0;
                 load = true;
-
                 naerKemuRightAdapter.selectnum(position);
-                String name = naerKemuRightAdapter.getData().getChilds().get(position).getName();
                 swipeRefreshLayout.setRefreshing(true);
                 getCurriculumData(kemuRightid, areasid, radius, jsonArray.toJSONString());
-                kemu.setText(name);
+                kemu.setText(categoryBean.getName());
                 popWindow2.dismiss();
             }
         });
@@ -492,9 +457,10 @@ public class CurriculumActivity extends FastActivity implements View.OnClickList
         /*  icon.setBackground(getContext().getResources().getDrawable(R.drawable.shaixuan));*/
     }
 
-    private void initMoreAdapter(int pos) {
-        if (nearSubjectBean != null && nearSubjectBean.getAaData() != null && nearSubjectBean.getAaData().size() > 0) {
-            naerKemuRightAdapter = new NaerKemuRightAdapter(CurriculumActivity.this, nearSubjectBean.getAaData().get(pos));
+    private void initMoreAdapter(int levelOneId) {
+        List<CategoryBean> levelTwoList = categoryDao.queryLevelTowAll(levelOneId);
+        if (levelTwoList != null && levelTwoList.size() > 0) {
+            naerKemuRightAdapter = new NaerKemuRightAdapter(CurriculumActivity.this, levelTwoList);
             morelist.setAdapter(naerKemuRightAdapter);
             naerKemuRightAdapter.notifyDataSetChanged();
         }

@@ -274,6 +274,9 @@ public class NetWork {
 
     }
 
+
+
+
     //首页城市返回id
     public static IHomeFragment getHomeCityId() {
            /*添加请求头*/

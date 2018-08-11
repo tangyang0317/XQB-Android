@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 
 import com.zhangju.xingquban.R;
 import com.zhangju.xingquban.interestclassapp.base.BaseActivity;
-import com.zhangju.xingquban.interestclassapp.bean.NearSubjectBean;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.near.NearPointbyFragment;
 
 import butterknife.BindView;
@@ -15,7 +14,6 @@ import butterknife.ButterKnife;
 
 //课程列表
 public class HomeDistrictActivity extends BaseActivity implements View.OnClickListener {
-
 
     @BindView(R.id.district_return)
     LinearLayout districtReturn;
@@ -25,9 +23,10 @@ public class HomeDistrictActivity extends BaseActivity implements View.OnClickLi
     FrameLayout fragmentNear;
 
     private NearPointbyFragment nearPointbyFragment;
-    private Integer degreeid=null;
+    private Integer degreeid = null;
     private Bundle bundle;
-    private NearSubjectBean.AaDataBean dataBean;
+    private int categoryId;
+
     @Override
     public int getLayout() {
         return R.layout.activity_district_copy;
@@ -35,13 +34,12 @@ public class HomeDistrictActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void initView() {
-        nearPointbyFragment=new NearPointbyFragment();
-        dataBean= (NearSubjectBean.AaDataBean) getIntent().getExtras().getSerializable("data");
-   //        bundle.putInt();
-        bundle=new Bundle();
-        bundle.putSerializable("data",dataBean);
+        nearPointbyFragment = new NearPointbyFragment();
+        categoryId = getIntent().getExtras().getInt("categoryId");
+        bundle = new Bundle();
+        bundle.putInt("categoryId", categoryId);
         nearPointbyFragment.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_near,nearPointbyFragment).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_near, nearPointbyFragment).commit();
     }
 
     @Override

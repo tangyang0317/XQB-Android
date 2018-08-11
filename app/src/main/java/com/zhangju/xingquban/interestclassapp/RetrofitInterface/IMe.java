@@ -11,10 +11,13 @@ import com.zhangju.xingquban.interestclassapp.ui.fragment.me.Institutions.xcgl.M
 import com.zhangju.xingquban.interestclassapp.ui.fragment.me.Institutions.xcgl.MeJiGouXcglTpBean;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.me.Message.MeXXBean;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.me.user.MeUserBean;
+import com.zhangju.xingquban.refactoring.entity.BaseResponseBean;
+import com.zhangju.xingquban.refactoring.entity.LessonsManagerBean;
 
 import java.io.File;
 import java.util.Map;
 
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
@@ -196,5 +199,8 @@ public interface IMe {
             @Query("customerId") String customerId,
             @Query("isCharge") Integer isCharge
     );
+
+    @GET("admnxzcmr/teacher/ls.json")
+    Observable<BaseResponseBean<LessonsManagerBean>> getLessonManager(@Query("id") String id);
 
 }

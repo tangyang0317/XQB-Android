@@ -6,6 +6,8 @@ import com.zhangju.xingquban.interestclassapp.bean.NearMSRight;
 import com.zhangju.xingquban.interestclassapp.bean.NearSubjectBean;
 import com.zhangju.xingquban.interestclassapp.bean.near.CurriculumBean;
 import com.zhangju.xingquban.interestclassapp.bean.near.NearDistrictBean;
+import com.zhangju.xingquban.refactoring.entity.BaseResponseBean;
+import com.zhangju.xingquban.refactoring.entity.CategoryBean;
 
 import java.util.Map;
 
@@ -31,23 +33,23 @@ public interface INear {
      * in:title,comment,isPic,picVideo,latitude,longitude,videoTitlePic,intro,customerId,type
      * out:
      */
-    String POST_COMMENT_ADD="/teacherComment/add.json";
-    String POST_COMMNET_ALL="/teacherComment/ls.json";
-    String POST_COMMEMT_COMM="/commentcomment/add.json";
-    String POST_COMMENT_ZAN="/thumbComment/add.json";
-    String POST_VIDEO_COMMENT="/OrganVideoComment/ls.json";
-    String POST_VIDEO_ADDCOMMNENT="/OrganVideoComment/add.json";
-    String POST_JIGOUXIANGQING="/organ/ls.json";
-    String POST_ORDER_CURRICULUM="/orders/add.json";
-    String POST_ORDERS_PAY="/orders/pay.json";
-    String POST_ORDERS_YUE="/paytype/ls.json";
-    String POST_VIDEOLESS="/videoLesson/ls.json";
-    String POST_LESSONS_XQ="/lesson/ls.json";
+    String POST_COMMENT_ADD = "/teacherComment/add.json";
+    String POST_COMMNET_ALL = "/teacherComment/ls.json";
+    String POST_COMMEMT_COMM = "/commentcomment/add.json";
+    String POST_COMMENT_ZAN = "/thumbComment/add.json";
+    String POST_VIDEO_COMMENT = "/OrganVideoComment/ls.json";
+    String POST_VIDEO_ADDCOMMNENT = "/OrganVideoComment/add.json";
+    String POST_JIGOUXIANGQING = "/organ/ls.json";
+    String POST_ORDER_CURRICULUM = "/orders/add.json";
+    String POST_ORDERS_PAY = "/orders/pay.json";
+    String POST_ORDERS_YUE = "/paytype/ls.json";
+    String POST_VIDEOLESS = "/videoLesson/ls.json";
+    String POST_LESSONS_XQ = "/lesson/ls.json";
     /**
      * 轮播
      * in:types
      */
-    String POST_BANNER="/chgpic/ls.json";
+    String POST_BANNER = "/chgpic/ls.json";
     //附近默认数据
 
     @POST("admnxzcmr/teacher/ls.json")
@@ -61,33 +63,33 @@ public interface INear {
     @FormUrlEncoded
     @POST("admnxzcmr/teacher/ls.json")
     Observable<NearDataBean> getNearData(@Field("lng") String lng,
-                                         @Field ("lat") String lat,
-                                         @Field ("pageIndex") Integer pageIndex,
-                                         @Field ("pageSize") String pageSize,
-                                         @Field ("degreeId") String degreeId,//级别id 老师1  机构2
-                                         @Field ("catagoriesIdes") Integer catagoriesId,//科目id
-                                         @Field ("cityId") Integer areasId,//地区ID
-                                         @Field ("radius")Integer radius,//半径
-                                         @Field("sortJson")String sortJson,//排序json
-                                         @Field("avgScore")Boolean avgScore,//精选
-                                         @Field("allStringQuery")String allStringQuery//精选
-
+                                         @Field("lat") String lat,
+                                         @Field("pageIndex") Integer pageIndex,
+                                         @Field("pageSize") String pageSize,
+                                         @Field("degreeId") String degreeId,//级别id 老师1  机构2
+                                         @Field("catagoriesIdes") Integer catagoriesId,//科目id
+                                         @Field("cityId") Integer areasId,//地区ID
+                                         @Field("radius") Integer radius,//半径
+                                         @Field("sortJson") String sortJson,//排序json
+                                         @Field("avgScore") Boolean avgScore,//精选
+                                         @Field("allStringQuery") String allStringQuery//精选
 
 
     );
+
     //获取课程数据
     @FormUrlEncoded
     @POST("admnxzcmr/lesson/ls.json")
     Observable<CurriculumBean> getCurriculumData(
-                                        @Field("id")String id,//课程ID
-                                        @Field("lng") String lng,
-                                         @Field ("lat") String lat,
-                                         @Field ("pageIndex") Integer pageIndex,
-                                         @Field ("pageSize") String pageSize,
-                                         @Field ("categoriesId") Integer catagoriesId,//科目id
-                                         @Field ("cityId") Integer areasId,//地区ID
-                                         @Field ("radius")Integer radius,//半径
-                                         @Field("sortJson")String sortJson//排序json
+            @Field("id") String id,//课程ID
+            @Field("lng") String lng,
+            @Field("lat") String lat,
+            @Field("pageIndex") Integer pageIndex,
+            @Field("pageSize") String pageSize,
+            @Field("categoriesId") Integer catagoriesId,//科目id
+            @Field("cityId") Integer areasId,//地区ID
+            @Field("radius") Integer radius,//半径
+            @Field("sortJson") String sortJson//排序json
     );
 
     //附近老师数据
@@ -112,6 +114,11 @@ public interface INear {
     @POST("admnxzcmr/catagories/ls.json")
     Observable<NearSubjectBean> getKemuAllData();
 
+    /*获取全部科目数据*/
+    @POST("admnxzcmr/catagories/ls.json")
+    Observable<BaseResponseBean<CategoryBean>> getCategory();
+
+
     //附近科目列表'右'数据
     @POST("admnxzcmr/catagories/ls.json")
     Observable<NearMSRight> getNearMSRight1(@Query("id") String id);
@@ -127,7 +134,6 @@ public interface INear {
     );
 
 
-
     //分页
     @POST("admnxzcmr/teacher/ls.json")
     Observable<NearDataBean> getNearDaatPtf(@Query("pageIndex") int pageIndex, @Query("pageSize") String pageSize);
@@ -137,8 +143,10 @@ public interface INear {
     Observable<HomeRecylerBean> getHomeDaatPtf(@Query("pageIndex") int pageIndex, @Query("pageSize") String pageSize);
 
     /*
-   * 有条件进行查询，获取附近页面数据
-   * */
+     * 有条件进行查询，获取附近页面数据
+     * */
     @POST("admnxzcmr/teacher/ls.json")
     Observable<NearDataBean> getNearDatasCondition(@QueryMap Map<String, String> map);
+
+
 }
