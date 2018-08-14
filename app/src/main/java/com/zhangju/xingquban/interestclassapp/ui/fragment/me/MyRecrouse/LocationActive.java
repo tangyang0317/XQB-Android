@@ -76,7 +76,6 @@ public class LocationActive extends AppCompatActivity implements AMap.OnMyLocati
                 String address = locationBean.getAddress();
                 String lat = locationBean.getLat().toString();
                 String lng = locationBean.getLng().toString();
-
                 Intent intent=new Intent();
                 intent.putExtra("address",address);
                 intent.putExtra("lat",lat);

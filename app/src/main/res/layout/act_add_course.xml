@@ -2,8 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.fastlib.widget.TitleBar
         android:id="@+id/titleBar"
@@ -11,7 +12,7 @@
         android:layout_height="?android:actionBarSize"
         android:background="@android:color/white"
         app:leftIcon="@drawable/home_city_back"
-        app:titleText="课程添加"/>
+        app:titleText="课程添加" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -20,33 +21,33 @@
         android:focusableInTouchMode="true">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/coverLayout"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:background="@android:color/white"
-                android:padding="5dp"
-                android:layout_marginTop="5dp">
+                android:orientation="horizontal"
+                android:padding="5dp">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="5dp"
                     android:layout_gravity="center_vertical"
-                    android:textColor="#444444"
-                    android:text="课程封面"/>
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:text="课程封面"
+                    android:textColor="#444444" />
 
                 <ImageView
                     android:id="@+id/cover"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@mipmap/me_touxiang"/>
+                    android:src="@mipmap/me_touxiang" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -54,490 +55,374 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:src="@drawable/list_arrow_normal_small"/>
+                    android:src="@drawable/list_arrow_normal_small" />
             </LinearLayout>
 
+            <include layout="@layout/view_divider_line_padding" />
+
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1px"
-                android:background="@android:color/white">
+                android:layout_height="@dimen/dp_50"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:textColor="#444444"
-                    android:text="课程名称"/>
+                    android:text="课程名称"
+                    android:textColor="#444444" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#EF4E4C"
-                    android:text="*"/>
+                    android:text="*"
+                    android:textColor="#EF4E4C" />
 
                 <EditText
                     android:id="@+id/courseName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@null"
-                    android:textSize="@dimen/font_size_normal"
                     android:layout_marginLeft="10dp"
-                    android:maxLines="1"
                     android:layout_marginRight="10dp"
-                    android:hint="请输入课程名称，如钢琴课程"/>
+                    android:background="@null"
+                    android:gravity="right|center_vertical"
+                    android:hint="请输入课程名称，如钢琴课程"
+                    android:maxLines="1"
+                    android:textSize="@dimen/font_size_normal" />
             </LinearLayout>
 
+            <include layout="@layout/view_divider_line_padding" />
+
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1px"
-                android:background="@android:color/white">
+                android:layout_height="@dimen/dp_50"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:textColor="#444444"
-                    android:text="课程数量(节)"/>
+                    android:text="课程数量(节)"
+                    android:textColor="#444444" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#EF4E4C"
-                    android:text="*"/>
+                    android:text="*"
+                    android:textColor="#EF4E4C" />
 
                 <EditText
                     android:id="@+id/courseCount"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@null"
-                    android:textSize="@dimen/font_size_normal"
                     android:layout_marginLeft="10dp"
-                    android:maxLines="1"
                     android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:gravity="right|center_vertical"
+                    android:hint="请输入课程数量"
                     android:inputType="number"
-                    android:hint="请输入课程数量"/>
+                    android:maxLines="1"
+                    android:textSize="@dimen/font_size_normal" />
             </LinearLayout>
 
+            <include layout="@layout/view_divider_line_padding" />
+
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1px"
-                android:background="@android:color/white">
+                android:layout_height="@dimen/dp_50"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:textColor="#444444"
-                    android:text="课时长度(分钟)"/>
+                    android:text="课时长度(分钟)"
+                    android:textColor="#444444" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#EF4E4C"
-                    android:text="*"/>
+                    android:text="*"
+                    android:textColor="#EF4E4C" />
 
                 <EditText
                     android:id="@+id/courseLength"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@null"
-                    android:textSize="@dimen/font_size_normal"
                     android:layout_marginLeft="10dp"
-                    android:maxLines="1"
                     android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:gravity="right|center_vertical"
+                    android:hint="请输入课时长度，如120"
                     android:inputType="number"
-                    android:hint="请输入课时长度，如120"/>
+                    android:maxLines="1"
+                    android:textSize="@dimen/font_size_normal" />
             </LinearLayout>
 
+            <include layout="@layout/view_divider_line_padding" />
+
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1px"
-                android:background="@android:color/white">
+                android:layout_height="@dimen/dp_50"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:textColor="#444444"
-                    android:text="课程价格(元)"/>
+                    android:text="课程价格(元)"
+                    android:textColor="#444444" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#EF4E4C"
-                    android:text="*"/>
+                    android:text="*"
+                    android:textColor="#EF4E4C" />
 
                 <EditText
                     android:id="@+id/coursePrice"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@null"
-                    android:textSize="@dimen/font_size_normal"
                     android:layout_marginLeft="10dp"
-                    android:maxLines="1"
                     android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:gravity="right|center_vertical"
+                    android:hint="请输入课程单价，如399"
                     android:inputType="numberDecimal"
-                    android:hint="请输入课程单价，如399"/>
+                    android:maxLines="1"
+                    android:textSize="@dimen/font_size_normal" />
             </LinearLayout>
 
+            <include layout="@layout/view_divider_line_padding" />
+
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1px"
-                android:background="@android:color/white">
+                android:layout_height="@dimen/dp_50"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:textColor="#444444"
-                    android:text="优惠价格(元)"/>
+                    android:text="优惠价格(元)"
+                    android:textColor="#444444" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#EF4E4C"
-                    android:text="*"/>
+                    android:text="*"
+                    android:textColor="#EF4E4C" />
 
                 <EditText
                     android:id="@+id/vipPrice"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@null"
-                    android:textSize="@dimen/font_size_normal"
                     android:layout_marginLeft="10dp"
-                    android:maxLines="1"
                     android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:gravity="right|center_vertical"
+                    android:hint="请输入优惠后的价格"
                     android:inputType="numberDecimal"
-                    android:hint="请输入优惠后的价格"/>
+                    android:maxLines="1"
+                    android:textSize="@dimen/font_size_normal" />
             </LinearLayout>
 
+            <include layout="@layout/view_divider_line_padding" />
+
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1px"
-                android:background="@android:color/white">
+                android:layout_height="@dimen/dp_50"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:textColor="#444444"
-                    android:text="授课教师"/>
+                    android:text="授课教师"
+                    android:textColor="#444444" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#EF4E4C"
-                    android:text="*"/>
+                    android:text="*"
+                    android:textColor="#EF4E4C" />
 
                 <EditText
                     android:id="@+id/teacherName"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@null"
-                    android:textSize="@dimen/font_size_normal"
                     android:layout_marginLeft="10dp"
-                    android:maxLines="1"
                     android:layout_marginRight="10dp"
-                    android:hint="请输入授课教师，如张三"/>
+                    android:background="@null"
+                    android:gravity="right|center_vertical"
+                    android:hint="请输入授课教师，如张三"
+                    android:maxLines="1"
+                    android:textSize="@dimen/font_size_normal" />
             </LinearLayout>
+
+            <include layout="@layout/view_divider_line_padding" />
 
             <LinearLayout
                 android:id="@+id/auditionLayout"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1px"
-                android:background="@android:color/white">
+                android:layout_height="@dimen/dp_50"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:textColor="#444444"
-                    android:text="试听消息"/>
+                    android:text="试听消息"
+                    android:textColor="#444444" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="#EF4E4C"
-                    android:text="*"/>
+                    android:text="*"
+                    android:textColor="#EF4E4C" />
 
                 <TextView
                     android:id="@+id/auditionInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/list_arrow_normal_small"
-                    android:drawablePadding="20dp"
                     android:layout_marginRight="10dp"
-                    android:hint="请选择"/>
+                    android:drawablePadding="20dp"
+                    android:drawableRight="@drawable/list_arrow_normal_small"
+                    android:hint="请选择" />
             </LinearLayout>
 
-            <!--开课人数改为无上限-->
-            <!--<LinearLayout-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="1px"-->
-                <!--android:background="@android:color/white">-->
-
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:padding="10dp"-->
-                    <!--android:textColor="#444444"-->
-                    <!--android:text="开课人数"/>-->
-
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:textColor="#EF4E4C"-->
-                    <!--android:text="*"/>-->
-
-                <!--<EditText-->
-                    <!--android:id="@+id/openCourseNeedMember"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="match_parent"-->
-                    <!--android:background="@null"-->
-                    <!--android:textSize="@dimen/font_size_normal"-->
-                    <!--android:layout_marginLeft="10dp"-->
-                    <!--android:layout_marginRight="10dp"-->
-                    <!--android:maxLines="1"-->
-                    <!--android:inputType="number"-->
-                    <!--android:hint="请输入开课人数，如6"/>-->
-            <!--</LinearLayout>-->
+            <include layout="@layout/view_divider_line_padding" />
 
             <LinearLayout
                 android:id="@+id/teachMethodLayout"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1px"
-                android:background="@android:color/white">
+                android:layout_height="@dimen/dp_50"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:textColor="#444444"
-                    android:text="授课方式"/>
+                    android:text="授课方式"
+                    android:textColor="#444444" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="#EF4E4C"
-                    android:text="*"/>
+                    android:text="*"
+                    android:textColor="#EF4E4C" />
 
                 <TextView
                     android:id="@+id/teachMethod"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/list_arrow_normal_small"
-                    android:drawablePadding="20dp"
                     android:layout_marginRight="10dp"
-                    android:hint="请选择"/>
+                    android:drawablePadding="20dp"
+                    android:drawableRight="@drawable/list_arrow_normal_small"
+                    android:hint="请选择" />
             </LinearLayout>
+
+            <include layout="@layout/view_divider_line_padding" />
 
             <LinearLayout
                 android:id="@+id/teachAddressLayout"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1px"
-                android:background="@android:color/white">
+                android:layout_height="@dimen/dp_50"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/teachAddressTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:textColor="#444444"
-                    android:text="授课地点"/>
+                    android:text="授课地点"
+                    android:textColor="#444444" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="#EF4E4C"
-                    android:text="*"/>
+                    android:text="*"
+                    android:textColor="#EF4E4C" />
 
                 <TextView
                     android:id="@+id/teachAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/list_arrow_normal_small"
-                    android:drawablePadding="20dp"
                     android:layout_marginRight="10dp"
-                    android:hint="请选择"/>
+                    android:drawablePadding="20dp"
+                    android:drawableRight="@drawable/list_arrow_normal_small"
+                    android:hint="请选择" />
             </LinearLayout>
 
-            <!--授课时间等于课程订单售卖期限，改为无限期-->
-            <!--<LinearLayout-->
-                <!--android:id="@+id/teachTimeLayout"-->
-                <!--android:orientation="horizontal"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="1px"-->
-                <!--android:background="@android:color/white">-->
-
-                <!--<TextView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:padding="10dp"-->
-                    <!--android:textColor="#444444"-->
-                    <!--android:text="授课时间"/>-->
-
-                <!--<TextView-->
-                    <!--android:layout_width="0dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:textColor="#EF4E4C"-->
-                    <!--android:text="*"/>-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/teachTime"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:drawableRight="@drawable/list_arrow_normal_small"-->
-                    <!--android:drawablePadding="20dp"-->
-                    <!--android:layout_marginRight="10dp"-->
-                    <!--android:hint="请选择"/>-->
-            <!--</LinearLayout>-->
+            <include layout="@layout/view_divider_line_padding" />
 
             <LinearLayout
                 android:id="@+id/teachCourseLayout"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1px"
-                android:background="@android:color/white">
+                android:layout_height="@dimen/dp_50"
+                android:background="@android:color/white"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
-                    android:textColor="#444444"
-                    android:text="授课科目"/>
+                    android:text="授课科目"
+                    android:textColor="#444444" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="#EF4E4C"
-                    android:text="*"/>
+                    android:text="*"
+                    android:textColor="#EF4E4C" />
 
                 <TextView
                     android:id="@+id/teachCourse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableRight="@drawable/list_arrow_normal_small"
-                    android:drawablePadding="20dp"
                     android:layout_marginRight="10dp"
-                    android:hint="请选择"/>
+                    android:drawablePadding="20dp"
+                    android:drawableRight="@drawable/list_arrow_normal_small"
+                    android:hint="请选择" />
             </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1px"
-                android:background="@android:color/white"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#444444"
-                    android:text="课程描述"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#EF4E4C"
-                    android:layout_marginLeft="10dp"
-                    android:text="*"/>
-
-                <EditText
-                    android:id="@+id/courseDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:textSize="@dimen/font_size_normal"
-                    android:layout_marginLeft="10dp"
-                    android:lines="3"
-                    android:gravity="top"
-                    android:hint="请输入少于22字符"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:layout_marginTop="1px"
-                android:padding="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#444444"
-                    android:text="课程简介"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="#EF4E4C"
-                    android:layout_marginLeft="10dp"
-                    android:text="*"/>
-
-                <EditText
-                    android:id="@+id/courseProfile"
-                    android:layout_marginLeft="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:lines="8"
-                    android:background="@null"
-                    android:gravity="top"
-                    android:textSize="@dimen/font_size_normal"
-                    android:hint="请输入少于100字符"/>
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/hint"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:text="带“*”号为必填事项"/>
 
             <Button
                 android:id="@+id/commit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/button_bg_red"
+                android:layout_marginBottom="40dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginBottom="40dp"
-                android:textColor="@android:color/white"
+                android:background="@drawable/button_bg_red"
                 android:minHeight="0dp"
-                android:paddingTop="11dp"
                 android:paddingBottom="11dp"
-                android:text="提交"/>
+                android:paddingTop="11dp"
+                android:text="提交"
+                android:textColor="@android:color/white" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

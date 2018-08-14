@@ -41,6 +41,7 @@
 
     <color name="row_bg_pressed_true">#DDDDDD</color>
     <color name="line">#DDDDDD</color>
+    <color name="divider_line">#EEEEEE</color>
     <color name="row_bg_pressed_false">#ffffff</color>
     <color name="button_bg_pressed_true_red">#E15447</color>
     <color name="cb_bg_choice_true">#ececec</color>

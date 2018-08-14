@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical">
 
     <com.fastlib.widget.TitleBar
@@ -15,45 +15,14 @@
         app:rightIcon="@mipmap/icon_add_class"
         app:titleText="课程设置" />
 
-    <LinearLayout
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/classListRecycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@color/background"
+        android:paddingTop="@dimen/dp_10">
 
-        <LinearLayout
-            android:id="@+id/teachClassesLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_8"
-            android:background="@color/white"
-            android:orientation="horizontal"
-            android:padding="10dp">
+    </android.support.v7.widget.RecyclerView>
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="授课科目" />
-
-            <TextView
-                android:id="@+id/teachClasses"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="5dp"
-                android:drawableRight="@drawable/list_arrow_normal"
-                android:gravity="center_vertical"
-                android:maxLength="15"
-                android:maxLines="1"
-                android:textSize="@dimen/font_size_small"
-                tools:text="幼儿美术，儿绘幼儿美术，儿绘幼儿美术，儿绘幼儿美术，儿绘幼儿美术，儿绘幼儿美术，儿绘" />
-        </LinearLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/classListRecycleView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </android.support.v7.widget.RecyclerView>
-
-    </LinearLayout>
 </LinearLayout>

@@ -203,4 +203,6 @@ public interface IMe {
     @GET("admnxzcmr/teacher/ls.json")
     Observable<BaseResponseBean<LessonsManagerBean>> getLessonManager(@Query("id") String id);
 
+    @POST("admnxzcmr/lesson/del.json")
+    Observable<BaseResponseBean<String>> deleteLesson(@Query("id") String id, @Query("teacherTimeId") String teacherTimeId);
 }

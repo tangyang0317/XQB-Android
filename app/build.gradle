@@ -86,46 +86,47 @@ android {
         /*图片选择器*/
 //        compile project(':shareSDK')
         compile project(':fastlib')
-        compile 'com.android.support:multidex:1.0.1' //64k限制依赖
+        implementation 'com.android.support:multidex:1.0.1' //64k限制依赖
 //        compile 'com.sina.weibo.sdk:core:4.1.4:openDefaultRelease@aar' //新浪微博SDK
         /*富文本显示器*/
-        compile 'com.github.bumptech.glide:glide:3.7.0'
-        compile 'com.orhanobut:logger:1.15'
-        compile 'com.squareup.okhttp:okhttp:2.7.5'
-        compile 'com.squareup.okhttp3:logging-interceptor:3.3.1'
-        compile 'com.alibaba:fastjson:1.2.9'
-        compile 'com.youth.banner:banner:1.4.9'
-        compile 'com.android.support:recyclerview-v7:25.3.1'
-        compile 'com.jakewharton:butterknife:8.4.0'
+        implementation 'com.github.bumptech.glide:glide:3.7.0'
+        implementation 'com.orhanobut:logger:1.15'
+        implementation 'com.squareup.okhttp:okhttp:2.7.5'
+        implementation 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+        implementation 'com.alibaba:fastjson:1.2.9'
+        implementation 'com.youth.banner:banner:1.4.9'
+        implementation 'com.android.support:recyclerview-v7:25.3.1'
+        implementation 'com.jakewharton:butterknife:8.4.0'
 
-        compile 'com.squareup.retrofit2:retrofit:2.3.0'
-        compile 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
-        compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-        compile 'io.reactivex:rxandroid:1.1.0'
-        compile 'io.reactivex:rxjava:1.1.0'
-        compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
+        implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+        implementation 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
+        implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+        implementation 'io.reactivex:rxandroid:1.1.0'
+        implementation 'io.reactivex:rxjava:1.1.0'
+        implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
 
-        compile 'com.trello:rxlifecycle-components:0.3.0'
-        compile 'com.romandanylyk:pageindicatorview:0.2.0'
-        compile 'com.gxz.pagerslidingtabstrip:library:1.3.1'
-        compile 'com.github.martin90s:ImagePicker:v1.3.2'
-        compile 'fm.jiecao:jiecaovideoplayer:5.5.4'
-        compile 'com.github.GaoGersy:AutoRecycleView:1.0.4'
-        compile 'com.android.support:support-v4:25.3.1'
-        compile 'com.android.support:cardview-v7:25.3.1'
-        compile 'com.google.zxing:core:3.3.1'
-        compile 'com.android.support.constraint:constraint-layout:1.0.2'
-        compile 'com.zzhoujay.richtext:richtext:2.5.4'
+        implementation 'com.trello:rxlifecycle-components:0.3.0'
+        implementation 'com.romandanylyk:pageindicatorview:0.2.0'
+        implementation 'com.gxz.pagerslidingtabstrip:library:1.3.1'
+        implementation 'com.github.martin90s:ImagePicker:v1.3.2'
+        implementation 'fm.jiecao:jiecaovideoplayer:5.5.4'
+        implementation 'com.github.GaoGersy:AutoRecycleView:1.0.4'
+        implementation 'com.android.support:support-v4:25.3.1'
+        implementation 'com.android.support:cardview-v7:25.3.1'
+        implementation 'com.google.zxing:core:3.3.1'
+        implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+        implementation 'com.zzhoujay.richtext:richtext:2.5.4'
         testCompile 'junit:junit:4.12'
         testCompile "org.robolectric:robolectric:3.5"
         testCompile "org.robolectric:shadows-multidex:3.5"
         annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 //        compile 'com.shuyu:GSYVideoPlayer:2.1.3'
         // 多图选择
-        compile 'com.jph.takephoto:takephoto_library:4.0.3'
-        compile 'com.j256.ormlite:ormlite-android:4.48'
+        implementation 'com.jph.takephoto:takephoto_library:4.0.3'
+        implementation 'com.j256.ormlite:ormlite-android:4.48'
         // 如果需要查看网络请求信息(根据需要，选择依赖)
-        compile 'com.facebook.stetho:stetho:1.3.1'
-        compile 'com.facebook.stetho:stetho-okhttp3:1.3.1'
+        implementation 'com.facebook.stetho:stetho:1.3.1'
+        implementation 'com.facebook.stetho:stetho-okhttp3:1.3.1'
+        implementation 'com.afollestad.material-dialogs:core:0.9.6.0'
     }
 }

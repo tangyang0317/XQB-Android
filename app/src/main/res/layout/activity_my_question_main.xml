@@ -98,7 +98,7 @@
                 app:tabSelectedTextColor="@color/color_main"
                 app:tabTextColor="@color/black" />
 
-            <include layout="@layout/view_divider_line" />
+            <include layout="@layout/view_divider_line_padding" />
 
         </android.support.design.widget.AppBarLayout>
 
