@@ -1,7 +1,6 @@
 package com.zhangju.xingquban.interestclassapp.ui.fragment.me.MyRecrouse;
 
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,12 +10,10 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 
-import com.amap.api.maps.AMap;
-import com.amap.api.maps.CameraUpdateFactory;
-import com.amap.api.maps.MapView;
-import com.amap.api.maps.UiSettings;
-import com.amap.api.maps.model.LatLng;
-import com.amap.api.maps.model.MyLocationStyle;
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.amap.api.services.core.AMapException;
 import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.core.PoiItem;
@@ -31,38 +28,65 @@ import java.util.ArrayList;
 import java.util.List;
 
 //地图poi位置检索
-public class LocationActive extends AppCompatActivity implements AMap.OnMyLocationChangeListener, PoiSearch.OnPoiSearchListener {
-
+public class LocationActive extends AppCompatActivity implements PoiSearch.OnPoiSearchListener {
     EditText editinput;
     RecyclerView recyclerAddress;
-
-    MapView mapview;
-
-    private AMap aMap;
-    private MyLocationStyle myLocationStyle;
     private LocationAdapter locationAdapter;
     private List<LocationBean> mLocationList = new ArrayList<>();//地理位置数据
 
     private String searchCity = "杭州";
-    private String keyWord;//搜索的关键字
+    private String keyWord = "杭州";//搜索的关键字
     private PoiSearch.Query query;// Poi查询条件类
     private PoiSearch poiSearch;// POI搜索
     private PoiResult poiResult; // poi返回的结果
+
+    //声明mlocationClient对象
+    public AMapLocationClient mlocationClient;
+    //声明mLocationOption对象
+    public AMapLocationClientOption mLocationOption = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
-        mapview = (MapView) findViewById(R.id.mapview);
-
-        editinput = (EditText) findViewById(R.id.editinput);
-        recyclerAddress = (RecyclerView) findViewById(R.id.recycler_address);
-        mapview.onCreate(savedInstanceState);
-
-        initMapview();
+        editinput = findViewById(R.id.editinput);
+        recyclerAddress = findViewById(R.id.recycler_address);
+        initLocation();
+        doSearchQuery();
         intiEditSearch();
         setLocationAdapter();
+    }
+
+    /***
+     * 初始化定位
+     */
+    private void initLocation() {
+        mlocationClient = new AMapLocationClient(this);
+        //初始化定位参数
+        mLocationOption = new AMapLocationClientOption();
+        //设置定位监听
+        mlocationClient.setLocationListener(new AMapLocationListener() {
+            @Override
+            public void onLocationChanged(AMapLocation aMapLocation) {
+                if (aMapLocation != null && aMapLocation.getErrorCode() == 0) {
+                    keyWord = aMapLocation.getCity();
+                    searchCity = aMapLocation.getCity();
+                }
+            }
+        });
+        //设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        //设置定位间隔,单位毫秒,默认为2000ms
+        mLocationOption.setInterval(2000);
+        //设置定位参数
+        mlocationClient.setLocationOption(mLocationOption);
+        // 此方法为每隔固定时间会发起一次定位请求，为了减少电量消耗或网络流量消耗，
+        // 注意设置合适的定位时间的间隔（最小间隔支持为1000ms），并且在合适时间调用stopLocation()方法来取消定位请求
+        // 在定位结束后，在合适的生命周期调用onDestroy()方法
+        // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
+        //启动定位
+        mlocationClient.startLocation();
     }
 
     private void setLocationAdapter() {
@@ -76,17 +100,17 @@ public class LocationActive extends AppCompatActivity implements AMap.OnMyLocati
                 String address = locationBean.getAddress();
                 String lat = locationBean.getLat().toString();
                 String lng = locationBean.getLng().toString();
-                Intent intent=new Intent();
-                intent.putExtra("address",address);
-                intent.putExtra("lat",lat);
-                intent.putExtra("lng",lng);
-                intent.putExtra("areaName",locationBean.getAresName());
-                intent.putExtra("areaCode",locationBean.getAreaId());
-                intent.putExtra("provinceName",locationBean.getProvinceName());
-                intent.putExtra("provinceCode",locationBean.getProvinceId());
-                intent.putExtra("cityId",locationBean.getCityCode());
-                intent.putExtra("cityName",locationBean.getCityName());
-                setResult(RESULT_OK,intent);
+                Intent intent = new Intent();
+                intent.putExtra("address", address);
+                intent.putExtra("lat", lat);
+                intent.putExtra("lng", lng);
+                intent.putExtra("areaName", locationBean.getAresName());
+                intent.putExtra("areaCode", locationBean.getAreaId());
+                intent.putExtra("provinceName", locationBean.getProvinceName());
+                intent.putExtra("provinceCode", locationBean.getProvinceId());
+                intent.putExtra("cityId", locationBean.getCityCode());
+                intent.putExtra("cityName", locationBean.getCityName());
+                setResult(RESULT_OK, intent);
                 finish();
             }
         });
@@ -114,34 +138,11 @@ public class LocationActive extends AppCompatActivity implements AMap.OnMyLocati
     }
 
 
-    private void initMapview() {
-        if (aMap == null) {
-            aMap = mapview.getMap();
-            // 如果要设置定位的默认状态，可以在此处进行设置
-            myLocationStyle = new MyLocationStyle();
-            aMap.setMyLocationStyle(myLocationStyle);
-
-            UiSettings uiSettings = aMap.getUiSettings();
-
-
-            aMap.getUiSettings().setMyLocationButtonEnabled(false);// 设置默认定位按钮是否显示
-            aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
-        }
-        //设置SDK 自带定位消息监听
-        aMap.moveCamera(CameraUpdateFactory.zoomTo(14));
-        aMap.setOnMyLocationChangeListener(this);
-
-        aMap.setMyLocationStyle(myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_SHOW));//	// 只定位，不进行其他操作
-
-
-    }
-
     ///搜索执行
     private void doSearchQuery() {
         query = new PoiSearch.Query(keyWord, "", searchCity);// 第一个参数表示搜索字符串，第二个参数表示poi搜索类型，第三个参数表示poi搜索区域（空字符串代表全国）
-        query.setPageSize(10);// 设置每页最多返回多少条poiitem
+        query.setPageSize(20);// 设置每页最多返回多少条poiitem
         query.setPageNum(1);// 设置查第一页
-
         poiSearch = new PoiSearch(this, query);
         poiSearch.setOnPoiSearchListener(this);
         poiSearch.searchPOIAsyn();
@@ -150,40 +151,16 @@ public class LocationActive extends AppCompatActivity implements AMap.OnMyLocati
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //在activity执行onDestroy时执行mMapView.onDestroy()，销毁地图
-        mapview.onDestroy();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        //在activity执行onResume时执行mMapView.onResume ()，重新绘制加载地图
-        mapview.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        //在activity执行onPause时执行mMapView.onPause ()，暂停地图的绘制
-        mapview.onPause();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        //在activity执行onSaveInstanceState时执行mMapView.onSaveInstanceState (outState)，保存地图当前的状态
-        mapview.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onMyLocationChange(Location location) {
-        if (location != null) {
-            Bundle bundle = location.getExtras();
-            searchCity = bundle.getString("City");
-
-            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-            aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));
-        }
     }
 
     @Override
@@ -194,13 +171,12 @@ public class LocationActive extends AppCompatActivity implements AMap.OnMyLocati
                     poiResult = result;
                     // 取得搜索到的poiitems有多少页
                     List<PoiItem> poiItems = poiResult.getPois();// 取得第一页的poiitem数据，页数从数字0开始
-
                     mLocationList.clear();
                     for (int i = 0; i < poiItems.size(); i++) {
-                        PoiItem item=poiItems.get(i);
-                        LatLonPoint latLonPoint =item.getLatLonPoint();
+                        PoiItem item = poiItems.get(i);
+                        LatLonPoint latLonPoint = item.getLatLonPoint();
                         String title = poiItems.get(i).getTitle();
-                        LocationBean bean=new LocationBean(title, latLonPoint.getLatitude(), latLonPoint.getLongitude());
+                        LocationBean bean = new LocationBean(title, latLonPoint.getLatitude(), latLonPoint.getLongitude());
                         bean.setAreaId(item.getAdCode());
                         bean.setAresName(item.getAdName());
                         bean.setCityCode(item.getCityCode());

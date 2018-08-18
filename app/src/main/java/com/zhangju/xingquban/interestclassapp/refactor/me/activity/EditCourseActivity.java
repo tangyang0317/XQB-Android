@@ -36,9 +36,11 @@ import com.zhangju.xingquban.interestclassapp.refactor.me.bean.ResponseUploadIma
 import com.zhangju.xingquban.interestclassapp.refactor.user.UserManager;
 import com.zhangju.xingquban.interestclassapp.ui.activity.find.liveradio.CourseChoiceActivity;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.me.MyRecrouse.LocationActive;
+import com.zhangju.xingquban.refactoring.activity.EditCourseDetailsActivity;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -54,8 +56,6 @@ public class EditCourseActivity extends FastActivity {
     final int REQ_TEACH_COURSE = 4;
     @LocalData(ARG_STR_ID)
     String mId;
-    //    @Bind(R.id.hint)
-//    TextView mHint;
     @Bind(R.id.titleBar)
     TitleBar mTitleBar;
     @Bind(R.id.courseName)
@@ -307,127 +307,40 @@ public class EditCourseActivity extends FastActivity {
             return;
         }
         loading();
+
+        HashMap<String, Object> lessonMap = new HashMap<>();
+        lessonMap.put("areasId", mAreaCode);
+        lessonMap.put("allows", 0);
+        lessonMap.put("cityCode", mCityId);
+        lessonMap.put("provinceId", mProvinceCode);
+        lessonMap.put("areasName", mAreaName);
+        lessonMap.put("cityName", mCityName);
+        lessonMap.put("courses", courseCount);
+        lessonMap.put("customerId", UserManager.getInstance().getUser().id);
+        lessonMap.put("isCantry", mAuditionType);
+        lessonMap.put("lat", mLat);
+        lessonMap.put("lng", mLng);
+        lessonMap.put("methodType", mTeachMethodType);
+        lessonMap.put("name", courseName);
+        lessonMap.put("picture", mCoverPath);
+        lessonMap.put("price", coursePrice);
+        lessonMap.put("provinceName", mProvinceName);
+        lessonMap.put("region", mAddress);
+        lessonMap.put("resId", teacherName);
+        lessonMap.put("teacherTimeId", UserManager.getInstance().getUser().teacherTimeId);
+        lessonMap.put("timelength", courseLength);
+        lessonMap.put("vipPrice", vipPrice);
+        lessonMap.put("lessonDate", "2050-01-01");
+        lessonMap.put("categoriesId", mCourseId);
+        lessonMap.put("catagoryName", mTeachCourse.getText().toString());
         if (!TextUtils.isEmpty(mId) && !"-1".equals(mId)) {
-            Request request = Request.obtain(MeInterface.POST_ADD_COURSE);
-            request.put("areasId", mAreaCode)
-//                    .put("allows", openNeedMember)
-                    .put("allows", 0)
-                    .put("cityCode", mCityId)
-                    .put("provinceId", mProvinceCode)
-                    .put("areasName", mAreaName)
-                    .put("cityName", mCityName)
-                    .put("courses", courseCount)
-                    .put("customerId", UserManager.getInstance().getUser().id)
-                    .put("isCantry", mAuditionType)
-                    .put("lat", mLat)
-                    .put("lng", mLng)
-                    .put("methodType", mTeachMethodType)
-                    .put("name", courseName)
-                    .put("picture", mCoverPath)
-                    .put("price", coursePrice)
-                    .put("provinceName", mProvinceName)
-                    .put("region", mAddress)
-                    .put("resId", teacherName)
-                    .put("teacherTimeId", UserManager.getInstance().getUser().teacherTimeId)
-                    .put("timelength", courseLength)
-                    .put("vipPrice", vipPrice)
-//                    .put("lessonDate",time)
-                    .put("lessonDate", "2050-01-01")
-                    .put("categoriesId", mCourseId)
-                    .put("catagoryName", mTeachCourse.getText().toString())
-                    .put("id", mId);
-            request.setListener(new SimpleListener<Response>() {
-
-                @Override
-                public void onResponseListener(Request r, Response result) {
-                    N.showShort(EditCourseActivity.this, "修改课程成功");
-                    finish();
-                }
-            });
-            net(request);
-        } else {
-            startTask(Task.begin(mCoverPath)
-                    .next(new Action<String, Request>() { //上传封面
-                        @Override
-                        protected Request execute(String param) throws Throwable {
-                            return Request.obtain(CommonInterface.POST_UPLOAD_IMAGE).put("files", new File(param))
-                                    .putHeader("X-CustomToken", UserManager.getInstance().getToken());
-
-                        }
-                    })
-                    .next(new NetAction<Response<List<ResponseUploadImage>>>() {
-
-                        @Override
-                        protected void executeAdapt(Response<List<ResponseUploadImage>> listResponse, Request request) {
-                            if (!listResponse.success || listResponse.data == null || listResponse.data.isEmpty())
-                                stopTask();
-                        }
-                    })
-                    .next(new Action<Response<List<ResponseUploadImage>>, Request>() { //开始调增加课程接口
-
-                        @Override
-                        protected Request execute(Response<List<ResponseUploadImage>> param) throws Throwable {
-                            Request request = Request.obtain(MeInterface.POST_ADD_COURSE);
-                            request.put("areasId", mAreaCode)
-//                                    .put("allows", openNeedMember)
-                                    .put("allows", 0)
-                                    .put("cityCode", mCityId)
-                                    .put("provinceId", mProvinceCode)
-                                    .put("areasName", mAreaName)
-                                    .put("cityName", mCityName)
-                                    .put("courses", courseCount)
-                                    .put("customerId", UserManager.getInstance().getUser().id)
-//                                    .put("descript", courseDescription)
-                                    .put("isCantry", mAuditionType)
-                                    .put("lat", mLat)
-                                    .put("lng", mLng)
-                                    .put("methodType", mTeachMethodType)
-                                    .put("name", courseName)
-                                    .put("picture", param.data.get(0).fileName)
-                                    .put("price", coursePrice)
-                                    .put("provinceName", mProvinceName)
-                                    .put("region", mAddress)
-                                    .put("resId", teacherName)
-//                                    .put("summary", courseProfile)
-                                    .put("teacherTimeId", UserManager.getInstance().getUser().teacherTimeId)
-                                    .put("timelength", courseLength)
-//                                    .put("lessonDate",time)
-                                    .put("lessonDate", "2050-01-01")
-                                    .put("categoriesId", mCourseId)
-                                    .put("catagoryName", mTeachCourse.getText().toString())
-                                    .put("vipPrice", vipPrice);
-                            return request;
-                        }
-                    })
-                    .next(new NetAction<Response>() {
-
-                        @Override
-                        protected void executeAdapt(Response response, Request request) {
-                            if (response.success) {
-                                N.showShort(EditCourseActivity.this, "增加课程成功");
-                                setResult(RESULT_OK);
-                                finish();
-                            }
-                        }
-                    }, ThreadType.MAIN), new NoReturnAction<Throwable>() {
-                @Override
-                public void executeAdapt(Throwable param) {
-                    param.printStackTrace();
-                    dismissLoading();
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            N.showShort(EditCourseActivity.this, "增加课程失败");
-                        }
-                    });
-                }
-            }, new EmptyAction() {
-                @Override
-                protected void executeAdapt() {
-                    dismissLoading();
-                }
-            });
+            lessonMap.put("id", mId);
         }
+
+        Intent intent = new Intent(this, EditCourseDetailsActivity.class);
+        intent.putExtra("lessonMap", lessonMap);
+        startActivity(intent);
+
     }
 
     @Bind(R.id.teachCourseLayout)
@@ -441,32 +354,7 @@ public class EditCourseActivity extends FastActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_OK) return;
-        if (requestCode == REQ_AUDITION_TYPE) {
-            mAuditionType = data.getIntExtra(AuditionTypeActivity.RES_INT_CAN_AUDITION, -1);
-            if (mAuditionType == 0)
-                mAuditionInfo.setText("不可以试听");
-            else mAuditionInfo.setText("可以试听");
-        } else if (requestCode == REQ_TEACH_TYPE) {
-            mTeachMethodType = data.getIntExtra(TeachTypeActivity.RES_INT_TEACH_METHOD_TYPE, -1);
-            switch (mTeachMethodType) {
-                case 1:
-                    mTeachMethod.setText("学生上门");
-                    mTeachAddressTitle.setText("授课地点");
-                    break;
-                case 2:
-                    mTeachMethod.setText("家教上门");
-                    mTeachAddressTitle.setText("所在地点");
-                    break;
-                case 3:
-                    mTeachMethod.setText("协商地点");
-                    mTeachAddressTitle.setText("所在地点");
-                    break;
-                default:
-                    mTeachMethod.setText("请选择");
-                    mTeachAddressTitle.setText("授课地点");
-                    break;
-            }
-        } else if (requestCode == REQ_ADDRESS) {
+        if (requestCode == REQ_ADDRESS) {
             mAddress = data.getStringExtra("address");
             mLat = data.getStringExtra("lat");
             mLng = data.getStringExtra("lng");

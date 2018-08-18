@@ -751,7 +751,10 @@
         <activity
             android:name=".interestclassapp.ui.fragment.home.contest.ContestWebActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".interestclassapp.ui.fragment.home.contest.ContestWebActivity1"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".interestclassapp.ui.fragment.home.contest.ContestWebActivity1"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".refactoring.activity.EditCourseDetailsActivity" />
     </application>
 </manifest>
