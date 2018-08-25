@@ -56,7 +56,7 @@ public class ClassManagerActivity extends FastActivity implements View.OnClickLi
     final int REQ_CHOICE_COURSE = 1;
     final int REQ_ADD_COURSE = 2;
     final int REQ_DISPLAY_COURSE = 3; //显示课程列表可能会有删除事件
-    
+
     @Bind(R.id.titleBar)
     TitleBar mTitleBar;
     @Bind(R.id.classListRecycleView)
@@ -189,7 +189,7 @@ public class ClassManagerActivity extends FastActivity implements View.OnClickLi
     /***
      * 获取类别数据
      */
-    Observer<BaseResponseBean<LessonsManagerBean>> observer = new Observer<BaseResponseBean<LessonsManagerBean>>() {
+    Observer<BaseResponseBean<List<LessonsManagerBean>>> observer = new Observer<BaseResponseBean<List<LessonsManagerBean>>>() {
         @Override
         public void onCompleted() {
         }
@@ -199,7 +199,7 @@ public class ClassManagerActivity extends FastActivity implements View.OnClickLi
         }
 
         @Override
-        public void onNext(BaseResponseBean<LessonsManagerBean> baseResponseBean) {
+        public void onNext(BaseResponseBean<List<LessonsManagerBean>> baseResponseBean) {
             if (baseResponseBean != null && baseResponseBean.getAaData() != null) {
                 List<LessonBean> lessonBeans = baseResponseBean.getAaData().get(0).getLessons();
                 String teachClasses = baseResponseBean.getAaData().get(0).getCatagoryName();

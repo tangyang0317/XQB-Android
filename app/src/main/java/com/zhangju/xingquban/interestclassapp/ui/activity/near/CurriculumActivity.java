@@ -191,9 +191,7 @@ public class CurriculumActivity extends FastActivity implements View.OnClickList
             statusBarHeight1 = getResources().getDimensionPixelSize(resourceId);
         }
 
-
         screenHeight = dm.heightPixels - DpUtil.dip2px(88) - statusBarHeight1;
-
 
         contentViewkemu = LayoutInflater.from(CurriculumActivity.this).inflate(R.layout.pop_down_kemu,
                 null);

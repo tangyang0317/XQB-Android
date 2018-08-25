@@ -69,7 +69,7 @@ public class BusinessListAdapter extends BaseQuickAdapter<NearDataBean.AaDataBea
             tvContent.setVisibility(View.GONE);
         }
         List<NearDataBean.AaDataBean.VideoLessonBean> videoLesson = dataBean.getVideoLesson();
-        if (videoLesson.size() > 0) {
+        if (videoLesson != null && videoLesson.size() > 0) {
             tv_video_show.setVisibility(View.VISIBLE);
         } else {
             tv_video_show.setVisibility(View.GONE);

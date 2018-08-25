@@ -76,7 +76,7 @@ public class LauncherActivity extends AppCompatActivity {
     /***
      * 获取类别数据
      */
-    Observer<BaseResponseBean<CategoryBean>> observer = new Observer<BaseResponseBean<CategoryBean>>() {
+    Observer<BaseResponseBean<List<CategoryBean>>> observer = new Observer<BaseResponseBean<List<CategoryBean>>>() {
         @Override
         public void onCompleted() {
         }
@@ -86,7 +86,7 @@ public class LauncherActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onNext(BaseResponseBean<CategoryBean> baseResponseBean) {
+        public void onNext(BaseResponseBean<List<CategoryBean>> baseResponseBean) {
             if (baseResponseBean != null && baseResponseBean.getAaData() != null) {
                 categoryDao.clearAll();
                 insertData(baseResponseBean.getAaData());

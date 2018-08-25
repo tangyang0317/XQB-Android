@@ -77,13 +77,12 @@ public class OrgProfileActivity extends FastActivity {
             @Override
             public void onChanged() {
                 super.onChanged();
-                if (mAdapter.getItemCount()>0){
+                if (mAdapter.getItemCount() > 0) {
                     mEmpty.setVisibility(View.GONE);
                     mList.setVisibility(View.VISIBLE);
                     mTitleBar.getRightText().setText("发布");
                     mTitleBar.setOnRightClickListener(mPublishProfileListener);
-                }
-                else{
+                } else {
                     mTitleBar.getRightText().setText("编辑");
                     mTitleBar.setOnRightClickListener(mEditListener);
                     mEmpty.setVisibility(View.VISIBLE);
@@ -95,7 +94,7 @@ public class OrgProfileActivity extends FastActivity {
             @Override
             public void onChanged() {
                 super.onChanged();
-                if(mDisplayAdapter.getItemCount()>0){
+                if (mDisplayAdapter.getItemCount() > 0) {
                     mTitleBar.getRightText().setText("编辑");
                     mTitleBar.setOnRightClickListener(mEditListener);
                     mEmpty.setVisibility(View.GONE);
@@ -136,7 +135,7 @@ public class OrgProfileActivity extends FastActivity {
     /**
      * 解析机构简介
      */
-    private void parseOrgProfile(){
+    private void parseOrgProfile() {
         mDisplayAdapter.setData(mOrgProfile);
         mList.setAdapter(mDisplayAdapter);
     }
@@ -144,17 +143,17 @@ public class OrgProfileActivity extends FastActivity {
     /**
      * 转换机构简介为可编辑状态
      */
-    private void convertProfileToEditable(){
-        if(mOrgProfile==null|| TextUtils.isEmpty(mOrgProfile.intro)){
+    private void convertProfileToEditable() {
+        if (mOrgProfile == null || TextUtils.isEmpty(mOrgProfile.intro)) {
             add();
             return;
         }
-        String[] ss=mOrgProfile.intro.split("#");
-        List<PublishActiveFeature> features=new ArrayList<>();
-        for(String s:ss){
-            PublishActiveFeature feature=new PublishActiveFeature();
-            feature.content=s;
-            feature.type=Patterns.WEB_URL.matcher(s).matches()?PublishActiveFeature.TYPE_IMAGE_URL:PublishActiveFeature.TYPE_TEXT;
+        String[] ss = mOrgProfile.intro.split("#");
+        List<PublishActiveFeature> features = new ArrayList<>();
+        for (String s : ss) {
+            PublishActiveFeature feature = new PublishActiveFeature();
+            feature.content = s;
+            feature.type = Patterns.WEB_URL.matcher(s).matches() ? PublishActiveFeature.TYPE_IMAGE_URL : PublishActiveFeature.TYPE_TEXT;
             features.add(feature);
         }
         mAdapter.setData(features);
@@ -164,10 +163,10 @@ public class OrgProfileActivity extends FastActivity {
     /**
      * 调接口发布机构简介
      */
-    private void requestPublishProfile(){
+    private void requestPublishProfile() {
         loading();
         startTask(Task.beginCycle(mAdapter.getData())
-                .filter(new Action<PublishActiveFeature, Boolean>(){  //过滤出是本地图像的item，上传并将返回的地址赋值到PublishActiveFeature.imageUrl中
+                .filter(new Action<PublishActiveFeature, Boolean>() {  //过滤出是本地图像的item，上传并将返回的地址赋值到PublishActiveFeature.imageUrl中
                     @Override
                     protected Boolean execute(PublishActiveFeature param) throws Throwable {
                         return param != null && param.type == PublishActiveFeature.TYPE_IMAGE;
@@ -177,7 +176,7 @@ public class OrgProfileActivity extends FastActivity {
 
                     @Override
                     protected Request execute(PublishActiveFeature param) throws Throwable {
-                        Request request = Request.obtain(CommonInterface.POST_UPLOAD_IMAGE).put("files",new File(param.content));
+                        Request request = Request.obtain(CommonInterface.POST_UPLOAD_IMAGE).put("files", new File(param.content));
                         request.putHeader("X-CustomToken", UserManager.getInstance().getToken());
                         request.setTag(param);
                         return request;
@@ -192,15 +191,15 @@ public class OrgProfileActivity extends FastActivity {
                         else stopTask();
                     }
                 })
-                .again(new Action<List<Response<List<ResponseUploadImage>>>,Request>() { //拼接图像和文本发布新机构简介
+                .again(new Action<List<Response<List<ResponseUploadImage>>>, Request>() { //拼接图像和文本发布新机构简介
 
                     @Override
                     protected Request execute(List<Response<List<ResponseUploadImage>>> param) throws Throwable {
                         Request request = Request.obtain(MeInterface.POST_ORG_CHANGE_PROFILE);
                         request.putHeader("X-CustomToken", UserManager.getInstance().getToken());
-                        if(mOrgProfile!=null) request.put("id",mOrgProfile.id);
+                        if (mOrgProfile != null) request.put("id", mOrgProfile.id);
                         request.put("customerId", UserManager.getInstance().getUser().id);
-                        request.put("intro",concatProfile());
+                        request.put("intro", concatProfile());
                         return request;
                     }
                 })
@@ -209,10 +208,9 @@ public class OrgProfileActivity extends FastActivity {
                     @Override
                     protected void executeAdapt(Response<ResponseOrgProfile> response, Request request) {
                         if (response.success) {
-                            mOrgProfile=response.data;
+                            mOrgProfile = response.data;
                             requestOrgProfile();
-                        }
-                        else N.showShort(OrgProfileActivity.this, "发布机构简介失败");
+                        } else N.showShort(OrgProfileActivity.this, "发布机构简介失败");
                     }
                 }, ThreadType.MAIN), new NoReturnAction<Throwable>() {
             @Override
@@ -255,17 +253,19 @@ public class OrgProfileActivity extends FastActivity {
 
     /**
      * 拼接文本和图片信息发布机构简介
+     *
      * @return 拼接好的机构简介
      */
-    private String concatProfile(){
-        StringBuilder sb=new StringBuilder();
-        List<PublishActiveFeature> list=mAdapter.getData();
-        for(PublishActiveFeature profile:list){
-            if(profile.type==PublishActiveFeature.TYPE_TEXT||profile.type==PublishActiveFeature.TYPE_IMAGE_URL) sb.append(profile.content);
-            else if(profile.type==PublishActiveFeature.TYPE_IMAGE) sb.append(profile.imageUrl);
+    private String concatProfile() {
+        StringBuilder sb = new StringBuilder();
+        List<PublishActiveFeature> list = mAdapter.getData();
+        for (PublishActiveFeature profile : list) {
+            if (profile.type == PublishActiveFeature.TYPE_TEXT || profile.type == PublishActiveFeature.TYPE_IMAGE_URL)
+                sb.append(profile.content);
+            else if (profile.type == PublishActiveFeature.TYPE_IMAGE) sb.append(profile.imageUrl);
             sb.append("#");
         }
-        if(sb.length()>0) sb.deleteCharAt(sb.length()-1);
+        if (sb.length() > 0) sb.deleteCharAt(sb.length() - 1);
         return sb.toString();
     }
 }

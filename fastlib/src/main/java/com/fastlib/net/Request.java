@@ -35,7 +35,6 @@ public class Request{
     private static final int MAX_POOL_SIZE = 20; //池中最大保存数
     private static Request sPool;
     private static int sPoolSize = 0;
-
     private boolean isAcceptGlobalCallback; //是否接受全局回调监听.默认true
     private boolean isReplaceChinese; //是否替换中文url,默认为true
     private boolean hadRootAddress; //是否已加入根地址

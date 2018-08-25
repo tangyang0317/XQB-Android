@@ -49,9 +49,8 @@ import java.util.List;
  */
 @ContentView(R.layout.act_add_course)
 public class EditCourseActivity extends FastActivity {
+
     public static final String ARG_STR_ID = "id"; //可选课程，如果存在则是修改课程否则添加
-    final int REQ_AUDITION_TYPE = 1;
-    final int REQ_TEACH_TYPE = 2;
     final int REQ_ADDRESS = 3;
     final int REQ_TEACH_COURSE = 4;
     @LocalData(ARG_STR_ID)
@@ -83,7 +82,6 @@ public class EditCourseActivity extends FastActivity {
     @Bind(R.id.teachCourse)
     TextView mTeachCourse;
 
-
     int mAuditionType = -1;
     int mTeachMethodType = -1;
     String mAddress;
@@ -97,6 +95,8 @@ public class EditCourseActivity extends FastActivity {
     String mCityId;
     String mCityName;
     String mCourseId;
+    String mDescript;
+    String mSummary;
 
     @Override
     protected void alreadyPrepared() {
@@ -146,6 +146,8 @@ public class EditCourseActivity extends FastActivity {
                     mLat = data.lat;
                     mLng = data.lng;
                     mCoverPath = data.picture;
+                    mDescript = data.descript;
+                    mSummary = data.summary;
                     if ("学生上门".equals(data.method))
                         mTeachMethodType = 1;
                     else if ("家教上门".equals(data.method))
@@ -306,21 +308,19 @@ public class EditCourseActivity extends FastActivity {
             N.showShort(this, "优惠价必须小于原价");
             return;
         }
-        loading();
-
-        HashMap<String, Object> lessonMap = new HashMap<>();
+        HashMap<String, String> lessonMap = new HashMap<>();
         lessonMap.put("areasId", mAreaCode);
-        lessonMap.put("allows", 0);
+        lessonMap.put("allows", String.valueOf(0));
         lessonMap.put("cityCode", mCityId);
         lessonMap.put("provinceId", mProvinceCode);
         lessonMap.put("areasName", mAreaName);
         lessonMap.put("cityName", mCityName);
         lessonMap.put("courses", courseCount);
         lessonMap.put("customerId", UserManager.getInstance().getUser().id);
-        lessonMap.put("isCantry", mAuditionType);
+        lessonMap.put("isCantry", String.valueOf(mAuditionType));
         lessonMap.put("lat", mLat);
         lessonMap.put("lng", mLng);
-        lessonMap.put("methodType", mTeachMethodType);
+        lessonMap.put("methodType", String.valueOf(mTeachMethodType));
         lessonMap.put("name", courseName);
         lessonMap.put("picture", mCoverPath);
         lessonMap.put("price", coursePrice);
@@ -333,10 +333,11 @@ public class EditCourseActivity extends FastActivity {
         lessonMap.put("lessonDate", "2050-01-01");
         lessonMap.put("categoriesId", mCourseId);
         lessonMap.put("catagoryName", mTeachCourse.getText().toString());
+        lessonMap.put("descript", mDescript);
+        lessonMap.put("summary", mSummary);
         if (!TextUtils.isEmpty(mId) && !"-1".equals(mId)) {
             lessonMap.put("id", mId);
         }
-
         Intent intent = new Intent(this, EditCourseDetailsActivity.class);
         intent.putExtra("lessonMap", lessonMap);
         startActivity(intent);

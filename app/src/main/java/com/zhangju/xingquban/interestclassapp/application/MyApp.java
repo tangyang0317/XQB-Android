@@ -66,7 +66,7 @@ import cn.jpush.android.api.JPushInterface;
 public class MyApp extends Application {
     public final static int DB_VERSION = 5;
     public static final String URL = "http://my.xqban.com"; //正式服务器
-    //    public static final String URL        = "http://test.xqban.com"; //测试服务器
+    //    public static final String URL = "http://test.xqban.com"; //测试服务器
     //    public static final String URL="http://myqqy.vicp.io/std"; //本地测试服务+器
     public static MyApp instance;
     public final static String TOKEN = "mToken";

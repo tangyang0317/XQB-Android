@@ -14,7 +14,6 @@ import com.zhangju.xingquban.R;
 import com.zhangju.xingquban.interestclassapp.bean.NearDataBean;
 
 
-
 /**
  * Created by Administrator on 2017/7/2.
  */
@@ -42,7 +41,7 @@ public class NearRecylerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.mOnItemClickListener = listener;
     }
 
-    public NearRecylerAdapter(Context context,  NearDataBean mdata) {
+    public NearRecylerAdapter(Context context, NearDataBean mdata) {
         this.mContext = context;
         this.data = mdata;
     }
@@ -51,11 +50,12 @@ public class NearRecylerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.mContext = context;
 
     }
-    public NearDataBean getdata(){
+
+    public NearDataBean getdata() {
         return this.data;
     }
 
-    public void addData(NearDataBean mdata){
+    public void addData(NearDataBean mdata) {
 
         this.data = mdata;
         notifyDataSetChanged();
@@ -78,7 +78,7 @@ public class NearRecylerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 .placeholder(R.drawable.rec_seize_bitmao)
                 .error(R.drawable.rec_seize_bitmao)
                 .into(holder1.home_recyclerview_item_image);
-        if(data.getAaData().get(position).getDegreeId().equals("1")) //1老师 2机构
+        if (data.getAaData().get(position).getDegreeId().equals("1")) //1老师 2机构
             holder1.home_recyclerview_item_title.setText(data.getAaData().get(position).getUsername());
         else
             holder1.home_recyclerview_item_title.setText(data.getAaData().get(position).getName());
@@ -89,19 +89,16 @@ public class NearRecylerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         } else {
             holder1.zhizhirenzheng.setVisibility(View.GONE);
         }
-        if (data.getAaData().get(position).getMinVipPrice()==0.0){
+        if (data.getAaData().get(position).getMinVipPrice() == 0.0) {
             holder1.home_recyclerview_item_money.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             holder1.home_recyclerview_item_money.setVisibility(View.VISIBLE);
-            holder1.home_recyclerview_item_money.setText("￥"+data.getAaData().get(position).getMinVipPrice() + "");
+            holder1.home_recyclerview_item_money.setText("￥" + data.getAaData().get(position).getMinVipPrice() + "");
         }
 
-        if (data.getAaData().get(position).getCommentCount()<=0){
+        if (data.getAaData().get(position).getCommentCount() <= 0) {
             holder1.near_number.setVisibility(View.GONE);
-        }
-
-        else{
+        } else {
             holder1.near_number.setVisibility(View.VISIBLE);
             holder1.near_number.setText(data.getAaData().get(position).getCommentCount() + "条");
         }
@@ -111,21 +108,22 @@ public class NearRecylerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         int range = data.getAaData().get(position).getRange();
         double dis = 0;
         dis = Math.round(range / 100d) / 10d;
-        if (range<1000)
+        if (range < 1000)
             holder1.home_recyclerview_item_cityNumber.setText(range + "m");
         else
-          holder1.home_recyclerview_item_cityNumber.setText(dis + "km");
+            holder1.home_recyclerview_item_cityNumber.setText(dis + "km");
 
-        if (data.getAaData().get(position).getVideoLesson().size() <= 0) {
-            holder1.home_recyclerview_linlayout_shipin.setVisibility(View.GONE);
-        } else {
+        if (data.getAaData().get(position).getVideoLesson() != null && data.getAaData().get(position).getVideoLesson().size() > 0) {
             holder1.home_recyclerview_linlayout_shipin.setVisibility(View.VISIBLE);
-        }
-        if (data.getAaData().get(position).getLessons().size() <=0) {
-            holder1.home_recyclerview_linlayout_kecheng.setVisibility(View.GONE);
         } else {
+            holder1.home_recyclerview_linlayout_shipin.setVisibility(View.GONE);
+        }
+
+        if (data.getAaData().get(position).getLessons() != null && data.getAaData().get(position).getLessons().size() > 0) {
             holder1.home_recyclerview_linlayout_kecheng.setVisibility(View.VISIBLE);
             holder1.home_recyclerview_item_course.setText(data.getAaData().get(position).getLessons().get(0).getName());
+        } else {
+            holder1.home_recyclerview_linlayout_kecheng.setVisibility(View.GONE);
         }
 
         holder.itemView.setTag(position);
@@ -180,14 +178,14 @@ public class NearRecylerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public int getItemCount() {
         try {
             return data.getAaData().size();
-        }catch (Exception e){
+        } catch (Exception e) {
             return 0;
         }
 
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        private ImageView home_recyclerview_item_image, start1, start2, start3, start4, start5,zhizhirenzheng;
+        private ImageView home_recyclerview_item_image, start1, start2, start3, start4, start5, zhizhirenzheng;
         private TextView home_recyclerview_item_title;
         private TextView home_recyclerview_item_course;
         private TextView home_recyclerview_item_coursename;
@@ -206,7 +204,7 @@ public class NearRecylerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             near_number = (TextView) itemView.findViewById(R.id.near_number);
             home_recyclerview_item_city = (TextView) itemView.findViewById(R.id.home_recyclerview_item_city);
             home_recyclerview_item_cityNumber = (TextView) itemView.findViewById(R.id.home_recyclerview_item_cityNumber);
-            zhizhirenzheng= (ImageView) itemView.findViewById(R.id.home_recyclerview_item_huiyuan);
+            zhizhirenzheng = (ImageView) itemView.findViewById(R.id.home_recyclerview_item_huiyuan);
             start1 = (ImageView) itemView.findViewById(R.id.start1);
             start2 = (ImageView) itemView.findViewById(R.id.start2);
             start3 = (ImageView) itemView.findViewById(R.id.start3);

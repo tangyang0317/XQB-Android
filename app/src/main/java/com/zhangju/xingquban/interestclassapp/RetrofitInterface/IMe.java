@@ -15,6 +15,8 @@ import com.zhangju.xingquban.refactoring.entity.BaseResponseBean;
 import com.zhangju.xingquban.refactoring.entity.LessonsManagerBean;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.http.GET;
@@ -22,6 +24,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import rx.Observable;
+import rx.Observer;
 
 /**
  * Created by zsl on 2017/7/18.
@@ -201,7 +204,10 @@ public interface IMe {
     );
 
     @GET("admnxzcmr/teacher/ls.json")
-    Observable<BaseResponseBean<LessonsManagerBean>> getLessonManager(@Query("id") String id);
+    Observable<BaseResponseBean<List<LessonsManagerBean>>> getLessonManager(@Query("id") String id);
+
+    @POST("admnxzcmr/lesson/add.json")
+    Observable<BaseResponseBean<Object>> addOrModifyLesson(@QueryMap HashMap<String, String> param);
 
     @POST("admnxzcmr/lesson/del.json")
     Observable<BaseResponseBean<String>> deleteLesson(@Query("id") String id, @Query("teacherTimeId") String teacherTimeId);

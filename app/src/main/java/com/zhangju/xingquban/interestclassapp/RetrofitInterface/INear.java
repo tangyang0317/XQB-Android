@@ -9,6 +9,7 @@ import com.zhangju.xingquban.interestclassapp.bean.near.NearDistrictBean;
 import com.zhangju.xingquban.refactoring.entity.BaseResponseBean;
 import com.zhangju.xingquban.refactoring.entity.CategoryBean;
 
+import java.util.List;
 import java.util.Map;
 
 import retrofit2.http.Field;
@@ -116,7 +117,7 @@ public interface INear {
 
     /*获取全部科目数据*/
     @POST("admnxzcmr/catagories/ls.json")
-    Observable<BaseResponseBean<CategoryBean>> getCategory();
+    Observable<BaseResponseBean<List<CategoryBean>>> getCategory();
 
 
     //附近科目列表'右'数据

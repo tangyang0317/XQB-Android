@@ -38,49 +38,48 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class HomeDataSjkcXq
-        extends BaseActivity {
+public class HomeDataSjkcXq extends BaseActivity {
 
 
-    @BindView(R.id.home_data_sjkcXq_head)
-    PublicHead   homeDataSjkcXqHead;
+    @BindView(R.id.home_data_msfcXq_Head)
+    PublicHead homeDataSjkcXqHead;
     @BindView(R.id.img_kcbanner)
-    ImageView    imgKcbanner;
+    ImageView imgKcbanner;
     @BindView(R.id.tv_kcname)
-    TextView     tvKcname;
+    TextView tvKcname;
     @BindView(R.id.home_data_sjkcXq_sellnumber)
-    TextView     homeDataSjkcXqSellnumber;
+    TextView homeDataSjkcXqSellnumber;
     @BindView(R.id.tv_kcsubname)
-    TextView     tvKcsubname;
+    TextView tvKcsubname;
     @BindView(R.id.isCantry_Boolean)
-    TextView     isCantryBoolean;
+    TextView isCantryBoolean;
     @BindView(R.id.methodType_scfs)
-    TextView     methodTypeScfs;
+    TextView methodTypeScfs;
     @BindView(R.id.tv_scdd)
-    TextView     tvScdd;
+    TextView tvScdd;
     @BindView(R.id.tv_kcjj)
-    TextView     tvKcjj;
+    TextView tvKcjj;
     @BindView(R.id.tv_less_comment_num)
-    TextView     tvLessCommentNum;
+    TextView tvLessCommentNum;
     @BindView(R.id.home_data_sjkcXq_recycler)
     RecyclerView homeDataSjkcXqRecycler;
     @BindView(R.id.tv_lessprice)
-    TextView     tvLessprice;
+    TextView tvLessprice;
     @BindView(R.id.tv_less_vip_price)
-    TextView     tvLessVipPrice;
+    TextView tvLessVipPrice;
     @BindView(R.id.seek_choiceness_xq_button)
-    Button       seekChoicenessXqButton;
+    Button seekChoicenessXqButton;
     @BindView(R.id.courseCount)
-    TextView     courseCount;
+    TextView courseCount;
     @BindView(R.id.courseLength)
-    TextView     courseLength;
+    TextView courseLength;
 
     private LessonXqBean lessonXqBean;
     private List<MeCommentBean> list = new ArrayList();
-    private MeCommentdapter                            meCommentdapter;
+    private MeCommentdapter meCommentdapter;
     private HomeDataTeacherBean.AaDataBean.LessonsBean lessonsBea;
     private String SHARE_ICON_URL = "http://m.xqban.com/rs/app/images/down_logo.png";
-    private String        mId;
+    private String mId;
     private MyShareDialog mMyShareDialog;
 
     @Override

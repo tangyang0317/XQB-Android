@@ -421,7 +421,7 @@
                 android:minHeight="0dp"
                 android:paddingBottom="11dp"
                 android:paddingTop="11dp"
-                android:text="提交"
+                android:text="下一步"
                 android:textColor="@android:color/white" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

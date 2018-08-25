@@ -25,7 +25,7 @@ public class BaseResponseBean<T> {
     private Object cId;
     private Object cname;
     private String time;
-    private List<T> aaData;
+    private T aaData;
 
 
     public int getsEcho() {
@@ -132,11 +132,11 @@ public class BaseResponseBean<T> {
         this.time = time;
     }
 
-    public List<T> getAaData() {
+    public T getAaData() {
         return aaData;
     }
 
-    public void setAaData(List<T> aaData) {
+    public void setAaData(T aaData) {
         this.aaData = aaData;
     }
 }

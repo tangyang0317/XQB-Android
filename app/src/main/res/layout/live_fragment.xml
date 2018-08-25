@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/white"
-              android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,12 +28,12 @@
                 android:padding="@dimen/dp_10"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/nav_btn_back_red_11_20"
-                android:visibility="invisible"/>
+                android:visibility="invisible" />
 
             <View
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
         </LinearLayout>
 
 
@@ -42,22 +42,22 @@
             android:layout_height="wrap_content"
             android:text="直播课程"
             android:textColor="@color/black"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
 
     </LinearLayout>
 
-    <include layout="@layout/layout_banner"/>
+    <include layout="@layout/layout_banner" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/devide_line_color"/>
+        android:background="@color/devide_line_color" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -72,13 +72,13 @@
             app:tabIndicatorColor="@color/color_main"
             app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/color_main"
-            app:tabTextColor="@color/color_tab_text"/>
+            app:tabTextColor="@color/color_tab_text" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/live_viewpage"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentTop="true"/>
+            android:layout_alignParentTop="true" />
 
     </LinearLayout>
 

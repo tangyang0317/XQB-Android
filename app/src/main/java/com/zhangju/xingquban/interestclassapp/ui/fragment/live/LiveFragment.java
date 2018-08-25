@@ -51,26 +51,26 @@ public class LiveFragment
     //    private LiveTabcAlligraphy liveTabcAlligraphy;
 
 
-    private final String TAG                       = "LiveFragment直播模块列表";
+    private final String TAG = "LiveFragment直播模块列表";
     /**
      * 6.0权限处理
      **/
-    private final int    WRITE_PERMISSION_REQ_CODE = 100;
+    private final int WRITE_PERMISSION_REQ_CODE = 100;
     @BindView(R.id.live_main_back)
     ImageView liveMainBack;
     @BindView(R.id.home_banner)
-    Banner    mHomeBanner;
+    Banner mHomeBanner;
     private ImageView back;
     private TabLayout tabLayout;
 
-    private String                  url;
-    private ViewPager               viewPager;
-    private LiveTabLayoutAdapter    liveTabLayoutAdapter;
-    private List<Fragment>          fragmentList;
-    private List<String>            tabstrList;
-    private LiveTabAttention        liveTabAttention;
-    private LiveTabNewEst           liveTabNewEst;
-    private LiveTabHot              liveTabHot;
+    private String url;
+    private ViewPager viewPager;
+    private LiveTabLayoutAdapter liveTabLayoutAdapter;
+    private List<Fragment> fragmentList;
+    private List<String> tabstrList;
+    private LiveTabAttention liveTabAttention;
+    private LiveTabNewEst liveTabNewEst;
+    private LiveTabHot liveTabHot;
     private SwitchBroadCastReceiver receiver;
     private BannerHelper mBannerHelper;
 

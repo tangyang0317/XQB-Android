@@ -85,12 +85,12 @@ public class NearByListAdapter extends BaseQuickAdapter<NearDataBean.AaDataBean,
         else
             home_recyclerview_item_cityNumber.setText(dis + "km");
 
-        if (item.getVideoLesson().size() <= 0) {
+        if (item.getVideoLesson() == null || item.getVideoLesson().size() <= 0) {
             home_recyclerview_linlayout_shipin.setVisibility(View.GONE);
         } else {
             home_recyclerview_linlayout_shipin.setVisibility(View.VISIBLE);
         }
-        if (item.getLessons().size() <= 0) {
+        if (item.getLessons() == null || item.getLessons().size() <= 0) {
             home_recyclerview_linlayout_kecheng.setVisibility(View.GONE);
         } else {
             home_recyclerview_linlayout_kecheng.setVisibility(View.VISIBLE);
