@@ -1,7 +1,9 @@
 package com.zhangju.xingquban.interestclassapp.refactor.me.activity;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -51,6 +53,7 @@ import java.util.List;
 public class EditCourseActivity extends FastActivity {
 
     public static final String ARG_STR_ID = "id"; //可选课程，如果存在则是修改课程否则添加
+    public static Activity instance;
     final int REQ_ADDRESS = 3;
     final int REQ_TEACH_COURSE = 4;
     @LocalData(ARG_STR_ID)
@@ -99,6 +102,12 @@ public class EditCourseActivity extends FastActivity {
     String mSummary;
 
     @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        instance = this;
+    }
+
+    @Override
     protected void alreadyPrepared() {
         mTitleBar.setOnLeftClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +128,6 @@ public class EditCourseActivity extends FastActivity {
         Request request = Request.obtain(MeInterface.POST_COURSE_DETAIL);
         request.put("id", mId);
         request.setListener(new SimpleListener<Response<List<ResponseCourse>>>() {
-
             @Override
             public void onResponseListener(Request r, Response<List<ResponseCourse>> result) {
                 if (result.success) {

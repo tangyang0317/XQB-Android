@@ -494,5 +494,6 @@
 
     <string name="previous">Go to previous</string>
     <string name="next">Go to next</string>
+    <string name="fling_scroll_behavior">com.zhangju.xingquban.refactoring.view.FlingBehavior</string>
 
 </resources>

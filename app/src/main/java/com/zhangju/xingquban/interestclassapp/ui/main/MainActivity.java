@@ -1,6 +1,7 @@
 package com.zhangju.xingquban.interestclassapp.ui.main;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -9,18 +10,22 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.alibaba.fastjson.JSONObject;
+import com.imnjh.imagepicker.util.LogUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
+import com.orhanobut.logger.Logger;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.zhangju.xingquban.BuildConfig;
 import com.zhangju.xingquban.R;
 import com.zhangju.xingquban.interestclassapp.application.MyApp;
@@ -44,6 +49,7 @@ import com.zhangju.xingquban.interestclassapp.util.SpUtil;
 import com.zhangju.xingquban.interestclassapp.util.ToastUtil;
 import com.zhangju.xingquban.interestclassapp.util.UrlUtils;
 import com.zhangju.xingquban.refactoring.IndexFragment;
+import com.zhangju.xingquban.refactoring.observer.XObserver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +59,9 @@ import java.util.Set;
 import butterknife.BindView;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import rx.functions.Action1;
 
 public class MainActivity extends BaseActivity {
     public static final String ARG_INT_JUMP_PAGE = "jumpPage";
@@ -167,61 +176,45 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //        ButterKnife.bind(this);
-
-        /**
-         * 6.0动态权限这块先放着不调用
-         */
-        /*if (PackageManager.PERMISSION_GRANTED == ActivityCompat.checkSelfPermission(MainActivity.this, Manifest
-                .permission.ACCESS_COARSE_LOCATION) && PackageManager.PERMISSION_GRANTED == ActivityCompat
-                .checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-        } else {
-            checkPublishPermission();
-        }*/
+        requestPermission();
     }
+
+    /**
+     * 申请权限
+     */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public void requestPermission() {
+        new RxPermissions(MainActivity.this)
+                .request(Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.CALL_PHONE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_PHONE_STATE)//多个权限用","隔开
+                .subscribe(new XObserver<Boolean>() {
+                    @Override
+                    protected void success(Boolean aBoolean) {
+                        if (aBoolean) {
+                            Logger.d("权限获取成功");
+                        }
+                    }
+
+                    @Override
+                    protected void error(String error) {
+                        Logger.d("权限获取失败，部分功能将无法使用");
+                        ToastUtil.showToast("");
+                    }
+                });
+
+    }
+
 
     @Override
     public int getLayout() {
         return R.layout.activity_main;
     }
 
-    //    public void setCityText() {
-    //        Subscription suscription = NetWork.getHomeCityId().getHomeCityId(LocationManager.getInstance().getLocation()
-    // .locationCity)
-    //                .subscribeOn(Schedulers.io())
-    //                .observeOn(AndroidSchedulers.mainThread())
-    //                .subscribe(observerCityId);
-    //    }
-
-    private boolean checkPublishPermission() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            List<String> permissions = new ArrayList<>();
-            if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(MainActivity.this, Manifest
-                    .permission.WRITE_EXTERNAL_STORAGE)) {
-                permissions.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-            }
-            if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(MainActivity.this, Manifest
-                    .permission.ACCESS_FINE_LOCATION)) {
-                permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
-            }
-            if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(MainActivity.this, Manifest
-                    .permission.ACCESS_COARSE_LOCATION)) {
-                permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
-            }
-            if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(MainActivity.this, Manifest
-                    .permission.CAMERA)) {
-                permissions.add(Manifest.permission.CAMERA);
-            }
-            if (permissions.size() != 0) {
-                ActivityCompat.requestPermissions(MainActivity.this,
-                        (String[]) permissions.toArray(new String[0]),
-                        WRITE_PERMISSION_REQ_CODE);
-                return false;
-            }
-        }
-        return true;
-    }
 
     /**
      * 获取本地版本号

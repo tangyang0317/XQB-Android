@@ -24,6 +24,7 @@ import com.zhangju.xingquban.R;
 import com.zhangju.xingquban.interestclassapp.RetrofitInterface.NetWork;
 import com.zhangju.xingquban.interestclassapp.refactor.common.bean.CommonInterface;
 import com.zhangju.xingquban.interestclassapp.refactor.common.bean.Response;
+import com.zhangju.xingquban.interestclassapp.refactor.me.activity.EditCourseActivity;
 import com.zhangju.xingquban.interestclassapp.refactor.me.activity.OrgProfileActivity;
 import com.zhangju.xingquban.interestclassapp.refactor.me.activity.publish_active.AddFeatureTextActivity;
 import com.zhangju.xingquban.interestclassapp.refactor.me.adapter.OrgProfileDisplayAdapter;
@@ -213,6 +214,7 @@ public class EditCourseDetailsActivity extends FastActivity {
                     @Override
                     protected void executeAdapt(Response<ResponseOrgProfile> response, Request request) {
                         if (response.success) {
+                            EditCourseActivity.instance.finish();
                             EditCourseDetailsActivity.this.finish();
                         } else {
                             N.showShort(EditCourseDetailsActivity.this, "课程发布失败");
