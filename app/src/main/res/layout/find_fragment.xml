@@ -7,7 +7,6 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="@dimen/title"
         android:layout_alignParentTop="true"
@@ -45,7 +44,6 @@
                     android:src="@mipmap/find_ziyuan" />
 
                 <TextView
-                    android:id="@+id/text1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -55,7 +53,6 @@
                     android:textSize="16sp" />
 
                 <ImageView
-                    android:id="@+id/arrows1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -104,7 +101,6 @@
                         android:src="@mipmap/find_zhaolaoshi" />
 
                     <ImageView
-                        android:id="@+id/arrows2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -126,7 +122,6 @@
                     android:background="@drawable/row_bg">
 
                     <TextView
-                        android:id="@+id/text3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -145,7 +140,6 @@
                         android:src="@mipmap/find_zhaojigou" />
 
                     <ImageView
-                        android:id="@+id/arrows3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -168,7 +162,6 @@
                     android:visibility="visible">
 
                     <TextView
-                        android:id="@+id/text5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -187,7 +180,6 @@
                         android:src="@mipmap/find_zhaozhibo" />
 
                     <ImageView
-                        android:id="@+id/arrows5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -222,7 +214,6 @@
                         android:src="@mipmap/find_wodewenda" />
 
                     <TextView
-                        android:id="@+id/text4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -232,7 +223,6 @@
                         android:textSize="16sp" />
 
                     <ImageView
-                        android:id="@+id/arrows4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -266,7 +256,6 @@
                         android:src="@drawable/find_zhaohuodong" />
 
                     <TextView
-                        android:id="@+id/text7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -276,7 +265,6 @@
                         android:textSize="16sp" />
 
                     <ImageView
-                        android:id="@+id/arrows7"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -318,7 +306,6 @@
                         android:src="@mipmap/find_xinxipingtai" />
 
                     <TextView
-                        android:id="@+id/tv_information"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -329,7 +316,6 @@
                     ·
 
                     <ImageView
-                        android:id="@+id/iv_goto_information"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"

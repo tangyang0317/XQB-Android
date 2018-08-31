@@ -46,7 +46,6 @@
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/click_to_load_more_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone">

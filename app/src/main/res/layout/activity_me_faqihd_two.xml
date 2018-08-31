@@ -201,7 +201,6 @@
             </RelativeLayout>
 
             <ImageView
-                android:id="@+id/me_jg_jgjjTj_tj1"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
                 android:src="@mipmap/me_jg_jgjj_tj" />
@@ -287,7 +286,6 @@
             </RelativeLayout>
 
             <ImageView
-                android:id="@+id/me_jg_jgjjTj_tj2"
                 android:layout_width="@dimen/dp_30"
                 android:layout_height="@dimen/dp_30"
                 android:src="@mipmap/me_jg_jgjj_tj" />

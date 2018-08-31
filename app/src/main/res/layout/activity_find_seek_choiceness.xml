@@ -205,13 +205,11 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:id="@+id/seek_choiceness_imageView1"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_180"
                         android:src="@drawable/seek_choicenss_image" />
 
                     <TextView
-                        android:id="@+id/seek_choiceness_lable1"
                         android:layout_width="@dimen/dp_60"
                         android:layout_height="@dimen/dp_25"
                         android:layout_marginLeft="@dimen/dp_10"
@@ -240,7 +238,6 @@
                     android:layout_height="@dimen/dp_40">
 
                     <TextView
-                        android:id="@+id/seek_choiceness_title1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -271,7 +268,6 @@
                         android:visibility="visible" />
 
                     <TextView
-                        android:id="@+id/seek_choiceness_mf1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -286,7 +282,6 @@
                 </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/seek_choiceness_xqb_qzjb1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_10"
@@ -305,7 +300,6 @@
                         android:src="@mipmap/seek_sl_time" />
 
                     <TextView
-                        android:id="@+id/seek_choiceness_ks_time1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_10"
@@ -328,7 +322,6 @@
                         android:visibility="gone" />
 
                     <TextView
-                        android:id="@+id/seek_choiceness_city1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_10"
@@ -342,7 +335,6 @@
                         android:src="@mipmap/seek_sl_jzsj" />
 
                     <TextView
-                        android:id="@+id/seek_choiceness_jz_time1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_10"
@@ -374,13 +366,11 @@
                     android:layout_height="wrap_content">
 
                     <ImageView
-                        android:id="@+id/seek_choiceness_imageView2"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/dp_180"
                         android:src="@drawable/seek_choicenss_image" />
 
                     <TextView
-                        android:id="@+id/seek_choiceness_lable2"
                         android:layout_width="@dimen/dp_60"
                         android:layout_height="@dimen/dp_25"
                         android:layout_marginLeft="@dimen/dp_10"
@@ -409,7 +399,6 @@
                     android:layout_height="@dimen/dp_40">
 
                     <TextView
-                        android:id="@+id/seek_choiceness_title2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -440,7 +429,6 @@
                         android:visibility="gone" />
 
                     <TextView
-                        android:id="@+id/seek_choiceness_mf2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -455,7 +443,6 @@
                 </RelativeLayout>
 
                 <TextView
-                    android:id="@+id/seek_choiceness_xqb_qzjb2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_10"
@@ -474,7 +461,6 @@
                         android:src="@mipmap/seek_sl_time" />
 
                     <TextView
-                        android:id="@+id/seek_choiceness_ks_time2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_10"
@@ -497,7 +483,6 @@
                         android:visibility="gone" />
 
                     <TextView
-                        android:id="@+id/seek_choiceness_city2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_10"
@@ -511,7 +496,6 @@
                         android:src="@mipmap/seek_sl_jzsj" />
 
                     <TextView
-                        android:id="@+id/seek_choiceness_jz_time2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_10"

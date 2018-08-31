@@ -108,7 +108,6 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
     LinearLayout homeHeadYouxiulaoshi;
     LinearLayout homeHeadYouxiujigou;
     LinearLayout homeHeadJingpinkecheng;
-    RecyclerView homeRecyclerview;
     ViewPager homeItemCp;
     //圆点指示器
     private LinearLayout group;
@@ -149,7 +148,6 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
         loadBottomData(currPage);
         loadBanner();
         loadCategoryData();
-
         /***初始化定位***/
         initLocation();
 
@@ -418,7 +416,6 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
         homeHeadYouxiujigou = view.findViewById(R.id.home_head_youxiujigou);
         homeHeadJingpinkecheng = view.findViewById(R.id.home_head_jingpinkecheng);
         group = view.findViewById(R.id.points);
-        homeRecyclerview = view.findViewById(R.id.home_recyclerview);
         homeItemCp = view.findViewById(R.id.home_item_cp);
         businessListAdapter.addHeaderView(view);
         indexRV.setAdapter(businessListAdapter);
@@ -521,7 +518,6 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
 
             //优秀机构
             case R.id.home_head_youxiulaoshi:
-
                 intent = new Intent(getActivity(), DistrictActivity_Copy.class);
                 bundle = new Bundle();
                 bundle.putInt("degreeid", 2);

@@ -8,6 +8,7 @@ import android.view.View;
 import com.zhangju.xingquban.R;
 import com.zhangju.xingquban.interestclassapp.base.BaseFragment;
 import com.zhangju.xingquban.interestclassapp.bean.near.CurriculumBean;
+import com.zhangju.xingquban.interestclassapp.bean.near.LessonXqBean;
 import com.zhangju.xingquban.interestclassapp.refactor.me.adapter.OrgProfileDisplayAdapter;
 import com.zhangju.xingquban.interestclassapp.refactor.me.bean.ResponseOrgProfile;
 
@@ -24,7 +25,7 @@ public class LessonDetailsFragment extends BaseFragment {
     private RecyclerView coreTextRecycleView;
     OrgProfileDisplayAdapter mDisplayAdapter;
 
-    public static Fragment getInstance(CurriculumBean.AaDataBean aaDataBean) {
+    public static Fragment getInstance(LessonXqBean.AaDataBean aaDataBean) {
         LessonDetailsFragment lessonAttrFragment = new LessonDetailsFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("lesson", aaDataBean);
@@ -32,9 +33,9 @@ public class LessonDetailsFragment extends BaseFragment {
         return lessonAttrFragment;
     }
 
-    private CurriculumBean.AaDataBean getLessonBean() {
+    private LessonXqBean.AaDataBean getLessonBean() {
         Bundle bundle = getArguments();
-        CurriculumBean.AaDataBean lesson = (CurriculumBean.AaDataBean) bundle.getSerializable("lesson");
+        LessonXqBean.AaDataBean lesson = (LessonXqBean.AaDataBean) bundle.getSerializable("lesson");
         return lesson;
     }
 

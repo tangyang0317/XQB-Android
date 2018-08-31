@@ -1,6 +1,7 @@
 package com.zhangju.xingquban.interestclassapp.ui.fragment.home.sjkc;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -13,10 +14,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.fastlib.net.Request;
+import com.fastlib.net.SimpleListener;
 import com.zhangju.xingquban.R;
+import com.zhangju.xingquban.interestclassapp.RetrofitInterface.INear;
 import com.zhangju.xingquban.interestclassapp.base.BaseActivity;
 import com.zhangju.xingquban.interestclassapp.bean.near.CurriculumBean;
+import com.zhangju.xingquban.interestclassapp.bean.near.LessonXqBean;
 import com.zhangju.xingquban.interestclassapp.refactor.common.utils.ThirdPartyUtils;
+import com.zhangju.xingquban.interestclassapp.refactor.location.LocationManager;
 import com.zhangju.xingquban.interestclassapp.ui.activity.near.CurriculumOrderActivity;
 import com.zhangju.xingquban.interestclassapp.view.dialog.ShareDialog;
 import com.zhangju.xingquban.refactoring.adapter.LessonDetailsPagerAdapter;
@@ -34,9 +40,23 @@ public class CurriculumXqActivity extends BaseActivity {
     private Button signUpBtn;
     private TabLayout lessonDetailsTablayout;
     private ViewPager lessonDetailsViewPager;
-    private CurriculumBean.AaDataBean lessonsBea;
     private ShareDialog shareDialog;
     private String SHARE_ICON_URL = "http://m.xqban.com/rs/app/images/down_logo.png";
+    private LessonXqBean.AaDataBean lessonsBea = null;
+
+
+    public static void lanuchActivity(Activity activity, String lessonId) {
+        Intent intent = new Intent(activity, CurriculumXqActivity.class);
+        intent.putExtra("lessonId", lessonId);
+        activity.startActivity(intent);
+    }
+
+    private String getlessonId() {
+        if (getIntent() != null) {
+            return getIntent().getStringExtra("lessonId");
+        }
+        return "";
+    }
 
     @Override
     public int getLayout() {
@@ -45,7 +65,6 @@ public class CurriculumXqActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        lessonsBea = (CurriculumBean.AaDataBean) getIntent().getExtras().getSerializable("lessons");
         lessonBackImg = findViewById(R.id.lessonBackImg);
         lessonSharedImg = findViewById(R.id.lessonSharedImg);
         bannerImg = findViewById(R.id.img_kcbanner);
@@ -58,18 +77,41 @@ public class CurriculumXqActivity extends BaseActivity {
         vipPrice = findViewById(R.id.tv_less_vip_price);
         lessPrice = findViewById(R.id.tv_lessprice);
         shareDialog = new ShareDialog(this, R.style.ActionSheetDialogStyle);
-        lessonDetailsViewPager.setAdapter(new LessonDetailsPagerAdapter(getSupportFragmentManager(), new String[]{"课程详情", "课程属性"}, lessonsBea));
-        lessonDetailsTablayout.setupWithViewPager(lessonDetailsViewPager);
-
         int screenWidth = DimentUtils.getScreenWidth(this);
         ViewGroup.LayoutParams bannerImgLayoutParams = bannerImg.getLayoutParams();
         bannerImgLayoutParams.width = screenWidth;
         bannerImgLayoutParams.height = screenWidth;
         bannerImg.setLayoutParams(bannerImgLayoutParams);
+
+        final Request request = Request.obtain(INear.POST_LESSONS_XQ);
+        request.put("id", getlessonId());
+        request.put("lng", LocationManager.getInstance().getLocation().longitude);
+        request.put("lat", LocationManager.getInstance().getLocation().latitude);
+        request.setListener(new SimpleListener<LessonXqBean>() {
+
+            @Override
+            public void onResponseListener(Request r, LessonXqBean result) {
+                if (request != null) {
+                    lessonsBea = result.getAaData().get(0);
+                    initData(result.getAaData().get(0));
+                }
+            }
+
+            @Override
+            public void onErrorListener(Request r, String error) {
+                super.onErrorListener(r, error);
+            }
+        });
+        request.start();
+
     }
 
     @Override
     public void initData() {
+
+    }
+
+    public void initData(LessonXqBean.AaDataBean lessonsBea) {
         Glide.with(CurriculumXqActivity.this).load(lessonsBea.getPicture()).into(bannerImg);
         orderNum.setText(lessonsBea.getLessonOrders() + "");
         lessonNameTxt.setText(lessonsBea.getName());
@@ -77,6 +119,8 @@ public class CurriculumXqActivity extends BaseActivity {
         lessPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
         lessPrice.setText(lessonsBea.getPrice() + "");
         vipPrice.setText("¥" + lessonsBea.getVipPrice() + "");
+        lessonDetailsViewPager.setAdapter(new LessonDetailsPagerAdapter(getSupportFragmentManager(), new String[]{"课程详情", "课程属性"}, lessonsBea));
+        lessonDetailsTablayout.setupWithViewPager(lessonDetailsViewPager);
     }
 
     @Override

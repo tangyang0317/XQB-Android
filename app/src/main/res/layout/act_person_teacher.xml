@@ -214,7 +214,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/teaPlatformQualifyLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?android:selectableItemBackground"
@@ -229,7 +228,6 @@
                 android:textColor="#444444"/>
 
             <TextView
-                android:id="@+id/teaPlatformQualify"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

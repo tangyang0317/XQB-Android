@@ -364,7 +364,6 @@
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/find_message_radio_cz"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/dp_30"
                         android:layout_marginLeft="@dimen/dp_10"
@@ -378,7 +377,6 @@
                         android:textColor="@drawable/find_message_textbg" />
 
                     <RadioButton
-                        android:id="@+id/find_message_radio_qued"
                         android:layout_width="0dp"
                         android:layout_height="@dimen/dp_30"
                         android:layout_marginLeft="@dimen/dp_10"

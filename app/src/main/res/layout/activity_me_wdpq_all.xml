@@ -10,7 +10,6 @@
 
 
     <LinearLayout
-        android:id="@+id/me_activity_wdpj_zwpj"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"

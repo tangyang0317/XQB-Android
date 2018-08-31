@@ -30,7 +30,6 @@
             android:textSize="@dimen/text_15dp" />
 
         <TextView
-            android:id="@+id/near_recyclerview_item_huiyuan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dp_10"
@@ -133,7 +132,6 @@
             android:text="生活体验" />
 
         <TextView
-            android:id="@+id/near_recyclerview_item_km"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/text_10dp"
@@ -166,7 +164,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/near_recyclerview_linlayout_jiage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/near_recyclerview_linlayout_shipin"

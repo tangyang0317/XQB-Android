@@ -12,6 +12,7 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/chooseAddressImg"
             android:layout_width="@dimen/dp_50"
             android:layout_height="@dimen/dp_50"
             android:scaleType="center"

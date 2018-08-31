@@ -72,7 +72,6 @@
         android:layout_marginLeft="10dp"/>
 
     <LinearLayout
-        android:id="@+id/legalPersonLayout"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -206,7 +205,6 @@
         android:layout_marginLeft="10dp"/>
 
     <LinearLayout
-        android:id="@+id/platformQualificationLayout"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -221,7 +219,6 @@
             android:text="平台认证"/>
 
         <TextView
-            android:id="@+id/platformQualification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableRight="@drawable/list_arrow_normal_small"

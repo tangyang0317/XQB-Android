@@ -12,7 +12,6 @@
         android:background="@color/white">
 
         <TextView
-            android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -94,7 +93,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/relative2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="25dp"

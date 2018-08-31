@@ -4,7 +4,6 @@
     <item type="id" name="swipe"/>
     <item type="id" name="headView"/>
     <item type="id" name="bottomView"/>
-    <item type="id" name="data"/>
 
     <!--AbsActivityPreviewImage必需-->
     <item type="id" name="viewPager"/>

@@ -131,7 +131,6 @@
                         android:text="密码设置"/>
 
                     <TextView
-                        android:id="@+id/changePassword"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableRight="@drawable/list_arrow_normal_small"

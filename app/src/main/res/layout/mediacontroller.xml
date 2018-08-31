@@ -56,7 +56,6 @@
 
 
         <ImageView
-            android:id="@+id/video_player_scale"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_alignEnd="@+id/mediacontroller_seekbar"
@@ -68,7 +67,6 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/rl_mediacontroller_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/rl_mediacontroller_top"

@@ -32,7 +32,6 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
@@ -133,7 +132,6 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/imageView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/liveto_choose_iocn"/>
@@ -158,7 +156,6 @@
             android:background="@color/divider"/>
 
         <TextView
-            android:id="@+id/textView50"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -250,7 +247,6 @@
                 android:checked="true"/>
 
             <TextView
-                android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"

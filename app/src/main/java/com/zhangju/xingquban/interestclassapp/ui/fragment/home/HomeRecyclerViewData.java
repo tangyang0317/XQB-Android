@@ -60,6 +60,7 @@ import com.zhangju.xingquban.interestclassapp.ui.fragment.home.msfc.HomeDataMsfc
 import com.zhangju.xingquban.interestclassapp.ui.fragment.home.msfc.HomeDataMsfcAll;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.home.msfc.HomeDataMsfcXq;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.home.ppjs.HomeDataPpjs;
+import com.zhangju.xingquban.interestclassapp.ui.fragment.home.sjkc.CurriculumXqActivity;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.home.sjkc.HomeDataSjkcAdapter;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.home.sjkc.HomeDataSjkcXq;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.home.spkc.HomeDataSpkcAdapter;
@@ -92,8 +93,7 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class HomeRecyclerViewData
-        extends BaseActivity {
+public class HomeRecyclerViewData extends BaseActivity {
     @BindView(R.id.home_data_image)
     Banner homeDataImage;
     @BindView(R.id.home_data_teacher_icon)
@@ -488,12 +488,8 @@ public class HomeRecyclerViewData
         homeDataSjkcAdapter.setOnItemClickListener(new HomeDataSjkcAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                intent = new Intent(HomeRecyclerViewData.this, HomeDataSjkcXq.class);
                 HomeDataTeacherBean.AaDataBean.LessonsBean lessonsBea = teacherInfo.getAaData().get(0).getLessons().get(position);
-                bundle = new Bundle();
-                bundle.putSerializable("lessons", lessonsBea);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                CurriculumXqActivity.lanuchActivity(HomeRecyclerViewData.this, lessonsBea.getId());
             }
         });
 

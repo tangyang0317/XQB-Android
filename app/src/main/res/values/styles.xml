@@ -18,13 +18,6 @@
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
-    </style>
     <!--首页底部按钮-->
     <style name="BottomRgStyle">
         <item name="android:layout_width">0dp</item>
@@ -55,76 +48,13 @@
     </style>
 
     <!--头部样式-->
-    <style name="head_style">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/title</item>
-        <item name="android:background">@color/color_main</item>
-    </style>
 
     <!--头部内容样式-->
-    <style name="headtext_style">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_centerInParent">true</item>
-        <item name="android:textColor">@color/title_text</item>
-        <item name="android:textSize">20sp</item>
-    </style>
 
     <!--头部返回键样式-->
-    <style name="head_back_style">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:layout_centerVertical">true</item>
-        <item name="android:src">@drawable/home_city_back</item>
-    </style>
 
 
     <!-- Application theme. -->
-
-    <style name="view_line">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">1px</item>
-        <item name="android:background">@color/group_small_text_color</item>
-    </style>
-
-    <style name="text_title">
-        <item name="android:textSize">@dimen/text_20dp</item>
-        <item name="android:textColor">@color/actionbar_sel_color</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="text_content" parent="text_title">
-        <item name="android:textSize">@dimen/text_18dp</item>
-    </style>
-
-    <style name="text_title_small">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:textColor">@color/actionbar_sel_color</item>
-        <item name="android:textSize">@dimen/text_19dp</item>
-        <item name="android:padding">6dp</item>
-    </style>
-
-    <style name="text_title_radio">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:textColor">@color/actionbar_sel_color</item>
-        <item name="android:textSize">@dimen/text_19dp</item>
-        <item name="android:padding">6dp</item>
-        <item name="android:background">@color/title_grey</item>
-        <item name="android:drawableRight">@drawable/switch_off</item>
-    </style>
-
-    <style name="radio_button">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:textSize">18sp</item>
-    </style>
 
     <style name="anim_bottombar" mce_bogus="1" parent="android:Animation">
         <item name="android:windowEnterAnimation">@anim/bottombar_in</item>
@@ -188,28 +118,6 @@
         <item name="android:maxLines">1</item>
         <item name="android:textColor">#FF686871</item>
         <item name="android:textSize">14sp</item>
-    </style>
-
-    <style name="BottomDialogStyle" parent="android:Animation.Dialog">
-        <item name="android:windowEnterAnimation">@anim/in_bottom_to_top</item>
-        <item name="android:windowExitAnimation">@anim/out_top_to_bottom</item>
-    </style>
-
-    <style name="RbStyle" parent="Base.Widget.AppCompat.CompoundButton.RadioButton">
-        <item name="android:button">@null</item>
-        <item name="android:background">@drawable/find_message_bg</item>
-        <item name="android:layout_marginLeft">10dp</item>
-        <item name="android:layout_marginRight">10dp</item>
-        <item name="android:gravity">center</item>
-    </style>
-
-    <style name="NavPage">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">fill_parent</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:gravity">center_horizontal</item>
-        <!-- <item name="android:background">@drawable/nav_page</item> -->
-        <item name="android:background">#FFE1E8EB</item>
     </style>
 
     <!--加载框-->
@@ -279,13 +187,6 @@
         <item name="android:backgroundDimEnabled">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>
-    </style>
-    <style name="mypopwindow_anim_style">
-        <item name="android:windowEnterAnimation">@anim/popshow</item>
-        <!-- 指定显示的动画xml -->
-
-        <item name="android:windowExitAnimation">@anim/pophide</item>
-        <!-- 指定消失的动画xml -->
     </style>
 
     <style name="my_dialog">

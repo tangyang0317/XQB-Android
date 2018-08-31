@@ -9,6 +9,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -30,12 +31,13 @@ import java.util.List;
 //地图poi位置检索
 public class LocationActive extends AppCompatActivity implements PoiSearch.OnPoiSearchListener {
     EditText editinput;
+    ImageView chooseAddressImg;
     RecyclerView recyclerAddress;
     private LocationAdapter locationAdapter;
     private List<LocationBean> mLocationList = new ArrayList<>();//地理位置数据
 
-    private String searchCity = "杭州";
-    private String keyWord = "杭州";//搜索的关键字
+    private String searchCity = "上海";
+    private String keyWord = "上海";//搜索的关键字
     private PoiSearch.Query query;// Poi查询条件类
     private PoiSearch poiSearch;// POI搜索
     private PoiResult poiResult; // poi返回的结果
@@ -51,11 +53,19 @@ public class LocationActive extends AppCompatActivity implements PoiSearch.OnPoi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
         editinput = findViewById(R.id.editinput);
+        chooseAddressImg = findViewById(R.id.chooseAddressImg);
         recyclerAddress = findViewById(R.id.recycler_address);
         initLocation();
         doSearchQuery();
         intiEditSearch();
         setLocationAdapter();
+
+        chooseAddressImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LocationActive.this.finish();
+            }
+        });
     }
 
     /***
@@ -72,6 +82,8 @@ public class LocationActive extends AppCompatActivity implements PoiSearch.OnPoi
                 if (aMapLocation != null && aMapLocation.getErrorCode() == 0) {
                     keyWord = aMapLocation.getCity();
                     searchCity = aMapLocation.getCity();
+                    doSearchQuery();
+                    mlocationClient.stopLocation();
                 }
             }
         });

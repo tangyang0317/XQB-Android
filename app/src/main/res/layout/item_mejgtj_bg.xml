@@ -22,7 +22,6 @@
             android:src="@mipmap/me_jg_kctj_imbg_tj_bg" />
 
         <ImageView
-            android:id="@+id/me_jg_jgjjTj_up"
             android:layout_width="@dimen/dp_20"
             android:layout_height="@dimen/dp_20"
             android:layout_alignParentRight="true"
@@ -41,7 +40,6 @@
             android:src="@mipmap/me_jg_kctj_imbg_sc" />
 
         <ImageView
-            android:id="@+id/me_jg_jgjjTj_down"
             android:layout_width="@dimen/dp_20"
             android:layout_height="@dimen/dp_20"
             android:layout_alignParentBottom="true"

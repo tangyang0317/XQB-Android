@@ -7,7 +7,6 @@
     
           
     <RelativeLayout
-        android:id="@+id/popup_window"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -80,7 +79,6 @@
         </LinearLayout>
         
         <LinearLayout
-            android:id="@+id/mixAudioSeekBarLayout"
             android:layout_below="@+id/audioMixWindow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -89,8 +87,7 @@
             android:gravity="center_vertical"
             android:padding="8dp" >
          
-            <TextView 
-                android:id="@+id/mixAudioNotifyTV" 
+            <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content" 

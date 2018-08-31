@@ -43,7 +43,6 @@
                     android:layout_height="30dp"
                     android:src="@drawable/youhuiq"/>
                 <TextView
-                    android:id="@+id/tv_live_pay_coupon"
                     android:gravity="center_vertical"
                     android:layout_marginLeft="15dp"
                     android:layout_width="wrap_content"

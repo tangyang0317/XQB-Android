@@ -19,7 +19,6 @@
         android:orientation="horizontal">
 
         <com.zhangju.xingquban.interestclassapp.view.imageView.CustomRoundView
-            android:id="@+id/item_wfbdbmglall_icon"
             android:layout_width="55dp"
             android:layout_height="55dp"
             android:layout_alignParentLeft="true"
@@ -97,7 +96,6 @@
                         android:textSize="@dimen/dp_12" />
 
                     <TextView
-                        android:id="@+id/item_wfbdbmglall_money"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_5"

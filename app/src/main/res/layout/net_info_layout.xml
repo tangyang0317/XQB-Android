@@ -7,7 +7,6 @@
     
           
     <RelativeLayout
-        android:id="@+id/popup_window"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
@@ -21,8 +20,7 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp" >
 
-            <TextView 
-                android:id="@+id/VideoFrameRateNotify" 
+            <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -53,8 +51,7 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp" >
 
-            <TextView 
-                android:id="@+id/VideoBitRateNotify" 
+            <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -86,8 +83,7 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp" >
 
-            <TextView 
-                android:id="@+id/AudioBitRateNotify" 
+            <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -118,8 +114,7 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp" >
 
-            <TextView 
-                android:id="@+id/TotalRealBitRateNotify" 
+            <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -141,7 +136,6 @@
         </LinearLayout>
         
         <LinearLayout
-            android:id="@+id/ResolutionWindow"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/TotalRealBitRateWindow"
@@ -150,8 +144,7 @@
             android:paddingLeft="20dp"
             android:paddingRight="20dp" >
 
-            <TextView 
-                android:id="@+id/ResolutionNotify" 
+            <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"

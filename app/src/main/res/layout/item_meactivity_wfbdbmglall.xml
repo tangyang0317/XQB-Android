@@ -8,7 +8,6 @@
 
 
     <com.zhangju.xingquban.interestclassapp.view.imageView.CustomRoundView
-        android:id="@+id/item_wfbdbmglall_icon"
         android:layout_width="55dp"
         android:layout_height="55dp"
         android:layout_alignParentLeft="true"

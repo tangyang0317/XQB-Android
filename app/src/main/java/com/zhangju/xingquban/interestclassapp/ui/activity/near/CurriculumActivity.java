@@ -283,11 +283,8 @@ public class CurriculumActivity extends FastActivity implements View.OnClickList
             curriculumAdapter.setOnItemClickListener(new CurriculumAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-                    Intent intent = new Intent(CurriculumActivity.this, CurriculumXqActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable(CurriculumXqActivity.ARG_BEAN_DATA, curriculumAdapter.getData().getAaData().get(position));
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+                    String lessonId = curriculumAdapter.getData().getAaData().get(position).getId();
+                    CurriculumXqActivity.lanuchActivity(CurriculumActivity.this, lessonId);
                 }
             });
         }

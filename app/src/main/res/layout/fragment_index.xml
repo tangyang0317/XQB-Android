@@ -21,7 +21,7 @@
             android:drawableRight="@drawable/city_image"
             android:gravity="center"
             android:singleLine="true"
-            android:text="杭州"
+            android:text="上海"
             android:textColor="@color/white" />
 
 

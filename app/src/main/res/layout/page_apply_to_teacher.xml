@@ -96,7 +96,6 @@
                     android:text="男"/>
 
                 <RadioButton
-                    android:id="@+id/woman"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/selector_sex_mowan"

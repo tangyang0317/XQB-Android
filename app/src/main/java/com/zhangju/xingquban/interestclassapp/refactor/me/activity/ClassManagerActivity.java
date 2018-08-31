@@ -137,8 +137,13 @@ public class ClassManagerActivity extends FastActivity implements View.OnClickLi
                 }
             }
         });
-        requestTeach();
         teachClassesLayout.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        requestTeach();
     }
 
     /**

@@ -144,6 +144,12 @@ public class EditCourseDetailsActivity extends FastActivity {
      * 课程发布和修改
      */
     private void requestPublishProfile() {
+        final String lessonDescripStr = lessonDescripEdt.getText().toString();
+        
+        if (lessonDescripStr.isEmpty()) {
+            ToastUtil.showToast("请填写课程描述课程描述！");
+            return;
+        }
         loading();
         startTask(Task.beginCycle(mAdapter.getData())
                 .filter(new Action<PublishActiveFeature, Boolean>() {  //过滤出是本地图像的item，上传并将返回的地址赋值到PublishActiveFeature.imageUrl中
@@ -201,7 +207,7 @@ public class EditCourseDetailsActivity extends FastActivity {
                         request.put("lessonDate", getLessonParam().get("lessonDate"));
                         request.put("categoriesId", getLessonParam().get("categoriesId"));
                         request.put("catagoryName", getLessonParam().get("catagoryName"));
-                        request.put("descript", getLessonParam().get("descript"));
+                        request.put("descript", lessonDescripStr);
                         request.put("summary", concatProfile());
                         if (!TextUtils.isEmpty(getLessonParam().get("id")) && !"-1".equals(getLessonParam().get("id"))) {
                             request.put("id", getLessonParam().get("id"));

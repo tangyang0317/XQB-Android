@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.zhangju.xingquban.R;
 import com.zhangju.xingquban.interestclassapp.base.BaseFragment;
 import com.zhangju.xingquban.interestclassapp.bean.near.CurriculumBean;
+import com.zhangju.xingquban.interestclassapp.bean.near.LessonXqBean;
 
 import java.util.Locale;
 
@@ -23,7 +24,7 @@ public class LessonAttrFragment extends BaseFragment {
 
     private TextView isCantry_Boolean, methodType_scfs, tv_scdd, courseCount, courseLength;
 
-    public static Fragment getInstance(CurriculumBean.AaDataBean aaDataBean) {
+    public static Fragment getInstance(LessonXqBean.AaDataBean aaDataBean) {
         LessonAttrFragment lessonAttrFragment = new LessonAttrFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("lesson", aaDataBean);
@@ -31,9 +32,9 @@ public class LessonAttrFragment extends BaseFragment {
         return lessonAttrFragment;
     }
 
-    private CurriculumBean.AaDataBean getLessonBean() {
+    private LessonXqBean.AaDataBean getLessonBean() {
         Bundle bundle = getArguments();
-        CurriculumBean.AaDataBean lesson = (CurriculumBean.AaDataBean) bundle.getSerializable("lesson");
+        LessonXqBean.AaDataBean lesson = (LessonXqBean.AaDataBean) bundle.getSerializable("lesson");
         return lesson;
     }
 

@@ -257,7 +257,6 @@
                         android:layout_height="match_parent">
 
                         <RadioButton
-                            android:id="@+id/radioButton1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:button="@null"
@@ -286,7 +285,6 @@
                         android:layout_height="match_parent">
 
                         <RadioButton
-                            android:id="@+id/radioButton2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:button="@null"
@@ -315,7 +313,6 @@
                         android:layout_height="match_parent">
 
                         <RadioButton
-                            android:id="@+id/radioButton3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:button="@null"
@@ -510,7 +507,6 @@
                 android:visibility="visible">
 
                 <LinearLayout
-                    android:id="@+id/organization"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -543,7 +539,6 @@
                             android:textSize="18sp" />
 
                         <EditText
-                            android:id="@+id/institution_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -577,7 +572,6 @@
                             android:textSize="15sp" />
 
                         <EditText
-                            android:id="@+id/business_card"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -680,7 +674,6 @@
                             android:textSize="18sp" />
 
                         <EditText
-                            android:id="@+id/legal_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -704,7 +697,6 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/text4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -715,7 +707,6 @@
                             android:textSize="15sp" />
 
                         <TextView
-                            android:id="@+id/star4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -725,7 +716,6 @@
                             android:textSize="18sp" />
 
                         <EditText
-                            android:id="@+id/phone_number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -742,7 +732,6 @@
                         android:background="@color/f7f7f7" />
 
                     <LinearLayout
-                        android:id="@+id/ll_course"
                         android:layout_width="match_parent"
                         android:layout_height="44dp"
                         android:layout_marginLeft="15dp"
@@ -751,7 +740,6 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/text5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -760,7 +748,6 @@
                             android:textSize="15sp" />
 
                         <TextView
-                            android:id="@+id/star5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -866,7 +853,6 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/text7"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -877,7 +863,6 @@
                             android:textSize="15sp" />
 
                         <TextView
-                            android:id="@+id/star7"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -887,7 +872,6 @@
                             android:textSize="18sp" />
 
                         <EditText
-                            android:id="@+id/street"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -1088,7 +1072,6 @@
                             android:textSize="18sp" />
 
                         <EditText
-                            android:id="@+id/work_phone_number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -1282,7 +1265,6 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/text1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -1293,7 +1275,6 @@
                             android:textSize="15sp" />
 
                         <TextView
-                            android:id="@+id/star1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -1322,7 +1303,6 @@
                         android:background="@color/divider" />
 
                     <LinearLayout
-                        android:id="@+id/ll_sex"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
@@ -1370,7 +1350,6 @@
                                 android:orientation="horizontal">
 
                                 <RadioButton
-                                    android:id="@+id/me_jigou_radio_man"
                                     android:layout_width="0dp"
                                     android:layout_height="@dimen/dp_30"
                                     android:layout_weight="1"
@@ -1382,7 +1361,6 @@
                                     android:textColor="@drawable/me_jg_teacher_sex_text" />
 
                                 <RadioButton
-                                    android:id="@+id/me_jigou_radio_woman"
                                     android:layout_width="0dp"
                                     android:layout_height="@dimen/dp_30"
                                     android:layout_weight="1"
@@ -1407,7 +1385,6 @@
                         android:background="@color/divider" />
 
                     <LinearLayout
-                        android:id="@+id/ll_education"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
@@ -1416,7 +1393,6 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/txt6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -1427,7 +1403,6 @@
                             android:textSize="15sp" />
 
                         <TextView
-                            android:id="@+id/sta6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -1477,7 +1452,6 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/tet5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -1488,7 +1462,6 @@
                             android:textSize="15sp" />
 
                         <TextView
-                            android:id="@+id/sta5"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -1498,7 +1471,6 @@
                             android:textSize="18sp" />
 
                         <EditText
-                            android:id="@+id/school"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -1544,7 +1516,6 @@
                             android:textSize="18sp" />
 
                         <EditText
-                            android:id="@+id/id_card"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -1570,7 +1541,6 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/text3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -1590,7 +1560,6 @@
                             android:textSize="18sp" />
 
                         <EditText
-                            android:id="@+id/qualification_card"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -1601,7 +1570,6 @@
                             android:textSize="15sp" />
 
                         <TextView
-                            android:id="@+id/star2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
@@ -1690,7 +1658,6 @@
                             android:textSize="18sp" />
 
                         <EditText
-                            android:id="@+id/teacher_phone_number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"

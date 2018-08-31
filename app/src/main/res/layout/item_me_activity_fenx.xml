@@ -147,7 +147,6 @@
         android:layout_marginTop="@dimen/dp_10">
 
         <LinearLayout
-            android:id="@+id/share_scphoto"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

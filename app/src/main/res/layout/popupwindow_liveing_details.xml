@@ -4,7 +4,6 @@
                 android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/rl_liveing_window_details"
         android:layout_width="match_parent"
         android:layout_height="242dp"
         android:layout_marginTop="35dp"
@@ -70,7 +69,6 @@
             android:background="#999999"/>
 
         <LinearLayout
-            android:id="@+id/ll_liveing_details_fllow"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"

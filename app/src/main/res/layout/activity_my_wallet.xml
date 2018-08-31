@@ -202,7 +202,6 @@
                         android:src="@mipmap/wallet_dou" />
 
                     <TextView
-                        android:id="@+id/tv_my_vip"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -253,7 +252,6 @@
                         android:src="@mipmap/wallet_bi" />
 
                     <TextView
-                        android:id="@+id/tv_my_vip1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -304,7 +302,6 @@
                         android:src="@mipmap/wallet_piao" />
 
                     <TextView
-                        android:id="@+id/tv_my_vip2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignBaseline="@+id/ticketIncomeCount"
@@ -358,7 +355,6 @@
                         android:src="@mipmap/wallet_juan" />
 
                     <TextView
-                        android:id="@+id/tv_my_vip3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"

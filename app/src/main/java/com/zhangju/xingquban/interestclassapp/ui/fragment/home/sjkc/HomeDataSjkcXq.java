@@ -40,8 +40,7 @@ import butterknife.OnClick;
 
 public class HomeDataSjkcXq extends BaseActivity {
 
-
-    @BindView(R.id.home_data_msfcXq_Head)
+    @BindView(R.id.home_data_sjkcXq_head)
     PublicHead homeDataSjkcXqHead;
     @BindView(R.id.img_kcbanner)
     ImageView imgKcbanner;
@@ -102,7 +101,6 @@ public class HomeDataSjkcXq extends BaseActivity {
                 lessonXqBean = result;
                 setHomeDataSjkcXqHead();
                 bindDatatoView();
-
             }
 
             @Override

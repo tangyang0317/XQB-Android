@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.zhangju.xingquban.interestclassapp.bean.near.CurriculumBean;
+import com.zhangju.xingquban.interestclassapp.bean.near.LessonXqBean;
 import com.zhangju.xingquban.refactoring.fragment.LessonAttrFragment;
 import com.zhangju.xingquban.refactoring.fragment.LessonDetailsFragment;
 
@@ -18,9 +19,9 @@ import com.zhangju.xingquban.refactoring.fragment.LessonDetailsFragment;
 public class LessonDetailsPagerAdapter extends FragmentPagerAdapter {
 
     String[] title;
-    CurriculumBean.AaDataBean ccurriculumBeanData;
+    LessonXqBean.AaDataBean ccurriculumBeanData;
 
-    public LessonDetailsPagerAdapter(FragmentManager fm, String[] title, CurriculumBean.AaDataBean aaDataBean) {
+    public LessonDetailsPagerAdapter(FragmentManager fm, String[] title, LessonXqBean.AaDataBean aaDataBean) {
         super(fm);
         this.title = title;
         this.ccurriculumBeanData = aaDataBean;
