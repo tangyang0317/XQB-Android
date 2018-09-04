@@ -176,37 +176,6 @@ public class MainActivity extends BaseActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestPermission();
-    }
-
-    /**
-     * 申请权限
-     */
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public void requestPermission() {
-        new RxPermissions(MainActivity.this)
-                .request(Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.CAMERA,
-                        Manifest.permission.CALL_PHONE,
-                        Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_PHONE_STATE)//多个权限用","隔开
-                .subscribe(new XObserver<Boolean>() {
-                    @Override
-                    protected void success(Boolean aBoolean) {
-                        if (aBoolean) {
-                            Logger.d("权限获取成功");
-                        }
-                    }
-
-                    @Override
-                    protected void error(String error) {
-                        Logger.d("权限获取失败，部分功能将无法使用");
-                        ToastUtil.showToast("");
-                    }
-                });
-
     }
 
 

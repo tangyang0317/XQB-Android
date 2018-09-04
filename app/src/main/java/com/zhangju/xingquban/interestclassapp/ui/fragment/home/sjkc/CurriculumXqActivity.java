@@ -19,7 +19,6 @@ import com.fastlib.net.SimpleListener;
 import com.zhangju.xingquban.R;
 import com.zhangju.xingquban.interestclassapp.RetrofitInterface.INear;
 import com.zhangju.xingquban.interestclassapp.base.BaseActivity;
-import com.zhangju.xingquban.interestclassapp.bean.near.CurriculumBean;
 import com.zhangju.xingquban.interestclassapp.bean.near.LessonXqBean;
 import com.zhangju.xingquban.interestclassapp.refactor.common.utils.ThirdPartyUtils;
 import com.zhangju.xingquban.interestclassapp.refactor.location.LocationManager;
@@ -166,12 +165,7 @@ public class CurriculumXqActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.seek_choiceness_xq_button:
-                double money = lessonsBea.getPrice();
-                Intent intent = new Intent(this, CurriculumOrderActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(CurriculumOrderActivity.ARG_BEAN_DATA, lessonsBea);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                CurriculumOrderActivity.lanuchActivity(CurriculumXqActivity.this, lessonsBea.getId());
                 break;
             case R.id.lessonBackImg:
                 CurriculumXqActivity.this.finish();

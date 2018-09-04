@@ -61,11 +61,7 @@ public class ExperienceAdapter extends SingleAdapterForRecycler<CurriculumBean.A
         holder.setOnClickListener(R.id.textView12, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, CurriculumOrderActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(CurriculumOrderActivity.ARG_BEAN_DATA, data);
-                intent.putExtras(bundle);
-                mContext.startActivity(intent);
+                CurriculumOrderActivity.lanuchActivity(mContext, data.getId());
             }
         });
         holder.itemView.setTag(position);

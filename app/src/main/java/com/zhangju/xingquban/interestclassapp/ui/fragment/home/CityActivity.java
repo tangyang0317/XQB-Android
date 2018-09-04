@@ -35,6 +35,7 @@ import com.zhangju.xingquban.interestclassapp.ui.widget.SideBar;
 import com.zhangju.xingquban.interestclassapp.util.PinyinComparator;
 import com.zhangju.xingquban.interestclassapp.util.SortUtils;
 import com.zhangju.xingquban.interestclassapp.util.SpUtil;
+import com.zhangju.xingquban.refactoring.utils.SoftKeyboardUtil;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
@@ -50,10 +51,8 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 
-public class CityActivity
-        extends AppCompatActivity {
+public class CityActivity extends AppCompatActivity {
     private static final String TAG = "CityActivity";
-
 
     RecyclerView recyclerRecent;
     RecyclerView recyclerHot;
@@ -233,6 +232,7 @@ public class CityActivity
                 intent.putExtra("cityPid", mCityPid);
                 updataLocation(intentCityCode, intentCity, mCityPid);
                 setResult(RESULT_OK, intent);
+                SoftKeyboardUtil.hideSoftKeyboard(CityActivity.this);
                 finish();
             }
         });
@@ -253,7 +253,7 @@ public class CityActivity
                 intent.putExtra("cityPid", mCityPid);
                 updataLocation(intentCityCode, intentCity, mCityPid);
                 setResult(RESULT_OK, intent);
-
+                SoftKeyboardUtil.hideSoftKeyboard(CityActivity.this);
                 finish();
             }
         });

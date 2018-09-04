@@ -45,7 +45,8 @@ public class VipActivity extends FastActivity {
             if (user.degree.isOrganization || user.degree.isTeacher) {
                 mOrgVipLayout.setVisibility(View.VISIBLE);
                 mPersonVipLayout.setVisibility(View.GONE);
-                mVipFlag.setText("商户会员");
+                mVipFlag.setText("");
+                mVipFlag.setText(user.isMember ? "商户认证(已开通)" : "商户认证(未开通)");
                 mVipFlag.setCompoundDrawablesWithIntrinsicBounds(user.isMember ? R.mipmap.vip_icon_merchantvip_select_17_17 : R.mipmap.vip_icon_merchantvip_normal_17_17, 0, 0, 0);
             } else {
                 mOrgVipLayout.setVisibility(View.GONE);

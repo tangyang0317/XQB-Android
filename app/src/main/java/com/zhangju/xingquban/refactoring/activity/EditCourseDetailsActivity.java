@@ -81,6 +81,7 @@ public class EditCourseDetailsActivity extends FastActivity {
 
     @Override
     protected void alreadyPrepared() {
+        lessonDescripEdt.clearFocus();
         mDisplayAdapter = new OrgProfileDisplayAdapter(this);
         mList.setAdapter(mAdapter = new PublishActiveFeatureAdapter(this));
         mAdapter.setEditable(false);
@@ -145,7 +146,7 @@ public class EditCourseDetailsActivity extends FastActivity {
      */
     private void requestPublishProfile() {
         final String lessonDescripStr = lessonDescripEdt.getText().toString();
-        
+
         if (lessonDescripStr.isEmpty()) {
             ToastUtil.showToast("请填写课程描述课程描述！");
             return;

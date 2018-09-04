@@ -21,6 +21,7 @@ import com.fastlib.widget.TitleBar;
 import com.zhangju.xingquban.R;
 import com.zhangju.xingquban.interestclassapp.RetrofitInterface.INear;
 import com.zhangju.xingquban.interestclassapp.bean.near.CurriculumBean;
+import com.zhangju.xingquban.interestclassapp.bean.near.LessonXqBean;
 import com.zhangju.xingquban.interestclassapp.bean.near.OrderUserYuE;
 import com.zhangju.xingquban.interestclassapp.refactor.common.bean.EventPayResult;
 import com.zhangju.xingquban.interestclassapp.refactor.common.utils.ThirdPartyUtils;
@@ -44,7 +45,7 @@ public class CurriculumOrderPayActivity extends FastActivity implements View.OnC
     public static final String ARG_BEAN_DATA = "lessons";
     public static final String ARG_INT_NUM = "curriculum_num";
     @LocalData(ARG_BEAN_DATA)
-    CurriculumBean.AaDataBean lessonsBea;
+    LessonXqBean.AaDataBean lessonsBea;
     @LocalData(ARG_INT_NUM)
     int ordernum;
 
@@ -114,7 +115,8 @@ public class CurriculumOrderPayActivity extends FastActivity implements View.OnC
     private String nonceStr;
     private String orderson;
     private OrderUserYuE orderUserYuE;
-    private  int zhifuqian;
+    private int zhifuqian;
+
     @Override
     protected void alreadyPrepared() {
         bindDataToView();
@@ -139,7 +141,6 @@ public class CurriculumOrderPayActivity extends FastActivity implements View.OnC
     }
 
     private void initRequestYue() {
-
         final Request request = Request.obtain(INear.POST_ORDERS_YUE);
         String token = UserManager.getInstance().getToken();
         request.addHeader("X-CustomToken", token);
@@ -147,7 +148,7 @@ public class CurriculumOrderPayActivity extends FastActivity implements View.OnC
         request.setListener(new SimpleListener<OrderUserYuE>() {
             @Override
             public void onResponseListener(Request r, OrderUserYuE result) {
-                orderUserYuE=result;
+                orderUserYuE = result;
                 bindViewimg(result);
                 walletRemain.setText("可用账号余额" + result.getAaData().get(0).getCoinNum());
 
@@ -171,7 +172,7 @@ public class CurriculumOrderPayActivity extends FastActivity implements View.OnC
             } else if (result.getAaData().get(i).getName().equals("微信")) {
                 Glide.with(this).load(result.getAaData().get(i).getIcon()).into(weixinIcon);
             } else if (result.getAaData().get(i).getName().equals("课程体验券")) {
-                walletQuanRemain.setText(result.getAaData().get(i).getCoinNum()+"张，限线下课程200元以上使用");
+                walletQuanRemain.setText(result.getAaData().get(i).getCoinNum() + "张，限线下课程200元以上使用");
             }
 
         }
@@ -226,7 +227,7 @@ public class CurriculumOrderPayActivity extends FastActivity implements View.OnC
         }
     }
 
-    @OnClick({R.id.commit,R.id.payByquanLayout, R.id.quanCheck,R.id.payByWechatCheck, R.id.walletRemainCheck, R.id.payByAlipayCheck, R.id.payByWechat, R.id.payByAlipayLayout,R.id.payByRemainLayout})
+    @OnClick({R.id.commit, R.id.payByquanLayout, R.id.quanCheck, R.id.payByWechatCheck, R.id.walletRemainCheck, R.id.payByAlipayCheck, R.id.payByWechat, R.id.payByAlipayLayout, R.id.payByRemainLayout})
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -250,42 +251,42 @@ public class CurriculumOrderPayActivity extends FastActivity implements View.OnC
                 quanCheck.setChecked(false);
                 break;
             case R.id.payByRemainLayout:
-                if (orderUserYuE.getAaData().get(0).getCoinNum()>0&&zhifuqian<=orderUserYuE.getAaData().get(0).getCoinNum()) {
+                if (orderUserYuE.getAaData().get(0).getCoinNum() > 0 && zhifuqian <= orderUserYuE.getAaData().get(0).getCoinNum()) {
                     payByWechatCheck.setChecked(false);
                     walletRemainCheck.setChecked(true);
                     payByAlipayCheck.setChecked(false);
                     quanCheck.setChecked(false);
-                }else
+                } else
                     ToastUtil.showToast("不可用");
                 break;
             case R.id.payByquanLayout:
-                if (orderUserYuE.getAaData().get(1).getCoinNum()>0){
+                if (orderUserYuE.getAaData().get(1).getCoinNum() > 0) {
                     payByWechatCheck.setChecked(false);
                     walletRemainCheck.setChecked(false);
                     payByAlipayCheck.setChecked(false);
                     quanCheck.setChecked(true);
-                }else
-                  ToastUtil.showToast("不可用");
+                } else
+                    ToastUtil.showToast("不可用");
                 break;
             case R.id.walletRemainCheck:
-                if (orderUserYuE.getAaData().get(0).getCoinNum()>0&&zhifuqian<=orderUserYuE.getAaData().get(0).getCoinNum()) {
+                if (orderUserYuE.getAaData().get(0).getCoinNum() > 0 && zhifuqian <= orderUserYuE.getAaData().get(0).getCoinNum()) {
                     payByWechatCheck.setChecked(false);
                     walletRemainCheck.setChecked(true);
                     payByAlipayCheck.setChecked(false);
                     quanCheck.setChecked(false);
-                }else{
+                } else {
                     walletRemainCheck.setChecked(false);
                     ToastUtil.showToast("不可用");
                 }
 
                 break;
             case R.id.quanCheck:
-                if (orderUserYuE.getAaData().get(1).getCoinNum()>0){
+                if (orderUserYuE.getAaData().get(1).getCoinNum() > 0) {
                     payByWechatCheck.setChecked(false);
                     walletRemainCheck.setChecked(false);
                     payByAlipayCheck.setChecked(false);
                     quanCheck.setChecked(true);
-                }else{
+                } else {
                     quanCheck.setChecked(false);
                     ToastUtil.showToast("不可用");
                 }
@@ -405,7 +406,7 @@ public class CurriculumOrderPayActivity extends FastActivity implements View.OnC
                     if (jsonObjectdingdan.getBoolean("success")) {
                         JSONObject jso = jsonObjectdingdan.getJSONObject("aaData");
                         orderson = jso.getString("sno");
-                        zhifuqian=jso.getInt("payAmount");
+                        zhifuqian = jso.getInt("payAmount");
                         commit.setText("确认支付 ￥" + jso.getDouble("payAmount"));
                     } else {
                         ToastUtil.showToast(jsonObjectdingdan.getJSONObject("errMsg").getString("sys"));
@@ -416,7 +417,7 @@ public class CurriculumOrderPayActivity extends FastActivity implements View.OnC
                     e.printStackTrace();
                 }
 
-               /* ToastUtil.showToast(result.toString());*/
+                /* ToastUtil.showToast(result.toString());*/
             }
 
             @Override

@@ -73,11 +73,7 @@ public class ExperienceActivity extends FastActivity implements SwipeRefreshLayo
                 switch (view.getId()) {
                     case R.id.textView12:
                         CurriculumBean.AaDataBean dataBean = (CurriculumBean.AaDataBean) adapter.getItem(position);
-                        Intent intent = new Intent(mContext, CurriculumOrderActivity.class);
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable(CurriculumOrderActivity.ARG_BEAN_DATA, dataBean);
-                        intent.putExtras(bundle);
-                        mContext.startActivity(intent);
+                        CurriculumOrderActivity.lanuchActivity(ExperienceActivity.this,dataBean.getId());
                         break;
                 }
             }

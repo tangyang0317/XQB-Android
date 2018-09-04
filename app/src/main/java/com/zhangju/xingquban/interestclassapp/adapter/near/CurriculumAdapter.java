@@ -46,14 +46,17 @@ public class CurriculumAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public CurriculumAdapter(Context context) {
         this.mContext = context;
     }
-    public void addData(CurriculumBean mcurriculumBean){
-        this.curriculumBean=mcurriculumBean;
+
+    public void addData(CurriculumBean mcurriculumBean) {
+        this.curriculumBean = mcurriculumBean;
         notifyDataSetChanged();
 
     }
-    public CurriculumBean getData(){
-        return  this.curriculumBean;
+
+    public CurriculumBean getData() {
+        return this.curriculumBean;
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_curriculum_data_sjkc, parent, false);
@@ -70,8 +73,8 @@ public class CurriculumAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         holder1.home_data_sjkc_title.setText(curriculumBean.getAaData().get(position).getName());
 
-        DecimalFormat decimalFormat=new DecimalFormat("##.##");
-        String p=decimalFormat.format(curriculumBean.getAaData().get(position).getVipPrice());//format 返回的是字符串
+        DecimalFormat decimalFormat = new DecimalFormat("##.##");
+        String p = decimalFormat.format(curriculumBean.getAaData().get(position).getVipPrice());//format 返回的是字符串
         holder1.home_data_sjkc_money.setText(p);
 
      /*   if (UserManager.getInstance().getUser().isMember){
@@ -86,28 +89,24 @@ public class CurriculumAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 
         holder1.home_data_sjkc_text1.setText(curriculumBean.getAaData().get(position).getCatagoryName());
-        if (curriculumBean.getAaData().get(position).getMethod()==null){
+        if (curriculumBean.getAaData().get(position).getMethod() == null) {
             holder1.home_data_sjkc_text2.setText("协商地点");
-        }else {
+        } else {
             holder1.home_data_sjkc_text2.setText(curriculumBean.getAaData().get(position).getMethod());
         }
-        holder1.home_data_sjkc_text3.setText(curriculumBean.getAaData().get(position).getAllows()+"人");
+        holder1.home_data_sjkc_text3.setText(curriculumBean.getAaData().get(position).getAllows() + "人");
         //米转公里
         int range = curriculumBean.getAaData().get(position).getRange();
         double dis = 0;
         dis = Math.round(range / 100d) / 10d;
-        if (curriculumBean.getAaData().get(position).getAreasName()==null)
-        holder1.tvjuli.setText(dis + "km");
+        if (curriculumBean.getAaData().get(position).getAreasName() == null)
+            holder1.tvjuli.setText(dis + "km");
         else
-            holder1.tvjuli.setText(curriculumBean.getAaData().get(position).getAreasName()+dis + "km");
+            holder1.tvjuli.setText(curriculumBean.getAaData().get(position).getAreasName() + dis + "km");
         holder1.lijiqiagke.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(mContext, CurriculumOrderActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putSerializable(CurriculumOrderActivity.ARG_BEAN_DATA,curriculumBean.getAaData().get(position));
-                intent.putExtras(bundle);
-                mContext.startActivity(intent);
+                CurriculumOrderActivity.lanuchActivity(mContext, curriculumBean.getAaData().get(position).getId());
             }
         });
         holder.itemView.setTag(position);
@@ -117,26 +116,26 @@ public class CurriculumAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public int getItemCount() {
         try {
             return curriculumBean.getAaData().size();
-        }catch (Exception e){
+        } catch (Exception e) {
             return 0;
         }
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         private ImageView home_data_sjkc_image;
-        private TextView home_data_sjkc_title, home_data_sjkc_money, home_data_sjkc_text1, home_data_sjkc_text2, home_data_sjkc_text3,tvjuli,lijiqiagke;
+        private TextView home_data_sjkc_title, home_data_sjkc_money, home_data_sjkc_text1, home_data_sjkc_text2, home_data_sjkc_text3, tvjuli, lijiqiagke;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             home_data_sjkc_image = (ImageView) itemView.findViewById(R.id.home_data_sjkc_image);
-            lijiqiagke= (TextView) itemView.findViewById(R.id.textView12);
+            lijiqiagke = (TextView) itemView.findViewById(R.id.textView12);
 
             home_data_sjkc_title = (TextView) itemView.findViewById(R.id.home_data_sjkc_title);
             home_data_sjkc_money = (TextView) itemView.findViewById(R.id.home_data_sjkc_money);
             home_data_sjkc_text1 = (TextView) itemView.findViewById(R.id.home_data_sjkc_text1);
             home_data_sjkc_text2 = (TextView) itemView.findViewById(R.id.home_data_sjkc_text2);
             home_data_sjkc_text3 = (TextView) itemView.findViewById(R.id.home_data_sjkc_text3);
-            tvjuli= (TextView) itemView.findViewById(R.id.tv_juli);
+            tvjuli = (TextView) itemView.findViewById(R.id.tv_juli);
 
         }
     }

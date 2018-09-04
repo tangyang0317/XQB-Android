@@ -1,11 +1,15 @@
 package com.zhangju.xingquban.refactoring;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +33,8 @@ import com.lidroid.xutils.http.RequestParams;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
+import com.orhanobut.logger.Logger;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.youth.banner.Banner;
 import com.zhangju.xingquban.R;
 import com.zhangju.xingquban.interestclassapp.RetrofitInterface.NetWork;
@@ -55,6 +61,7 @@ import com.zhangju.xingquban.interestclassapp.ui.fragment.home.contest.ContestWe
 import com.zhangju.xingquban.interestclassapp.ui.fragment.home.zyzs.ChangeCityEvent;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.near.DistrictActivity_Copy;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.near.NearShare.NearShareActivity;
+import com.zhangju.xingquban.interestclassapp.ui.main.MainActivity;
 import com.zhangju.xingquban.interestclassapp.util.ToastUtil;
 import com.zhangju.xingquban.interestclassapp.util.UrlUtils;
 import com.zhangju.xingquban.interestclassapp.util.click.NoDoubleClick;
@@ -64,6 +71,7 @@ import com.zhangju.xingquban.refactoring.adapter.BusinessListAdapter;
 import com.zhangju.xingquban.refactoring.adapter.CategoryViewPagerAdapter;
 import com.zhangju.xingquban.refactoring.adapter.IndexCategoryGridAdapter;
 import com.zhangju.xingquban.refactoring.dblite.CategoryDao;
+import com.zhangju.xingquban.refactoring.observer.XObserver;
 import com.zhangju.xingquban.refactoring.view.XQBLoadMoreView;
 
 import java.util.ArrayList;
@@ -113,21 +121,9 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
     private LinearLayout group;
     //小圆点图片的集合
     private ImageView[] ivPoints;
-
     private BannerHelper mBannerHelper;
-
-    private String city;
-    String latitude;
-    String longtitude;
-    private String requestCity = "上海市";
-    private String requestCityCode = "310000";
-    private String mRequestCityPid = "100000";
-    private String myLat = "30.292678";
-    private String myLng = "120.036981";
-
     private Intent intent;
     private Bundle bundle;
-
 
     private BusinessListAdapter businessListAdapter;
     private int currPage = 0;
@@ -145,11 +141,41 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
     @Override
     public void initData() {
         currPage = 0;
+        /***初始化定位***/
+        requestPermission();
         loadBottomData(currPage);
         loadBanner();
         loadCategoryData();
-        /***初始化定位***/
-        initLocation();
+    }
+
+    /**
+     * 申请权限
+     */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public void requestPermission() {
+        new RxPermissions(this)
+                .request(Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.CALL_PHONE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_PHONE_STATE)//多个权限用","隔开
+                .subscribe(new XObserver<Boolean>() {
+                    @Override
+                    protected void success(Boolean aBoolean) {
+                        if (aBoolean) {
+                            initLocation();
+                            Logger.d("权限获取成功");
+                        }
+                    }
+
+                    @Override
+                    protected void error(String error) {
+                        Logger.d("权限获取失败，部分功能将无法使用");
+                        ToastUtil.showToast("");
+                    }
+                });
 
     }
 
@@ -222,28 +248,16 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
             public void onLocationChanged(AMapLocation amapLocation) {
                 if (amapLocation != null) {
                     if (amapLocation.getErrorCode() == 0) {
-                        city = amapLocation.getCity();//称呼四
-                        latitude = Double.toString(amapLocation.getLatitude());
-                        longtitude = Double.toString(amapLocation.getLongitude());
-                        requestCity = amapLocation.getCity();
-                        if (LocationManager.getInstance().getLocation().locationCity.equals("默认城市")) {
-                            indexCityTxt.setText(requestCity);
-                            getCityCode(latitude, longtitude);
-                            LocationManager instance = LocationManager.getInstance();
-                            Location location = instance.getLocation();
-                            location.latitude = latitude;
-                            location.longitude = longtitude;
-                            location.cityId = amapLocation.getAdCode();
-                            location.cityPid = "100000";
-                            location.locationCity = city;
-                            LocationManager.getInstance().updateLocation(location);
-                        } else {
-                            indexCityTxt.setText(LocationManager.getInstance().getLocation().locationCity);
-                            LocationManager.getInstance().convertCityId();
-                            currPage = 0;
-                            loadBottomData(currPage);
-                            loadBanner();
-                        }
+                        indexCityTxt.setText(amapLocation.getCity());
+                        getCityCode(Double.toString(amapLocation.getLatitude()), Double.toString(amapLocation.getLongitude()));
+                        LocationManager instance = LocationManager.getInstance();
+                        Location location = instance.getLocation();
+                        location.latitude = Double.toString(amapLocation.getLatitude());
+                        location.longitude = Double.toString(amapLocation.getLongitude());
+                        location.cityId = amapLocation.getAdCode();
+                        location.cityPid = "100000";
+                        location.locationCity = amapLocation.getCity();
+                        LocationManager.getInstance().updateLocation(location);
                     } else {
                         //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
                         Log.e("AmapError", "location Error, ErrCode:"
@@ -280,17 +294,15 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
             if (success) {
                 CityConvertBean.AaDataBean.Districtes addressComponent = result.getAaData().getAddressComponent();
                 if (addressComponent != null) {
-                    requestCityCode = addressComponent.getAdcode();
                     LocationManager instance = LocationManager.getInstance();
                     Location location = instance.getLocation();
-                    location.latitude = latitude;
-                    location.longitude = longtitude;
-                    location.cityId = requestCityCode;
+                    location.latitude = instance.getLocation().latitude;
+                    location.longitude = instance.getLocation().longitude;
+                    location.cityId = addressComponent.getAdcode();
                     location.cityPid = "100000";
-                    location.locationCity = city;
+                    location.locationCity = instance.getLocation().locationCity;
                     LocationManager.getInstance().updateLocation(location);
                 }
-//                setCityText();
                 LocationManager.getInstance().convertCityId();
                 currPage = 0;
                 loadBottomData(currPage);
@@ -308,13 +320,18 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
     private void loadBottomData(final int pageIndex) {
         HttpUtils httpUtils = new HttpUtils();
         RequestParams params = new RequestParams();
+
+        String cityId = TextUtils.isEmpty(LocationManager.getInstance().getLocation().cityId) ? "310000" : LocationManager.getInstance().getLocation().cityId;
+        String lat = TextUtils.isEmpty(LocationManager.getInstance().getLocation().latitude) ? "30.292678" : LocationManager.getInstance().getLocation().latitude;
+        String lng = TextUtils.isEmpty(LocationManager.getInstance().getLocation().cityId) ? "120.036981" : LocationManager.getInstance().getLocation().longitude;
+
         params.addHeader("X-CustomToken", UserManager.getInstance().getToken());
         params.addBodyParameter("pageIndex", pageIndex + "");
         params.addBodyParameter("pageSize", "30");
-        params.addBodyParameter("cityId", LocationManager.getInstance().getLocation().cityId);
+        params.addBodyParameter("cityId", cityId);
         params.addBodyParameter("degreeId", "2");
-        params.addBodyParameter("lat", LocationManager.getInstance().getLocation().latitude);
-        params.addBodyParameter("lng", LocationManager.getInstance().getLocation().longitude);
+        params.addBodyParameter("lat", lat);
+        params.addBodyParameter("lng", lng);
         String url = UrlUtils.URL_HOME_BOTTOM;
         httpUtils.send(HttpRequest.HttpMethod.POST,
                 url,
@@ -378,13 +395,15 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
         //用户选择城市数据搜索
         if (requestCode == 1 && resultCode == RESULT_OK) {
             String city = data.getStringExtra("city");
-            if (!city.equals(requestCity)) {
-                requestCity = city;
-                requestCityCode = data.getStringExtra("cityId");
-                mRequestCityPid = data.getStringExtra("citypId");
-            }
-
-            indexCityTxt.setText(requestCity);
+            String cityId = data.getStringExtra("cityId");
+            String cityPid = data.getStringExtra("citypId");
+            indexCityTxt.setText(city);
+            LocationManager instance = LocationManager.getInstance();
+            Location location = instance.getLocation();
+            location.cityId = cityId;
+            location.cityPid = cityPid;
+            location.locationCity = city;
+            LocationManager.getInstance().updateLocation(location);
             currPage = 0;
             LocationManager.getInstance().convertCityId();
             loadBanner();
@@ -451,7 +470,6 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
 
     public void onClick(View v) {
         switch (v.getId()) {
-
             //搜索
             case R.id.nearShareActivity:
                 startActivity(new Intent(getActivity(), NearShareActivity.class));
