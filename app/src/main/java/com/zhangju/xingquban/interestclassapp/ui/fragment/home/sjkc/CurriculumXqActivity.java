@@ -22,7 +22,9 @@ import com.zhangju.xingquban.interestclassapp.base.BaseActivity;
 import com.zhangju.xingquban.interestclassapp.bean.near.LessonXqBean;
 import com.zhangju.xingquban.interestclassapp.refactor.common.utils.ThirdPartyUtils;
 import com.zhangju.xingquban.interestclassapp.refactor.location.LocationManager;
+import com.zhangju.xingquban.interestclassapp.refactor.user.UserManager;
 import com.zhangju.xingquban.interestclassapp.ui.activity.near.CurriculumOrderActivity;
+import com.zhangju.xingquban.interestclassapp.util.ToastUtil;
 import com.zhangju.xingquban.interestclassapp.view.dialog.ShareDialog;
 import com.zhangju.xingquban.refactoring.adapter.LessonDetailsPagerAdapter;
 import com.zhangju.xingquban.refactoring.utils.DimentUtils;
@@ -32,7 +34,6 @@ import java.util.ArrayList;
 import butterknife.ButterKnife;
 
 public class CurriculumXqActivity extends BaseActivity {
-    public static final String ARG_BEAN_DATA = "lessons";
     private ImageView lessonBackImg, lessonSharedImg, bannerImg;
     private TextView lessonNameTxt, orderNum, lessonSubTitleTxt;
     private TextView vipPrice, lessPrice;
@@ -42,7 +43,6 @@ public class CurriculumXqActivity extends BaseActivity {
     private ShareDialog shareDialog;
     private String SHARE_ICON_URL = "http://m.xqban.com/rs/app/images/down_logo.png";
     private LessonXqBean.AaDataBean lessonsBea = null;
-
 
     public static void lanuchActivity(Activity activity, String lessonId) {
         Intent intent = new Intent(activity, CurriculumXqActivity.class);
@@ -165,6 +165,10 @@ public class CurriculumXqActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.seek_choiceness_xq_button:
+                if (UserManager.getInstance().getUser().id.equals(lessonsBea.getAddUserId())) {
+                    ToastUtil.showToast("自己的课程，不能购买");
+                    return;
+                }
                 CurriculumOrderActivity.lanuchActivity(CurriculumXqActivity.this, lessonsBea.getId());
                 break;
             case R.id.lessonBackImg:

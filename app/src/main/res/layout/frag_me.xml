@@ -92,9 +92,10 @@
 
                     <ImageView
                         android:id="@+id/openVip"
-                        android:layout_width="@dimen/dp_70"
-                        android:layout_height="@dimen/dp_20"
-                        android:src="@mipmap/icon_cert"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="center"
+                        android:src="@mipmap/icon_user_open_vip"
                         android:visibility="visible" />
                 </FrameLayout>
             </LinearLayout>

@@ -307,14 +307,31 @@ public class MeFragment extends FastFragment {
             mVendorOrder.setVisibility(View.GONE);
             mOrgProfile.setText("申请成为老师/机构");
         }
-        if (user.isMember) {
-            mOpenVip.setVisibility(View.GONE);
-            mVipFlag.setVisibility(View.VISIBLE);
-            mVipFlag.setImageResource(R.mipmap.icon_vip_merchant);
-        } else {
-            mOpenVip.setVisibility(View.VISIBLE);
-            mVipFlag.setVisibility(View.GONE);
-            mVipFlag.setImageResource(R.mipmap.vip_user_74_18);
+
+
+        if (user.degree != null) {
+            if (user.degree.isOrganization || user.degree.isTeacher) {
+                if (user.isMember) {
+                    mOpenVip.setVisibility(View.GONE);
+                    mVipFlag.setVisibility(View.VISIBLE);
+                    mVipFlag.setImageResource(R.mipmap.icon_vip_merchant);
+                } else {
+                    mOpenVip.setVisibility(View.GONE);
+                    mVipFlag.setVisibility(View.VISIBLE);
+                    mVipFlag.setImageResource(R.mipmap.icon_cert);
+                }
+            } else {
+                if (user.isMember) {
+                    if (user.isMember) {
+                        mOpenVip.setVisibility(View.GONE);
+                        mVipFlag.setVisibility(View.VISIBLE);
+                        mVipFlag.setImageResource(R.mipmap.vip_user_74_18);
+                    } else {
+                        mOpenVip.setVisibility(View.GONE);
+                        mVipFlag.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
         }
         Glide.with(this)
                 .load(user.picture)

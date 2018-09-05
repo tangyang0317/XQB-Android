@@ -165,7 +165,7 @@ public class ClassManagerActivity extends FastActivity implements View.OnClickLi
         NetWork.getMe().deleteLesson(id, UserManager.getInstance().getUser().teacherTimeId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<BaseResponseBean<String>>() {
+                .subscribe(new Observer<BaseResponseBean<List<Object>>>() {
                     @Override
                     public void onCompleted() {
 
@@ -173,11 +173,11 @@ public class ClassManagerActivity extends FastActivity implements View.OnClickLi
 
                     @Override
                     public void onError(Throwable e) {
-
+                        ToastUtil.showToast(e.getMessage());
                     }
 
                     @Override
-                    public void onNext(BaseResponseBean<String> stringBaseResponseBean) {
+                    public void onNext(BaseResponseBean<List<Object>> stringBaseResponseBean) {
                         ToastUtil.showToast("课程删除成功");
                         if (classListAdapter != null && classListAdapter.getData() != null) {
                             for (int i = 0; i < classListAdapter.getData().size(); i++) {

@@ -34,24 +34,25 @@ public class CustomCourseAdapter extends FastAdapterForRecycler<ResponseOrder.Le
         super(context, R.layout.item_custom_course);
     }
 
-    public CustomCourseAdapter(Context context, List<ResponseOrder.Lesson> data){
-        super(context,R.layout.item_custom_course, data);
+    public CustomCourseAdapter(Context context, List<ResponseOrder.Lesson> data) {
+        super(context, R.layout.item_custom_course, data);
     }
 
     /**
      * 请求删除课程
+     *
      * @param position
      * @param id
      */
-    private void requestDelLesson(final int position, String id){
-        Request request=new Request(MeInterface.POST_LESSON_DEL);
-        request.put("id",id);
+    private void requestDelLesson(final int position, String id) {
+        Request request = new Request(MeInterface.POST_LESSON_DEL);
+        request.put("id", id);
         request.put("teacherTimeId", UserManager.getInstance().getUser().teacherTimeId);
-        request.setListener(new SimpleListener<Response>(){
+        request.setListener(new SimpleListener<Response>() {
 
             @Override
             public void onResponseListener(Request r, Response result) {
-                if(result.success){
+                if (result.success) {
                     getData().remove(position);
                     notifyDataSetChanged();
                 }
@@ -62,16 +63,16 @@ public class CustomCourseAdapter extends FastAdapterForRecycler<ResponseOrder.Le
 
     @Override
     public void binding(final int position, final ResponseOrder.Lesson data, CommonViewHolder holder) {
-        holder.setText(R.id.name,data.name);
-        holder.setText(R.id.price,String.format(Locale.getDefault(),"￥%s",data.price));
+        holder.setText(R.id.name, data.name);
+        holder.setText(R.id.price, String.format(Locale.getDefault(), "￥%s", data.price));
 
         holder.setOnClickListener(R.id.delete, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FastDialog.showMessageDialog("确定删除课程？",true).show(((AppCompatActivity) mContext).getSupportFragmentManager(), new DialogInterface.OnClickListener() {
+                FastDialog.showMessageDialog("确定删除课程？", true).show(((AppCompatActivity) mContext).getSupportFragmentManager(), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        requestDelLesson(position,data.id);
+                        requestDelLesson(position, data.id);
                     }
                 });
             }
@@ -79,8 +80,8 @@ public class CustomCourseAdapter extends FastAdapterForRecycler<ResponseOrder.Le
         holder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(mContext,EditCourseActivity.class);
-                intent.putExtra(EditCourseActivity.ARG_STR_ID,data.id);
+                Intent intent = new Intent(mContext, EditCourseActivity.class);
+                intent.putExtra(EditCourseActivity.ARG_STR_ID, data.id);
                 mContext.startActivity(intent);
             }
         });

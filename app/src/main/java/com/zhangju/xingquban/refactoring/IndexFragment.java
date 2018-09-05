@@ -61,16 +61,15 @@ import com.zhangju.xingquban.interestclassapp.ui.fragment.home.contest.ContestWe
 import com.zhangju.xingquban.interestclassapp.ui.fragment.home.zyzs.ChangeCityEvent;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.near.DistrictActivity_Copy;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.near.NearShare.NearShareActivity;
-import com.zhangju.xingquban.interestclassapp.ui.main.MainActivity;
 import com.zhangju.xingquban.interestclassapp.util.ToastUtil;
 import com.zhangju.xingquban.interestclassapp.util.UrlUtils;
 import com.zhangju.xingquban.interestclassapp.util.click.NoDoubleClick;
 import com.zhangju.xingquban.interestclassapp.view.BannerHelper;
-import com.zhangju.xingquban.refactoring.entity.CategoryBean;
 import com.zhangju.xingquban.refactoring.adapter.BusinessListAdapter;
 import com.zhangju.xingquban.refactoring.adapter.CategoryViewPagerAdapter;
 import com.zhangju.xingquban.refactoring.adapter.IndexCategoryGridAdapter;
 import com.zhangju.xingquban.refactoring.dblite.CategoryDao;
+import com.zhangju.xingquban.refactoring.entity.CategoryBean;
 import com.zhangju.xingquban.refactoring.observer.XObserver;
 import com.zhangju.xingquban.refactoring.view.XQBLoadMoreView;
 
@@ -91,7 +90,6 @@ import static android.app.Activity.RESULT_OK;
  * @DATE 2018/8/2
  **/
 public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
-
     @BindView(R.id.indexSRF)
     SwipeRefreshLayout indexSRF;
     @BindView(R.id.indexRV)
@@ -320,11 +318,9 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
     private void loadBottomData(final int pageIndex) {
         HttpUtils httpUtils = new HttpUtils();
         RequestParams params = new RequestParams();
-
         String cityId = TextUtils.isEmpty(LocationManager.getInstance().getLocation().cityId) ? "310000" : LocationManager.getInstance().getLocation().cityId;
         String lat = TextUtils.isEmpty(LocationManager.getInstance().getLocation().latitude) ? "30.292678" : LocationManager.getInstance().getLocation().latitude;
         String lng = TextUtils.isEmpty(LocationManager.getInstance().getLocation().cityId) ? "120.036981" : LocationManager.getInstance().getLocation().longitude;
-
         params.addHeader("X-CustomToken", UserManager.getInstance().getToken());
         params.addBodyParameter("pageIndex", pageIndex + "");
         params.addBodyParameter("pageSize", "30");

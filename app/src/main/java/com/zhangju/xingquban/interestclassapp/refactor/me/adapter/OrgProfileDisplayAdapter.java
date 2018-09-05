@@ -15,25 +15,23 @@ import com.zhangju.xingquban.interestclassapp.refactor.me.bean.ResponseOrgProfil
  * Created by sgfb on 2017/11/3.
  * 机构简介适配器
  */
-public class OrgProfileDisplayAdapter extends MultiTypeAdapter{
+public class OrgProfileDisplayAdapter extends MultiTypeAdapter {
     private TitleGroup mTitleGroup;
     private TextGroup mTextGroup;
     private ImageGroup mImageGroup;
 
     public OrgProfileDisplayAdapter(Context context) {
         super(context);
-//        addGroup(mTitleGroup=new TitleGroup());
-        addGroup(mTextGroup=new TextGroup());
-        addGroup(mImageGroup=new ImageGroup());
+        addGroup(mTextGroup = new TextGroup());
+        addGroup(mImageGroup = new ImageGroup());
     }
 
-    public void setData(ResponseOrgProfile orgProfile){
-        if(orgProfile==null) return;
+    public void setData(ResponseOrgProfile orgProfile) {
+        if (orgProfile == null) return;
         clear();
-//        mTitleGroup.addData("机构简介");
-        String[] intro= TextUtils.isEmpty(orgProfile.intro)?new String[0]:orgProfile.intro.split("#");
-        for(String s:intro){
-            if(Patterns.WEB_URL.matcher(s).matches()) mImageGroup.addData(s);
+        String[] intro = TextUtils.isEmpty(orgProfile.intro) ? new String[0] : orgProfile.intro.split("#");
+        for (String s : intro) {
+            if (Patterns.WEB_URL.matcher(s).matches()) mImageGroup.addData(s);
             else mTextGroup.addData(s);
         }
     }
@@ -41,11 +39,11 @@ public class OrgProfileDisplayAdapter extends MultiTypeAdapter{
     /**
      * 标题群组
      */
-    public class TitleGroup extends RecyclerGroup<String>{
+    public class TitleGroup extends RecyclerGroup<String> {
 
         @Override
         protected void binding(int positionOfRecyclerView, int positionOfGroup, String data, CommonViewHolder holder) {
-            holder.setText(R.id.title,data);
+            holder.setText(R.id.title, data);
         }
 
         @Override
@@ -57,11 +55,11 @@ public class OrgProfileDisplayAdapter extends MultiTypeAdapter{
     /**
      * 文本群组
      */
-    public class TextGroup extends RecyclerGroup<String>{
+    public class TextGroup extends RecyclerGroup<String> {
 
         @Override
-        protected void binding(int positionOfRecyclerView, int positionOfGroup,String data, CommonViewHolder holder) {
-            holder.setText(R.id.text,data);
+        protected void binding(int positionOfRecyclerView, int positionOfGroup, String data, CommonViewHolder holder) {
+            holder.setText(R.id.text, data);
         }
 
         @Override
@@ -73,11 +71,11 @@ public class OrgProfileDisplayAdapter extends MultiTypeAdapter{
     /**
      * 图像群组
      */
-    public class ImageGroup extends RecyclerGroup<String>{
+    public class ImageGroup extends RecyclerGroup<String> {
 
         @Override
-        protected void binding(int positionOfRecyclerView, int positionOfGroup,String data, CommonViewHolder holder) {
-            Glide.with(mContext).load(data).into((ImageView)holder.getView(R.id.image));
+        protected void binding(int positionOfRecyclerView, int positionOfGroup, String data, CommonViewHolder holder) {
+            Glide.with(mContext).load(data).into((ImageView) holder.getView(R.id.image));
         }
 
         @Override

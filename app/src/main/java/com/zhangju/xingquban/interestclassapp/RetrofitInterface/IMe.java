@@ -210,5 +210,5 @@ public interface IMe {
     Observable<BaseResponseBean<Object>> addOrModifyLesson(@QueryMap HashMap<String, String> param);
 
     @POST("admnxzcmr/lesson/del.json")
-    Observable<BaseResponseBean<String>> deleteLesson(@Query("id") String id, @Query("teacherTimeId") String teacherTimeId);
+    Observable<BaseResponseBean<List<Object>>> deleteLesson(@Query("id") String id, @Query("teacherTimeId") String teacherTimeId);
 }

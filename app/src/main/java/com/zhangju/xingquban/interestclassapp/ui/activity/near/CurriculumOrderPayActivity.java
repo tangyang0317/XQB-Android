@@ -374,9 +374,7 @@ public class CurriculumOrderPayActivity extends FastActivity implements View.OnC
     }
 
     private void dingdan() {
-
         JSONObject jo1 = new JSONObject();
-
         try {
             if (UserManager.getInstance().getUser().isMember) {
                 jo1.put("price", lessonsBea.getVipPrice());
@@ -402,7 +400,6 @@ public class CurriculumOrderPayActivity extends FastActivity implements View.OnC
                 //  Gson gson=new Gson();
                 try {
                     jsonObjectdingdan = new JSONObject(result);
-
                     if (jsonObjectdingdan.getBoolean("success")) {
                         JSONObject jso = jsonObjectdingdan.getJSONObject("aaData");
                         orderson = jso.getString("sno");
