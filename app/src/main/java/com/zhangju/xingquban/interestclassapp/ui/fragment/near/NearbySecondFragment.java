@@ -189,7 +189,6 @@ public class NearbySecondFragment extends BaseFragment {
             statusBarHeight1 = getResources().getDimensionPixelSize(resourceId);
             //            statusBarHeight1 = DpUtil.dip2px(180);
         }
-
         screenHeight = dm.heightPixels - DpUtil.dip2px(88) - statusBarHeight1;
 
         contentViewliebie = LayoutInflater.from(getContext()).inflate(R.layout.pop_down_leibie,
@@ -802,12 +801,8 @@ public class NearbySecondFragment extends BaseFragment {
             nearRecylerAdapter.setOnItemClickListener(new NearRecylerAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-                    Intent intent = new Intent(getActivity(), HomeRecyclerViewData.class);
-                    intent.putExtra("tag", position);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("homeXq", nearRecylerAdapter.getdata().getAaData().get(position));
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+                    HomeRecyclerViewData.launchActivity(getActivity(), nearRecylerAdapter.getdata().getAaData().get(position).getId());
+
                 }
             });
         }

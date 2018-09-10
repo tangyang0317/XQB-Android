@@ -1,6 +1,5 @@
 package com.zhangju.xingquban.interestclassapp.http;
 
-import com.zhangju.xingquban.interestclassapp.base.BaseBean;
 import com.zhangju.xingquban.interestclassapp.bean.NearDataBean;
 
 import java.io.Serializable;
@@ -8,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import retrofit2.http.POST;
-import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;

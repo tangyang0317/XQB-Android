@@ -20,7 +20,7 @@
             android:drawableLeft="@mipmap/vip_icon_merchantvip_select_17_17"
             android:drawablePadding="@dimen/dp_5"
             android:gravity="center"
-            android:text="商户会员" />
+            android:text="商户认证" />
     </LinearLayout>
 
     <LinearLayout

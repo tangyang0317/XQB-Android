@@ -43,7 +43,7 @@ public class NearAllSjkcAcitivity extends FastActivity {
         initview();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         horizontalList.setLayoutManager(linearLayoutManager);
-        homeDataSjkcAdapter = new HomeDataSjkcAdapter(this, data);
+        homeDataSjkcAdapter = new HomeDataSjkcAdapter(this, teacherInfo);
         horizontalList.setAdapter(homeDataSjkcAdapter);
         homeDataSjkcAdapter.setOnItemClickListener(new HomeDataSjkcAdapter.OnItemClickListener() {
             @Override

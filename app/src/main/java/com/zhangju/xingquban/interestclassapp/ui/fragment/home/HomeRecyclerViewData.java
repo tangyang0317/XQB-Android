@@ -1,5 +1,6 @@
 package com.zhangju.xingquban.interestclassapp.ui.fragment.home;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -62,7 +63,6 @@ import com.zhangju.xingquban.interestclassapp.ui.fragment.home.msfc.HomeDataMsfc
 import com.zhangju.xingquban.interestclassapp.ui.fragment.home.ppjs.HomeDataPpjs;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.home.sjkc.CurriculumXqActivity;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.home.sjkc.HomeDataSjkcAdapter;
-import com.zhangju.xingquban.interestclassapp.ui.fragment.home.sjkc.HomeDataSjkcXq;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.home.spkc.HomeDataSpkcAdapter;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.home.spkc.HomeDataSpkcXq;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.home.wydp.HomeDataCommentAdapter;
@@ -287,7 +287,6 @@ public class HomeRecyclerViewData extends BaseActivity {
     private HomeRecylerBean.AaDataBean homeXq;
     private BottomDialog2 bottomDialog2;
     private Subscription suscription;
-    private String id;
 
     private HomeDataCommentAdapter homeDataCommentAdapter;
     private HomeDataSjkcAdapter homeDataSjkcAdapter;
@@ -298,7 +297,6 @@ public class HomeRecyclerViewData extends BaseActivity {
     private List<String> imageslist = new ArrayList<>();
     private HomeDataTeacherBean teacherInfo;
     private Intent intent;
-    private Bundle bundle;
     private String mRoomId;
     private String SHARE_URL;
     private MyShareDialog mMyShareDialog;
@@ -312,16 +310,30 @@ public class HomeRecyclerViewData extends BaseActivity {
         return R.layout.activity_home_recycler_view_data;
     }
 
+
+    public static void launchActivity(Context activity, String id) {
+        Intent intent = new Intent(activity, HomeRecyclerViewData.class);
+        intent.putExtra("id", id);
+        activity.startActivity(intent);
+    }
+
+
+    private String getOrgId() {
+        if (getIntent() != null) {
+            return getIntent().getStringExtra("id");
+        }
+        return "";
+    }
+
+
     @Override
     public void initView() {
         shoucang.setEnabled(false);
         EventObserver.getInstance().subscribe(HomeRecyclerViewData.this, this);
-        Bundle bundle = getIntent().getExtras();
-        id = bundle.getString("id", null);
-        if (id != null) {
+        if (!TextUtils.isEmpty(getOrgId())) {
             progress.setVisibility(View.VISIBLE);
             HashMap<String, String> map = new HashMap<>();
-            map.put("id", id);
+            map.put("id", getOrgId());
             MyNetManager.getInstance().teacherLs(map, addSubscriber(new BaseSubscriber<NearDataBean>() {
                 @Override
                 public void onSuccess(NearDataBean bean) {
@@ -346,15 +358,8 @@ public class HomeRecyclerViewData extends BaseActivity {
                     super.onError(e);
                 }
             }));
-        } else {
-            loadFailure = true;
-            homeXq = (NearDataBean.AaDataBean) bundle.getSerializable("homeXq");
-            id = homeXq.getId();
-            getData();
-            initVideoBanner();
         }
-
-        /*获取机构老师的详细信息*/
+//        /*获取机构老师的详细信息*/
         msfcData();
         /*获取机构简介*/
         mMyShareDialog = new MyShareDialog(mContext);
@@ -474,7 +479,7 @@ public class HomeRecyclerViewData extends BaseActivity {
 
     //私教课程
     public void SjkcData() {
-        if (homeXq.getLessons().size() == 0)
+        if (teacherInfo.getAaData().get(0).getLessons().size() == 0)
             allSjkc.setVisibility(View.GONE);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) {
             @Override
@@ -483,7 +488,7 @@ public class HomeRecyclerViewData extends BaseActivity {
             }
         };
         homeDataSjRecycler.setLayoutManager(linearLayoutManager);
-        homeDataSjkcAdapter = new HomeDataSjkcAdapter(this, homeXq);
+        homeDataSjkcAdapter = new HomeDataSjkcAdapter(this, teacherInfo);
         homeDataSjRecycler.setAdapter(homeDataSjkcAdapter);
         homeDataSjkcAdapter.setOnItemClickListener(new HomeDataSjkcAdapter.OnItemClickListener() {
             @Override
@@ -508,7 +513,7 @@ public class HomeRecyclerViewData extends BaseActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(HomeRecyclerViewData.this, HomeDataSpkcXq.class);
-                bundle = new Bundle();
+                Bundle bundle = new Bundle();
                 bundle.putSerializable(HomeDataSpkcXq.ARG_BEAN_SHIPINXQ, teacherInfo.getAaData().get(0).getVideoLesson().get
                         (position));
                 bundle.putString(HomeDataSpkcXq.ARG_STRING_NAME, teacherInfo.getAaData().get(0).getSigname());
@@ -573,7 +578,7 @@ public class HomeRecyclerViewData extends BaseActivity {
     //名师风采
     public void msfcData() {
         Location location = LocationManager.getInstance().getLocation();
-        NetWork.getHomeBanner().getHomeDataTeacher(location.cityId, location.longitude, location.latitude, id)
+        NetWork.getHomeBanner().getHomeDataTeacher(location.cityId, location.longitude, location.latitude, getOrgId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
@@ -719,7 +724,7 @@ public class HomeRecyclerViewData extends BaseActivity {
             @Override
             public void onItemClick(View view, int position) {
                 intent = new Intent(HomeRecyclerViewData.this, HomeDataMsfcXq.class);
-                bundle = new Bundle();
+                Bundle bundle = new Bundle();
                 bundle.putSerializable("teacher", teacherInfo.getAaData().get(0).getReses().get(position));
                 intent.putExtras(bundle);
                 startActivity(intent);
@@ -748,7 +753,7 @@ public class HomeRecyclerViewData extends BaseActivity {
             public void onItemClick(View view, int position) {
 
                 intent = new Intent(HomeRecyclerViewData.this, NearAlbumManageActivity.class);
-                bundle = new Bundle();
+                Bundle bundle = new Bundle();
                 bundle.putSerializable("albumFiles", teacherInfo.getAaData().get(0));
                 intent.putExtras(bundle);
                 startActivity(intent);
@@ -846,7 +851,7 @@ public class HomeRecyclerViewData extends BaseActivity {
             //全部点评
             case R.id.home_data_pj_wydp:
                 intent = new Intent(this, NearAllCommentActivity.class);
-                bundle = new Bundle();
+                Bundle bundle = new Bundle();
                 bundle.putSerializable(NearAllCommentActivity.ARG_STRING_DATA, homeXq);
                 bundle.putSerializable(NearAllCommentActivity.ARG_STRING_TEACHER, teacherInfo);
                 intent.putExtras(bundle);
@@ -900,7 +905,7 @@ public class HomeRecyclerViewData extends BaseActivity {
             //分享
             case R.id.home_data_fenx:
                 if (homeXq.getDegreeId().equals("1")) { // 老师
-                    SHARE_URL = "http://my.xqban.com/share/#/teacher/detail?id=" + id;
+                    SHARE_URL = "http://my.xqban.com/share/#/teacher/detail?id=" + getOrgId();
                     if (homeXq.getUsername() != null) {
                         mShareName = homeXq.getUsername();
                     }
@@ -908,7 +913,7 @@ public class HomeRecyclerViewData extends BaseActivity {
                     if (homeXq.getName() != null) {
                         mShareName = homeXq.getName();
                     }
-                    SHARE_URL = "http://my.xqban.com/share/#/merchant/detail?id=" + id;
+                    SHARE_URL = "http://my.xqban.com/share/#/merchant/detail?id=" + getOrgId();
                 }
                 mMyShareDialog
                         .initShare(homeXq.getPicture(), SHARE_URL, mShareSummary, mShareName)

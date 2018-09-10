@@ -30,85 +30,81 @@ import java.util.List;
  * Created by sgfb on 2017/10/30.
  * 老师/机构类型的收藏
  */
-public class StoreCollectionAdapter extends SingleAdapterForRecycler<ResponseCollection,Response<List<ResponseCollection>>>{
+public class StoreCollectionAdapter extends SingleAdapterForRecycler<ResponseCollection, Response<List<ResponseCollection>>> {
     private boolean isShowDelete;
 
-    public StoreCollectionAdapter(Context context){
+    public StoreCollectionAdapter(Context context) {
         super(context, R.layout.item_collection_store);
     }
 
     @Override
-    public Request generateRequest(){
-        Request request=Request.obtain(MeInterface.POST_COLLECTION_LIST);
+    public Request generateRequest() {
+        Request request = Request.obtain(MeInterface.POST_COLLECTION_LIST);
         request.put("customerId", UserManager.getInstance().getUser().id);
-        request.put("collectionTypes",3);
-        request.put("pageIndex",0);
-        request.put("pageSize",10);
+        request.put("collectionTypes", 3);
+        request.put("pageIndex", 0);
+        request.put("pageSize", 10);
         return request;
     }
 
     @Override
     public void binding(int position, final ResponseCollection data, CommonViewHolder holder) {
-        if(data.teacherTime==null) return;
-        final ResponseCollection.CollectionStore resource=data.teacherTime;
-        RatingBar ratingBar=holder.getView(R.id.ratingBar);
+        if (data.teacherTime == null) return;
+        final ResponseCollection.CollectionStore resource = data.teacherTime;
+        RatingBar ratingBar = holder.getView(R.id.ratingBar);
 
-        holder.setText(R.id.title,resource.name);
-        holder.setText(R.id.type,resource.catagoryName);
-        holder.setText(R.id.price,"￥"+data.LessonsPrice);
+        holder.setText(R.id.title, resource.name);
+        holder.setText(R.id.type, resource.catagoryName);
+        holder.setText(R.id.price, "￥" + data.LessonsPrice);
 
-        if(data.customer!=null){
-            Glide.with(mContext).load(data.customer.picture).error(R.mipmap.me_touxiang).into((ImageView)holder.getView(R.id.cover));
-            holder.setText(R.id.location,data.customer.areasName);
+        if (data.customer != null) {
+            Glide.with(mContext).load(data.customer.picture).error(R.mipmap.me_touxiang).into((ImageView) holder.getView(R.id.cover));
+            holder.setText(R.id.location, data.customer.areasName);
         }
         ratingBar.setRating(resource.star);
 
-        final CheckBox deleteCheck=holder.getView(R.id.deleteFlag);
-        View contentView=holder.getView(R.id.contentView);
+        final CheckBox deleteCheck = holder.getView(R.id.deleteFlag);
+        View contentView = holder.getView(R.id.contentView);
 
         deleteCheck.setOnCheckedChangeListener(null);
         deleteCheck.setChecked(data.isDeleteChecked);
         deleteCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                data.isDeleteChecked=isChecked;
+                data.isDeleteChecked = isChecked;
             }
         });
-        if(isShowDelete){
-            contentView.setTranslationX(deleteCheck.getWidth()+ DensityUtils.dp2px(mContext,32));
-        }
-        else{
+        if (isShowDelete) {
+            contentView.setTranslationX(deleteCheck.getWidth() + DensityUtils.dp2px(mContext, 32));
+        } else {
             contentView.setTranslationX(0);
         }
         holder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 v.setEnabled(false);
-                requestStoreData(v,resource.id);
+                requestStoreData(v, resource.id);
             }
         });
     }
 
     /**
      * 调起店铺接口返回后跳转
+     *
      * @param id 店铺id
      */
-    private void requestStoreData(final View view, String id){
-        Request request=new Request("/teacher/ls.json");
-        request.put("id",id);
+    private void requestStoreData(final View view, String id) {
+        Request request = new Request("/teacher/ls.json");
+        request.put("id", id);
         request.put("lat", LocationManager.getInstance().getLocation().latitude);
-        request.put("lng",LocationManager.getInstance().getLocation().longitude);
-        request.setListener(new SimpleListener<NearDataBean>(){
+        request.put("lng", LocationManager.getInstance().getLocation().longitude);
+        request.setListener(new SimpleListener<NearDataBean>() {
 
             @Override
             public void onResponseListener(Request r, NearDataBean result) {
                 view.setEnabled(true);
-                if(result.isSuccess()&&result.getAaData()!=null&&!result.getAaData().isEmpty()){
-                    Intent intent = new Intent(mContext, HomeRecyclerViewData.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("homeXq",result.getAaData().get(0));
-                    intent.putExtras(bundle);
-                    mContext.startActivity(intent);
+                if (result.isSuccess() && result.getAaData() != null && !result.getAaData().isEmpty()) {
+                    HomeRecyclerViewData.launchActivity(mContext, result.getAaData().get(0).getId());
                 }
             }
 
@@ -123,25 +119,25 @@ public class StoreCollectionAdapter extends SingleAdapterForRecycler<ResponseCol
 
     @Override
     public List<ResponseCollection> translate(Response<List<ResponseCollection>> result) {
-        if(result.success) return result.data;
+        if (result.success) return result.data;
         return null;
     }
 
     @Override
     public void getMoreDataRequest(Request request) {
-        request.increment("pageIndex",1);
+        request.increment("pageIndex", 1);
     }
 
     @Override
     public void getRefreshDataRequest(Request request) {
-        request.put("pageIndex",0);
+        request.put("pageIndex", 0);
     }
 
-    public void setShowDelete(boolean showDelete){
-        isShowDelete=showDelete;
-        if(isShowDelete&&mData!=null){
-            for(ResponseCollection collection:mData){
-                collection.isDeleteChecked=false;
+    public void setShowDelete(boolean showDelete) {
+        isShowDelete = showDelete;
+        if (isShowDelete && mData != null) {
+            for (ResponseCollection collection : mData) {
+                collection.isDeleteChecked = false;
             }
         }
         notifyDataSetChanged();

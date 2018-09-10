@@ -85,7 +85,6 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="@dimen/dp_10"
-                            android:text="卢晓燕书法成人零基础课程"
                             android:textColor="@color/c44444"
                             android:textSize="14sp" />
 
@@ -117,7 +116,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_10"
-                        android:text="仅售100元的体验课程，还送文房四宝一套！"
                         android:textColor="@color/c88888"
                         android:textSize="12sp" />
 
@@ -205,7 +203,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp_10"
-                android:text="158"
                 android:textColor="@color/color_main"
                 android:textSize="26sp"
                 android:textStyle="bold" />
@@ -217,7 +214,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp_10"
-                android:text="￥348"
                 android:textColor="#888888"
                 android:textSize="13sp" />
 

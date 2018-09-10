@@ -437,12 +437,7 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
         businessListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(getActivity(), HomeRecyclerViewData.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("homeXq", businessListAdapter.getItem(position));
-                intent.putExtra("tag", position);
-                intent.putExtras(bundle);
-                startActivity(intent);
+                HomeRecyclerViewData.launchActivity(getActivity(), businessListAdapter.getItem(position).getId());
             }
         });
     }

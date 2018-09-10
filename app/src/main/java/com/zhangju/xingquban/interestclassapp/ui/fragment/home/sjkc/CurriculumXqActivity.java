@@ -166,7 +166,7 @@ public class CurriculumXqActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.seek_choiceness_xq_button:
                 if (UserManager.getInstance().getUser().id.equals(lessonsBea.getAddUserId())) {
-                    ToastUtil.showToast("自己的课程，不能购买");
+                    ToastUtil.showToast("不可购买自己发布的课程");
                     return;
                 }
                 CurriculumOrderActivity.lanuchActivity(CurriculumXqActivity.this, lessonsBea.getId());

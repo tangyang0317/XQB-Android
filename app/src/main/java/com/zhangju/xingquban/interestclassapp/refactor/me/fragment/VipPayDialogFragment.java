@@ -53,8 +53,8 @@ public class VipPayDialogFragment extends BottomDialog{
             vipType.setText("(普通会员)");
         }
         else{
-            title.setText("商户会员");
-            vipType.setText("(商户会员)");
+            title.setText("商户认证");
+            vipType.setText("(商户认证)");
         }
         v.findViewById(R.id.wechatPayLayout).setOnClickListener(new View.OnClickListener() {
             @Override

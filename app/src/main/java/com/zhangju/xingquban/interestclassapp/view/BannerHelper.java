@@ -259,10 +259,7 @@ public class BannerHelper {
                 break;
             case "2":
             case "3":
-                intent.setClass(mContext, HomeRecyclerViewData.class);
-                bundle.putString("id", listBean.getAdvertGoToSourceId());
-                intent.putExtras(bundle);
-                mContext.startActivity(intent);
+                HomeRecyclerViewData.launchActivity(mContext, listBean.getAdvertGoToSourceId());
                 break;
             case "4":
                 break;

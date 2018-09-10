@@ -704,12 +704,8 @@ public class NearPointbyFragment extends BaseFragment {
             nearRecylerAdapter.setOnItemClickListener(new NearRecylerAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-                    Intent intent = new Intent(getActivity(), HomeRecyclerViewData.class);
-                    intent.putExtra("tag", position);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("homeXq", nearRecylerAdapter.getdata().getAaData().get(position));
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+
+                    HomeRecyclerViewData.launchActivity(getActivity(), nearRecylerAdapter.getdata().getAaData().get(position).getId());
                 }
             });
         }

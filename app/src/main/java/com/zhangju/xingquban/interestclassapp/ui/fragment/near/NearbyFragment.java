@@ -314,12 +314,8 @@ public class NearbyFragment extends BaseFragment implements SwipeRefreshLayout.O
         nearByListAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(getActivity(), HomeRecyclerViewData.class);
-                intent.putExtra("tag", position);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("homeXq", ((NearDataBean.AaDataBean) nearByListAdapter.getItem(position)));
-                intent.putExtras(bundle);
-                startActivity(intent);
+                NearDataBean.AaDataBean bean = nearByListAdapter.getItem(position);
+                HomeRecyclerViewData.launchActivity(getActivity(), bean.getId());
             }
         });
 

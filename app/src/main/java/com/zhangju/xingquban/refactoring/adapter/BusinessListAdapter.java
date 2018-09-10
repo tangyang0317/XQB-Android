@@ -38,7 +38,7 @@ public class BusinessListAdapter extends BaseQuickAdapter<NearDataBean.AaDataBea
         TextView tvContent = helper.getView(R.id.tv_content);
         TextView tv_address_area = helper.getView(R.id.tv_address_area);
         TextView tv_price = helper.getView(R.id.tv_price);
-        TextView tv_certify = helper.getView(R.id.tv_price);
+        TextView tv_certify = helper.getView(R.id.tv_certify);
         TextView tv_video_show = helper.getView(R.id.tv_video_show);
 
 

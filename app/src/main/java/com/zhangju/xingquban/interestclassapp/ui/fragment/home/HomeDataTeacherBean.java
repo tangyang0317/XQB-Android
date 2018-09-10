@@ -9,7 +9,7 @@ import java.util.List;
  * Created by zsl on 2017/9/19.
  */
 
-public class HomeDataTeacherBean implements Serializable{
+public class HomeDataTeacherBean implements Serializable {
 
 
     private int sEcho;
@@ -139,10 +139,10 @@ public class HomeDataTeacherBean implements Serializable{
         this.aaData = aaData;
     }
 
-    public static class ErrMsgBean implements Serializable{
+    public static class ErrMsgBean implements Serializable {
     }
 
-    public static class AaDataBean implements Serializable{
+    public static class AaDataBean implements Serializable {
 
         private String editUserId;
         private String degreeId;
@@ -173,7 +173,7 @@ public class HomeDataTeacherBean implements Serializable{
         private int degreeAuth;
         private int resesNum;
         private double avgPrice;
-        private double range;
+        private int range;
         private int teachAge;
         private Object qCertificate;
         private int clickRate;
@@ -258,6 +258,7 @@ public class HomeDataTeacherBean implements Serializable{
         public void setClickRate(int clickRate) {
             this.clickRate = clickRate;
         }
+
         public String getEditUserId() {
             return editUserId;
         }
@@ -490,11 +491,11 @@ public class HomeDataTeacherBean implements Serializable{
             this.avgPrice = avgPrice;
         }
 
-        public double getRange() {
+        public int getRange() {
             return range;
         }
 
-        public void setRange(double range) {
+        public void setRange(int range) {
             this.range = range;
         }
 
@@ -1098,7 +1099,7 @@ public class HomeDataTeacherBean implements Serializable{
             this.videoLesson = videoLesson;
         }
 
-        public static class VideoLessonBean implements Serializable{
+        public static class VideoLessonBean implements Serializable {
             private String id;
             private String title;
             private String comment;
@@ -1370,7 +1371,8 @@ public class HomeDataTeacherBean implements Serializable{
                 this.degreeId = degreeId;
             }
         }
-        public static class AccountsBean implements Serializable{
+
+        public static class AccountsBean implements Serializable {
             /**
              * id : 8
              * username : zhangju_zhz
@@ -1646,7 +1648,7 @@ public class HomeDataTeacherBean implements Serializable{
             }
         }
 
-        public static class DegreeBean implements Serializable{
+        public static class DegreeBean implements Serializable {
             /**
              * isOrgaliza : true
              * nameCn : 机构
@@ -1712,7 +1714,7 @@ public class HomeDataTeacherBean implements Serializable{
             }
         }
 
-        public static class CustomerBean implements Serializable{
+        public static class CustomerBean implements Serializable {
             /**
              * editUserId : 1
              * degreeId : 2
@@ -1769,7 +1771,7 @@ public class HomeDataTeacherBean implements Serializable{
              * contractAuthStr : null
              * summary : null
              * address : 地址：朱泾镇秀州街328号209-210室
-
+             * <p>
              * studSkill : null
              * chgDegreeId : 4122
              * sex : null
@@ -2429,7 +2431,7 @@ public class HomeDataTeacherBean implements Serializable{
             }
         }
 
-        public static class OrganAlbumFilesBean implements Serializable{
+        public static class OrganAlbumFilesBean implements Serializable {
             /**
              * id : 15
              * organAlbumId : 25
@@ -2715,23 +2717,23 @@ public class HomeDataTeacherBean implements Serializable{
             }
         }
 
-        public static class ResesBean implements Serializable{
+        public static class ResesBean implements Serializable {
             /**
              * id : 26582
              * name : 李英波
              * signame : 李
              * picture : http://video.xqban.com/Res/2017-06-09/1496974971111_868.jpg
              * summary : 李英波，济宁市乐缶音乐艺术学校校长。1998年毕业于济宁师专艺术系音乐教育专业，先后进于中央音乐学院，上海音乐学院杨茹文、罗天琪、张旭儒教授学习打击乐理论。师从上海打击乐协会陈少伦会长，专业涉及西洋流行打击乐及古典打击乐的技能技巧。通过努力获得以下荣誉：
-             中国音协打击乐学会会员；
-             中国社会艺术考级考官
-             国家西洋打击乐高级演奏员
-             中国行进打击乐联合会会员；
-             上海打击乐协会理事
-             济宁市打击乐协会会长
-             山东省音乐家协会会员。
-             山东省社会组织联合会会员
-             山东省打击乐协会 秘书长
-
+             * 中国音协打击乐学会会员；
+             * 中国社会艺术考级考官
+             * 国家西洋打击乐高级演奏员
+             * 中国行进打击乐联合会会员；
+             * 上海打击乐协会理事
+             * 济宁市打击乐协会会长
+             * 山东省音乐家协会会员。
+             * 山东省社会组织联合会会员
+             * 山东省打击乐协会 秘书长
+             * <p>
              * customerId : 6488
              * teacherTimeId : 6426
              * age : 42
@@ -3070,7 +3072,7 @@ public class HomeDataTeacherBean implements Serializable{
                 this.changepic = changepic;
             }
 
-            public static class ChangepicBean implements Serializable{
+            public static class ChangepicBean implements Serializable {
                 /**
                  * types : 5
                  * pictureurl : http://video.xqban.com/ReleaseVersion/2016-08-16/1471344561882_teacherpower.jpg
@@ -3117,7 +3119,7 @@ public class HomeDataTeacherBean implements Serializable{
             }
         }
 
-        public static class LessonsBean implements Serializable{
+        public static class LessonsBean implements Serializable {
 
             /**
              * radius : null
@@ -3154,10 +3156,10 @@ public class HomeDataTeacherBean implements Serializable{
              * location : null
              * courses : 10
              * summary :
-             动漫手绘板大师班（全程手绘板授课）
-             上课时间：6月23—7月2日。
-             学费标准：10天课程现报名只需1200元。
-             优惠方案：以上所有课程学生可多选，报两科以上立减200元。前十名报名者可获得由朝阳画室提供价值200元的画画工具箱。
+             * 动漫手绘板大师班（全程手绘板授课）
+             * 上课时间：6月23—7月2日。
+             * 学费标准：10天课程现报名只需1200元。
+             * 优惠方案：以上所有课程学生可多选，报两科以上立减200元。前十名报名者可获得由朝阳画室提供价值200元的画画工具箱。
              * catagoryName : 少儿编程
              * orgName : null
              * teacherName : null
@@ -3786,7 +3788,7 @@ public class HomeDataTeacherBean implements Serializable{
             }
         }
 
-        public static class ChangepicBeanX implements Serializable{
+        public static class ChangepicBeanX implements Serializable {
             /**
              * types : 3
              * pictureurl : http://video.xqban.com/ReleaseVersion/2017-03-04/1488599346029_336.jpg
@@ -3832,7 +3834,7 @@ public class HomeDataTeacherBean implements Serializable{
             }
         }
 
-        public static class CommentsListBean implements Serializable{
+        public static class CommentsListBean implements Serializable {
             /**
              * radius : null
              * districtType : null
