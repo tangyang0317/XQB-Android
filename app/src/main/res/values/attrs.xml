@@ -127,7 +127,16 @@
         <!--加载更多完成显示的文字-->
         <attr name="load_completed_text" format="string" />
         <!--加载更多layout有动画显示效果-->
-        <attr name="load_animator" format="boolean"/>
-        <attr name="empty_text" format="string"/>
+        <attr name="load_animator" format="boolean" />
+        <attr name="empty_text" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="FlikerProgressBar">
+        <attr name="textSize" format="dimension" />
+        <attr name="loadingColor" format="color" />
+        <attr name="stopColor" format="color" />
+        <attr name="finishColor" format="color" />
+        <attr name="radiuss" format="dimension" />
+        <attr name="borderWidth" format="dimension" />
     </declare-styleable>
 </resources>

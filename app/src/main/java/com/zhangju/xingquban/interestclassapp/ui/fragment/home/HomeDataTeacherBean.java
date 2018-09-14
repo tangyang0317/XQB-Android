@@ -1,5 +1,6 @@
 package com.zhangju.xingquban.interestclassapp.ui.fragment.home;
 
+import com.zhangju.xingquban.interestclassapp.bean.NearDataBean;
 import com.zhangju.xingquban.interestclassapp.refactor.me.bean.ResponseComment;
 
 import java.io.Serializable;
@@ -250,6 +251,7 @@ public class HomeDataTeacherBean implements Serializable {
         private List<ChangepicBeanX> changepic;
         private List<ResponseComment> commentsList;
         private List<VideoLessonBean> videoLesson;
+        private NearDataBean.AaDataBean.LiveVdoBean liveVdo;
 
         public int getClickRate() {
             return clickRate;
@@ -1097,6 +1099,14 @@ public class HomeDataTeacherBean implements Serializable {
 
         public void setVideoLesson(List<VideoLessonBean> videoLesson) {
             this.videoLesson = videoLesson;
+        }
+
+        public NearDataBean.AaDataBean.LiveVdoBean getLiveVdo() {
+            return liveVdo;
+        }
+
+        public void setLiveVdo(NearDataBean.AaDataBean.LiveVdoBean liveVdo) {
+            this.liveVdo = liveVdo;
         }
 
         public static class VideoLessonBean implements Serializable {

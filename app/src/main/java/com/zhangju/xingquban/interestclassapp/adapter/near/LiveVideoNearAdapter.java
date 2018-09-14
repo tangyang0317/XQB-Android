@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zhangju.xingquban.R;
 import com.zhangju.xingquban.interestclassapp.bean.NearDataBean;
+import com.zhangju.xingquban.interestclassapp.ui.fragment.home.HomeDataTeacherBean;
 import com.zhangju.xingquban.interestclassapp.view.imageView.CustomRoundView;
 import com.zhangju.xingquban.interestclassapp.view.imageView.TopOvelImageView;
 
@@ -25,7 +26,7 @@ public class LiveVideoNearAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private Context mContext;
     private OnItemClickListener mOnItemClickListener = null;
-    private NearDataBean.AaDataBean liveVdoBean;
+    private HomeDataTeacherBean liveVdoBean;
 
     //define interface
     public static interface OnItemClickListener {
@@ -44,7 +45,7 @@ public class LiveVideoNearAdapter extends RecyclerView.Adapter<RecyclerView.View
         this.mOnItemClickListener = listener;
     }
 
-    public LiveVideoNearAdapter(Context context, NearDataBean.AaDataBean mcomment) {
+    public LiveVideoNearAdapter(Context context, HomeDataTeacherBean mcomment) {
         this.mContext = context;
         this.liveVdoBean = mcomment;
     }
@@ -61,13 +62,13 @@ public class LiveVideoNearAdapter extends RecyclerView.Adapter<RecyclerView.View
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder holder1 = (ViewHolder) holder;
-        Glide.with(mContext).load(liveVdoBean.getLiveVdo().getRoomPic()).placeholder(R.drawable.app_icon).dontTransform().dontAnimate().into(holder1.imgResourceSmall);
-        Glide.with(mContext).load(liveVdoBean.getPicture().isEmpty() ? R.drawable.default_icon : liveVdoBean.getPicture()).into(holder1.imgAuthorHead);
-        holder1.tvResourceTitle.setText(liveVdoBean.getLiveVdo().getRoomName());
-        holder1.tvResourceLooks.setText(liveVdoBean.getLiveVdo().getOnlineUserCount() + "人在看");
-        holder1.tvVideoCommentnum.setText(liveVdoBean.getLiveVdo().getComtCount()+"");
-        holder1.tvVideoStartnum.setText(liveVdoBean.getLiveVdo().getFollows()+"");
-        holder1.tvResourceMoney.setText("¥" + liveVdoBean.getLiveVdo().getAmount()+"");
+        Glide.with(mContext).load(liveVdoBean.getAaData().get(0).getLiveVdo().getRoomPic()).placeholder(R.drawable.app_icon).dontTransform().dontAnimate().into(holder1.imgResourceSmall);
+        Glide.with(mContext).load(liveVdoBean.getAaData().get(0).getPicture().isEmpty() ? R.drawable.default_icon : liveVdoBean.getAaData().get(0).getPicture()).into(holder1.imgAuthorHead);
+        holder1.tvResourceTitle.setText(liveVdoBean.getAaData().get(0).getLiveVdo().getRoomName());
+        holder1.tvResourceLooks.setText(liveVdoBean.getAaData().get(0).getLiveVdo().getOnlineUserCount() + "人在看");
+        holder1.tvVideoCommentnum.setText(liveVdoBean.getAaData().get(0).getLiveVdo().getComtCount() + "");
+        holder1.tvVideoStartnum.setText(liveVdoBean.getAaData().get(0).getLiveVdo().getFollows() + "");
+        holder1.tvResourceMoney.setText("¥" + liveVdoBean.getAaData().get(0).getLiveVdo().getAmount() + "");
         holder.itemView.setTag(position);
 
 
@@ -79,7 +80,7 @@ public class LiveVideoNearAdapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
 
-    static class ViewHolder extends RecyclerView.ViewHolder{
+    static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.img_resource_small)
         ImageView imgResourceSmall;
         @BindView(R.id.tv_video_time)

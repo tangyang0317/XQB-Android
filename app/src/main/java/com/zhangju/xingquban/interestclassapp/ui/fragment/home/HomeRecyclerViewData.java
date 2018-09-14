@@ -15,15 +15,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.bumptech.glide.Glide;
 import com.fastlib.annotation.Event;
 import com.fastlib.app.EventObserver;
 import com.fastlib.net.Request;
 import com.fastlib.net.SimpleListener;
-import com.google.gson.Gson;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
@@ -38,12 +35,8 @@ import com.zhangju.xingquban.interestclassapp.adapter.near.LiveVideoNearAdapter;
 import com.zhangju.xingquban.interestclassapp.application.MyApp;
 import com.zhangju.xingquban.interestclassapp.base.BaseActivity;
 import com.zhangju.xingquban.interestclassapp.bean.AdBannerBean;
-import com.zhangju.xingquban.interestclassapp.bean.HomeRecylerBean;
 import com.zhangju.xingquban.interestclassapp.bean.LivePayBean;
-import com.zhangju.xingquban.interestclassapp.bean.NearDataBean;
 import com.zhangju.xingquban.interestclassapp.bean.near.NearJiGouJianjie;
-import com.zhangju.xingquban.interestclassapp.http.BaseSubscriber;
-import com.zhangju.xingquban.interestclassapp.http.MyNetManager;
 import com.zhangju.xingquban.interestclassapp.refactor.common.bean.Response;
 import com.zhangju.xingquban.interestclassapp.refactor.location.Location;
 import com.zhangju.xingquban.interestclassapp.refactor.location.LocationManager;
@@ -80,7 +73,6 @@ import com.zhangju.xingquban.interestclassapp.view.scrollerview.ObservableScroll
 import com.zhangju.xingquban.interestclassapp.view.scrollerview.ScrollViewListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import butterknife.BindView;
@@ -284,7 +276,6 @@ public class HomeRecyclerViewData extends BaseActivity {
     @BindView(R.id.progress)
     FrameLayout progress;
 
-    private HomeRecylerBean.AaDataBean homeXq;
     private BottomDialog2 bottomDialog2;
     private Subscription suscription;
 
@@ -310,7 +301,6 @@ public class HomeRecyclerViewData extends BaseActivity {
         return R.layout.activity_home_recycler_view_data;
     }
 
-
     public static void launchActivity(Context activity, String id) {
         Intent intent = new Intent(activity, HomeRecyclerViewData.class);
         intent.putExtra("id", id);
@@ -330,36 +320,7 @@ public class HomeRecyclerViewData extends BaseActivity {
     public void initView() {
         shoucang.setEnabled(false);
         EventObserver.getInstance().subscribe(HomeRecyclerViewData.this, this);
-        if (!TextUtils.isEmpty(getOrgId())) {
-            progress.setVisibility(View.VISIBLE);
-            HashMap<String, String> map = new HashMap<>();
-            map.put("id", getOrgId());
-            MyNetManager.getInstance().teacherLs(map, addSubscriber(new BaseSubscriber<NearDataBean>() {
-                @Override
-                public void onSuccess(NearDataBean bean) {
-                    loadFailure = true;
-                    progress.setVisibility(View.GONE);
-                    homeXq = bean.getAaData().get(0);
-                    getData();
-                    initVideoBanner();
-                }
-
-                @Override
-                public void onFailure(NearDataBean aaDataBean) {
-                    loadFailure = false;
-                    progress.setVisibility(View.GONE);
-                    super.onFailure(aaDataBean);
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                    loadFailure = false;
-                    progress.setVisibility(View.GONE);
-                    super.onError(e);
-                }
-            }));
-        }
-//        /*获取机构老师的详细信息*/
+        /*获取机构老师的详细信息*/
         msfcData();
         /*获取机构简介*/
         mMyShareDialog = new MyShareDialog(mContext);
@@ -378,7 +339,6 @@ public class HomeRecyclerViewData extends BaseActivity {
         /*获取机构老师的详细信息*/
         homeDataPjWydpAll.setVisibility(View.VISIBLE);
         msfcData();
-
     }
 
     private void initJgSummary() {
@@ -395,7 +355,7 @@ public class HomeRecyclerViewData extends BaseActivity {
                     if (introList != null && introList.size() > 1) {
                         mShareSummary = introList.get(1);
                     }
-                    if (homeXq.getDegreeId().equals("2")) {//机构详情
+                    if (teacherInfo.getAaData().get(0).getDegreeId().equals("2")) {//机构详情
                         homeDataPinpaijs.setVisibility(View.VISIBLE);
                     } else {
                         homeDataPinpaijs.setVisibility(View.VISIBLE);
@@ -410,7 +370,7 @@ public class HomeRecyclerViewData extends BaseActivity {
     private void requestBanner() {
         mBannerHelper = new BannerHelper(mContext);
         mBannerHelper.init(homeDataImage);
-        if ("2".equals(homeXq.getDegreeId())) {//机构详情
+        if ("2".equals(teacherInfo.getAaData().get(0).getDegreeId())) {//机构详情
             mBannerHelper.loadBannerDate("6");
         } else {
             mBannerHelper.loadBannerDate("5");
@@ -419,9 +379,11 @@ public class HomeRecyclerViewData extends BaseActivity {
     }
 
     private void bindDataToView() {
-        initJgSummary();
-        requestBanner();
         bindRenzheng();
+        initVideoBanner();
+        initJgSummary();
+        getData();
+        requestBanner();
         /*名声风采*/
         binddataMsfc();
         /*私教课程*/
@@ -432,12 +394,10 @@ public class HomeRecyclerViewData extends BaseActivity {
         xczsData();
         /*评论*/
         comment();
-
         if (teacherInfo.getAaData().get(0).getChangepic() != null)
             for (int i = 0; i < teacherInfo.getAaData().get(0).getChangepic().size(); i++) {
                 imageslist.add(teacherInfo.getAaData().get(0).getChangepic().get(i).getPictureurl());
             }
-        //        advertismentHead();
     }
 
     private void bindRenzheng() {
@@ -447,9 +407,8 @@ public class HomeRecyclerViewData extends BaseActivity {
             renzhengicon.setVisibility(View.VISIBLE);
         } else {
             Glide.with(mContext).load(R.mipmap.find_huodong_dianda).into(imgZzrz);
-
         }
-        if (homeXq.getDegreeId().equals("1")) {
+        if (teacherInfo.getAaData().get(0).getDegreeId().equals("1")) {
             if (teacherInfo.getAaData().get(0).getRealnameAuth() == 2) {
                 Glide.with(mContext).load(R.mipmap.home_data_rz).into(imgSfrz);
             } else {
@@ -463,7 +422,7 @@ public class HomeRecyclerViewData extends BaseActivity {
         //身份认证
         tvTeacherLiulan.setText("浏览" + teacherInfo.getAaData().get(0).getClickRate() + "");
         tvTeacherFensi.setText("粉丝" + teacherInfo.getAaData().get(0).getCollectionNum() + "");
-        int range = homeXq.getRange();
+        int range = teacherInfo.getAaData().get(0).getRange();
         double dis = 0;
         dis = Math.round(range / 100d) / 10d;
         if (range < 1000)
@@ -502,12 +461,12 @@ public class HomeRecyclerViewData extends BaseActivity {
 
     //视频课程
     public void shkcData() {
-        if (homeXq.getVideoLesson().size() == 0)
+        if (teacherInfo.getAaData().get(0).getVideoLesson().size() == 0)
             allShipinkec.setVisibility(View.GONE);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         homeDataSpkcRecycler.setLayoutManager(linearLayoutManager);
-        spkcAdapter = new HomeDataSpkcAdapter(this, homeXq);
+        spkcAdapter = new HomeDataSpkcAdapter(this, teacherInfo);
         homeDataSpkcRecycler.setAdapter(spkcAdapter);
         spkcAdapter.setOnItemClickListener(new HomeDataSpkcAdapter.OnItemClickListener() {
             @Override
@@ -538,47 +497,13 @@ public class HomeRecyclerViewData extends BaseActivity {
             teacherInfo = homeDataTeacherBean;
             shoucang.setEnabled(true);
             bindDataToView();
-
-        }
-    };
-
-
-    Observer<Object> homeDataSc = new Observer<Object>() {
-
-        @Override
-        public void onCompleted() {
-
-        }
-
-        @Override
-        public void onError(Throwable e) {
-            //ToastUtil.showToast(e.toString());
-        }
-
-        @Override
-        public void onNext(Object object) {
-            Gson gson = new Gson();
-            JSONObject jsonObject = null;
-            try {
-
-                jsonObject = JSON.parseObject(gson.toJson(object));
-                JSONObject jso = jsonObject.getJSONObject("aaData");
-                if (jso.getString("isCollections").equals("添加收藏成功"))
-                    shoucang.setText("已收藏");
-                else
-                    shoucang.setText("收藏");
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
         }
     };
 
 
     //名师风采
     public void msfcData() {
-        Location location = LocationManager.getInstance().getLocation();
-        NetWork.getHomeBanner().getHomeDataTeacher(location.cityId, location.longitude, location.latitude, getOrgId())
+        NetWork.getHomeBanner().getHomeDataTeacher(getOrgId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);
@@ -593,13 +518,13 @@ public class HomeRecyclerViewData extends BaseActivity {
             }
         };
         homeDataLiveRecycler.setLayoutManager(linearLayoutManager);
-        liveVideoNearAdapter = new LiveVideoNearAdapter(mContext, homeXq);
+        liveVideoNearAdapter = new LiveVideoNearAdapter(mContext, teacherInfo);
         homeDataLiveRecycler.setAdapter(liveVideoNearAdapter);
         liveVideoNearAdapter.setOnItemClickListener(new LiveVideoNearAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 if (UserManager.getInstance().isLogin()) {
-                    getVideoInfo(homeXq.getLiveVdo().getId(), 0, 1);
+                    getVideoInfo(teacherInfo.getAaData().get(0).getLiveVdo().getId(), 0, 1);
                 } else {
                     startActivity(new Intent(HomeRecyclerViewData.this, com.zhangju.xingquban.interestclassapp.refactor.me
                             .activity.LoginActivity.class));
@@ -706,7 +631,7 @@ public class HomeRecyclerViewData extends BaseActivity {
 
     //名师风采
     private void binddataMsfc() {
-        if (teacherInfo.getAaData().get(0).getReses().size() == 0) {
+        if (teacherInfo.getAaData().get(0).getReses() == null || teacherInfo.getAaData().get(0).getReses().size() == 0) {
             homeDataMsfcAll.setVisibility(View.GONE);
         }
         homeDataMsfcNumber.setText(teacherInfo.getAaData().get(0).getResesNum() + "");
@@ -781,12 +706,6 @@ public class HomeRecyclerViewData extends BaseActivity {
                 intent.putExtra(CommentDetailActivity.ARG_SER_COMMENT, teacherInfo.getAaData().get(0).getCommentsList().get
                         (position));
                 startActivity(intent);
-                //                intent = new Intent(HomeRecyclerViewData.this, HomeDataWdplXq.class);
-                //                bundle = new Bundle();
-                //                bundle.putSerializable(HomeDataWdplXq.ARG_STRING_COMMENTID, teacherInfo.getAaData().get(0)
-                // .getCommentsList().get(position).getId());
-                //                intent.putExtras(bundle);
-                //                startActivity(intent);
             }
         });
     }
@@ -852,7 +771,7 @@ public class HomeRecyclerViewData extends BaseActivity {
             case R.id.home_data_pj_wydp:
                 intent = new Intent(this, NearAllCommentActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(NearAllCommentActivity.ARG_STRING_DATA, homeXq);
+//                bundle.putSerializable(NearAllCommentActivity.ARG_STRING_DATA, homeXq);
                 bundle.putSerializable(NearAllCommentActivity.ARG_STRING_TEACHER, teacherInfo);
                 intent.putExtras(bundle);
                 startActivity(intent);
@@ -891,7 +810,7 @@ public class HomeRecyclerViewData extends BaseActivity {
                 if (UserManager.getInstance().isLogin()) {
                     intent = new Intent(this, HomeDataXdp.class);
                     bundle = new Bundle();
-                    bundle.putString(HomeDataXdp.ARG_STRING_ID, homeXq.getId());
+                    bundle.putString(HomeDataXdp.ARG_STRING_ID, teacherInfo.getAaData().get(0).getId());
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } else {
@@ -904,30 +823,29 @@ public class HomeRecyclerViewData extends BaseActivity {
 
             //分享
             case R.id.home_data_fenx:
-                if (homeXq.getDegreeId().equals("1")) { // 老师
+                if (teacherInfo.getAaData().get(0).getDegreeId().equals("1")) { // 老师
                     SHARE_URL = "http://my.xqban.com/share/#/teacher/detail?id=" + getOrgId();
-                    if (homeXq.getUsername() != null) {
-                        mShareName = homeXq.getUsername();
+                    if (teacherInfo.getAaData().get(0).getUsername() != null) {
+                        mShareName = (String) teacherInfo.getAaData().get(0).getUsername();
                     }
-                } else if (homeXq.getDegreeId().equals("2")) { // 机构
-                    if (homeXq.getName() != null) {
-                        mShareName = homeXq.getName();
+                } else if (teacherInfo.getAaData().get(0).getDegreeId().equals("2")) { // 机构
+                    if (teacherInfo.getAaData().get(0).getName() != null) {
+                        mShareName = teacherInfo.getAaData().get(0).getName();
                     }
                     SHARE_URL = "http://my.xqban.com/share/#/merchant/detail?id=" + getOrgId();
                 }
                 mMyShareDialog
-                        .initShare(homeXq.getPicture(), SHARE_URL, mShareSummary, mShareName)
+                        .initShare(teacherInfo.getAaData().get(0).getPicture(), SHARE_URL, mShareSummary, mShareName)
                         .show();
                 break;
 
             //城市
             case R.id.home_data_city:
-
                 intent = new Intent(this, MapNaviActivity.class);
                 bundle = new Bundle();
-                bundle.putDouble(MapNaviActivity.ARG_DOUBLE_LAT, homeXq.getLat());
-                bundle.putDouble(MapNaviActivity.ARG_DOUBLE_LNG, homeXq.getLng());
-                bundle.putString(MapNaviActivity.ARG_STRING_NAME, homeXq.getSigname());
+                bundle.putDouble(MapNaviActivity.ARG_DOUBLE_LAT, teacherInfo.getAaData().get(0).getLat());
+                bundle.putDouble(MapNaviActivity.ARG_DOUBLE_LNG, teacherInfo.getAaData().get(0).getLng());
+                bundle.putString(MapNaviActivity.ARG_STRING_NAME, teacherInfo.getAaData().get(0).getSigname());
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -971,7 +889,7 @@ public class HomeRecyclerViewData extends BaseActivity {
             case R.id.all_sjkc:
                 intent = new Intent(HomeRecyclerViewData.this, NearAllSjkcAcitivity.class);
                 bundle = new Bundle();
-                bundle.putSerializable(NearAllSjkcAcitivity.ARG_STRING_DATA, homeXq);
+//                bundle.putSerializable(NearAllSjkcAcitivity.ARG_STRING_DATA, homeXq);
                 bundle.putSerializable(NearAllSjkcAcitivity.ARG_STRING_TEACHER, teacherInfo);
                 intent.putExtras(bundle);
                 startActivity(intent);
@@ -1001,7 +919,7 @@ public class HomeRecyclerViewData extends BaseActivity {
             case R.id.all_shipinkec:
                 intent = new Intent(HomeRecyclerViewData.this, NearAllVideoLessonsAcitivity.class);
                 bundle = new Bundle();
-                bundle.putSerializable(NearAllVideoLessonsAcitivity.ARG_STRING_DATA, homeXq);
+//                bundle.putSerializable(NearAllVideoLessonsAcitivity.ARG_STRING_DATA, homeXq);
                 bundle.putSerializable(NearAllVideoLessonsAcitivity.ARG_STRING_TEACHER, teacherInfo);
                 intent.putExtras(bundle);
                 startActivity(intent);
@@ -1041,18 +959,17 @@ public class HomeRecyclerViewData extends BaseActivity {
     }
 
     public void getData() {
-        homeDataSpkcVidoNumber.setText(homeXq.getVideoLessonNum() + "");
-        homeDataWydpNumber.setText(homeXq.getCommentCount() + "");
-
-        if (homeXq.getLiveVdo() == null) {
+        homeDataSpkcVidoNumber.setText(teacherInfo.getAaData().get(0).getVideoLessonNum() + "");
+        homeDataWydpNumber.setText(teacherInfo.getAaData().get(0).getCommentCount() + "");
+        if (teacherInfo.getAaData().get(0).getLiveVdo() == null) {
             llZhibo.setVisibility(View.GONE);
         } else {
             bindataZhibo();
         }
-        homeDataAddress.setText(homeXq.getClassRoom());
-        homeDataTacherPlNumber.setText(homeXq.getCommentCount() + "");
+        homeDataAddress.setText(teacherInfo.getAaData().get(0).getClassRoom());
+        homeDataTacherPlNumber.setText(teacherInfo.getAaData().get(0).getCommentCount() + "");
         toolbarText.setVisibility(View.GONE);
-        if (homeXq.getDegreeId().equals("1")) {
+        if (teacherInfo.getAaData().get(0).getDegreeId().equals("1")) {
             toolbarText.setText("老师详情");
             homeDataTeacherTitle.setVisibility(View.VISIBLE);
 
@@ -1064,18 +981,18 @@ public class HomeRecyclerViewData extends BaseActivity {
             homeDataLiveAll.setVisibility(View.GONE);
             homeDataMsfcAll.setVisibility(View.GONE);
             homeDataTeacherIcon.setVisibility(View.VISIBLE);
-            Glide.with(mContext).load(homeXq.getPicture()).into(homeDataTeacherIcon);
-            homeDataTacherName.setText(homeXq.getUsername());
+            Glide.with(mContext).load(teacherInfo.getAaData().get(0).getPicture()).into(homeDataTeacherIcon);
+            homeDataTacherName.setText("" + teacherInfo.getAaData().get(0).getUsername());
         }
         /*机构*/
-        if (homeXq.getDegreeId().equals("2")) {
+        if (teacherInfo.getAaData().get(0).getDegreeId().equals("2")) {
             toolbarText.setText("机构详情");
-            homeDataTacherName.setText(homeXq.getName());
+            homeDataTacherName.setText(teacherInfo.getAaData().get(0).getName());
             homeDataMessage.setVisibility(View.VISIBLE);
             homeDataTeacherIcon.setVisibility(View.GONE);
             jieshao.setText("品牌介绍");
         }
-        switch ((int) homeXq.getAvgComment()) {
+        switch ((int) teacherInfo.getAaData().get(0).getAvgComment()) {
             case 0:
                 homeDataTacherStart1.setImageResource(R.drawable.home_recyler_item_pingjiatwo);
                 homeDataTacherStart2.setImageResource(R.drawable.home_recyler_item_pingjiatwo);
@@ -1131,7 +1048,7 @@ public class HomeRecyclerViewData extends BaseActivity {
         params.addQueryStringParameter("pageSize", "10");
         params.addQueryStringParameter("advertPutInProvince", location.cityPid);
         params.addQueryStringParameter("advertPutInCity", location.cityId);
-        if ("2".equals(homeXq.getDegreeId())) {//机构详情
+        if ("2".equals(teacherInfo.getAaData().get(0).getDegreeId())) {//机构详情
             params.addQueryStringParameter("advertSection", "6");
         } else {
             params.addQueryStringParameter("advertSection", "5");

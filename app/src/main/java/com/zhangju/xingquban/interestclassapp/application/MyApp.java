@@ -38,6 +38,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.zhangju.xingquban.BuildConfig;
 import com.zhangju.xingquban.R;
 import com.zhangju.xingquban.interestclassapp.bean.City;
@@ -51,6 +52,7 @@ import com.zhangju.xingquban.interestclassapp.ui.sys.SystemUtil;
 import com.zhangju.xingquban.interestclassapp.util.ToastUtil;
 import com.zhangju.xingquban.interestclassapp.util.imageloader.GlideImageLoader;
 import com.zhangju.xingquban.refactoring.dblite.DataBaseHelper;
+import com.zhangju.xingquban.refactoring.utils.BuglyUpdate;
 
 import java.io.File;
 import java.sql.Date;
@@ -64,8 +66,8 @@ import cn.jpush.android.api.JPushInterface;
  */
 public class MyApp extends Application {
     public final static int DB_VERSION = 5;
-    //    public static final String URL = "http://my.xqban.com"; //正式服务器
-    public static final String URL = "http://test.xqban.com"; //测试服务器
+    public static final String URL = "http://my.xqban.com"; //正式服务器
+    //    public static final String URL = "http://test.xqban.com"; //测试服务器
     //    public static final String URL="http://myqqy.vicp.io/std"; //本地测试服务+器
     public static MyApp instance;
     public final static String TOKEN = "mToken";
@@ -125,17 +127,16 @@ public class MyApp extends Application {
     }
 
     private void init() {
-        //        x.Ext.init(this);
-        //        x.Ext.setDebug(BuildConfig.DEBUG);
         instance = this;
         mActivityStack = new ActivityStack(this);
+        BuglyUpdate.initUpdateConfig(this);
+        CrashReport.initCrashReport(getApplicationContext(), "37dc7f1977", false);
         NetManager.getInstance().setRootAddress(URL + "/admnxzcmr");
         FastDatabase.getConfig().setVersion(DB_VERSION);
-        if (UserManager.getInstance().isLogin())
+        if (UserManager.getInstance().isLogin()) {
             NetManager.getInstance().setGlobalHead(Request.ExtraHeader.create(false, "X-CustomToken", UserManager.getInstance()
                     .getToken()));
-        //        JPushInterface.setDebugMode(false);    // 发布
-//        JPushInterface.setDebugMode(true);    // 设置开启日志,发布时请关闭日志
+        }
         JPushInterface.setDebugMode(BuildConfig.DEBUG);    // 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);
 
@@ -147,19 +148,14 @@ public class MyApp extends Application {
         initLocation();
         bitmapUtils = new BitmapUtils(this);
         httpUtils = new HttpUtils();
-        //		initBitmapConfig(this); // xuilts的图片缓存
         initDiskPath();
-        //    g    initImaeLoader(this);
-        // initLocation();
         com.zhangju.xingquban.interestclassapp.config.Logger.setTag("xingquban");
         com.zhangju.xingquban.interestclassapp.config.Logger.setDebug(true);
-
         /****初始化数据库****/
         DataBaseHelper.getHelper(this);
 
         /****Steho 初始化****/
         Stetho.initializeWithDefaults(this);
-
 
         ToastUtil.init(this);
         SImagePicker.init(new PickerConfig.Builder().setAppContext(this)
@@ -236,48 +232,6 @@ public class MyApp extends Application {
         return packageName.equals(processName);
     }
 
-    private void initImageLoader(Context context) {
-        int memoryCacheSize = (int) (Runtime.getRuntime().maxMemory() / 5);
-        MemoryCache memoryCache;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
-            memoryCache = new LruMemoryCache(memoryCacheSize);
-        } else {
-            memoryCache = new LRULimitedMemoryCache(memoryCacheSize);
-        }
-
-        mNormalImageOptions = new DisplayImageOptions.Builder()
-                .bitmapConfig(Config.RGB_565)
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .showImageOnLoading(R.drawable.home_institute_portrait_grey)
-                .showImageForEmptyUri(R.drawable.home_institute_portrait_grey)
-                .resetViewBeforeLoading(true)
-                .build();
-
-        // This
-        // This configuration tuning is custom. You can tune every option, you
-        // may tune some of them,
-        // or you can create default configuration by
-        // ImageLoaderConfiguration.createDefault(this);
-        // method.
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(
-                context)
-                .defaultDisplayImageOptions(mNormalImageOptions)
-                .denyCacheImageMultipleSizesInMemory()
-                .diskCacheFileCount(100)
-                .diskCache(new UnlimitedDiskCache(file))
-                // .discCacheFileNameGenerator(new Md5FileNameGenerator())
-                .memoryCache(memoryCache)
-                // .memoryCacheSize(memoryCacheSize)
-                .tasksProcessingOrder(QueueProcessingType.LIFO)
-                .threadPriority(Thread.NORM_PRIORITY - 2).threadPoolSize(3)
-                .build();
-
-        // Initialize ImageLoader with configuration.
-        imageLoader = ImageLoader.getInstance();
-        imageLoader.init(config);
-    }
-
     /**
      * 初始化磁盘路径(以sdcard作为根路径)
      */
@@ -325,37 +279,6 @@ public class MyApp extends Application {
         }
     }
 
-    public void clearTempPictures() {
-        File[] files = tempPictures.listFiles();
-        if (files != null && files.length > 0) {
-            for (int i = 0; i < files.length; i++) {
-                files[i].delete();
-            }
-        }
-    }
-
-    /**
-     * 初始化Bitmap全局的参数
-     */
-    private void initBitmapConfig(Context context) {
-        // 图片的磁盘缓D
-        // 第一个参数:上下文环境
-        // 第二个参数:实际图片存放的磁盘路径
-        BitmapGlobalConfig globalConfig = BitmapGlobalConfig.getInstance(
-                context, DISK_PICTURE);
-        // 配置磁盘的信息
-        globalConfig.setDiskCacheEnabled(true); // 启用磁盘缓存 (false不启用磁盘缓存)
-        // 设置磁盘的大小(52428800 = 50*1024*1024 = 50M) ,10485760(必须>10M有效)
-        globalConfig.setDiskCacheSize(30 * 1024 * 1024); // 分配了30M (不设置就是默认值)
-        // 图片存放的过期时间(2592000000L = 30*24*60*60*1000 ) 默认的单位是ms
-        globalConfig.setDefaultCacheExpiry(10 * 24 * 60 * 60 * 1000L); // 设置过期时间是10天,如果不设置30天
-        // 读取磁盘图片超时时间(默认值是15s) 默认单位是ms
-        globalConfig.setDefaultReadTimeout(8 * 1000);
-        // 设置线程池核心线程的大小
-        globalConfig.setThreadPoolSize(4); // 默认是2
-        // MD5加密(不可逆的转换)
-        globalConfig.setFileNameGenerator(new MD5FileNameGenerator());
-    }
 
     private void initLocation() {
         mLocationClient = new AMapLocationClient(this);

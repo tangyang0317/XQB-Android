@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zhangju.xingquban.R;
 import com.zhangju.xingquban.interestclassapp.bean.HomeRecylerBean;
+import com.zhangju.xingquban.interestclassapp.ui.fragment.home.HomeDataTeacherBean;
 
 /**
  * Created by zsl on 2017/8/21.
@@ -18,7 +19,7 @@ import com.zhangju.xingquban.interestclassapp.bean.HomeRecylerBean;
 
 public class HomeDataSpkcAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
     private Context mConten;
-    private HomeRecylerBean.AaDataBean mHomeRecyclerbean;
+    private HomeDataTeacherBean mHomeRecyclerbean;
 
     private OnItemClickListener mOnItemClickListener = null;
 
@@ -40,7 +41,7 @@ public class HomeDataSpkcAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.mOnItemClickListener = listener;
     }
 
-    public HomeDataSpkcAdapter(Context context, HomeRecylerBean.AaDataBean homeRecylerBean) {
+    public HomeDataSpkcAdapter(Context context, HomeDataTeacherBean homeRecylerBean) {
         this.mConten = context;
         this.mHomeRecyclerbean = homeRecylerBean;
     }
@@ -57,14 +58,14 @@ public class HomeDataSpkcAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         MyViewHolder holder1 = (MyViewHolder) holder;
 
-        Glide.with(mConten).load(mHomeRecyclerbean.getVideoLesson().get(position).getVideoTitlePic()).into(holder1.home_data_spkc_image);
-        holder1.home_data_spkc_text.setText(mHomeRecyclerbean.getVideoLesson().get(position).getTitle());
+        Glide.with(mConten).load(mHomeRecyclerbean.getAaData().get(0).getVideoLesson().get(position).getVideoTitlePic()).into(holder1.home_data_spkc_image);
+        holder1.home_data_spkc_text.setText(mHomeRecyclerbean.getAaData().get(0).getVideoLesson().get(position).getTitle());
         holder.itemView.setTag(position);
     }
 
     @Override
     public int getItemCount() {
-        return mHomeRecyclerbean.getVideoLesson().size();
+        return mHomeRecyclerbean.getAaData().get(0).getVideoLesson().size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {

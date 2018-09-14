@@ -23,12 +23,7 @@ public interface IHomeFragment {
 
 
     @POST("admnxzcmr/teacher/ls.json")
-    Observable<HomeDataTeacherBean> getHomeDataTeacher(
-            @Query("cityId") String cityId,
-            @Query("lng") String lng,
-            @Query("lat") String lat,
-            @Query("id") String id
-
+    Observable<HomeDataTeacherBean> getHomeDataTeacher(@Query("id") String id
     );
 
     @POST("admnxzcmr/organCollection/add.json")
