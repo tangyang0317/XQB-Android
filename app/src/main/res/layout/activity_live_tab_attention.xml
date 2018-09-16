@@ -23,7 +23,6 @@
         </com.zhangju.xingquban.interestclassapp.swiperefrsh.SwipeRefreshRecyclerView>
 
 
-
         <LinearLayout
             android:id="@+id/line_no_more"
             android:layout_width="match_parent"
@@ -60,7 +59,7 @@
     <ImageView
         android:id="@+id/btn_live_jump"
         style="@style/float_zhibo_btn"
-        android:visibility="gone"
-        android:background="@mipmap/btn_beganbroadcast" />
+        android:background="@mipmap/btn_beganbroadcast"
+        android:visibility="gone" />
 
 </RelativeLayout>

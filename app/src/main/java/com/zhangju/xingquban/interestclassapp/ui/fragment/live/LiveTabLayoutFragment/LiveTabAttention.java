@@ -122,10 +122,11 @@ public class LiveTabAttention extends BaseFragment implements SwipeRefreshLayout
         //普通用户不能进行直播操作
         if (isCommon) {
             btnLiveJump.setVisibility(View.GONE);
-        }else {
+        } else {
             btnLiveJump.setVisibility(View.VISIBLE);
         }
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -215,8 +216,8 @@ public class LiveTabAttention extends BaseFragment implements SwipeRefreshLayout
                                     intent = new Intent(getActivity(), LivePayActivity.class);
                                     intent.putExtra("roomPrice", roomPrice);
                                     intent.putExtra("seeBalances", seeBalances);
-                                    intent.putExtra("roomName",roomName);
-                                    intent.putExtra("roomPic",roomPic);
+                                    intent.putExtra("roomName", roomName);
+                                    intent.putExtra("roomPic", roomPic);
                                 }
                                 intent.putExtra("stdCoin", stdCoin);
                                 intent.putExtra("chatToken", chatToken);
@@ -247,6 +248,7 @@ public class LiveTabAttention extends BaseFragment implements SwipeRefreshLayout
     public void initListener() {
 
     }
+
     @OnClick({R.id.tv_see_more, R.id.btn_live_jump})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -259,14 +261,13 @@ public class LiveTabAttention extends BaseFragment implements SwipeRefreshLayout
                 break;
             //广播通知切换
             case R.id.tv_see_more:
-                Intent intent=new Intent();
+                Intent intent = new Intent();
                 intent.setAction("cuttab");
-                intent.putExtra("index",1);
+                intent.putExtra("index", 1);
                 getActivity().sendBroadcast(intent);
 
         }
     }
-
 
 
     private void jumpLive() {

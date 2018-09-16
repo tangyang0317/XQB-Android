@@ -40,16 +40,7 @@ import butterknife.OnClick;
  * Created by zsl on 2017/6/14.
  */
 //直播模块
-public class LiveFragment
-        extends BaseFragment
-        implements View.OnClickListener {
-
-    //    private LiveTabInstrumentalMusic liveTabInstrumentalMusic;
-    //    private LiveTabPerformance liveTabPerformance;
-    //    private LiveTabVocalMusic liveTabVocalMusic;
-    //    private LiveTabArt liveTabArt;
-    //    private LiveTabcAlligraphy liveTabcAlligraphy;
-
+public class LiveFragment extends BaseFragment implements View.OnClickListener {
 
     private final String TAG = "LiveFragment直播模块列表";
     /**

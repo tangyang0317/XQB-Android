@@ -26,8 +26,8 @@ import java.util.List;
  * 机构管理
  */
 @ContentView(R.layout.act_org_manager)
-public class OrgManagerActivity extends FastActivity{
-    List<Pair<Integer,String>> mFunctions=new ArrayList<>();
+public class OrgManagerActivity extends FastActivity {
+    List<Pair<Integer, String>> mFunctions = new ArrayList<>();
     @Bind(R.id.titleBar)
     TitleBar mTitleBar;
     @Bind(R.id.avatar)
@@ -40,32 +40,35 @@ public class OrgManagerActivity extends FastActivity{
 
     @Override
     protected void alreadyPrepared() {
-        User user=UserManager.getInstance().getUser();
-//        Pair<Integer,String> classManagerPair=Pair.create(R.mipmap.me_jg_kcap,"课程安排");
+        User user = UserManager.getInstance().getUser();
         mName.setText(user.signame);
         Glide.with(this).load(user.picture).dontAnimate().dontTransform().into(mAvatar);
-        mGrid.setLayoutManager(new GridLayoutManager(this,3));
-        mFunctions.add(Pair.create(R.mipmap.me_jg_kcgl,"课程管理"));
-//        mFunctions.add(classManagerPair);
-        mFunctions.add(Pair.create(R.mipmap.me_jg_xcgl,"相册管理"));
-        mFunctions.add(Pair.create(R.mipmap.me_jg_spkc,"视频课程"));
-        mFunctions.add(Pair.create(R.mipmap.me_jg_jgjj,"机构简介"));
-//        if(!user.degree.isTeacher)
-//            mFunctions.remove(classManagerPair);
-        mGrid.setAdapter(mAdapter=new OrgFunctionAdapter(this,mFunctions));
+        mGrid.setLayoutManager(new GridLayoutManager(this, 3));
+        mFunctions.add(Pair.create(R.mipmap.me_jg_kcgl, "课程管理"));
+        mFunctions.add(Pair.create(R.mipmap.me_jg_xcgl, "相册管理"));
+        mFunctions.add(Pair.create(R.mipmap.me_jg_spkc, "视频课程"));
+        mFunctions.add(Pair.create(R.mipmap.me_jg_jgjj, "机构简介"));
+        mGrid.setAdapter(mAdapter = new OrgFunctionAdapter(this, mFunctions));
         mAdapter.setmListener(new HomeRecylerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Pair<Integer,String> pair=mFunctions.get(position);
-                switch (pair.second){
-                    case "课程管理":openClassManager();break;
-//                    case "课程安排":openCourseManager();break;
-                    case "相册管理":openImageManager();break;
+                Pair<Integer, String> pair = mFunctions.get(position);
+                switch (pair.second) {
+                    case "课程管理":
+                        openClassManager();
+                        break;
+                    case "相册管理":
+                        openImageManager();
+                        break;
                     case "视频课程":
-                        openVideoManager();break;
+                        openVideoManager();
+                        break;
                     case "机构简介":
-                        openOrgProfile();break;
-                    default:System.out.println("点击了一个不存在的功能模块");break;
+                        openOrgProfile();
+                        break;
+                    default:
+                        System.out.println("点击了一个不存在的功能模块");
+                        break;
                 }
             }
         });
@@ -77,23 +80,23 @@ public class OrgManagerActivity extends FastActivity{
         });
     }
 
-    private void openClassManager(){
+    private void openClassManager() {
         startActivity(ClassManagerActivity.class);
     }
 
-    private void openCourseManager(){
+    private void openCourseManager() {
 
     }
 
-    private void openImageManager(){
+    private void openImageManager() {
         startActivity(AlbumManageActivity.class);
     }
 
-    private void openVideoManager(){
+    private void openVideoManager() {
         startActivity(CourseVideoActivity.class);
     }
 
-    private void openOrgProfile(){
+    private void openOrgProfile() {
         startActivity(OrgProfileActivity.class);
     }
 }

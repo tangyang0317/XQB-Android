@@ -51,7 +51,6 @@ import java.util.List;
  */
 @ContentView(R.layout.act_add_course)
 public class EditCourseActivity extends FastActivity {
-
     public static final String ARG_STR_ID = "id"; //可选课程，如果存在则是修改课程否则添加
     public static Activity instance;
     final int REQ_ADDRESS = 3;

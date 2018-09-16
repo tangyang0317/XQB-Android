@@ -30,10 +30,10 @@ import java.util.List;
  * 机构管理中的相册管理内容模块
  */
 @ContentView(R.layout.frag_album_manage)
-public class AlbumManageFragment extends FastFragment{
-    public static final String ARG_INT_MANAGER_TYPE="managerType"; //管理模块类型 0-图片 2-视频
-    final int REQ_UPLOAD_ALBUM=1;
-    final int REQ_UPLOAD_VIDEO=2;
+public class AlbumManageFragment extends FastFragment {
+    public static final String ARG_INT_MANAGER_TYPE = "managerType"; //管理模块类型 0-图片 2-视频
+    final int REQ_UPLOAD_ALBUM = 1;
+    final int REQ_UPLOAD_VIDEO = 2;
 
     @LocalData(ARG_INT_MANAGER_TYPE)
     int mType;
@@ -44,42 +44,41 @@ public class AlbumManageFragment extends FastFragment{
     @Bind(R.id.delete)
     TextView mDelete;
     AlbumManageAdapter mAdapter;
-    List<ResponseVideoAlbum> mDeleteFlagResponseVideoAlbum =new ArrayList<>();
+    List<ResponseVideoAlbum> mDeleteFlagResponseVideoAlbum = new ArrayList<>();
 
-    public static AlbumManageFragment getInstance(int type){
-        Bundle bundle=new Bundle();
-        AlbumManageFragment fragment=new AlbumManageFragment();
-        bundle.putInt(ARG_INT_MANAGER_TYPE,type);
+    public static AlbumManageFragment getInstance(int type) {
+        Bundle bundle = new Bundle();
+        AlbumManageFragment fragment = new AlbumManageFragment();
+        bundle.putInt(ARG_INT_MANAGER_TYPE, type);
         fragment.setArguments(bundle);
         return fragment;
     }
 
     @Override
-    protected void alreadyPrepared(){
-        if(mType==2) {
+    protected void alreadyPrepared() {
+        if (mType == 2) {
             mUpload.setText("上传视频");
         }
-        mGrid.setAdapter(mAdapter=new AlbumManageAdapter(getContext(),mType));
+        mGrid.setAdapter(mAdapter = new AlbumManageAdapter(getContext(), mType));
         mGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                List<ResponseVideoAlbum> data=mAdapter.getData();
-                ArrayList<String> images=new ArrayList<>();
+                List<ResponseVideoAlbum> data = mAdapter.getData();
+                ArrayList<String> images = new ArrayList<>();
 
-                for(ResponseVideoAlbum videoAlbum:data) {
+                for (ResponseVideoAlbum videoAlbum : data) {
                     images.add(mType == 0 ? videoAlbum.picVideo : videoAlbum.videoTitlePic);
                 }
                 Intent intent;
-                if(mType==0){
-                    intent=new Intent(getContext(), PreviewImageActivity.class);
-                    intent.putExtra(PreviewImageActivity.ARG_BOOL_IS_LOCAL,false);
-                    intent.putExtra(PreviewImageActivity.ARG_INT_INDEX,position);
-                    intent.putExtra(PreviewImageActivity.ARG_LIST_STR_IMAGES,images);
-                }
-                else{
-                    intent=new Intent(getContext(), ShipinBofangActivity.class);
-                    intent.putExtra(ShipinBofangActivity.ARG_STRING_NAME,data.get(position).title);
-                    intent.putExtra(ShipinBofangActivity.ARG_STRING_URL,data.get(position).picVideo);
+                if (mType == 0) {
+                    intent = new Intent(getContext(), PreviewImageActivity.class);
+                    intent.putExtra(PreviewImageActivity.ARG_BOOL_IS_LOCAL, false);
+                    intent.putExtra(PreviewImageActivity.ARG_INT_INDEX, position);
+                    intent.putExtra(PreviewImageActivity.ARG_LIST_STR_IMAGES, images);
+                } else {
+                    intent = new Intent(getContext(), ShipinBofangActivity.class);
+                    intent.putExtra(ShipinBofangActivity.ARG_STRING_NAME, data.get(position).title);
+                    intent.putExtra(ShipinBofangActivity.ARG_STRING_URL, data.get(position).picVideo);
                 }
                 startActivity(intent);
             }
@@ -87,21 +86,21 @@ public class AlbumManageFragment extends FastFragment{
         mAdapter.setmCallback(new AlbumManageAdapter.DeleteFlagChangeCallback() {
             @Override
             public void callback(ResponseVideoAlbum videoAlbum, boolean isChecked) {
-                if(isChecked) {
+                if (isChecked) {
                     mDeleteFlagResponseVideoAlbum.add(videoAlbum);
                 } else {
                     mDeleteFlagResponseVideoAlbum.remove(videoAlbum);
                 }
-                mDelete.setVisibility(mDeleteFlagResponseVideoAlbum.isEmpty()?View.GONE:View.VISIBLE);
+                mDelete.setVisibility(mDeleteFlagResponseVideoAlbum.isEmpty() ? View.GONE : View.VISIBLE);
             }
         });
     }
 
     @Event
-    private void eShowDelete(EventAlbumMangeShowDelete event){
-        if(event.isDeleteFlag())
+    private void eShowDelete(EventAlbumMangeShowDelete event) {
+        if (event.isDeleteFlag())
             mUpload.setVisibility(View.GONE);
-        else{
+        else {
             mDelete.setVisibility(View.GONE);
             mUpload.setVisibility(View.VISIBLE);
         }
@@ -109,10 +108,10 @@ public class AlbumManageFragment extends FastFragment{
     }
 
     @Bind(R.id.upload)
-    private void upload(){
-        if(mType==0) {
+    private void upload() {
+        if (mType == 0) {
             startActivityForResult(new Intent(getContext(), AlbumMangeUploadImageActivity.class), REQ_UPLOAD_ALBUM);
-        } else if(mType==2) {
+        } else if (mType == 2) {
             startActivityForResult(new Intent(getContext(), AlbumManageUploadVideoActivity.class), REQ_UPLOAD_VIDEO);
         } else {
             System.out.println("一个未知的相册管理类型");
@@ -120,9 +119,9 @@ public class AlbumManageFragment extends FastFragment{
     }
 
     @Bind(R.id.delete)
-    private void delete(){
+    private void delete() {
         mAdapter.deleteSelectImage();
-        EventObserver.getInstance().sendEvent(getContext(),new EventAlbumMangeShowDelete(false));
+        EventObserver.getInstance().sendEvent(getContext(), new EventAlbumMangeShowDelete(false));
     }
 
     @Override
