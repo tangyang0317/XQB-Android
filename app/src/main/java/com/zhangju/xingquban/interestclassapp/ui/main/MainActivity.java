@@ -104,8 +104,7 @@ public class MainActivity extends BaseActivity {
         index = mainBtnHome.getId();
         getServiceVersion();
         loadAdData();
-        JPushInterface.setAliasAndTags(getApplicationContext(), UserManager.getInstance().isLogin() ? UserManager.getInstance()
-                .getUser().id : "", null, new TagAliasCallback() {
+        JPushInterface.setAliasAndTags(getApplicationContext(), UserManager.getInstance().isLogin() ? UserManager.getInstance().getUser().id : "", null, new TagAliasCallback() {
             @Override
             public void gotResult(int i, String s, Set<String> set) {
 

@@ -7,6 +7,7 @@ def enableProguardInReleaseBuilds = false
 android {
     compileSdkVersion rootProject.android.compileSdkVersion
     buildToolsVersion rootProject.android.buildToolsVersion
+    sourceSets.main.jniLibs.srcDirs = ['libs']
     defaultConfig {
         applicationId "com.zhangju.xingquban"
         useLibrary 'org.apache.http.legacy'
@@ -16,6 +17,9 @@ android {
         versionName "2.1.1"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            abiFilters "armeabi", "armeabi-v7a", "x86_64", "x86"
+        }
     }
 
     dexOptions {
@@ -28,6 +32,13 @@ android {
         // Or, if you prefer, you can continue to check for errors in release builds,
         // but continue the build even when errors are found:
         abortOnError false
+    }
+
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
     }
 
     dexOptions {

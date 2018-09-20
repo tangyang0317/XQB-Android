@@ -1,7 +1,9 @@
 package com.zhangju.xingquban.interestclassapp.refactor.me.fragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -12,8 +14,11 @@ import com.fastlib.annotation.ContentView;
 import com.fastlib.annotation.Event;
 import com.fastlib.annotation.LocalData;
 import com.fastlib.app.EventObserver;
+import com.fastlib.app.FastDialog;
 import com.fastlib.app.FastFragment;
+import com.fastlib.app.PhotoResultListener;
 import com.zhangju.xingquban.R;
+import com.zhangju.xingquban.interestclassapp.base.TakePhotoFastActivity;
 import com.zhangju.xingquban.interestclassapp.refactor.common.activity.PreviewImageActivity;
 import com.zhangju.xingquban.interestclassapp.refactor.me.activity.AlbumManageUploadVideoActivity;
 import com.zhangju.xingquban.interestclassapp.refactor.me.activity.AlbumMangeUploadImageActivity;
@@ -107,11 +112,33 @@ public class AlbumManageFragment extends FastFragment {
         mAdapter.setShowDelete(event.isDeleteFlag());
     }
 
+    private void dialog() {
+        FastDialog.showListDialog(new String[]{"拍照", "从手机相册选择"}).show(getChildFragmentManager(), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                TakePhotoFastActivity activity = (TakePhotoFastActivity) getActivity();
+                if (which == 0) {
+                    activity.openCamera(new PhotoResultListener() {
+                        @Override
+                        public void onPhotoResult(String path) {
+
+                        }
+                    });
+                } else {
+                    activity.getTakePhoto().onPickMultiple(9);
+                }
+            }
+        });
+    }
+
+
     @Bind(R.id.upload)
     private void upload() {
         if (mType == 0) {
-            startActivityForResult(new Intent(getContext(), AlbumMangeUploadImageActivity.class), REQ_UPLOAD_ALBUM);
+            //上传相册
+            dialog();
         } else if (mType == 2) {
+            //上传视频
             startActivityForResult(new Intent(getContext(), AlbumManageUploadVideoActivity.class), REQ_UPLOAD_VIDEO);
         } else {
             System.out.println("一个未知的相册管理类型");

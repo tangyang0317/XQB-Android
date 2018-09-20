@@ -38,6 +38,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.orhanobut.logger.Logger;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.zhangju.xingquban.BuildConfig;
 import com.zhangju.xingquban.R;
@@ -137,12 +138,10 @@ public class MyApp extends Application {
             NetManager.getInstance().setGlobalHead(Request.ExtraHeader.create(false, "X-CustomToken", UserManager.getInstance()
                     .getToken()));
         }
-        JPushInterface.setDebugMode(BuildConfig.DEBUG);    // 设置开启日志,发布时请关闭日志
+        JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
-
         // shareSDK
         MobSDK.init(this);
-
         // 初始化网易云信SDK
         initIMSDK();
         initLocation();
