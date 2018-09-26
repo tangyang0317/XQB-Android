@@ -1,5 +1,6 @@
 package com.zhangju.xingquban.interestclassapp.refactor.me.activity;
 
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
@@ -25,22 +26,23 @@ import java.util.List;
  * 相册管理
  */
 @ContentView(R.layout.act_album_manager)
-public class AlbumManageActivity extends FastActivity{
+public class AlbumManageActivity extends FastActivity {
     @Bind(R.id.titleBar)
     TitleBar mTitleBar;
     @Bind(R.id.tabLayout)
     TabLayout mTabLayout;
     @Bind(R.id.viewPager)
     ViewPager mViewPager;
-    boolean deleteFlag=false;
+    boolean deleteFlag = false;
+
 
     @Override
     protected void alreadyPrepared() {
-        List<Pair<String,Fragment>> pages=new ArrayList<>();
+        List<Pair<String, Fragment>> pages = new ArrayList<>();
 
-        pages.add(Pair.<String, Fragment>create("视频",AlbumManageFragment.getInstance(2)));
-        pages.add(Pair.<String, Fragment>create("图片",AlbumManageFragment.getInstance(0)));
-        mViewPager.setAdapter(new CommonFragmentViewPagerAdapter(getSupportFragmentManager(),pages));
+        pages.add(Pair.<String, Fragment>create("视频", AlbumManageFragment.getInstance(2)));
+        pages.add(Pair.<String, Fragment>create("图片", AlbumManageFragment.getInstance(0)));
+        mViewPager.setAdapter(new CommonFragmentViewPagerAdapter(getSupportFragmentManager(), pages));
         mTabLayout.setupWithViewPager(mViewPager);
         mTitleBar.setOnLeftClickListener(new View.OnClickListener() {
             @Override
@@ -51,14 +53,14 @@ public class AlbumManageActivity extends FastActivity{
         mTitleBar.setOnRightClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventObserver.getInstance().sendEvent(AlbumManageActivity.this,new EventAlbumMangeShowDelete(!deleteFlag));
+                EventObserver.getInstance().sendEvent(AlbumManageActivity.this, new EventAlbumMangeShowDelete(!deleteFlag));
             }
         });
     }
 
     @Event
-    private void eDeleteFlagChanged(EventAlbumMangeShowDelete event){
-        deleteFlag=event.isDeleteFlag();
-        mTitleBar.getRightText().setText(event.isDeleteFlag()?"取消":"编辑");
+    private void eDeleteFlagChanged(EventAlbumMangeShowDelete event) {
+        deleteFlag = event.isDeleteFlag();
+        mTitleBar.getRightText().setText(event.isDeleteFlag() ? "取消" : "编辑");
     }
 }

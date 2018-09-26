@@ -119,6 +119,8 @@ public class MyApp extends Application {
     //声明AMapLocationClient类对象
     public AMapLocationClient mLocationClient = null;
 
+    public static String registrationId;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -162,6 +164,17 @@ public class MyApp extends Application {
                 .setToolbaseColor(getResources().getColor(R.color.color_main))
                 .build());
         initGlobalNetCallback();
+        registrationId = JPushInterface.getRegistrationID(this);
+        Logger.d("--registrationId--" + registrationId);
+    }
+
+    public static String getRegistrationId() {
+        return registrationId;
+    }
+
+    public static void setRegistrationId(String registrationId) {
+        MyApp.registrationId = registrationId;
+
     }
 
     private void initGlobalNetCallback() {

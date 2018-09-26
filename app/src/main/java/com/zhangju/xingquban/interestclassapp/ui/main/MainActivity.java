@@ -7,9 +7,11 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -52,6 +54,7 @@ import com.zhangju.xingquban.refactoring.IndexFragment;
 import com.zhangju.xingquban.refactoring.observer.XObserver;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -100,14 +103,30 @@ public class MainActivity extends BaseActivity {
         FragmentHelper.replaceFragment(fragmentManager, fragmentList.get(Constant.MAIN_HOME), R.id.main_frame_empty);
         //        mainBtnHome.setChecked(true);
         // 申请权限
-        //        initLogin();
+        // initLogin();
         index = mainBtnHome.getId();
+        if (!TextUtils.isEmpty(UserManager.getInstance().getUser().id)) {
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    setPushAliasAndTags();
+                }
+            }, 1000);
+        }
         getServiceVersion();
         loadAdData();
-        JPushInterface.setAliasAndTags(getApplicationContext(), UserManager.getInstance().isLogin() ? UserManager.getInstance().getUser().id : "", null, new TagAliasCallback() {
+    }
+
+    /***
+     * 设置推送别名
+     */
+    private void setPushAliasAndTags() {
+        Set<String> tags = new HashSet<String>();
+        tags.add(UserManager.getInstance().getUser().id);
+        JPushInterface.setAliasAndTags(this, UserManager.getInstance().getUser().id, tags, new TagAliasCallback() {
             @Override
             public void gotResult(int i, String s, Set<String> set) {
-
+                Logger.d("推送别名设置成功" + s);
             }
         });
     }

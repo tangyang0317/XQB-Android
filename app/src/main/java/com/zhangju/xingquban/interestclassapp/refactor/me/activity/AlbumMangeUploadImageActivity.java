@@ -56,12 +56,12 @@ public class AlbumMangeUploadImageActivity extends TakePhotoFastActivity {
     @Bind(R.id.photos)
     GridView mPhotos;
     AddImageAdapter mAdapter;
-    String mLat,mLng;
+    String mLat, mLng;
     int mUploadIndex;
 
     @Override
     protected void alreadyPrepared() {
-        mPhotos.setAdapter(mAdapter=new AddImageAdapter());
+        mPhotos.setAdapter(mAdapter = new AddImageAdapter());
         mAdapter.setMaxLimit(9);
         mTitleBar.setOnLeftClickListener(new View.OnClickListener() {
             @Override
@@ -77,48 +77,48 @@ public class AlbumMangeUploadImageActivity extends TakePhotoFastActivity {
         });
     }
 
-    private void commit(){
-        final String title=mTitle.getText().toString();
-        final String content=mContent.getText().toString();
-        List<String> photos=mAdapter.getData();
+    private void commit() {
+        final String title = mTitle.getText().toString();
+        final String content = mContent.getText().toString();
+        List<String> photos = mAdapter.getData();
 
-        if(TextUtils.isEmpty(title)){
+        if (TextUtils.isEmpty(title)) {
             mTitle.setError("请输入标题");
             mTitle.requestFocus();
             return;
         }
-        if(TextUtils.isEmpty(content)){
+        if (TextUtils.isEmpty(content)) {
             mContent.setError("请输入内容");
             mContent.requestFocus();
             return;
         }
-        if(photos.isEmpty()){
-            N.showShort(this,"上传的图片为空");
+        if (photos.isEmpty()) {
+            N.showShort(this, "上传的图片为空");
             return;
         }
-        final List<File> thumbPhotos=new ArrayList<>();
+        final List<File> thumbPhotos = new ArrayList<>();
         loading("解析图像");
-        for(String photo:photos){
+        for (String photo : photos) {
             try {
-                thumbPhotos.add(ImageUtil.getThumbImageFile(800,90,photo, FileHelper.getImageCacheFolder(this).getAbsolutePath()));
+                thumbPhotos.add(ImageUtil.getThumbImageFile(800, 90, photo, FileHelper.getImageCacheFolder(this).getAbsolutePath()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        loading(String.format(Locale.getDefault(),"上传图像 %d/%d",mUploadIndex=0,thumbPhotos.size()));
+        loading(String.format(Locale.getDefault(), "上传图像 %d/%d", mUploadIndex = 0, thumbPhotos.size()));
         startTask(Task.beginCycle(thumbPhotos)
-                .next(new Action<File,Request>() {
+                .next(new Action<File, Request>() {
                     @Override
                     protected Request execute(File param) throws Throwable {
-                        return Request.obtain(CommonInterface.POST_UPLOAD_IMAGE).put("files",param)
-                        .putHeader("X-CustomToken", UserManager.getInstance().getToken());
+                        return Request.obtain(CommonInterface.POST_UPLOAD_IMAGE).put("files", param)
+                                .putHeader("X-CustomToken", UserManager.getInstance().getToken());
                     }
                 })
                 .next(new NetAction<Response<List<ResponseUploadImage>>>() {
 
                     @Override
-                    protected void executeAdapt(Response<List<ResponseUploadImage>> listResponse, Request request){
-                        loading(String.format(Locale.getDefault(),"上传图像 %d/%d",++mUploadIndex,thumbPhotos.size()));
+                    protected void executeAdapt(Response<List<ResponseUploadImage>> listResponse, Request request) {
+                        loading(String.format(Locale.getDefault(), "上传图像 %d/%d", ++mUploadIndex, thumbPhotos.size()));
                         if (!listResponse.success || listResponse.data == null || listResponse.data.isEmpty())
                             stopTask();
                     }
@@ -180,17 +180,17 @@ public class AlbumMangeUploadImageActivity extends TakePhotoFastActivity {
     }
 
     @Bind(R.id.locationLayout)
-    private void selectLocation(){
-        startActivityForResult(LocationActive.class,1);
+    private void selectLocation() {
+        startActivityForResult(LocationActive.class, 1);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode!=RESULT_OK) return;
-        if(requestCode==1){
-            mLat=data.getStringExtra("mLat");
-            mLng=data.getStringExtra("mLng");
+        if (resultCode != RESULT_OK) return;
+        if (requestCode == 1) {
+            mLat = data.getStringExtra("mLat");
+            mLng = data.getStringExtra("mLng");
             mLocation.setText(data.getStringExtra("address"));
         }
     }

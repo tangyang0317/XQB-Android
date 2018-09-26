@@ -161,6 +161,7 @@ public class AlbumManageUploadVideoActivity extends FastActivity{
         if(mAdapter.getData()==null||mAdapter.getData().isEmpty()){
             N.showShort(this,"请上传视频");
             return;
+
         }
         loading();
         startTask(Task.beginCycle(mAdapter.getData())
