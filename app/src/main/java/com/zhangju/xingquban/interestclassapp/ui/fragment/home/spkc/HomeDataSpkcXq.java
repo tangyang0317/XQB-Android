@@ -66,68 +66,67 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
 
 @ContentView(R.layout.activity_home_data_spkx_xq)
-public class HomeDataSpkcXq
-        extends FastActivity {
+public class HomeDataSpkcXq extends FastActivity {
     public static final String ARG_BEAN_SHIPINXQ = "shipin";
-    public static final String ARG_STRING_NAME   = "teacher_name";
+    public static final String ARG_STRING_NAME = "teacher_name";
     @LocalData(ARG_BEAN_SHIPINXQ)
     HomeDataTeacherBean.AaDataBean.VideoLessonBean videoLessonBean;
     @LocalData(ARG_STRING_NAME)
-    String                                         teahername;
+    String teahername;
     @Bind(R.id.home_data_spkc_Head)
-    PublicHead                                     homeDataSpkcHead;
+    PublicHead homeDataSpkcHead;
     @Bind(R.id.videoplayer)
-    JCVideoPlayerStandard                          videoplayer;
+    JCVideoPlayerStandard videoplayer;
     @Bind(R.id.tv_ischarge_res)
-    TextView                                       tv_ischarge_res;
+    TextView tv_ischarge_res;
     @Bind(R.id.video_name)
-    TextView                                       videoName;
+    TextView videoName;
     @Bind(R.id.rl_miaoshu)
-    RelativeLayout                                 rlMiaoshu;
+    RelativeLayout rlMiaoshu;
     @Bind(R.id.rl_xiaoliang)
-    RelativeLayout                                 rlXiaoliang;
+    RelativeLayout rlXiaoliang;
     @Bind(R.id.video_summary)
-    TextView                                       videoSummary;
+    TextView videoSummary;
     @Bind(R.id.teacher_name)
-    RelativeLayout                                 teacherName;
+    RelativeLayout teacherName;
     @Bind(R.id.tv_xq)
-    TextView                                       tvXq;
+    TextView tvXq;
     @Bind(R.id.ine_xq)
-    View                                           ineXq;
+    View ineXq;
     @Bind(R.id.rl_xiangq)
-    RelativeLayout                                 rlXiangq;
+    RelativeLayout rlXiangq;
     @Bind(R.id.tv_pl)
-    TextView                                       tvPl;
+    TextView tvPl;
     @Bind(R.id.line_pl)
-    View                                           linePl;
+    View linePl;
     @Bind(R.id.rl_pinglun)
-    RelativeLayout                                 rlPinglun;
+    RelativeLayout rlPinglun;
     @Bind(R.id.shipin_xiangqing)
-    TextView                                       shipinXiangqing;
+    TextView shipinXiangqing;
     @Bind(R.id.rec_sp_comment)
-    RecyclerView                                   recSpComment;
+    RecyclerView recSpComment;
     @Bind(R.id.edt_comment)
-    EditText                                       edtComment;
+    EditText edtComment;
     @Bind(R.id.commit_commnet)
-    Button                                         commitCommnet;
+    Button commitCommnet;
     @Bind(R.id.ll_comment_add)
-    LinearLayout                                   llCommentAdd;
+    LinearLayout llCommentAdd;
     @Bind(R.id.tv_xiaoliang)
-    TextView                                       xiaoliang;
+    TextView xiaoliang;
     @Bind(R.id.comment_num)
-    TextView                                       comment_num;
+    TextView comment_num;
     @Bind(R.id.ll_zhifumoney)
-    LinearLayout                                   zhifumoney;
+    LinearLayout zhifumoney;
     @Bind(R.id.zhifu)
-    TextView                                       zhifu;
+    TextView zhifu;
 
     private VideoLessonsBean lessonsBean2;
     private boolean isBofang = false;
-    private NeatVideoComment    videoComment;
+    private NeatVideoComment videoComment;
     private VideoCommentAdapter videoCommentAdapter;
     boolean isPay;//是否付钱
     private MyShareDialog mMyShareDialog;
-    private String        mId;
+    private String mId;
 
     @Override
     protected void alreadyPrepared() {
@@ -146,7 +145,7 @@ public class HomeDataSpkcXq
                 videoplayer.backButton.setVisibility(View.GONE);
                 videoplayer.setUp(""
                         , JCVideoPlayerStandard.CURRENT_STATE_NORMAL, "");
-        /*请求评论列表*/
+                /*请求评论列表*/
                 ineXq.setVisibility(View.VISIBLE);
                 linePl.setVisibility(View.GONE);
                 recSpComment.setVisibility(View.GONE);

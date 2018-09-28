@@ -27,8 +27,6 @@ import com.fastlib.app.task.ThreadType;
 import com.fastlib.net.Request;
 import com.fastlib.utils.ImageUtil;
 import com.fastlib.utils.N;
-import com.jph.takephoto.model.TResult;
-import com.orhanobut.logger.Logger;
 import com.zhangju.xingquban.R;
 import com.zhangju.xingquban.interestclassapp.refactor.common.activity.PreviewImageActivity;
 import com.zhangju.xingquban.interestclassapp.refactor.common.bean.CommonInterface;
@@ -44,6 +42,7 @@ import com.zhangju.xingquban.interestclassapp.ui.activity.near.ShipinBofangActiv
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.GlideEngine;
+import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
 import java.io.File;
 import java.io.IOException;
@@ -156,15 +155,7 @@ public class AlbumManageFragment extends FastFragment {
                         }
                     });
                 } else {
-                    Matisse.from(AlbumManageFragment.this)
-                            .choose(MimeType.ofImage())
-                            .countable(true)
-                            .maxSelectable(9)
-                            .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
-                            .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-                            .thumbnailScale(0.85f)
-                            .imageEngine(new GlideEngine())
-                            .forResult(REQUEST_CODE_CHOOSE_IMG);
+
                 }
             }
         });
@@ -255,12 +246,12 @@ public class AlbumManageFragment extends FastFragment {
                 if (which == 0) {
                     Matisse.from(AlbumManageFragment.this)
                             .choose(MimeType.ofVideo())
+                            .capture(true)
+                            .captureStrategy(new CaptureStrategy(true, "com.zhangju.xingquban.fileprovider"))
                             .countable(true)
                             .maxSelectable(1)
                             .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
                             .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-                            .thumbnailScale(0.85f)
-                            .imageEngine(new GlideEngine())
                             .forResult(REQUEST_CODE_CHOOSE_VIDEO);
 
                 } else {
@@ -287,8 +278,17 @@ public class AlbumManageFragment extends FastFragment {
     @Bind(R.id.upload)
     private void upload() {
         if (mType == 0) {
-            //上传相册
-            dialog();
+            Matisse.from(AlbumManageFragment.this)
+                    .choose(MimeType.ofImage())
+                    .capture(true)
+                    .captureStrategy(new CaptureStrategy(true, "com.zhangju.xingquban.fileprovider"))
+                    .countable(true)
+                    .maxSelectable(9)
+                    .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
+                    .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+                    .thumbnailScale(0.85f)
+                    .imageEngine(new GlideEngine())
+                    .forResult(REQUEST_CODE_CHOOSE_IMG);
         } else if (mType == 2) {
             videoDialog();
         } else {

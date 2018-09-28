@@ -1,25 +1,19 @@
 package com.zhangju.xingquban.interestclassapp.ui.main;
 
-import android.Manifest;
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.alibaba.fastjson.JSONObject;
-import com.imnjh.imagepicker.util.LogUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
@@ -27,7 +21,6 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.orhanobut.logger.Logger;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.zhangju.xingquban.BuildConfig;
 import com.zhangju.xingquban.R;
 import com.zhangju.xingquban.interestclassapp.application.MyApp;
@@ -51,7 +44,6 @@ import com.zhangju.xingquban.interestclassapp.util.SpUtil;
 import com.zhangju.xingquban.interestclassapp.util.ToastUtil;
 import com.zhangju.xingquban.interestclassapp.util.UrlUtils;
 import com.zhangju.xingquban.refactoring.IndexFragment;
-import com.zhangju.xingquban.refactoring.observer.XObserver;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -62,9 +54,6 @@ import java.util.Set;
 import butterknife.BindView;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import rx.functions.Action1;
 
 public class MainActivity extends BaseActivity {
     public static final String ARG_INT_JUMP_PAGE = "jumpPage";
@@ -116,6 +105,7 @@ public class MainActivity extends BaseActivity {
         getServiceVersion();
         loadAdData();
     }
+
 
     /***
      * 设置推送别名

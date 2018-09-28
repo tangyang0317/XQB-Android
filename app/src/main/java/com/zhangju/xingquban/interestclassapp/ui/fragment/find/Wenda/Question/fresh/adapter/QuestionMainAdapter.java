@@ -71,6 +71,7 @@ public class QuestionMainAdapter extends BaseRecycleViewAdapter {
         TextView itemQuestionCount;
         @BindView(R.id.item_question_answer)
         LinearLayout itemQuestionAnswer;
+
         public QuestionMainViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -78,33 +79,33 @@ public class QuestionMainAdapter extends BaseRecycleViewAdapter {
 
         void onBind() {
             pos = getLayoutPosition();
-            registerOnItemClickListener(pos,itemView);
+            registerOnItemClickListener(pos, itemView);
             final QuestionMainBean.AaDataBean dataBean = mainBeanList.get(pos);
-            String authorName = dataBean.getAuthorName()==null?"":dataBean.getAuthorName();//作者
-            final String title = dataBean.getTitle()==null?"":dataBean.getTitle();//标题
-            String addUserTime = dataBean.getAddUserTime()==null?"":dataBean.getAddUserTime();//
+            String authorName = dataBean.getAuthorName() == null ? "" : dataBean.getAuthorName();//作者
+            final String title = dataBean.getTitle() == null ? "" : dataBean.getTitle();//标题
+            String addUserTime = dataBean.getAddUserTime() == null ? "" : dataBean.getAddUserTime();//
             String time = addUserTime.substring(0, addUserTime.indexOf(" "));//时间
-            String label = dataBean.getLabel()==null?"":dataBean.getLabel();//标签
+            String label = dataBean.getLabel() == null ? "" : dataBean.getLabel();//标签
             int answers = dataBean.getAnswers();//评论数
-            String authorPicture = dataBean.getAuthorPicture()==null?"":dataBean.getAuthorPicture();//头像
+            String authorPicture = dataBean.getAuthorPicture() == null ? "" : dataBean.getAuthorPicture();//头像
 
 
             itemQuestionTitle.setText(title);
             itemQuestionType.setText(label);
             itemQuestionTime.setText(time);
-            itemQuestionCount.setText(answers+"");
+            itemQuestionCount.setText(answers + "");
             itemQuestionName.setText(authorName);
             Glide.with(c).load(authorPicture).placeholder(R.drawable.app_icon).dontTransform().dontAnimate().into(itemQuestionHeadPic);
 
             List<QuestionMainBean.AaDataBean.PicStrBeans> picStr = dataBean.getPicStr();
-            List<String> mImageList=new ArrayList<>();
+            List<String> mImageList = new ArrayList<>();
             for (QuestionMainBean.AaDataBean.PicStrBeans beans : picStr) {
                 mImageList.add(beans.getPicture());
             }
 
             //图片
-            ImageAdapter imageAdapter=new ImageAdapter(c,mImageList);
-            ScrollGridManager manager=new ScrollGridManager(c,3);
+            ImageAdapter imageAdapter = new ImageAdapter(c, mImageList);
+            ScrollGridManager manager = new ScrollGridManager(c, 3);
             manager.setScrollEnabled(false);
             itemQuestionRecyclerView.setLayoutManager(manager);
             itemQuestionRecyclerView.setAdapter(imageAdapter);
@@ -113,9 +114,9 @@ public class QuestionMainAdapter extends BaseRecycleViewAdapter {
                 @Override
                 public void onClick(View v) {
                     String id = dataBean.getId();
-                    Intent intent=new Intent(c, MyAnswerActivity.class);
-                    intent.putExtra("data",dataBean);
-                    intent.putExtra("type",1);
+                    Intent intent = new Intent(c, MyAnswerActivity.class);
+                    intent.putExtra("data", dataBean);
+                    intent.putExtra("type", 1);
                     c.startActivity(intent);
                 }
             });

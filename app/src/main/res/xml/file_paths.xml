@@ -2,20 +2,23 @@
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
     <files-path
         name="no_sdcard"
-        path=""/>
+        path="" />
     <cache-path
         name="downlad"
-        path=""/>
+        path="" />
     <external-path
         name="external_files"
-        path="."/>
+        path="." />
     <root-path
         name="downlad"
-        path=""/>
+        path="" />
     <external-files-path
         name="has_sdcard"
-        path=""/>
+        path="" />
     <external-cache-path
         name="cacheDir"
-        path=""/>
+        path="" />
+    <external-path
+        name="my_images"
+        path="Pictures" />
 </paths>
