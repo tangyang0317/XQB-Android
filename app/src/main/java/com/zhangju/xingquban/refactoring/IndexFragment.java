@@ -65,6 +65,7 @@ import com.zhangju.xingquban.interestclassapp.util.ToastUtil;
 import com.zhangju.xingquban.interestclassapp.util.UrlUtils;
 import com.zhangju.xingquban.interestclassapp.util.click.NoDoubleClick;
 import com.zhangju.xingquban.interestclassapp.view.BannerHelper;
+import com.zhangju.xingquban.refactoring.activity.ResourceDetailsActivity;
 import com.zhangju.xingquban.refactoring.adapter.BusinessListAdapter;
 import com.zhangju.xingquban.refactoring.adapter.CategoryViewPagerAdapter;
 import com.zhangju.xingquban.refactoring.adapter.IndexCategoryGridAdapter;
@@ -494,6 +495,7 @@ public class IndexFragment extends BaseFragment implements SwipeRefreshLayout.On
 
             //找资源
             case R.id.home_head_resourecs:
+                ResourceDetailsActivity.launcherThis(getActivity(), "1");
                 startActivity(new Intent(getActivity(), FindResource.class));
                 break;
 

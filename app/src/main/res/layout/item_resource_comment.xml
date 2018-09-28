@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/view_divider_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/dp_10">
+
+        <ImageView
+            android:id="@+id/commentUserPicImg"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:src="@drawable/app_logo" />
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10">
+
+            <TextView
+                android:id="@+id/userNickNameTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="爱吃糖的🐑"
+                android:textColor="@color/color_666666"
+                android:textSize="14sp" />
+
+
+            <TextView
+                android:id="@+id/userCommentTimeTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="9月28 16:03"
+                android:textColor="@color/button_text_bg"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/commentContentTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/userNickNameTxt"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="据悉，周兴才让今年23岁，来自青海海南藏族自治区，目前是一位藏吧歌手。在《中国好声音》的舞台上，周兴才让以一首《大雁》赢得了两位导师的转身。"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/sp_12" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

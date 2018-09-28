@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.youth.banner.Banner
+        android:id="@+id/home_banner"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:background="@drawable/banner_place_holder"
+        app:indicator_drawable_selected="@drawable/selected_radius"
+        app:indicator_drawable_unselected="@drawable/unselected_radius" />
+
+
+    <TextView
+        android:id="@+id/resourceDetailsTitileTxt"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_10"
+        android:text="【西汉】铜雀山汉墓竹简"
+        android:textColor="#333333"
+        android:textSize="14sp" />
+
+    <include layout="@layout/view_divider_line" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10"
+        android:text="音乐选秀节目《中国好声音》正在热播中，在最新一期节目里，有一位藏族小伙子引起大家的注意，她就是周兴才让。那么周兴才让是谁呢?下面我们一起来了解一下这位选手吧!"
+        android:textColor="#333333"
+        android:textSize="@dimen/sp_12" />
+
+    <include layout="@layout/view_divider_space" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_10"
+        android:text="网友点评(20)"
+        android:textColor="#666666"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+
+</LinearLayout>
