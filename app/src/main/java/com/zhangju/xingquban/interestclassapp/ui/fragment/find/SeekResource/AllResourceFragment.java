@@ -23,6 +23,7 @@ import com.zhangju.xingquban.interestclassapp.refactor.user.UserManager;
 import com.zhangju.xingquban.interestclassapp.swiperefrsh.SwipeRefreshAdapterView;
 import com.zhangju.xingquban.interestclassapp.swiperefrsh.SwipeRefreshRecyclerView;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.find.EventResourceFilterContent;
+import com.zhangju.xingquban.refactoring.activity.ResourcePictureDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -144,10 +145,7 @@ public class AllResourceFragment extends BaseFragment implements SwipeRefreshLay
                     startActivity(intent);
 
                 } else if (types.equals("picture")) {
-
-                    Intent intent = new Intent(getActivity(), PicDetailActivity.class);
-                    intent.putExtra("id", id);
-                    startActivity(intent);
+                    ResourcePictureDetailsActivity.launcherThis(getActivity(), id);
                 } else if (types.equals("article")) {
                     Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
                     intent.putExtra("id", id);

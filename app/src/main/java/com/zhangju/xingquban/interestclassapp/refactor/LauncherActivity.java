@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -134,6 +135,7 @@ public class LauncherActivity extends AppCompatActivity {
                 .error(R.drawable.launcher)
                 .override(ScreenUtils.getScreenWidth(this), ScreenUtils.getScreenHeight(this))
                 .into(background);
+
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -182,7 +184,11 @@ public class LauncherActivity extends AppCompatActivity {
             startActivities(new Intent[]{new Intent(this, MainActivity.class), new Intent(this, GuideActivity.class)});
             SaveUtil.saveToSp(this, SAVE_FIRST_LAUNCHER, false);
         } else {
-            startActivity(new Intent(LauncherActivity.this, MainActivity.class));
+            Intent intent = new Intent(LauncherActivity.this, MainActivity.class);
+            if (getIntent().getSerializableExtra("data") != null) {
+                intent.putExtra("data", getIntent().getSerializableExtra("data"));
+            }
+            startActivity(intent);
         }
         finish();
     }

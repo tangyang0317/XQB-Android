@@ -23,6 +23,7 @@ import com.zhangju.xingquban.interestclassapp.refactor.user.UserManager;
 import com.zhangju.xingquban.interestclassapp.swiperefrsh.SwipeRefreshAdapterView;
 import com.zhangju.xingquban.interestclassapp.swiperefrsh.SwipeRefreshRecyclerView;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.find.EventResourceFilterContent;
+import com.zhangju.xingquban.refactoring.activity.ResourcePictureDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,17 +44,14 @@ public class PicResFragment extends BaseFragment implements SwipeRefreshAdapterV
     @BindView(R.id.swipe_refresh_audio)
     SwipeRefreshRecyclerView swipeRefreshAudio;
     Unbinder unbinder;
-
     private int pageIndex = 0;//
     private int total = 0;//总页数
-
-
 
     private PictureResourceAdapter pictureAdapter;
     private List<ResouecesAll.AaDataBean> mPictureList = new ArrayList<>();
 
     boolean isRefresh;
-    String mFilter="";
+    String mFilter = "";
 
    /* @Override
     public void onResume() {
@@ -92,18 +90,14 @@ public class PicResFragment extends BaseFragment implements SwipeRefreshAdapterV
 
 
         pictureAdapter = new PictureResourceAdapter(getActivity(), mPictureList);
-        swipeRefreshAudio.setLayoutManager(new GridLayoutManager(getActivity(),2));
+        swipeRefreshAudio.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         swipeRefreshAudio.setAdapter(pictureAdapter);
 
         pictureAdapter.setOnListItemClickListener(new OnListItemClickListener() {
+
             @Override
             public void onItemClickListener(int position, View v) {
-                String id = mPictureList.get(position).getId();
-
-                Intent intent=new Intent(getActivity(),PicDetailActivity.class);
-                intent.putExtra("id",id);
-                startActivity(intent);
-
+                ResourcePictureDetailsActivity.launcherThis(getActivity(), mPictureList.get(position).getId());
             }
         });
         pictureAdapter.setMyOnClickListener(new AllTypeResourceAdapter.MyOnClickListener() {
@@ -164,7 +158,7 @@ public class PicResFragment extends BaseFragment implements SwipeRefreshAdapterV
         public void onNext(ResouecesAll resourcesVideo) {
             if (resourcesVideo.isSuccess()) {
                 total = resourcesVideo.getTotal();
-                if (pageIndex==0){
+                if (pageIndex == 0) {
                     mPictureList.clear();
                 }
                 if (resourcesVideo.getAaData() != null && resourcesVideo.getAaData().size() > 0) {
@@ -201,11 +195,12 @@ public class PicResFragment extends BaseFragment implements SwipeRefreshAdapterV
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer));
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this,rootView);
-        EventObserver.getInstance().subscribe(getContext(),this);
+        unbinder = ButterKnife.bind(this, rootView);
+        EventObserver.getInstance().subscribe(getContext(), this);
         return rootView;
     }
 
@@ -213,12 +208,12 @@ public class PicResFragment extends BaseFragment implements SwipeRefreshAdapterV
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
-        EventObserver.getInstance().unsubscribe(getContext(),this);
+        EventObserver.getInstance().unsubscribe(getContext(), this);
     }
 
     @Event
-    private void eFilterContent(EventResourceFilterContent filter){
-        mFilter=filter.getmFilter();
+    private void eFilterContent(EventResourceFilterContent filter) {
+        mFilter = filter.getmFilter();
         swipeRefreshAudio.autoRefresh();
     }
 }

@@ -257,7 +257,6 @@ public class PicDetailActivity extends FastActivity implements SwipeRefreshAdapt
                 if (success) {
                     List<ResDeatailTopBean.AaDataBean> databean = result.getAaData();
                     if (databean != null && databean.size() > 0) {
-
                         ResDeatailTopBean.AaDataBean dataBean = databean.get(0);
                         String title = dataBean.getTitle() == null ? "" : dataBean.getTitle();//标题
                         int clickRate = dataBean.getClickRate();//播放次数
@@ -335,13 +334,12 @@ public class PicDetailActivity extends FastActivity implements SwipeRefreshAdapt
     //viewpager 设置
     private void setViewPager() {
         vp.setAdapter(new MyViewpagerAdapter(PicDetailActivity.this, mPicList, vp));
-        tvPosition.setText( 1 + "/" + mPicList.size());
+        tvPosition.setText(1 + "/" + mPicList.size());
 
 //        setAutoviewpager();
 
 
     }
-
 
 
     @OnClick({R.id.audio_back, R.id.audio_share, R.id.image_next, R.id.audio_detail_comment, R.id.audio_detail_prise, R.id.audio_detail_collect})
@@ -406,7 +404,6 @@ public class PicDetailActivity extends FastActivity implements SwipeRefreshAdapt
         request.put("resourcesId", resId);
         request.addHeader("X-CustomToken", token);
         request.setListener(new SimpleListener<Response>() {
-
             @Override
             public void onResponseListener(Request r, Response result) {
                 if (result.success) {

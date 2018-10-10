@@ -26,7 +26,7 @@ public abstract class BaseActivity extends RxAppCompatActivity implements View.O
     protected CompositeSubscription mSubscribers;//管理所有的订阅
 
 
-    @Override
+        @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);

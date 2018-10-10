@@ -197,6 +197,7 @@ public class ClassManagerActivity extends FastActivity implements View.OnClickLi
     Observer<BaseResponseBean<List<LessonsManagerBean>>> observer = new Observer<BaseResponseBean<List<LessonsManagerBean>>>() {
         @Override
         public void onCompleted() {
+
         }
 
         @Override

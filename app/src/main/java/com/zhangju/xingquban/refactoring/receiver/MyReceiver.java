@@ -7,10 +7,11 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.orhanobut.logger.Logger;
 import com.zhangju.xingquban.interestclassapp.ui.main.MainActivity;
+import com.zhangju.xingquban.refactoring.activity.PushIntentActivity;
 import com.zhangju.xingquban.refactoring.bean.PushJsonBean;
+import com.zhangju.xingquban.refactoring.utils.SystemUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,8 +49,27 @@ public class MyReceiver extends BroadcastReceiver {
                 int notifactionId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
                 Logger.d("[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
                 receivingNotification(context, bundle);
+
             } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
-                openNotification(context, bundle);
+                String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
+                PushJsonBean.ExtrasBean extrasBean = new Gson().fromJson(extras, PushJsonBean.ExtrasBean.class);
+                if (extrasBean != null) {
+                    if (SystemUtils.isAppaLive(context, "com.zhangju.xingquban")) {
+                        Intent mainIntent = new Intent(context, MainActivity.class);
+                        mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        mainIntent.putExtra("data", extrasBean);
+//                        Intent pushIntent = new Intent(context, PushIntentActivity.class);
+//                        pushIntent.putExtra("data", extrasBean);
+                        Intent[] intents = {mainIntent};
+                        context.startActivities(intents);
+                    } else {
+                        Intent launchIntent = context.getPackageManager().
+                                getLaunchIntentForPackage("com.zhangju.xingquban");
+                        launchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+                        launchIntent.putExtra("data", extrasBean);
+                        context.startActivity(launchIntent);
+                    }
+                }
             } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
                 Logger.d("[MyReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));
                 //在这里根据 JPushInterface.EXTRA_EXTRA 的内容处理代码，比如打开新的Activity， 打开一个网页等..
@@ -109,26 +129,6 @@ public class MyReceiver extends BroadcastReceiver {
         Logger.d("extras : " + extras);
     }
 
-    private void openNotification(Context context, Bundle bundle) {
-        String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
-        PushJsonBean pushJsonBean = new Gson().fromJson(extras, PushJsonBean.class);
-        if (pushJsonBean != null) {
-            if ("0".equals(pushJsonBean.getAndroid().getExtras().getPushInfotype())) {
-                if ("0".equals(pushJsonBean.getAndroid().getExtras().getIsTeacher())) {
-                    //跳转到机构详情
-
-                } else if ("".equals(pushJsonBean.getAndroid().getExtras().getIsTeacher())) {
-                    //跳转到教师详情
-                }
-            } else if ("1".equals(pushJsonBean.getAndroid().getExtras().getPushInfotype())) {
-                //跳转到课程详情
-            } else if ("2".equals(pushJsonBean.getAndroid().getExtras().getPushInfotype())) {
-                //挑战到活动详情
-            } else if ("3".equals(pushJsonBean.getAndroid().getExtras().getPushInfotype())) {
-                //挑战到资源
-            }
-        }
-
 
 //        String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
 //        String myValue = "";
@@ -151,5 +151,5 @@ public class MyReceiver extends BroadcastReceiver {
 //            context.startActivity(mIntent);
 //        }
 
-    }
+//    }
 }

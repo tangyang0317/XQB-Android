@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/videoPlayFrameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_200">
+
+        <ImageView
+            android:id="@+id/mediaPalyBackgroundImg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/back_play"
+            android:visibility="gone" />
+
+        <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+            android:id="@+id/mediaResourceJCVideoPlayerStandard"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"></fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard>
+
+        <TextView
+            android:id="@+id/isChareResTxt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_10">
+
+        <TextView
+            android:id="@+id/mediaResourceTitleTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="收拾收拾"
+            android:textColor="@color/color_333333"
+            android:textSize="@dimen/sp_16" />
+
+        <TextView
+            android:id="@+id/mediaResourcePayFirTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="¥1"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/sp_14" />
+
+
+        <TextView
+            android:id="@+id/mediaPlayCountTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mediaResourceTitleTxt"
+            android:layout_marginTop="@dimen/dp_6"
+            android:text="21次播放"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/sp_14" />
+
+
+        <TextView
+            android:id="@+id/mediaResourceCommentTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/mediaResourcePayFirTxt"
+            android:layout_alignTop="@+id/mediaPlayCountTxt"
+            android:drawableLeft="@drawable/icon_disscuz_12_12"
+            android:drawablePadding="@dimen/dp_5"
+            android:text="2109"
+            android:textColor="#FFACACAC"
+            android:textSize="11sp" />
+
+
+        <TextView
+            android:id="@+id/mediaResourcePrisedTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/mediaPlayCountTxt"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_toLeftOf="@id/mediaResourceCommentTxt"
+            android:drawableLeft="@drawable/love_red"
+            android:drawablePadding="@dimen/dp_5"
+            android:text="2109"
+            android:textColor="#FFACACAC"
+            android:textSize="11sp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/levelTwoResourceLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/levelTowResourceRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+    </LinearLayout>
+
+    <include layout="@layout/view_divider_space" />
+
+    <TextView
+        android:id="@+id/commentCountTxt"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_10"
+        android:text="网友点评(20)"
+        android:textColor="#666666"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+</LinearLayout>

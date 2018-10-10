@@ -5,8 +5,11 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -21,13 +24,16 @@ import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.orhanobut.logger.Logger;
+import com.youth.banner.BannerConfig;
 import com.zhangju.xingquban.BuildConfig;
 import com.zhangju.xingquban.R;
+import com.zhangju.xingquban.interestclassapp.RetrofitInterface.NetWork;
 import com.zhangju.xingquban.interestclassapp.application.MyApp;
 import com.zhangju.xingquban.interestclassapp.base.BaseActivity;
 import com.zhangju.xingquban.interestclassapp.bean.AdBannerBean;
 import com.zhangju.xingquban.interestclassapp.bean.Data;
 import com.zhangju.xingquban.interestclassapp.bean.EditBean;
+import com.zhangju.xingquban.interestclassapp.bean.ResDeatailTopBean;
 import com.zhangju.xingquban.interestclassapp.config.Constant;
 import com.zhangju.xingquban.interestclassapp.hplper.FragmentHelper;
 import com.zhangju.xingquban.interestclassapp.refactor.common.UpdateService;
@@ -37,6 +43,10 @@ import com.zhangju.xingquban.interestclassapp.refactor.me.activity.LoginActivity
 import com.zhangju.xingquban.interestclassapp.refactor.me.fragment.MeFragment;
 import com.zhangju.xingquban.interestclassapp.refactor.user.UserManager;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.find.FindFragment;
+import com.zhangju.xingquban.interestclassapp.ui.fragment.find.SeekResource.AudioDetailActivity;
+import com.zhangju.xingquban.interestclassapp.ui.fragment.find.SeekResource.NewsDetailActivity;
+import com.zhangju.xingquban.interestclassapp.ui.fragment.find.SeekResource.PicDetailActivity;
+import com.zhangju.xingquban.interestclassapp.ui.fragment.home.GlideImageLoader;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.live.LiveFragment;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.me.Settings.MyDialog;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.near.NearbyFragment;
@@ -44,6 +54,10 @@ import com.zhangju.xingquban.interestclassapp.util.SpUtil;
 import com.zhangju.xingquban.interestclassapp.util.ToastUtil;
 import com.zhangju.xingquban.interestclassapp.util.UrlUtils;
 import com.zhangju.xingquban.refactoring.IndexFragment;
+import com.zhangju.xingquban.refactoring.activity.ResourcePictureDetailsActivity;
+import com.zhangju.xingquban.refactoring.adapter.ResourceLevelTwoAdapter;
+import com.zhangju.xingquban.refactoring.bean.PushJsonBean;
+import com.zhangju.xingquban.refactoring.entity.BaseResponseBean;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -54,6 +68,9 @@ import java.util.Set;
 import butterknife.BindView;
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
+import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class MainActivity extends BaseActivity {
     public static final String ARG_INT_JUMP_PAGE = "jumpPage";
@@ -79,6 +96,18 @@ public class MainActivity extends BaseActivity {
     private String uploadUrl;
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (intent.getSerializableExtra("data") != null) {
+            PushJsonBean.ExtrasBean pushJsonBean = (PushJsonBean.ExtrasBean) intent.getSerializableExtra("data");
+            if (pushJsonBean != null) {
+                openNotification(pushJsonBean);
+            }
+        }
+    }
+
+
+    @Override
     public void initData() {
         //添加fragment//
         fragmentList.add(new IndexFragment());
@@ -87,11 +116,12 @@ public class MainActivity extends BaseActivity {
         fragmentList.add(new FindFragment());
         fragmentList.add(new MeFragment());
         fragmentManager = getSupportFragmentManager();
-
         //默认展示首页
         FragmentHelper.replaceFragment(fragmentManager, fragmentList.get(Constant.MAIN_HOME), R.id.main_frame_empty);
-        //        mainBtnHome.setChecked(true);
-        // 申请权限
+        PushJsonBean.ExtrasBean pushJsonBean = (PushJsonBean.ExtrasBean) getIntent().getSerializableExtra("data");
+        if (pushJsonBean != null) {
+            openNotification(pushJsonBean);
+        }
         // initLogin();
         index = mainBtnHome.getId();
         if (!TextUtils.isEmpty(UserManager.getInstance().getUser().id)) {
@@ -105,6 +135,70 @@ public class MainActivity extends BaseActivity {
         getServiceVersion();
         loadAdData();
     }
+
+    private void openNotification(PushJsonBean.ExtrasBean pushJsonBean) {
+        if (pushJsonBean != null) {
+            if ("3".equals(pushJsonBean.getPushInfotype())) {
+                //跳转到资源
+                String resId = pushJsonBean.getTypeId();
+                if (!TextUtils.isEmpty(resId)) {
+                    getResourceDetailsTopData(resId);
+                }
+            }
+        }
+    }
+
+
+    /***
+     * 获取资源详情数据
+     */
+    private void getResourceDetailsTopData(String resId) {
+        NetWork.getReources().getResourceDetailsTopData(resId, String.valueOf(0), String.valueOf(10))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(topDataObserva);
+    }
+
+
+    Observer<BaseResponseBean<List<ResDeatailTopBean.AaDataBean>>> topDataObserva = new Observer<BaseResponseBean<List<ResDeatailTopBean.AaDataBean>>>() {
+        @Override
+        public void onCompleted() {
+
+        }
+
+        @Override
+        public void onError(Throwable e) {
+
+        }
+
+        @Override
+        public void onNext(BaseResponseBean<List<ResDeatailTopBean.AaDataBean>> listBaseResponseBean) {
+            if (listBaseResponseBean.isSuccess()) {
+                if (listBaseResponseBean.getAaData() != null && listBaseResponseBean.getAaData().size() > 0) {
+                    ResDeatailTopBean.AaDataBean dataBean = listBaseResponseBean.getAaData().get(0);
+                    String types = dataBean.getTypes();
+                    String id = dataBean.getId();
+                    if (types.equals("video")) {
+                        Intent intent = new Intent(MainActivity.this, AudioDetailActivity.class);
+                        intent.putExtra("types", "video");
+                        intent.putExtra("resId", id);
+                        startActivity(intent);
+                    } else if (types.equals("picture")) {
+                        ResourcePictureDetailsActivity.launcherThis(MainActivity.this, id);
+                    } else if (types.equals("article")) {
+                        Intent intent = new Intent(MainActivity.this, NewsDetailActivity.class);
+                        intent.putExtra("id", id);
+                        startActivity(intent);
+                    } else if (types.equals("audio")) {
+                        Intent intent = new Intent(MainActivity.this, AudioDetailActivity.class);
+                        intent.putExtra("types", "audio");
+                        intent.putExtra("resId", id);
+                        startActivity(intent);
+                    }
+                }
+            }
+        }
+    };
 
 
     /***

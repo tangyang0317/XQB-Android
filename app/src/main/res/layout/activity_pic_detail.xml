@@ -53,6 +53,5 @@
 
     </com.zhangju.xingquban.interestclassapp.swiperefrsh.SwipeRefreshRecyclerView>
 
-
     <include layout="@layout/res_bottom" />
 </LinearLayout>

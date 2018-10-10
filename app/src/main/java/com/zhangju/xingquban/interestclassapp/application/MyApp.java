@@ -174,7 +174,6 @@ public class MyApp extends Application {
 
     public static void setRegistrationId(String registrationId) {
         MyApp.registrationId = registrationId;
-
     }
 
     private void initGlobalNetCallback() {
