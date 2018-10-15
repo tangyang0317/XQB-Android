@@ -41,7 +41,7 @@ public class CurriculumXqActivity extends BaseActivity {
     private TabLayout lessonDetailsTablayout;
     private ViewPager lessonDetailsViewPager;
     private ShareDialog shareDialog;
-    private String SHARE_ICON_URL = "http://m.xqban.com/rs/app/images/down_logo.png";
+    private String SHARE_ICON_URL = "https://my.xqban.com/share/#/class/detail?id=";
     private LessonXqBean.AaDataBean lessonsBea = null;
 
     public static void lanuchActivity(Activity activity, String lessonId) {
@@ -132,25 +132,26 @@ public class CurriculumXqActivity extends BaseActivity {
             public void onClick(View v) {
                 ArrayList<String> imgs = new ArrayList<String>();
                 imgs.add(lessonsBea.getPicture());
-                ThirdPartyUtils.getInstance(CurriculumXqActivity.this).shareUrlToZone(CurriculumXqActivity.this, SHARE_ICON_URL, lessonsBea.getName(), "", imgs);
+                ThirdPartyUtils.getInstance(CurriculumXqActivity.this).shareUrlToZone(CurriculumXqActivity.this, SHARE_ICON_URL+lessonsBea.getId(), lessonsBea.getName(), "", imgs);
             }
         });
         shareDialog.qq(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ThirdPartyUtils.getInstance(CurriculumXqActivity.this).shareToQQ(CurriculumXqActivity.this, SHARE_ICON_URL, lessonsBea.getName(), "", lessonsBea.getPicture());
+                ThirdPartyUtils.getInstance(CurriculumXqActivity.this).shareToQQ(CurriculumXqActivity.this, SHARE_ICON_URL+lessonsBea.getId(), lessonsBea.getName(), "", lessonsBea.getPicture());
             }
         });
         shareDialog.wechat(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ThirdPartyUtils.getInstance(CurriculumXqActivity.this).shareUrlToWechat(SHARE_ICON_URL, lessonsBea.getName(), "", lessonsBea.getPicture(), false, false);
+                ThirdPartyUtils.getInstance(CurriculumXqActivity.this).shareUrlToWechat(SHARE_ICON_URL+lessonsBea.getId(), lessonsBea.getName(), "", lessonsBea.getPicture(), false, true);
+
             }
         });
         shareDialog.wechat_zone(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ThirdPartyUtils.getInstance(CurriculumXqActivity.this).shareUrlToWechat(SHARE_ICON_URL, lessonsBea.getName(), "", lessonsBea.getPicture(), false, true);
+                ThirdPartyUtils.getInstance(CurriculumXqActivity.this).shareUrlToWechat(SHARE_ICON_URL+lessonsBea.getId(), lessonsBea.getName(), "", lessonsBea.getPicture(), false, false);
             }
         });
         shareDialog.weibo(new View.OnClickListener() {

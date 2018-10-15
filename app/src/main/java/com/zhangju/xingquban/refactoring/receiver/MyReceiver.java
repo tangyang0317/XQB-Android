@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
 import com.zhangju.xingquban.interestclassapp.ui.main.MainActivity;
-import com.zhangju.xingquban.refactoring.activity.PushIntentActivity;
 import com.zhangju.xingquban.refactoring.bean.PushJsonBean;
 import com.zhangju.xingquban.refactoring.utils.SystemUtils;
 

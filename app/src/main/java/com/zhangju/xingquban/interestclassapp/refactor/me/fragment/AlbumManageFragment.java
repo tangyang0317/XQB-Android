@@ -19,7 +19,6 @@ import com.fastlib.annotation.LocalData;
 import com.fastlib.app.EventObserver;
 import com.fastlib.app.FastDialog;
 import com.fastlib.app.FastFragment;
-import com.fastlib.app.PhotoResultListener;
 import com.fastlib.app.task.Action;
 import com.fastlib.app.task.NetAction;
 import com.fastlib.app.task.Task;
@@ -62,7 +61,7 @@ public class AlbumManageFragment extends FastFragment {
     final int REQ_VIDEO_ALBUM = 2;
     final int REQ_LOCATION = 3;
     final int REQUEST_CODE_CHOOSE_IMG = 4;
-    final int REQUEST_CODE_CHOOSE_VIDEO = 4;
+    final int REQUEST_CODE_CHOOSE_VIDEO = 5;
     @LocalData(ARG_INT_MANAGER_TYPE)
     int mType;
     @Bind(R.id.grid)
@@ -138,29 +137,6 @@ public class AlbumManageFragment extends FastFragment {
         mAdapter.setShowDelete(event.isDeleteFlag());
     }
 
-    /***
-     * 上传图片
-     */
-    private void dialog() {
-        FastDialog.showListDialog(new String[]{"拍照", "从手机相册选择"}).show(getChildFragmentManager(), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (which == 0) {
-                    openCamera(new PhotoResultListener() {
-                        @Override
-                        public void onPhotoResult(String path) {
-                            List<String> photoList = new ArrayList<>();
-                            photoList.add(path);
-                            uploadImage(photoList);
-                        }
-                    });
-                } else {
-
-                }
-            }
-        });
-    }
-
 
     private void uploadImage(List<String> photos) {
         final List<File> thumbPhotos = new ArrayList<>();
@@ -228,6 +204,7 @@ public class AlbumManageFragment extends FastFragment {
                     @Override
                     protected void executeAdapt(Response response, Request request) {
                         if (response.success) {
+                            mAdapter.refresh();
                             dismissLoading();
                             N.showShort(getActivity(), "上传成功");
                         }
@@ -245,11 +222,10 @@ public class AlbumManageFragment extends FastFragment {
             public void onClick(DialogInterface dialog, int which) {
                 if (which == 0) {
                     Matisse.from(AlbumManageFragment.this)
-                            .choose(MimeType.ofVideo())
-                            .capture(true)
-                            .captureStrategy(new CaptureStrategy(true, "com.zhangju.xingquban.fileprovider"))
+                            .choose(MimeType.ofVideo(), true)
                             .countable(true)
                             .maxSelectable(1)
+                            .showSingleMediaType(true)
                             .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
                             .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
                             .forResult(REQUEST_CODE_CHOOSE_VIDEO);
@@ -279,11 +255,12 @@ public class AlbumManageFragment extends FastFragment {
     private void upload() {
         if (mType == 0) {
             Matisse.from(AlbumManageFragment.this)
-                    .choose(MimeType.ofImage())
+                    .choose(MimeType.ofImage(), true)
                     .capture(true)
                     .captureStrategy(new CaptureStrategy(true, "com.zhangju.xingquban.fileprovider"))
                     .countable(true)
                     .maxSelectable(9)
+                    .showSingleMediaType(true)
                     .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
                     .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
                     .thumbnailScale(0.85f)
@@ -333,8 +310,9 @@ public class AlbumManageFragment extends FastFragment {
                     protected Request execute(String param) throws Throwable {
                         String name = System.currentTimeMillis() + ".jpg";
                         ImageUtil.saveVideoFrame(getActivity(), param, name);
+                        File file = new File(getActivity().getFilesDir(), name);
                         return Request.obtain(CommonInterface.POST_UPLOAD_IMAGE)
-                                .add("files", new File(name))
+                                .add("files", file)
                                 .add("files", new File(param))
                                 .setSendEventInterval(500)
                                 .setHost(getActivity())
@@ -345,9 +323,12 @@ public class AlbumManageFragment extends FastFragment {
 
                     @Override
                     protected void executeAdapt(Response<List<ResponseUploadImage>> listResponse, Request request) {
-                        if (listResponse.success && listResponse.data != null && listResponse.data.size() >= 2) {
+                        if (listResponse.success && listResponse.data != null && listResponse.data.size() == 2) {
                             mCoverVideoPairList.add(Pair.create(listResponse.data.get(0).fileName, listResponse.data.get(1).fileName));
-                        } else stopTask();
+                        } else {
+                            stopTask();
+                            dismissLoading();
+                        }
                     }
                 })
                 .again(new Action<List<Response<List<ResponseUploadImage>>>, Request>() {
@@ -374,8 +355,9 @@ public class AlbumManageFragment extends FastFragment {
                     @Override
                     protected void executeAdapt(Response response, Request request) {
                         if (response.success) {
+                            dismissLoading();
+                            mAdapter.refresh();
                             N.showShort(getActivity(), "发布成功");
-                            finish();
                         }
                     }
                 }, ThreadType.MAIN));

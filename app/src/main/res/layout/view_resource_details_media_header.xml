@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:text="收拾收拾"
-            android:textColor="@color/color_333333"
+            android:textColor="#333333"
             android:textSize="@dimen/sp_16" />
 
         <TextView

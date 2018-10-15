@@ -1,6 +1,5 @@
 package com.zhangju.xingquban.interestclassapp.ui.activity.near;
 
-import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -44,8 +43,8 @@ import com.zhangju.xingquban.interestclassapp.ui.fragment.home.sjkc.CurriculumXq
 import com.zhangju.xingquban.interestclassapp.util.DpUtil;
 import com.zhangju.xingquban.interestclassapp.util.ToastUtil;
 import com.zhangju.xingquban.interestclassapp.view.BannerHelper;
-import com.zhangju.xingquban.refactoring.entity.CategoryBean;
 import com.zhangju.xingquban.refactoring.dblite.CategoryDao;
+import com.zhangju.xingquban.refactoring.entity.CategoryBean;
 import com.zhangju.xingquban.refactoring.view.AppBarStateChangeListener;
 
 import java.util.ArrayList;

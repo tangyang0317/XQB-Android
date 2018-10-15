@@ -13,8 +13,8 @@ android {
         useLibrary 'org.apache.http.legacy'
         minSdkVersion rootProject.android.minSdkVersion
         targetSdkVersion rootProject.android.targetSdkVersion
-        versionCode 211
-        versionName "2.1.1"
+        versionCode 212
+        versionName "2.1.2"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
