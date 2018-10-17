@@ -6,17 +6,24 @@
     android:background="@color/back_main"
     android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/title"
-        android:layout_alignParentTop="true"
-        android:background="@color/white"
-        android:gravity="center"
-        android:paddingBottom="5dp"
-        android:paddingTop="5dp"
-        android:text="@string/find"
-        android:textColor="@color/black"
-        android:textSize="18sp" />
+        android:layout_height="@dimen/dp_50"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/find"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
