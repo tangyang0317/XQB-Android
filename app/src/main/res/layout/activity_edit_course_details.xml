@@ -12,7 +12,7 @@
         android:layout_height="?android:actionBarSize"
         android:background="@android:color/white"
         app:leftIcon="@drawable/home_city_back"
-        app:rightText="发布"
+        app:rightText="预览"
         app:titleText="课程添加" />
 
     <View

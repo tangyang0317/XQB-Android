@@ -196,5 +196,9 @@ public class UrlUtils {
      */
     public static final String POST_STUDENT_INTRODUCE = url + "stdResource/ls.json";
 
+    public static final String URL_UPLOAD_IMG = url + "/customer/upload.json";
+
+    public static final String URL_ADD_LESSON = url + "/lesson/add.json";
+
 
 }

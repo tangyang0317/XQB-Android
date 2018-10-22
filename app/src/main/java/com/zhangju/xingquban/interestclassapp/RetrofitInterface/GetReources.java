@@ -3,13 +3,17 @@ package com.zhangju.xingquban.interestclassapp.RetrofitInterface;
 import com.zhangju.xingquban.interestclassapp.bean.ResDeatailTopBean;
 import com.zhangju.xingquban.interestclassapp.bean.ResDetailBean;
 import com.zhangju.xingquban.interestclassapp.bean.ResouecesAll;
+import com.zhangju.xingquban.interestclassapp.refactor.me.bean.ResponseUploadImage;
 import com.zhangju.xingquban.refactoring.entity.BaseResponseBean;
 
 
+import java.io.File;
 import java.util.List;
 
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 import rx.Observable;
 import rx.Observer;

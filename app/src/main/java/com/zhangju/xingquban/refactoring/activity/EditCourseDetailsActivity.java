@@ -1,5 +1,6 @@
 package com.zhangju.xingquban.refactoring.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -22,6 +23,7 @@ import com.fastlib.utils.N;
 import com.fastlib.widget.TitleBar;
 import com.zhangju.xingquban.R;
 import com.zhangju.xingquban.interestclassapp.RetrofitInterface.NetWork;
+import com.zhangju.xingquban.interestclassapp.bean.near.LessonXqBean;
 import com.zhangju.xingquban.interestclassapp.refactor.common.bean.CommonInterface;
 import com.zhangju.xingquban.interestclassapp.refactor.common.bean.Response;
 import com.zhangju.xingquban.interestclassapp.refactor.me.activity.EditCourseActivity;
@@ -37,6 +39,7 @@ import com.zhangju.xingquban.interestclassapp.refactor.me.fragment.publish_activ
 import com.zhangju.xingquban.interestclassapp.refactor.user.UserManager;
 import com.zhangju.xingquban.interestclassapp.util.ToastUtil;
 import com.zhangju.xingquban.refactoring.entity.BaseResponseBean;
+import com.zhangju.xingquban.refactoring.fragment.CurriculumDetailsPreViewActivity;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -56,6 +59,7 @@ import rx.schedulers.Schedulers;
 @ContentView(R.layout.activity_edit_course_details)
 public class EditCourseDetailsActivity extends FastActivity {
 
+    public static Activity instance;
     @Bind(R.id.titleBar)
     TitleBar titleBar;
     @Bind(R.id.lessonDescripEdt)
@@ -81,6 +85,7 @@ public class EditCourseDetailsActivity extends FastActivity {
 
     @Override
     protected void alreadyPrepared() {
+        instance = this;
         lessonDescripEdt.clearFocus();
         mDisplayAdapter = new OrgProfileDisplayAdapter(this);
         mList.setAdapter(mAdapter = new PublishActiveFeatureAdapter(this));
@@ -145,100 +150,21 @@ public class EditCourseDetailsActivity extends FastActivity {
      * 课程发布和修改
      */
     private void requestPublishProfile() {
+
+        HashMap<String, String> params = getLessonParam();
         final String lessonDescripStr = lessonDescripEdt.getText().toString();
+        params.put("descript", lessonDescripStr);
+        params.put("summary", concatProfile());
 
         if (lessonDescripStr.isEmpty()) {
             ToastUtil.showToast("请填写课程描述课程描述！");
             return;
         }
-        loading();
-        startTask(Task.beginCycle(mAdapter.getData())
-                .filter(new Action<PublishActiveFeature, Boolean>() {  //过滤出是本地图像的item，上传并将返回的地址赋值到PublishActiveFeature.imageUrl中
-                    @Override
-                    protected Boolean execute(PublishActiveFeature param) throws Throwable {
-                        return param != null && param.type == PublishActiveFeature.TYPE_IMAGE;
-                    }
-                })
-                .next(new Action<PublishActiveFeature, Request>() {
-
-                    @Override
-                    protected Request execute(PublishActiveFeature param) throws Throwable {
-                        Request request = Request.obtain(CommonInterface.POST_UPLOAD_IMAGE).put("files", new File(param.content));
-                        request.putHeader("X-CustomToken", UserManager.getInstance().getToken());
-                        request.setTag(param);
-                        return request;
-                    }
-                })
-                .next(new NetAction<Response<List<ResponseUploadImage>>>() {
-
-                    @Override
-                    protected void executeAdapt(Response<List<ResponseUploadImage>> listResponse, Request request) {
-                        if (listResponse.success && listResponse.data != null && !listResponse.data.isEmpty())
-                            ((PublishActiveFeature) request.getTag()).imageUrl = listResponse.data.get(0).fileName;
-                        else stopTask();
-                    }
-                })
-                .again(new Action<List<Response<List<ResponseUploadImage>>>, Request>() { //拼接图像和文本发布新机构简介
-
-                    @Override
-                    protected Request execute(List<Response<List<ResponseUploadImage>>> param) throws Throwable {
-                        Request request = Request.obtain(MeInterface.POST_ADD_COURSE);
-                        request.putHeader("X-CustomToken", UserManager.getInstance().getToken());
-                        request.put("areasId", getLessonParam().get("areasId"));
-                        request.put("allows", getLessonParam().get("allows"));
-                        request.put("cityCode", getLessonParam().get("cityCode"));
-                        request.put("provinceId", getLessonParam().get("provinceId"));
-                        request.put("areasName", getLessonParam().get("areasName"));
-                        request.put("cityName", getLessonParam().get("cityName"));
-                        request.put("courses", getLessonParam().get("courses"));
-                        request.put("customerId", getLessonParam().get("customerId"));
-                        request.put("isCantry", getLessonParam().get("isCantry"));
-                        request.put("lat", getLessonParam().get("lat"));
-                        request.put("lng", getLessonParam().get("lng"));
-                        request.put("methodType", getLessonParam().get("methodType"));
-                        request.put("name", getLessonParam().get("name"));
-                        request.put("picture", getLessonParam().get("picture"));
-                        request.put("price", getLessonParam().get("price"));
-                        request.put("provinceName", getLessonParam().get("provinceName"));
-                        request.put("region", getLessonParam().get("region"));
-                        request.put("resId", getLessonParam().get("resId"));
-                        request.put("teacherTimeId", getLessonParam().get("teacherTimeId"));
-                        request.put("timelength", getLessonParam().get("timelength"));
-                        request.put("vipPrice", getLessonParam().get("vipPrice"));
-                        request.put("lessonDate", getLessonParam().get("lessonDate"));
-                        request.put("categoriesId", getLessonParam().get("categoriesId"));
-                        request.put("catagoryName", getLessonParam().get("catagoryName"));
-                        request.put("descript", lessonDescripStr);
-                        request.put("summary", concatProfile());
-                        if (!TextUtils.isEmpty(getLessonParam().get("id")) && !"-1".equals(getLessonParam().get("id"))) {
-                            request.put("id", getLessonParam().get("id"));
-                        }
-                        return request;
-                    }
-                })
-                .next(new NetAction<Response<ResponseOrgProfile>>() {
-
-                    @Override
-                    protected void executeAdapt(Response<ResponseOrgProfile> response, Request request) {
-                        if (response.success) {
-                            EditCourseActivity.instance.finish();
-                            EditCourseDetailsActivity.this.finish();
-                        } else {
-                            N.showShort(EditCourseDetailsActivity.this, "课程发布失败");
-                        }
-                    }
-                }, ThreadType.MAIN), new NoReturnAction<Throwable>() {
-            @Override
-            public void executeAdapt(Throwable param) {
-                param.printStackTrace();
-                dismissLoading();
-            }
-        }, new EmptyAction() {
-            @Override
-            protected void executeAdapt() {
-                dismissLoading();
-            }
-        });
+        if (concatProfile().isEmpty()) {
+            ToastUtil.showToast("请填写课程描述课程描述！");
+            return;
+        }
+        CurriculumDetailsPreViewActivity.lanuchActivity(EditCourseDetailsActivity.this, params);
     }
 
 

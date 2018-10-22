@@ -286,7 +286,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:drawableLeft="@mipmap/me_xiaoxi"
+                        android:drawableLeft="@mipmap/me_msg_red"
                         android:drawablePadding="10dp"
                         android:gravity="center_vertical"
                         android:text="消息中心"

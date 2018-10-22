@@ -75,7 +75,6 @@ public class ContestWebActivity1 extends AppCompatActivity {
                 finish();
             }
         });
-
         assert mWebView != null;
         WebSettings settings = mWebView.getSettings();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -89,8 +88,6 @@ public class ContestWebActivity1 extends AppCompatActivity {
         settings.setJavaScriptEnabled(true);
         settings.setLoadsImagesAutomatically(true);
         settings.setAllowFileAccess(true);
-
-
         mWebView.addJavascriptInterface(this, "androidWebView");
         mWebView.setWebViewClient(new WebClient());
         mWebView.setWebChromeClient(new ChromeClient());
@@ -110,32 +107,25 @@ public class ContestWebActivity1 extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == REQUEST_CODE_ALBUM || requestCode == REQUEST_CODE_CAMERA) {
             if (uploadMessage == null && uploadMessageAboveL == null) {
                 return;
             }
-
             //取消拍照或者图片选择时
             if (resultCode != RESULT_OK) {
                 //一定要返回null,否则<input file> 就是没有反应
                 returnNullValue();
             }
-
             //拍照成功和选取照片时
             if (resultCode == RESULT_OK) {
                 Uri imageUri = null;
-
                 switch (requestCode) {
                     case REQUEST_CODE_ALBUM:
-
                         if (data != null) {
                             imageUri = data.getData();
                         }
-
                         break;
                     case REQUEST_CODE_CAMERA:
-
                         if (!TextUtils.isEmpty(mCurrentPhotoPath)) {
                             File file = new File(mCurrentPhotoPath);
                             Uri localUri = Uri.fromFile(file);
@@ -214,10 +204,7 @@ public class ContestWebActivity1 extends AppCompatActivity {
                 returnNullValue();
             }
         });
-
-
         builder.show();
-
     }
 
     /**
@@ -323,6 +310,7 @@ public class ContestWebActivity1 extends AppCompatActivity {
             mProgress.setVisibility(View.VISIBLE);
             mProgress.setProgress(20);
         }
+
         // For Android < 3.0
         public void openFileChooser(ValueCallback<Uri> valueCallback) {
             uploadMessage = valueCallback;
