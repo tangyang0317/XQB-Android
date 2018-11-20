@@ -409,7 +409,7 @@ public class AllTypeResourceAdapter extends BaseRecycleViewAdapter {
             final ResouecesAll.AaDataBean dataBean = resAllList.get(pos);
             if (dataBean != null) {
                 String titlePicture = "";//背景图
-                if (dataBean.getPictureList().size() > 0) {
+                if (dataBean.getPictureList() != null && dataBean.getPictureList().size() > 0) {
                     titlePicture = dataBean.getPictureList().get(0).getFileUrl();
                 }
 

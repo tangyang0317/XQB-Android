@@ -3,6 +3,7 @@ package com.zhangju.xingquban.interestclassapp.refactor.me.activity;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -29,18 +30,35 @@ import com.fastlib.net.SimpleListener;
 import com.fastlib.utils.N;
 import com.fastlib.utils.Utils;
 import com.fastlib.widget.TitleBar;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
 import com.zhangju.xingquban.R;
 import com.zhangju.xingquban.interestclassapp.refactor.common.bean.CommonInterface;
 import com.zhangju.xingquban.interestclassapp.refactor.common.bean.Response;
 import com.zhangju.xingquban.interestclassapp.refactor.me.bean.MeInterface;
 import com.zhangju.xingquban.interestclassapp.refactor.me.bean.ResponseCourse;
 import com.zhangju.xingquban.interestclassapp.refactor.me.bean.ResponseUploadImage;
+import com.zhangju.xingquban.interestclassapp.refactor.me.fragment.AlbumManageFragment;
 import com.zhangju.xingquban.interestclassapp.refactor.user.UserManager;
 import com.zhangju.xingquban.interestclassapp.ui.activity.find.liveradio.CourseChoiceActivity;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.me.MyRecrouse.LocationActive;
+import com.zhangju.xingquban.interestclassapp.util.ToastUtil;
+import com.zhangju.xingquban.interestclassapp.util.UrlUtils;
 import com.zhangju.xingquban.refactoring.activity.EditCourseDetailsActivity;
+import com.zhangju.xingquban.refactoring.entity.BaseResponseBean;
+import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
+import com.zhihu.matisse.engine.impl.GlideEngine;
+import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
 import java.io.File;
+import java.lang.reflect.Type;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -55,6 +73,7 @@ public class EditCourseActivity extends FastActivity {
     public static Activity instance;
     final int REQ_ADDRESS = 3;
     final int REQ_TEACH_COURSE = 4;
+    final int REQUEST_CODE_CHOOSE_IMG = 5;
     @LocalData(ARG_STR_ID)
     String mId;
     @Bind(R.id.titleBar)
@@ -169,25 +188,38 @@ public class EditCourseActivity extends FastActivity {
 
     @Bind(R.id.coverLayout)
     private void selectCover() {
-        FastDialog.showListDialog(new String[]{"拍照", "从相册中选择"}).show(getSupportFragmentManager(), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (which == 0) openCamera(new PhotoResultListener() {
-                    @Override
-                    public void onPhotoResult(String path) {
-                        Glide.with(EditCourseActivity.this).load(new File(path)).into(mCover);
-                        mCoverPath = path;
-                    }
-                });
-                else openAlbum(new PhotoResultListener() {
-                    @Override
-                    public void onPhotoResult(String path) {
-                        Glide.with(EditCourseActivity.this).load(new File(path)).into(mCover);
-                        mCoverPath = path;
-                    }
-                });
-            }
-        });
+        Matisse.from(EditCourseActivity.this)
+                .choose(MimeType.ofImage(), true)
+                .capture(true)
+                .maxSelectable(1)
+                .captureStrategy(new CaptureStrategy(true, "com.zhangju.xingquban.fileprovider"))
+                .countable(true)
+                .showSingleMediaType(true)
+                .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
+                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+                .thumbnailScale(0.85f)
+                .imageEngine(new GlideEngine())
+                .forResult(REQUEST_CODE_CHOOSE_IMG);
+
+//        FastDialog.showListDialog(new String[]{"拍照", "从相册中选择"}).show(getSupportFragmentManager(), new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                if (which == 0) openCamera(new PhotoResultListener() {
+//                    @Override
+//                    public void onPhotoResult(String path) {
+//                        Glide.with(EditCourseActivity.this).load(new File(path)).into(mCover);
+//                        mCoverPath = path;
+//                    }
+//                });
+//                else openAlbum(new PhotoResultListener() {
+//                    @Override
+//                    public void onPhotoResult(String path) {
+//                        Glide.with(EditCourseActivity.this).load(new File(path)).into(mCover);
+//                        mCoverPath = path;
+//                    }
+//                });
+//            }
+//        });
     }
 
     @Bind(R.id.auditionLayout)
@@ -376,6 +408,44 @@ public class EditCourseActivity extends FastActivity {
         } else if (requestCode == REQ_TEACH_COURSE) {
             mCourseId = data.getStringExtra("subId");
             mTeachCourse.setText(data.getStringExtra("subName"));
+        } else if (requestCode == REQUEST_CODE_CHOOSE_IMG) {
+            List<String> pathList = Matisse.obtainPathResult(data);
+            if (pathList != null && pathList.size() > 0) {
+                upLoadImg(pathList.get(0));
+            }
         }
     }
+
+
+    /***
+     * 课程发布
+     */
+    private void upLoadImg(String filePath) {
+        RequestParams params = new RequestParams();
+        params.addHeader("X-CustomToken", UserManager.getInstance().getToken());
+        params.addBodyParameter("files", new File(filePath));
+        new HttpUtils().send(HttpRequest.HttpMethod.POST, UrlUtils.URL_UPLOAD_IMG, params, new RequestCallBack<String>() {
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                Type type = new TypeToken<BaseResponseBean<List<ResponseUploadImage>>>() {
+                }.getType();
+                BaseResponseBean<List<ResponseUploadImage>> listBaseResponseBean = new Gson().fromJson(responseInfo.result, type);
+                if (listBaseResponseBean.isSuccess()) {
+                    if (listBaseResponseBean.getAaData() != null && listBaseResponseBean.getAaData().size() > 0) {
+                        mCoverPath = listBaseResponseBean.getAaData().get(0).fileName;
+                        Glide.with(EditCourseActivity.this).load(mCoverPath).into(mCover);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(HttpException e, String s) {
+                ToastUtil.showToast(s);
+            }
+        });
+
+    }
+
+
 }

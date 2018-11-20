@@ -58,6 +58,7 @@ import com.zhangju.xingquban.refactoring.activity.ResourcePictureDetailsActivity
 import com.zhangju.xingquban.refactoring.adapter.ResourceLevelTwoAdapter;
 import com.zhangju.xingquban.refactoring.bean.PushJsonBean;
 import com.zhangju.xingquban.refactoring.entity.BaseResponseBean;
+import com.zhangju.xingquban.refactoring.fragment.ResourceFragment;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -112,7 +113,7 @@ public class MainActivity extends BaseActivity {
         //添加fragment//
         fragmentList.add(new IndexFragment());
         fragmentList.add(new NearbyFragment());
-        fragmentList.add(new LiveFragment());
+        fragmentList.add(new ResourceFragment());
         fragmentList.add(new FindFragment());
         fragmentList.add(new MeFragment());
         fragmentManager = getSupportFragmentManager();
@@ -245,16 +246,8 @@ public class MainActivity extends BaseActivity {
                 index = v.getId();
                 break;
             case R.id.main_btn_live:
-                SpUtil.putBoolean(MainActivity.this, "isBack", false);
-                if (!UserManager.getInstance().isLogin()) {
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                    main_radioGroup.check(index);
-                    //                    mainBtnLive.setChecked(false);
-                } else {
-                    showFragment(Constant.MAIN_LIVE);
-                    index = v.getId();
-                }
-
+                showFragment(Constant.MAIN_LIVE);
+                index = v.getId();
                 break;
             case R.id.main_btn_find:
                 showFragment(Constant.MAIN_FIND);

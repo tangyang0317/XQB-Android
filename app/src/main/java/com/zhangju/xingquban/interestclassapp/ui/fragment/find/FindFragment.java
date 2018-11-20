@@ -18,6 +18,7 @@ import com.zhangju.xingquban.interestclassapp.ui.fragment.find.SeekResource.Find
 import com.zhangju.xingquban.interestclassapp.ui.fragment.find.Wenda.Question.fresh.MyQuestionMain;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.find.mediscover.FindLiveActivity;
 import com.zhangju.xingquban.interestclassapp.ui.fragment.near.DistrictActivity_Copy;
+import com.zhangju.xingquban.interestclassapp.util.ToastUtil;
 import com.zhangju.xingquban.interestclassapp.util.test.TestMyActivity;
 
 import butterknife.BindView;
@@ -102,11 +103,14 @@ public class FindFragment extends BaseFragment {
 
             //找直播
             case R.id.find_live:
-                if (!UserManager.getInstance().isLogin()) {
-                    startActivity(new Intent(getActivity(), LoginActivity.class));
-                } else {
-                    startActivity(new Intent(getActivity(), FindLiveActivity.class));
-                }
+
+                ToastUtil.showToast("系统更新维护，暂不可用");
+
+//                if (!UserManager.getInstance().isLogin()) {
+//                    startActivity(new Intent(getActivity(), LoginActivity.class));
+//                } else {
+//                    startActivity(new Intent(getActivity(), FindLiveActivity.class));
+//                }
 
                 break;
             //我的问答

@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -58,6 +59,7 @@ public class NearShareActivity extends FastActivity {
     private List<SearchRecord> searchRecordList=new ArrayList<>();
     @Override
     protected void alreadyPrepared() {
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         mytitle.setIconifiedByDefault(false);
         mytitle.setQueryHint("搜索老师/机构");
         mytitle.setFocusable(false);

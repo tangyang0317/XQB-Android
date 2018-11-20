@@ -38,8 +38,11 @@ public class OrgProfileDisplayAdapter extends MultiTypeAdapter {
         clear();
         String[] intro = TextUtils.isEmpty(orgProfile.intro) ? new String[0] : orgProfile.intro.split("#");
         for (String s : intro) {
-            if (Patterns.WEB_URL.matcher(s).matches()) mImageGroup.addData(s);
-            else mTextGroup.addData(s);
+            if (Patterns.WEB_URL.matcher(s).matches()) {
+                mImageGroup.addData(s);
+            } else {
+                mTextGroup.addData(s);
+            }
         }
     }
 

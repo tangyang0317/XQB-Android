@@ -7,9 +7,12 @@
         android:minSdkVersion="17"
         android:targetSdkVersion="22" />
 
+    <!-- Required -->
     <permission
         android:name="com.zhangju.xingquban.permission.JPUSH_MESSAGE"
         android:protectionLevel="signature" />
+    <!-- Required -->
+    <uses-permission android:name="com.zhangju.xingquban.permission.JPUSH_MESSAGE" />
 
     <!-- 扫描二维码需要权限 -->
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -752,8 +755,6 @@
         <activity android:name=".interestclassapp.refactor.me.activity.OrderCommentActivity" />
         <activity android:name=".interestclassapp.test.TestActivity" />
         <activity android:name=".interestclassapp.ui.fragment.home.ExperienceActivity" />
-
-        <activity android:name=".interestclassapp.ui.fragment.home.BusinessDetailsActivity" />
 
         <activity
             android:name=".interestclassapp.ui.fragment.home.contest.ContestWebActivity"

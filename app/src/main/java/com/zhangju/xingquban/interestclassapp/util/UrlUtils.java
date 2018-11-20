@@ -194,11 +194,11 @@ public class UrlUtils {
     /**
      * 生源平台
      */
-    public static final String POST_STUDENT_INTRODUCE = url + "stdResource/ls.json";
+    public static final String POST_STUDENT_INTRODUCE = url + "admnxzcmr/stdResource/ls.json";
 
-    public static final String URL_UPLOAD_IMG = url + "/customer/upload.json";
+    public static final String URL_UPLOAD_IMG = url + "admnxzcmr/customer/upload.json";
 
-    public static final String URL_ADD_LESSON = url + "/lesson/add.json";
+    public static final String URL_ADD_LESSON = url + "admnxzcmr/lesson/add.json";
 
 
 }

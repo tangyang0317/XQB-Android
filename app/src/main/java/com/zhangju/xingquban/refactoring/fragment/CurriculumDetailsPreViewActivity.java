@@ -3,7 +3,6 @@ package com.zhangju.xingquban.refactoring.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -15,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.RequestParams;
@@ -34,6 +35,7 @@ import com.zhangju.xingquban.refactoring.entity.BaseResponseBean;
 import com.zhangju.xingquban.refactoring.utils.DimentUtils;
 
 import java.io.File;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 
@@ -111,7 +113,11 @@ public class CurriculumDetailsPreViewActivity extends BaseActivity {
                 CurriculumDetailsPreViewActivity.this.finish();
                 break;
             case R.id.publish_right_now:
-                upLoadImg();
+                if (getLessonParam().get("picture").startsWith("http") || getLessonParam().get("picture").equals("https")) {
+                    publishLesson(getLessonParam().get("picture"));
+                } else {
+                    upLoadImg();
+                }
                 break;
         }
     }
@@ -151,13 +157,19 @@ public class CurriculumDetailsPreViewActivity extends BaseActivity {
         if (!TextUtils.isEmpty(getLessonParam().get("id")) && !"-1".equals(getLessonParam().get("id"))) {
             params.addBodyParameter("id", getLessonParam().get("id"));
         }
-        new HttpUtils().send(HttpRequest.HttpMethod.POST, UrlUtils.URL_ADD_LESSON, params, new RequestCallBack<BaseResponseBean<String>>() {
+        new HttpUtils().send(HttpRequest.HttpMethod.POST, UrlUtils.URL_ADD_LESSON, params, new RequestCallBack<String>() {
+
             @Override
-            public void onSuccess(ResponseInfo<BaseResponseBean<String>> responseInfo) {
-                if (responseInfo.result.isSuccess()) {
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                Type type = new TypeToken<BaseResponseBean<Object>>() {
+                }.getType();
+                BaseResponseBean<Object> baseResponseBean = new Gson().fromJson(responseInfo.result, type);
+                if (baseResponseBean.isSuccess()) {
                     EditCourseDetailsActivity.instance.finish();
                     EditCourseActivity.instance.finish();
                     CurriculumDetailsPreViewActivity.this.finish();
+                } else {
+                    ToastUtil.showToast(baseResponseBean.getErrMsg().toString());
                 }
             }
 
@@ -175,13 +187,18 @@ public class CurriculumDetailsPreViewActivity extends BaseActivity {
         RequestParams params = new RequestParams();
         params.addHeader("X-CustomToken", UserManager.getInstance().getToken());
         params.addBodyParameter("files", new File(getLessonParam().get("picture")));
-        new HttpUtils().send(HttpRequest.HttpMethod.POST, UrlUtils.URL_UPLOAD_IMG, params, new RequestCallBack<BaseResponseBean<List<ResponseUploadImage>>>() {
+        new HttpUtils().send(HttpRequest.HttpMethod.POST, UrlUtils.URL_UPLOAD_IMG, params, new RequestCallBack<String>() {
 
             @Override
-            public void onSuccess(ResponseInfo<BaseResponseBean<List<ResponseUploadImage>>> responseInfo) {
-                if (responseInfo.result.isSuccess()) {
-                    String imgUrl = responseInfo.result.getAaData().get(0).fileName;
-                    publishLesson(imgUrl);
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                Type type = new TypeToken<BaseResponseBean<List<ResponseUploadImage>>>() {
+                }.getType();
+                BaseResponseBean<List<ResponseUploadImage>> listBaseResponseBean = new Gson().fromJson(responseInfo.result, type);
+                if (listBaseResponseBean.isSuccess()) {
+                    if (listBaseResponseBean.getAaData() != null && listBaseResponseBean.getAaData().size() > 0) {
+                        String imgUrl = listBaseResponseBean.getAaData().get(0).fileName;
+                        publishLesson(imgUrl);
+                    }
                 }
             }
 

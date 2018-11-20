@@ -7,7 +7,6 @@ import android.view.View;
 
 import com.zhangju.xingquban.R;
 import com.zhangju.xingquban.interestclassapp.base.BaseFragment;
-import com.zhangju.xingquban.interestclassapp.bean.near.LessonXqBean;
 import com.zhangju.xingquban.interestclassapp.refactor.me.adapter.OrgProfileDisplayAdapter;
 import com.zhangju.xingquban.interestclassapp.refactor.me.bean.ResponseOrgProfile;
 

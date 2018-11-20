@@ -2,6 +2,7 @@ package com.zhangju.xingquban.refactoring.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -11,44 +12,40 @@ import android.widget.EditText;
 import com.fastlib.annotation.Bind;
 import com.fastlib.annotation.ContentView;
 import com.fastlib.app.FastActivity;
-import com.fastlib.app.PhotoResultListener;
-import com.fastlib.app.task.Action;
-import com.fastlib.app.task.EmptyAction;
-import com.fastlib.app.task.NetAction;
-import com.fastlib.app.task.NoReturnAction;
-import com.fastlib.app.task.Task;
-import com.fastlib.app.task.ThreadType;
-import com.fastlib.net.Request;
-import com.fastlib.utils.N;
 import com.fastlib.widget.TitleBar;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.lidroid.xutils.HttpUtils;
+import com.lidroid.xutils.exception.HttpException;
+import com.lidroid.xutils.http.RequestParams;
+import com.lidroid.xutils.http.ResponseInfo;
+import com.lidroid.xutils.http.callback.RequestCallBack;
+import com.lidroid.xutils.http.client.HttpRequest;
 import com.zhangju.xingquban.R;
-import com.zhangju.xingquban.interestclassapp.RetrofitInterface.NetWork;
-import com.zhangju.xingquban.interestclassapp.bean.near.LessonXqBean;
-import com.zhangju.xingquban.interestclassapp.refactor.common.bean.CommonInterface;
-import com.zhangju.xingquban.interestclassapp.refactor.common.bean.Response;
-import com.zhangju.xingquban.interestclassapp.refactor.me.activity.EditCourseActivity;
-import com.zhangju.xingquban.interestclassapp.refactor.me.activity.OrgProfileActivity;
 import com.zhangju.xingquban.interestclassapp.refactor.me.activity.publish_active.AddFeatureTextActivity;
 import com.zhangju.xingquban.interestclassapp.refactor.me.adapter.OrgProfileDisplayAdapter;
 import com.zhangju.xingquban.interestclassapp.refactor.me.adapter.PublishActiveFeatureAdapter;
-import com.zhangju.xingquban.interestclassapp.refactor.me.bean.MeInterface;
 import com.zhangju.xingquban.interestclassapp.refactor.me.bean.PublishActiveFeature;
 import com.zhangju.xingquban.interestclassapp.refactor.me.bean.ResponseOrgProfile;
 import com.zhangju.xingquban.interestclassapp.refactor.me.bean.ResponseUploadImage;
 import com.zhangju.xingquban.interestclassapp.refactor.me.fragment.publish_active.AddFeatureDialog;
 import com.zhangju.xingquban.interestclassapp.refactor.user.UserManager;
 import com.zhangju.xingquban.interestclassapp.util.ToastUtil;
+import com.zhangju.xingquban.interestclassapp.util.UrlUtils;
 import com.zhangju.xingquban.refactoring.entity.BaseResponseBean;
 import com.zhangju.xingquban.refactoring.fragment.CurriculumDetailsPreViewActivity;
+import com.zhangju.xingquban.refactoring.interfacs.BottomSheetDialogListener;
+import com.zhangju.xingquban.refactoring.view.AddRichTextDialog;
+import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
+import com.zhihu.matisse.engine.impl.GlideEngine;
+import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
 import java.io.File;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-import rx.Observer;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * @packageName com.zhangju.xingquban.refactoring.activity
@@ -71,6 +68,7 @@ public class EditCourseDetailsActivity extends FastActivity {
     ResponseOrgProfile mOrgProfile;
     OrgProfileDisplayAdapter mDisplayAdapter;
     PublishActiveFeatureAdapter mAdapter; //活动特色适配器复用.
+    final int REQUEST_CODE_CHOOSE_IMG = 5;
 
     /***
      * 获取课程详情数据参数
@@ -200,15 +198,32 @@ public class EditCourseDetailsActivity extends FastActivity {
 
     @Bind(R.id.add)
     private void add() {
-        AddFeatureDialog.getInstance(this).show(0, this, new PhotoResultListener() {
+
+        AddRichTextDialog.getInstance(this).show(0, this, new BottomSheetDialogListener() {
             @Override
-            public void onPhotoResult(String path) {
-                PublishActiveFeature feature = new PublishActiveFeature();
-                feature.type = PublishActiveFeature.TYPE_IMAGE;
-                feature.content = path;
-                mAdapter.addData(feature);
+            public void onImageClickListenner() {
+                Matisse.from(EditCourseDetailsActivity.this)
+                        .choose(MimeType.ofImage(), true)
+                        .capture(true)
+                        .maxSelectable(1)
+                        .captureStrategy(new CaptureStrategy(true, "com.zhangju.xingquban.fileprovider"))
+                        .countable(true)
+                        .showSingleMediaType(true)
+                        .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
+                        .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+                        .thumbnailScale(0.85f)
+                        .imageEngine(new GlideEngine())
+                        .forResult(REQUEST_CODE_CHOOSE_IMG);
+            }
+
+            @Override
+            public void onTextClickListenner() {
+                Intent intent = new Intent(EditCourseDetailsActivity.this, AddFeatureTextActivity.class);
+                intent.putExtra(AddFeatureTextActivity.ARG_RES_INT_POSITION, 0);
+                EditCourseDetailsActivity.this.startActivityForResult(intent, AddFeatureDialog.REQ_ADD_FEATURE_TEXT);
             }
         });
+
     }
 
     @Override
@@ -220,8 +235,48 @@ public class EditCourseDetailsActivity extends FastActivity {
             feature.type = PublishActiveFeature.TYPE_TEXT;
             feature.content = data.getStringExtra(AddFeatureTextActivity.ARG_RES_STR_TEXT);
             mAdapter.addData(feature);
+        } else if (requestCode == REQUEST_CODE_CHOOSE_IMG) {
+            List<String> pathList = Matisse.obtainPathResult(data);
+            if (pathList != null && pathList.size() > 0) {
+                upLoadImg(pathList.get(0));
+            }
         }
     }
+
+
+    /***
+     * 课程发布
+     */
+    private void upLoadImg(String filePath) {
+        RequestParams params = new RequestParams();
+        params.addHeader("X-CustomToken", UserManager.getInstance().getToken());
+        params.addBodyParameter("files", new File(filePath));
+        new HttpUtils().send(HttpRequest.HttpMethod.POST, UrlUtils.URL_UPLOAD_IMG, params, new RequestCallBack<String>() {
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                Type type = new TypeToken<BaseResponseBean<List<ResponseUploadImage>>>() {
+                }.getType();
+                BaseResponseBean<List<ResponseUploadImage>> listBaseResponseBean = new Gson().fromJson(responseInfo.result, type);
+                if (listBaseResponseBean.isSuccess()) {
+                    if (listBaseResponseBean.getAaData() != null && listBaseResponseBean.getAaData().size() > 0) {
+                        String imgPath = listBaseResponseBean.getAaData().get(0).fileName;
+                        PublishActiveFeature feature = new PublishActiveFeature();
+                        feature.type = PublishActiveFeature.TYPE_IMAGE_URL;
+                        feature.content = imgPath;
+                        mAdapter.addData(feature);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(HttpException e, String s) {
+                ToastUtil.showToast(s);
+            }
+        });
+
+    }
+
 
     /**
      * 拼接文本和图片信息发布机构简介
@@ -232,12 +287,17 @@ public class EditCourseDetailsActivity extends FastActivity {
         StringBuilder sb = new StringBuilder();
         List<PublishActiveFeature> list = mAdapter.getData();
         for (PublishActiveFeature profile : list) {
-            if (profile.type == PublishActiveFeature.TYPE_TEXT || profile.type == PublishActiveFeature.TYPE_IMAGE_URL)
+            if (profile.type == PublishActiveFeature.TYPE_TEXT || profile.type == PublishActiveFeature.TYPE_IMAGE_URL) {
                 sb.append(profile.content);
-            else if (profile.type == PublishActiveFeature.TYPE_IMAGE) sb.append(profile.imageUrl);
-            sb.append("#");
+                sb.append("#");
+            } else if (profile.type == PublishActiveFeature.TYPE_IMAGE) {
+                sb.append(profile.imageUrl);
+                sb.append("#");
+            }
         }
-        if (sb.length() > 0) sb.deleteCharAt(sb.length() - 1);
+        if (sb.length() > 0 && sb.toString().endsWith("#")) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
         return sb.toString();
     }
 }

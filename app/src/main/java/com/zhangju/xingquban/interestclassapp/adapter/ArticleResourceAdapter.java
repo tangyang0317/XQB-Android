@@ -30,12 +30,12 @@ import butterknife.ButterKnife;
 
 public class ArticleResourceAdapter extends BaseRecycleViewAdapter {
 
-    private List<ResouecesAll.AaDataBean > newsList;
+    private List<ResouecesAll.AaDataBean> newsList;
 
     private int TYPE_SINGLE = 0x001;
     private int TYPE_MULTI = 0x002;
 
-    public ArticleResourceAdapter(Context c, List<ResouecesAll.AaDataBean > newsList) {
+    public ArticleResourceAdapter(Context c, List<ResouecesAll.AaDataBean> newsList) {
         super(c);
         this.newsList = newsList;
     }
@@ -53,7 +53,7 @@ public class ArticleResourceAdapter extends BaseRecycleViewAdapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder!=null){
+        if (holder != null) {
             if (holder instanceof SingleViewHolder) {
                 SingleViewHolder singleViewHolder = (SingleViewHolder) holder;
                 singleViewHolder.onBind();
@@ -71,15 +71,15 @@ public class ArticleResourceAdapter extends BaseRecycleViewAdapter {
 
     @Override
     public int getItemViewType(int position) {
-        ResouecesAll.AaDataBean  dataBean = newsList.get(position);
+        ResouecesAll.AaDataBean dataBean = newsList.get(position);
 
-        if (dataBean!=null&&dataBean.getPictureList()!=null&&dataBean.getPictureList().size()>=2){
+        if (dataBean != null && dataBean.getPictureList() != null && dataBean.getPictureList().size() >= 2) {
             return TYPE_MULTI;
         }
         return TYPE_SINGLE;
     }
 
-    class SingleViewHolder extends RecyclerView.ViewHolder{
+    class SingleViewHolder extends RecyclerView.ViewHolder {
         int pos;
         @BindView(R.id.tv_title)
         TextView tvTitle;
@@ -102,11 +102,11 @@ public class ArticleResourceAdapter extends BaseRecycleViewAdapter {
         void onBind() {
             pos = getLayoutPosition();
             registerOnItemClickListener(pos, itemView);
-            ResouecesAll.AaDataBean  dataBean = newsList.get(pos);
+            ResouecesAll.AaDataBean dataBean = newsList.get(pos);
             if (dataBean != null) {
-                String titlePicture="" ;//背景图
-                if (dataBean.getPictureList().size()>0){
-                    titlePicture=dataBean.getPictureList().get(0).getFileUrl();
+                String titlePicture = "";//背景图
+                if (dataBean.getPictureList() != null && dataBean.getPictureList().size() > 0) {
+                    titlePicture = dataBean.getPictureList().get(0).getFileUrl();
                 }
 
                 String title = dataBean.getTitle() == null ? "" : dataBean.getTitle();
@@ -120,14 +120,12 @@ public class ArticleResourceAdapter extends BaseRecycleViewAdapter {
                 tvNewsNum.setText(commentCounts + "");
                 tvNewsLoveNum.setText(likes + "");
                 tvNewsTime.setText(editUserTime);
-                mThumbCount.setText(String.format(Locale.getDefault(),"点赞%d次",dataBean.getLikes()));
+                mThumbCount.setText(String.format(Locale.getDefault(), "点赞%d次", dataBean.getLikes()));
                 if (!editUserTime.isEmpty()) {
                     String time = editUserTime.substring(0, editUserTime.indexOf(" "));
                     tvNewsTime.setText(time);
                 }
                 Glide.with(c).load(titlePicture).placeholder(R.mipmap.default_image).dontAnimate().dontTransform().into(imgNewsBack);
-
-
             }
 
         }
@@ -158,7 +156,7 @@ public class ArticleResourceAdapter extends BaseRecycleViewAdapter {
         void onBind() {
             pos = getLayoutPosition();
             registerOnItemClickListener(pos, itemView);
-            final ResouecesAll.AaDataBean  dataBean = newsList.get(pos);
+            final ResouecesAll.AaDataBean dataBean = newsList.get(pos);
 
             if (dataBean != null) {
                 String title = dataBean.getTitle() == null ? "" : dataBean.getTitle();
@@ -172,23 +170,23 @@ public class ArticleResourceAdapter extends BaseRecycleViewAdapter {
                 tvNewsNum.setText(commentCounts + "");
                 tvNewsLoveNum.setText(likes + "");
                 tvNewsTime.setText(editUserTime);
-                mThumbCount.setText(String.format(Locale.getDefault(),"点赞%d次",dataBean.getLikes()));
+                mThumbCount.setText(String.format(Locale.getDefault(), "点赞%d次", dataBean.getLikes()));
                 if (!editUserTime.isEmpty()) {
                     String time = editUserTime.substring(0, editUserTime.indexOf(" "));
                     tvNewsTime.setText(time);
                 }
-                List<ResouecesAll.AaDataBean .PictureListBean> pictureList = dataBean.getPictureList();
-                if (pictureList!=null&&pictureList.size()>=2){
-                    List<String> mList=new ArrayList<>();
+                List<ResouecesAll.AaDataBean.PictureListBean> pictureList = dataBean.getPictureList();
+                if (pictureList != null && pictureList.size() >= 2) {
+                    List<String> mList = new ArrayList<>();
 
-                    int size=pictureList.size()>3?3:pictureList.size();
+                    int size = pictureList.size() > 3 ? 3 : pictureList.size();
 
-                    for (int i = 0; i <  size ; i++) {
+                    for (int i = 0; i < size; i++) {
                         mList.add(pictureList.get(i).getFileUrl());
                     }
 
-                    SingleImaAdapter singleImaAdapter=new SingleImaAdapter(c,mList);
-                    ScrollGridManager scrollGridManager=new ScrollGridManager(c,3);
+                    SingleImaAdapter singleImaAdapter = new SingleImaAdapter(c, mList);
+                    ScrollGridManager scrollGridManager = new ScrollGridManager(c, 3);
                     scrollGridManager.setScrollEnabled(false);
                     recyclerImage.setLayoutManager(scrollGridManager);
                     recyclerImage.setAdapter(singleImaAdapter);
@@ -197,8 +195,8 @@ public class ArticleResourceAdapter extends BaseRecycleViewAdapter {
                         public void onItemClickListener(int position, View v) {
                             String id = newsList.get(pos).getId();
 
-                            Intent intent=new Intent(c,NewsDetailActivity.class);
-                            intent.putExtra("id",id);
+                            Intent intent = new Intent(c, NewsDetailActivity.class);
+                            intent.putExtra("id", id);
                             c.startActivity(intent);
                         }
                     });
@@ -214,6 +212,7 @@ public class ArticleResourceAdapter extends BaseRecycleViewAdapter {
             }
         }
     }
+
     private AllTypeResourceAdapter.MyOnClickListener mMyOnClickListener;
 
     public void setMyOnClickListener(AllTypeResourceAdapter.MyOnClickListener myOnClickListener) {

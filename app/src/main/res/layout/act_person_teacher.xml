@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -130,9 +131,9 @@
             android:padding="13dp">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="12"
+                android:layout_weight="0"
                 android:text="授课地点"
                 android:textColor="#444444" />
 
@@ -141,12 +142,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_weight="1"
                 android:drawablePadding="5dp"
                 android:drawableRight="@drawable/list_arrow_normal_small"
-                android:gravity="center_vertical"
+                android:ellipsize="end"
+                android:gravity="center_vertical|right"
+                android:maxLength="25"
+                android:singleLine="true"
                 android:textColor="#888888"
                 android:textSize="@dimen/font_size_small"
-                tools:text="上大路23号" />
+                tools:text="上海市长宁区威宁路511弄40号1103" />
+
         </LinearLayout>
     </LinearLayout>
 
@@ -170,7 +177,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="12"
                 android:text="身份认证"
-                android:textColor="#444444"/>
+                android:textColor="#444444" />
 
             <TextView
                 android:id="@+id/teaIdQuality"
@@ -182,7 +189,7 @@
                 android:gravity="center_vertical"
                 android:textColor="#888888"
                 android:textSize="@dimen/font_size_small"
-                tools:text="未认证"/>
+                tools:text="未认证" />
         </LinearLayout>
 
         <LinearLayout
@@ -198,7 +205,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="12"
                 android:text="资格认证"
-                android:textColor="#444444"/>
+                android:textColor="#444444" />
 
             <TextView
                 android:id="@+id/teaQualify"
@@ -210,7 +217,7 @@
                 android:gravity="center_vertical"
                 android:textColor="#888888"
                 android:textSize="@dimen/font_size_small"
-                tools:text="未认证"/>
+                tools:text="未认证" />
         </LinearLayout>
 
         <LinearLayout
@@ -225,7 +232,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="12"
                 android:text="平台认证"
-                android:textColor="#444444"/>
+                android:textColor="#444444" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -236,7 +243,7 @@
                 android:gravity="center_vertical"
                 android:text="已认证"
                 android:textColor="#888888"
-                android:textSize="@dimen/font_size_small"/>
+                android:textSize="@dimen/font_size_small" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
